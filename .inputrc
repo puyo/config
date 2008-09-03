@@ -1,0 +1,5 @@
+set convert-meta on
+set bell-style visible
+"\M-n": history-search-forward
+"\M-p": history-search-backward
+set show-all-if-ambiguous on
