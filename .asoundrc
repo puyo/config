@@ -1,0 +1,75 @@
+# ALSA library configuration file
+
+# Include settings that are under the control of asoundconf(1).
+# (To disable these settings, comment out this line.)
+#</home/greg/.asoundrc.asoundconf>
+
+pcm.card0 {
+	type hw
+	card 0
+	device 0
+	#mmap_emulation true
+	nonblock yes
+	rate 44100
+}
+
+pcm.!default {
+	type plug
+	slave.pcm "duplex"
+}
+
+pcm.duplex {
+	type asym
+	playback.pcm "dmixer"
+	capture.pcm "dsnooper"
+}
+
+pcm.dsnooper {
+	type dsnoop
+	ipc_key 4096
+	slave {
+		pcm "card0"
+		format S32_LE
+		period_time 0
+		period_size 1024
+		buffer_size 16384
+		rate 44100
+		channels 32
+	}
+	bindings {
+		0 0
+		1 1
+	}
+}
+
+pcm.dmixer {
+	type dmix
+	ipc_key 1024
+	ipc_perm 0666
+	slave {
+		pcm "card0"
+		format S32_LE
+		period_time 0
+		period_size 512
+		buffer_size 16384
+		rate 44100
+		channels 32
+	}
+	bindings {
+		0 0
+		1 1
+	}
+}
+
+ctl.dmixer {
+	type hw
+	card 0
+	device 0
+}
+
+pcm.dsp0 {
+	type plug      
+	pcm "card0"
+	nonblock yes
+	mmap_emulation true
+}
