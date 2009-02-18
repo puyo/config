@@ -1,0 +1,7 @@
+[user]
+	name = puyo
+	email = blue.puyo@gmail.com
+[color]
+	branch = auto
+	diff = auto
+	status = auto
