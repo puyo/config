@@ -1,14 +1,18 @@
 #!/bin/sh 
 
-## test for an existing bus daemon, just to be safe
-if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
-	## if not found, launch a new one
-	eval 'dbus-launch --sh-syntax --exit-with-session'
-	echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
-fi
+#docker -wmaker &
+wmitime -12 &
+wmcpuload &
+wmtop -a 2 &
+wmnet -W eth0 -wlr darkcyan -x 100000 &
+wmmemload -b -c &
+wmhdplop &
+wmmixer -w -l darkcyan -L cyan &
 
-xscreensaver &
-update-notifier &
+xscreensaver -no-splash &
+update-notifier-kde &
+
+export LC_ALL=C
 
 [ -f ~/.xprofile ] && . ~/.xprofile
 exec /usr/bin/wmaker
