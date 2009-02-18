@@ -1,0 +1,12 @@
+[render]
+scaler = normal3x
+
+[mixer]
+nosound=false
+
+[midi]
+device=dsp
+
+[autoexec]
+mount C: ~/games
+C:
