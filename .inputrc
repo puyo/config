@@ -1,5 +1,8 @@
-set convert-meta on
+# Be quiet.
 set bell-style visible
-"\M-n": history-search-forward
-"\M-p": history-search-backward
-set show-all-if-ambiguous on
+
+# We are using a UTF terminal.
+set convert-meta on
+
+M-n: history-search-forward
+M-p: history-search-backward
