@@ -1,4 +1,4 @@
-amarok
+amarok14
 astyle
 automake
 blender
@@ -48,7 +48,7 @@ libboost-dev
 libboost-doc
 libxine1-ffmpeg
 love
-lua
+lua5.1
 manpages-dev
 mednafen
 meld
