@@ -8,9 +8,10 @@ wmnet -W eth0 -wlr darkcyan -x 100000 &
 wmmemload -b -c &
 wmhdplop &
 wmmixer -w -l darkcyan -L cyan &
+checkgmail &
 
 xscreensaver -no-splash &
-update-notifier-kde &
+update-notifier &
 
 export LC_ALL=C
 
