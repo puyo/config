@@ -76,9 +76,9 @@ qiv
 rake
 rdoc1.9
 rsync
-ruby1.8-dev
 ruby-dev
 ruby-full
+ruby1.8-dev
 rubygems
 rubygems1.8
 rubygems1.9
@@ -113,6 +113,7 @@ wmakerconf
 wmcpuload
 wmhdplop
 wmitime
+wmmemload
 wmmixer
 wmnet
 wmtop
