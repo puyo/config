@@ -10,3 +10,5 @@ wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
 sudo aptitude update
 sudo aptitude safe-upgrade
 cat package.list | sudo xargs aptitude -y install
+
+sudo dontzap -d
