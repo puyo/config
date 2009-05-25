@@ -45,6 +45,7 @@ kdirstat
 ktorrent
 lame
 lftp
+liballegro-dev
 libboost-dev
 libboost-doc
 libsdl-gfx1.2-dev
