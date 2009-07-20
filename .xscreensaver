@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.07 for greg on Fri Feb 20 14:38:52 2009.
+# Written by xscreensaver-demo 5.07 for greg on Tue Jul 21 09:53:24 2009.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -30,8 +30,8 @@ dpmsSuspend:	2:00:00
 dpmsOff:	4:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
-chooseRandomImages: False
-imageDirectory:	/home/greg/pictures/wallpaper
+chooseRandomImages: True
+imageDirectory:	/home/greg/wallpaper
 
 mode:		random
 selected:	-1
@@ -163,7 +163,7 @@ programs:								      \
   GL: 				molecule -root				    \n\
 -				rotzoomer -root				    \n\
 				speedmine -root				    \n\
-  GL: 				starwars -root				    \n\
+- GL: 				starwars -root				    \n\
   GL: 				stonerview -root			    \n\
 				vermiculate -root			    \n\
 				whirlwindwarp -root			    \n\
@@ -202,7 +202,7 @@ programs:								      \
   GL: 				flipflop -root				    \n\
 - GL: 				flyingtoasters -root			    \n\
 				fontglide -root				    \n\
-  GL: 				gleidescope -root			    \n\
+- GL: 				gleidescope -root			    \n\
   GL: 				glknots -root				    \n\
   GL: 				glmatrix -root				    \n\
 - GL: 				glslideshow -root			    \n\
@@ -219,7 +219,7 @@ programs:								      \
 -				abstractile -root			    \n\
 -				anemotaxis -root			    \n\
   GL: 				antinspect -root			    \n\
-				fireworkx -root				    \n\
+-				fireworkx -root				    \n\
 				fuzzyflakes -root			    \n\
 				interaggregate -root			    \n\
 -				intermomentary -root			    \n\
@@ -258,6 +258,25 @@ programs:								      \
   GL: 				hypnowheel -root			    \n\
 -				lcdscrub -root				    \n\
   GL: 				skytentacles -root			    \n\
+- GL: 		  "MatrixView" 	matrixview --root			    \n\
+  GL: 		 "SpirographX" 	spirographx --root			    \n\
+  GL: 				flux --root				    \n\
+  GL: 				helios --root				    \n\
+  GL: 				lattice --root				    \n\
+  GL: 			"BioF" 	biof --root				    \n\
+  GL: 	       "Hufo's Tunnel" 	hufo_tunnel --root			    \n\
+  GL: 				hyperspace --root			    \n\
+  GL: 				euphoria --root				    \n\
+  GL: 		"Hufo's Smoke" 	hufo_smoke --root			    \n\
+  GL: 				skyrocket --root			    \n\
+  GL: 				flocks --root				    \n\
+  GL: 				solarwinds --root			    \n\
+  GL: 				fieldlines --root			    \n\
+  GL: 				colorfire --root			    \n\
+  GL: 				cyclone --root				    \n\
+  GL: 				plasma --root				    \n\
+  GL: 				sundancer2 --root			    \n\
+  GL: 		 "BusySpheres" 	busyspheres --root			    \n\
 
 
 pointerPollTime:    0:00:05
