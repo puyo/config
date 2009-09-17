@@ -48,6 +48,12 @@ lftp
 liballegro-dev
 libboost-dev
 libboost-doc
+libfreetype6-dev
+libgl-dev
+libjpeg62-dev
+libpcre3-dev
+libpng12-0-dev
+libsdl1.2-dev
 libsdl-gfx1.2-dev
 libsdl-image1.2-dev
 libsdl-mixer1.2-dev
@@ -55,9 +61,10 @@ libsdl-net1.2-dev
 libsdl-pango-dev
 libsdl-sound1.2-dev
 libsdl-ttf2.0-dev
-libsdl1.2-dev
 libsqlite3-dev
+libvorbis-dev
 libxcursor-dev
+libxi-dev
 libxine1-ffmpeg
 love
 lua5.1
@@ -81,10 +88,10 @@ qiv
 rake
 rdoc1.9
 rsync
-ruby-dev
-ruby-full
 ruby1.8-dev
 ruby1.9-dev
+ruby-dev
+ruby-full
 rubygems
 rubygems1.8
 rubygems1.9
