@@ -62,6 +62,7 @@ libsdl-pango-dev
 libsdl-sound1.2-dev
 libsdl-ttf2.0-dev
 libsqlite3-dev
+libtool
 libvorbis-dev
 libxcursor-dev
 libxi-dev
