@@ -1,124 +1,177 @@
-" Greg McIntyre
+" vim: set foldmarker={,} foldlevel=0 spell:
 
-" Use Vim settings, rather then Vi settings. This must be first, because it
-" changes other options as a side effect.
-set nocompatible
+" Basics {
+set nocompatible " no vi-compatible mode
+set noexrc " don't use local .vimrc files
+set background=dark " use light foreground colours
+set cpoptions+=a " :read updates alternative file name
+set cpoptions+=A " :write updates alternative file name
+set cpoptions+=c " continue searching after the current match
+set cpoptions+=F " :write updates current buffer file name
+set cpoptions+=m " show match parens after .5s
+set cpoptions+=q " when joining lines, leave the cursor between lines
+set history=100  " keep this many lines of command line history
+helptags ~/.vim/doc " add help searching for user installed packages
+" }
 
+" Folding {
+set foldenable " turn on folding
+set foldmarker={,} " fold C style code (only use this as default if you use a high foldlevel)
+set foldmethod=marker " fold on the marker
+set foldlevel=100 " don't autofold anything (but I can still fold manually)
+set foldopen=block,hor,mark,percent,quickfix,tag,search,undo " what movements open folds
+function! SimpleFoldText()
+    return getline(v:foldstart).' '
+endfunction
+set foldtext=SimpleFoldText() " custom fold text function (cleaner than default)
+" }
+
+" Files and buffers {
+set backup " make backup files
+set backupdir=~/.vim/backup " where to put backup files
+set fileformats=unix,dos,mac " support all three, in this order
+set directory=~/.vim/tmp
+set hidden " let me open multiple unsaved buffers
+set autowrite " autowrite, save the file when calling external commands
+" }
+
+" Appearance {
+syntax on " syntax highlighting
+colorscheme candycode " syntax highlighting colour scheme
+"colorscheme desert " syntax highlighting colour scheme
+set clipboard+=unnamed " share windows clipboard
+set ruler " show the cursor position all the time
+set showcmd " display incomplete commands
+set noerrorbells " no error bells
+set visualbell " flash the screen instead of beeping
+set t_vb= " terminal code for flashing the screen
+set incsearch " highlight search matches as I type the search query
+set nohlsearch " don't highlight the last search, I find it distracting
+set showmatch " parens matching (like Emacs paren blink)
+set scrolloff=10 " always show 10 lines above and below cursor
+set sidescrolloff=10 " always show 10 lines side of cursor
+set guioptions-=m " hide menu bar
+set guioptions-=T " hide tool bar
+set nowrap " do not wrap long lines
+set cursorcolumn " highlight current column
+set cursorline " highlight current line
+set laststatus=2 " always show the status line
+set lazyredraw " do not redraw while running macros
+set linespace=0 " do not insert extra pixels between rows
+set list " needed to display tabs
+set listchars=tab:>- " only display tabs, not other whitespace
+set shortmess=aOstT " try to avoid 'press a key' prompts
+set report=0 " tell us when anything has changed
+set number " line numbers on the left
+set wildmode=list:longest " bash-like tab completion
+set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
+            \*.jpg,*.gif,*.png,*~,*.swp
+set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
+" }
+
+" Text and code editing {
 set backspace=indent,eol,start " allow backspacing over everything
-set wildmode=list:longest      " bash-like tab completion
-set hidden                     " let me open multiple unsaved buffers
-set incsearch                  " highlight search matches as I type the search query
-set nohlsearch                 " don't highlight the last sesarh, I find it distracting
-set showmatch                  " parens matching (like Emacs paren blink)
-set nojoinspaces               " only insert one space when joining sentences
-set history=100                " keep this many lines of command line history
-set ruler                      " show the cursor position all the time
-set showcmd                    " display incomplete commands
-set noerrorbells               " no error bells
-set visualbell t_vb=           " no beeps or blinks
-set tabstop=4                  " tab size (how many characters wide tabs are)
-set shiftwidth=4               " general purpose indent/unindent size
-set autowrite                  " autowrite, save the file when calling external commands
-set scrolloff=1                " number of lines to show above and below the cursor
-set guifont=Monospace\ 9       " gvim font
-set guioptions-=T              " turn off useless toolbar
-set guioptions+=c              " use console rather than GUI dialog boxes
-set guioptions-=m              " turn off the menu
-set directory=~/.vim/tmp       " where temporary files will go
-set backupdir=~/.vim/backups   " where backup files will go to die
-set nobackup                   " turn off backups, they only ever get in my way
-set noswapfile                 " turn off swapfiles, they're annoying
-set number                     " show line numbers on the left
-set nowrap                     " don't wrap the display of lines
+set nojoinspaces " only insert one space when joining sentences
+set expandtab " no actual tabs by default
+set tabstop=4  " tab size (how many characters wide tabs are)
+set shiftwidth=4 " general purpose indent/unindent size
+set softtabstop=4 " number of spaces to insert instead of a tab
+set shiftround " round up to the next indentation column
+set completeopt= " don't use a pop up menu for completions
+set ignorecase " ignore case in patterns
+set infercase " infer case in patterns
+set smartcase " infer case in searches
+set formatoptions+=r " auto-insert comment leader when pressing enter
+set formatoptions+=q " format comments with gq
+set iskeyword+=_,$,@,%,#,? " these are not word dividers
+" }
 
-let g:rubycomplete_rails=1
-let g:closetag_html_style=1
-
-" Enable file type detection with settings for each mode and auto-indenting
-" rules.
+" File types {
 filetype plugin indent on
-
 augroup filetypedetect
-    " Set some modes based on file extension
-    au BufNewFile,BufRead *.rb,*.rjs,*.rbw,*.gem,*.gemspec setlocal filetype=ruby
-    au BufNewFile,BufRead *.as setlocal filetype=actionscript
-    au BufNewFile,BufRead *.mxml setlocal filetype=xml
-    au BufNewFile,BufRead *.wiki setlocal filetype=Wikipedia
-    au BufNewFile,BufRead *.json setlocal nowrap sw=4 ts=4 sts=0 noet smartindent number
+    au BufNewFile,BufRead *.rb,*.rjs,*.rbw,*.gem,*.gemspec setl filetype=ruby
+    au BufNewFile,BufRead *.as setl filetype=actionscript efm=%f(%l):\ col:\ %c\ Error:\ %m
+    au BufNewFile,BufRead *.tex setl spell
+    au BufNewFile,BufRead *.mxml setl filetype=xml number
+    au BufNewFile,BufRead *.wiki setl filetype=Wikipedia
+    au BufNewFile,BufRead *.json setl nowrap sw=2 ts=2 sts=0 noet smartindent
 
-    " Mode specific settings.
-    au FileType ruby setlocal et ts=2 sw=2 softtabstop=2 omnifunc=rubycomplete#Complete
-    au FileType eruby setlocal et ts=2 sw=2 softtabstop=2
-    au FileType css setlocal et ts=2 sw=2 softtabstop=2
-    au FileType actionscript setlocal nowrap sw=4 ts=4 sts=0 noet smartindent efm=%f(%l):\ col:\ %c\ Error:\ %m
-    au FileType text setlocal textwidth=78 nonumber
-    au FileType html,xml setlocal spell nonumber
-    au FileType html,xml source ~/.vim/scripts/closetag.vim
-    au FileType cpp,c setlocal makeprg=make ts=4 sw=4 sts=4 et
-    au FileType plaintex setlocal spell
-    au FileType python setlocal ts=4 sw=4 sts=4 et
-
-    " TextMate style snippets for Actionscript.
-    au FileType actionscript exec "Snippet for for(var <{i}>:<{uint}> = <{0}>; <{i}> <= <{array}>.length; <{i}>++){\n<{}>\n}"
-    au FileType actionscript exec "Snippet foreach for each(var <{name}>:<{String}> in <{collection}>){\n<{}>\n}"
-    au FileType actionscript exec "Snippet if if(<{}>){\n<{}>\n}"
-    au FileType actionscript exec "Snippet else else{\n<{}>\n}"
-    au FileType actionscript exec "Snippet new var <{name}>:<{Class}> = new <{Class}>(<{}>);"
-    au FileType actionscript exec "Snippet var var <{name}>:<{Class}>;\n<{}>"
-    au FileType actionscript exec "Snippet class var <{name}>:<{Class}>;\n<{}>"
-    au FileType actionscript exec "Snippet listener <{x}>.addEventListener(<{EventClass}>.<{eventConst}>, handle<{eventType}>, false, 0, true);\n\nfunction handle<{eventType}>(event:<{EventClass}>):void{\n<{}>\n}"
-    au FileType actionscript exec "Snippet package package <{name}>{\n<{}>\n}"
-    au FileType actionscript exec "Snippet class public class <{name}>{\npublic function <{name}>(){\n<{}>\n}\n}"
-    au FileType actionscript exec "Snippet function <{public}> function <{name}>():<{void}>{\n<{}>\n}"
+    au FileType c setl et sw=4 sts=4 makeprg=make
+    au FileType ruby setl et sw=2 sts=2 makeprg=rake
+    au FileType eruby setl et sw=2 sts=2 makeprg=rake
+    au FileType css setl et ts=2 sw=2 sts=2 makeprg=rake
+    au FileType actionscript setl nowrap sw=2 ts=2 sts=0 noet smartindent
+    au FileType text setl textwidth=78
 augroup END
+" }
 
-" Colour, syntax highlighting.
-colorscheme slate2
-syntax enable
+" Ex commands {
+function! HTMLize(line1, line2) range
+    exec (a:line1. ',' . a:line2) . 'TOhtml'
+    exec '0,6d'
+    exec '0s/body bgcolor="\(.*\)" text="\(.*\)"/pre style="background-color:\1; color:\2"/'
+    exec '2d'
+    exec '$-1,$d'
+endfunction
+command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
+" }
 
-" Add help searching for user installed packages.
-helptags ~/.vim/doc
+" Shortcuts {
 
-" Most recently used file list. Alt-R
-noremap <M-r> :MRU<CR>
-inoremap <M-r> <C-O>:MRU<CR>
+" M-a switches between alternative files (.cpp <=> .hpp)
+nmap <M-a> :A<CR>
+imap <M-a> <ESC>:A<CR>
 
-" Show diff of current buffer. Alt-M
-noremap <M-d> :!tkdiff %<CR>
+" M-r opens the most recently used file list
+nmap <M-r> :FuzzyFinderMruFile<CR>
+imap <M-r> <ESC>:FuzzyFinderMruFile<CR>
 
-" Compilation.
+" Compilation and quickfix
 nmap <F9> :make<CR><CR><CR>:copen<CR><C-W><C-W>k
 nmap <F10> :cnext<CR>
 nmap <F11> :cprev<CR>
 
-" Navigation. F12 opens a sidebar with hotlinks to code definitions.
+" Tag list
 nmap <F12> :TlistToggle<CR>
-
-" I use rake more often than make.
-set makeprg=rake
 
 " Allow %/ to be put in :e lines and be expanded to the currently open file's
 " directory.
 cmap %/ <C-R>=expand("%:p:h")."/"<CR>
+nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 
-" ,e is like :e except it starts with the directory of the file currently
-" being edited. Works like Emacs <C-x C-f>.
-nmap ,e :e <C-R>=expand("%:p:h")."/"<CR>
+" Alt-Backspace is delete word back, like bash/emacs
+cmap <M-Backspace> <C-W>
 
-" Eclipse style moving of lines - e.g. Vjjj<M-j>
-imap <M-j> <Esc>:m+<CR>gi
-imap <M-k> <Esc>:m-2<CR>gi
-vmap <M-j> :m'>+<CR>gv
-vmap <M-k> :m'<-2<CR>gv
-vmap <M-h> :<<CR>gv
-nmap <M-j> mz:m+<CR>`z
-nmap <M-k> mz:m-2<CR>`z
-vmap <M-l> :><CR>gv
+" Key mapping for that nice buffer switching plugin.
+nmap <silent> <unique> <C-B> :IncBufSwitch<CR>
 
-" Emacs flavoured command line editing.
-cnoremap <M-BS> <C-W>
-cnoremap <C-A> <Home>
+    " Make Arrow Keys Useful Again {
+        map <down> <ESC>:bn<RETURN>
+        map <left> <ESC>:NERDTreeToggle<RETURN>
+        map <right> <ESC>:Tlist<RETURN>
+        map <up> <ESC>:bp<RETURN>
+    " }
 
-" Rebuild tags file
-nmap <M-C> :!ctags -R .
+" }
 
+" TagList Settings {
+let Tlist_Auto_Open=0 " let the tag list open automagically
+let Tlist_Compact_Format = 1 " show small menu
+let Tlist_Ctags_Cmd = 'ctags' " location of ctags
+let Tlist_Enable_Fold_Column = 0 " do show folding tree
+let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
+let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
+let Tlist_Sort_Type = "name" " order by
+let Tlist_Use_Right_Window = 1 " split to the right side of the screen
+let Tlist_WinWidth = 40 " 40 cols wide
+    " Language Specifics {
+    " just functions and classes please
+    let tlist_aspjscript_settings = 'asp;f:function;c:class' 
+    " just functions and subs please
+    let tlist_aspvbs_settings = 'asp;f:function;s:sub' 
+    " don't show variables in freaking php
+    let tlist_php_settings = 'php;c:class;d:constant;f:function' 
+    " just functions and classes please
+    let tlist_vb_settings = 'asp;f:function;c:class' 
+    " }
+" }
