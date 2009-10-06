@@ -106,14 +106,16 @@ augroup END
 " }
 
 " Ex commands {
+
+" HTMLize - TOhtml then strip the cruft
+let html_use_css = 1
 function! HTMLize(line1, line2) range
     exec (a:line1. ',' . a:line2) . 'TOhtml'
-    exec '0,6d'
-    exec '0s/body bgcolor="\(.*\)" text="\(.*\)"/pre style="background-color:\1; color:\2"/'
-    exec '2d'
+    exec '0,/<body/d'
     exec '$-1,$d'
 endfunction
 command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
+
 " }
 
 " Shortcuts {
