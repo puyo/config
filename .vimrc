@@ -53,7 +53,7 @@ set sidescrolloff=10 " always show 10 lines side of cursor
 set guioptions-=m " hide menu bar
 set guioptions-=T " hide tool bar
 set nowrap " do not wrap long lines
-set cursorcolumn " highlight current column
+"set cursorcolumn " highlight current column
 set cursorline " highlight current line
 set laststatus=2 " always show the status line
 set lazyredraw " do not redraw while running macros
@@ -73,7 +73,7 @@ set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
 set backspace=indent,eol,start " allow backspacing over everything
 set nojoinspaces " only insert one space when joining sentences
 set expandtab " no actual tabs by default
-set tabstop=4  " tab size (how many characters wide tabs are)
+set tabstop=8  " tab size (how many characters wide tabs are)
 set shiftwidth=4 " general purpose indent/unindent size
 set softtabstop=4 " number of spaces to insert instead of a tab
 set shiftround " round up to the next indentation column
@@ -145,33 +145,47 @@ cmap <M-Backspace> <C-W>
 " Key mapping for that nice buffer switching plugin.
 nmap <silent> <unique> <C-B> :IncBufSwitch<CR>
 
-    " Make Arrow Keys Useful Again {
-        map <down> <ESC>:bn<RETURN>
-        map <left> <ESC>:NERDTreeToggle<RETURN>
-        map <right> <ESC>:Tlist<RETURN>
-        map <up> <ESC>:bp<RETURN>
+    " Tab through open buffers {
+        map <C-Tab> <ESC>:bn<RETURN>
+        map <C-S-Tab> <ESC>:bp<RETURN>
     " }
 
+    " Eclipse moving blocks of text {
+        nmap <M-j> :<C-U>move .+1<CR>==
+        nmap <M-k> :<C-U>move .-2<CR>==
+        imap <M-j> <C-o>:<C-u>move .+1<CR><C-o>==
+        imap <M-k> <C-o>:<C-u>move .-2<CR><C-o>==
+        vmap <M-j> :move '>+1<CR>gv
+        vmap <M-k> :move '<-2<CR>gv
+        nmap <M-h> <<
+        nmap <M-l> >>
+        imap <M-h> <C-o><<
+        imap <M-l> <C-o>>>
+        vmap <M-h> <gv
+        vmap <M-l> >gv
+    " }
 " }
 
 " TagList Settings {
-let Tlist_Auto_Open=0 " let the tag list open automagically
-let Tlist_Compact_Format = 1 " show small menu
-let Tlist_Ctags_Cmd = 'ctags' " location of ctags
-let Tlist_Enable_Fold_Column = 0 " do show folding tree
-let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
-let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
-let Tlist_Sort_Type = "name" " order by
-let Tlist_Use_Right_Window = 1 " split to the right side of the screen
-let Tlist_WinWidth = 40 " 40 cols wide
+    let Tlist_Auto_Open=0 " let the tag list open automagically
+    let Tlist_Compact_Format = 1 " show small menu
+    let Tlist_Ctags_Cmd = 'ctags' " location of ctags
+    let Tlist_Enable_Fold_Column = 0 " do show folding tree
+    let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
+    let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
+    let Tlist_Sort_Type = "name" " order by
+    let Tlist_Use_Right_Window = 1 " split to the right side of the screen
+    let Tlist_WinWidth = 40 " 40 cols wide
+
     " Language Specifics {
-    " just functions and classes please
-    let tlist_aspjscript_settings = 'asp;f:function;c:class' 
-    " just functions and subs please
-    let tlist_aspvbs_settings = 'asp;f:function;s:sub' 
-    " don't show variables in freaking php
-    let tlist_php_settings = 'php;c:class;d:constant;f:function' 
-    " just functions and classes please
-    let tlist_vb_settings = 'asp;f:function;c:class' 
+        " just functions and classes please
+        let tlist_aspjscript_settings = 'asp;f:function;c:class'
+        " just functions and subs please
+        let tlist_aspvbs_settings = 'asp;f:function;s:sub'
+        " don't show variables in freaking php
+        let tlist_php_settings = 'php;c:class;d:constant;f:function'
+        " just functions and classes please
+        let tlist_vb_settings = 'asp;f:function;c:class'
     " }
 " }
+
