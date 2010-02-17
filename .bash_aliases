@@ -16,5 +16,7 @@ rbgrep() {
 }
 
 railsgrep() {
-    find . -name "*.{rb,conf,html,css}" -print0 | xargs -0 grep --color "$@"
+    find . -regextype posix-extended \
+        -regex ".*(rb|erb|yml|html|css|js)$" \
+        -print0 | xargs -0 grep --color "$@"
 }
