@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# irssi in a screen session on a commonly accessible host
+irc() {
+    HOST=jube
+    while [ 1 ]; do
+        ssh -t $HOST screen -dAar
+        sleep 10
+    done
+}
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
