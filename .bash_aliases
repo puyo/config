@@ -20,12 +20,21 @@ else
     alias dir='ls -lhG'
 fi
 
+alias less='less -R' # deal with colours
+
 rbgrep() {
-    find . -name "*.rb" -print0 | xargs -0 grep --color "$@"
+    find . -name "*.rb" -print0 | xargs -0 grep --color=always "$@"
+}
+
+re_find_from_current() {
+    if [ `uname` == 'Darwin' ]; then
+        find -E . "$@"
+    else
+        find . -regextype posix-extended "$@"
+    fi
 }
 
 railsgrep() {
-    find . -regextype posix-extended \
-        -regex ".*(rb|erb|yml|html|css|js)$" \
-        -print0 | xargs -0 grep --color "$@"
+    re_find_from_current -regex ".*(rb|erb|haml|yml|html|css|js|Rakefile|Gemfile)$" \
+        -print0 | xargs -0 grep --color=always "$@"
 }
