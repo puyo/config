@@ -22,6 +22,10 @@ fi
 
 alias less='less -R' # deal with colours
 
+alias psxiso='pcsx -nogui -runcd -cdfile'
+alias psxcd='pcsx -nogui -runcd'
+alias danim="dosbox -c 'c:' -c 'cd danim' -exit 'dpa'"
+
 rbgrep() {
     find . -name "*.rb" -print0 | xargs -0 grep --color=always "$@"
 }
