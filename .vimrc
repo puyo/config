@@ -58,8 +58,8 @@ set cursorline " highlight current line
 set laststatus=2 " always show the status line
 set lazyredraw " do not redraw while running macros
 set linespace=0 " do not insert extra pixels between rows
-set list " needed to display tabs
-set listchars=tab:>- " only display tabs, not other whitespace
+"set list " needed to display tabs
+"set listchars=tab:>- " only display tabs, not other whitespace
 set shortmess=aOstT " try to avoid 'press a key' prompts
 set report=0 " tell us when anything has changed
 set number " line numbers on the left
@@ -67,6 +67,9 @@ set wildmode=list:longest " bash-like tab completion
 set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
             \*.jpg,*.gif,*.png,*~,*.swp
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
+if has("gui_macvim")
+    set fuoptions+=maxhorz
+endif
 " }
 
 " Text and code editing {
