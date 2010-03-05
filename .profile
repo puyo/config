@@ -1,12 +1,4 @@
 # ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
-
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -16,20 +8,25 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+# $PATH
+[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
+[ -d "/usr/X11/bin" ] && PATH="/usr/X11/bin:$PATH"
+[ -d "/opt/local/bin" ] && PATH="/opt/local/bin:$PATH"
+[ -d "/opt/local/sbin" ] && PATH="/opt/local/sbin:$PATH"
+export PATH
 
-PYTHONBIN="$HOME/lib/python2.6/bin"
-if [ -d "$PYTHONBIN" ] ; then
-    PATH="$PATH:$PYTHONBIN"
+# $BROWSER
+if [ -x "/usr/bin/google-chrome" ] ; then
+    CHROME="/usr/bin/google-chrome"
+else
+    CHROME="$HOME/bin/google-chrome"
 fi
+export BROWSER="$CHROME"
 
-export LC_ALL=C
-export BROWSER=/usr/bin/firefox
 export EDITOR=/usr/bin/vim
 export DICTIONARY=british
 export PAGER="/usr/bin/less -R"
 export OOO_FORCE_DESKTOP=gnome
+export SDL_AUDIODRIVER=dsp
 export LL_BAD_OPENAL_DRIVER=x
+export HISTCONTROL=ignoreboth
