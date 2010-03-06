@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+#
+# Greg's gvim wrapper. Parses arguments to open all sorts of random junk I
+# paste into it. ;)
+#
+# Files are opened as new buffers in a single gvim instance.
+
+require 'pathname'
+require 'pp'
+
+def gvim(*args)
+  system('gvim', '--servername', 'vim', *args)
+end
+
+if ARGV.empty?
+  gvim
+else
+  args = ARGV.join(' ')
+  file_path = line = nil
+  if match = /^([^(]+?)\((\d+?)\)/.match(args) 
+    # mxmlc although annoying because ( has special meaning in bash so you
+    # can't just copy and paste without quoting or escaping the brackets
+    file_path, line = match[1], match[2]
+  elsif match = /^([^:]+?):(\d+?):/.match(args)
+    # standard error format (gcc, pylint, ruby, grep -n)
+    file_path, line = match[1], match[2]
+  elsif match = /File (.+?), line (\d+)/.match(args)
+    # python stack trace
+    file_path, line = match[1], match[2]
+  elsif match = /^(.+?):/.match(args)
+    # grep without -n
+    file_path = match[1]
+  else
+    file_path = args
+  end
+
+  path = Pathname.new(file_path)
+  gvim_servername = `gvim --serverlist`.split(/\n/).first
+
+  if not path.exist?
+    # Check if it's relative to gvim's cwd.
+    if gvim_servername
+      # Prefix relative paths with gvim's current working directory.
+      cmd = format("gvim --servername '%s' --remote-expr 'getcwd()'",
+                   gvim_servername)
+      gvim_cwd = Pathname.new(`#{cmd}`)
+      new_path = gvim_cwd.join(file_path)
+      if new_path.exist?
+        path = new_path
+      end
+    end
+  end
+
+  gvim("--remote-silent", path.to_s)
+  while gvim_servername.nil?
+    gvim_servername = `gvim --serverlist`.split(/\n/).first
+  end
+  # not working
+  #if path.exist? and line # jump to the right line
+    #gvim("--remote-send", "#{line}G")
+  #end
+end
+
