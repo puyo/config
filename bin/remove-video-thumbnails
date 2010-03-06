@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find -size '-79k' -name "*.JPG"
+find -size '-79k' -name "*.JPG" | xargs rm
