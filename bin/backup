@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# NB: --whole-file for initial transfer
+RSYNC="/usr/bin/rsync
+        --human-readable
+        --verbose
+        --archive
+        --delete
+        --delete-excluded
+        --progress
+	--exclude '*~'
+	--exclude cache/
+	--exclude .Trash/
+	--exclude .opera/cache/
+	--exclude '.mozilla/firefox/*/Cache/'
+	--exclude games/emerald
+	--exclude games/df_linux
+	--exclude games/homedesigner
+	--exclude games/pcsx2
+	--exclude games/epsxe
+	--exclude games/ut2004
+	--exclude games/wow
+	--exclude 'games/Warcraft III'
+	--exclude unzipped
+	--exclude .thumbnails
+	--exclude .secondlife/cache/
+	--exclude .kde/share/apps/amarok/albumcovers/cache/
+	"
+
+$RSYNC "$HOME" "/media/stuff/$HOSTNAME/home/greg/"
+#$RSYNC "lucy@dusan:/home/lucy/" "/media/stuff/$HOSTNAME/home/lucy/"
