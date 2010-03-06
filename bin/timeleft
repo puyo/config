@@ -1,0 +1,109 @@
+#!/usr/bin/env ruby
+
+# = Time Left
+#
+# Script for calculating when you should go home.
+#
+# == Installation
+#
+# Copy it somewhere in PATH and chmod it.
+#   chmod +x timeleft
+#
+# == Usage
+#
+#   timeleft --help
+
+require 'time'
+require 'optparse'
+require 'ostruct'
+
+module TimeLeft
+  TIME_FORMAT = '%a %b %d %I:%M:%S %p'
+
+  def self.pluralise(n, singular, plural=nil)
+    plural ||= singular + 's'
+    if n != 1
+    "%d %s" % [n, plural]
+    else
+    "%d %s" % [n, singular]
+    end
+  end
+
+  def self.hms_english(seconds)
+    hour_words = %w(hour hours)
+    minute_words = %w(minute minutes)
+    second_words = %w(second seconds)
+
+    m, s = seconds.to_f.divmod(60)
+    h, m = m.to_f.divmod(60)
+
+    parts = []
+    parts << pluralise(h, *hour_words) if h > 0
+    parts << pluralise(m, *minute_words) if m > 0
+    parts << pluralise(s, *second_words) if s > 0
+    commas, rest = parts[0...-1], parts[-1]
+
+    return [parts[0...-1].join(', '), parts[-1]].join(' and ')
+  end
+
+  def self.main()
+    options = OpenStruct.new
+    options.lunch_mins = 60
+    options.hours = 6
+
+    now = Time.now
+
+    OptionParser.new do |opts|
+      opts.on("-s", "--start HHMM", 
+          "Start (24 hour time), default = boot") do |arg|
+        if m = /(\d\d):?(\d\d)?/.match(arg)
+          hour = m[1] || now.hour
+          minute = m[2] || now.min
+          options.t0 = Time.local(now.year, now.month, now.day, hour.to_i,
+                                  minute.to_i)
+        else
+          raise "Invalid time format for --start: #{t0}"
+        end
+      end
+      opts.on("-l", "--lunch MINS", 
+          "Time spent at lunch (mins), default = #{options.lunch_mins}") do |arg|
+        options.lunch_mins = arg.to_i
+      end
+      opts.on("-h", "--hours HOURS", 
+          "Number of hours to work, default = #{options.hours}") do |arg|
+        options.hours = arg.to_i
+      end
+    end.parse!
+
+    if options.t0.nil?
+      uptime = File.read("/proc/uptime").strip.split.first
+      seconds = uptime.to_i
+      options.t0 = now - now.sec - seconds
+    end
+
+    lunch_s = options.lunch_mins * 60
+    hours_per_day = options.hours
+    t1 = options.t0 + hours_per_day*60*60 + lunch_s
+    hours_present = (now - options.t0 - options.lunch_mins*60.0)/(60*60.0)
+
+    fmt = "%-22s: %s\n"
+    times = [
+      [options.t0, "Start"],
+      [now, "NOW"],
+      [t1, "Finish (lunch #{options.lunch_mins}m)"],
+    ]
+    times.sort_by{|t, label| t }.each do |t, label|
+      printf fmt, t.strftime(TIME_FORMAT), label
+    end
+    puts
+    printf "Hours present: %.2f hours\n", hours_present
+
+    if now > t1
+      printf "GO HOME, you have worked an extra %s today.\n", hms_english(now - t1)
+    else
+      printf "You have %s left today.\n", hms_english(t1 - now)
+    end
+  end
+end
+
+TimeLeft.main if $0 == __FILE__
