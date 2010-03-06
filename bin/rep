@@ -1,0 +1,67 @@
+#! /usr/bin/env ruby
+#
+# Rudimentary script to replace a regexp across many files
+#
+# Example:
+#
+#   rep '\b([hH]ello)\b' '$1 + "world"' *.txt
+#
+# (Ensure the word 'hello' or 'Hello' has the suffix -world appended.)
+
+MINARGS = 3
+
+def usage
+  puts "Perform a string replacement on the contents of a set of text files."
+  puts "  #{__FILE__} regexp replacement files..."
+  puts
+  puts "The 'replacement' argument will be evaluated as a Ruby expression"
+  puts %s{so you probably need to quote it. e.g. '"abc#$1xyz"'}
+  exit
+end
+
+usage if ARGV.size < MINARGS
+
+regexp = Regexp.compile(ARGV.shift, Regexp::EXTENDED)
+replacement = ARGV.shift
+filenames = ARGV
+
+ask = true
+
+for filename in filenames
+  result = ''
+  replaced = false
+  File::open(filename, 'r') do |f|
+    lineno = 1
+    f.each_line do |line|
+      mpos = 0
+
+      newline = line.gsub(regexp) { |match|
+        eval(replacement)
+      }
+
+      if line != newline
+
+        puts "LOC: '#{filename}', line #{lineno}"
+        puts "OLD: '#{line.chomp}'"
+        puts "NEW: '#{newline.chomp}'"
+        puts
+
+        line = newline
+        replaced = true
+      end
+
+      lineno += 1
+      result += line
+    end
+  end
+
+  if replaced and ask
+    puts "Replace all? [y]"
+    if STDIN.gets.strip[0] == ?y
+      File::rename(filename, filename + "~")
+      File::open(filename, 'w') do |f|
+        f.puts result
+      end
+    end
+  end
+end
