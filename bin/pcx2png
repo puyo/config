@@ -1,0 +1,7 @@
+#!/usr/bin/ruby
+
+for fn in Dir["*.PCX"] + Dir["*.pcx"]
+  newfn = File.basename(fn.downcase, '.pcx') + '.png'
+  puts newfn
+  system "convert '#{fn}' '#{newfn}'" or fail("Could not convert #{fn}")
+end
