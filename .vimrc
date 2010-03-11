@@ -68,7 +68,7 @@ set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
             \*.jpg,*.gif,*.png,*~,*.swp
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
 if has("gui_macvim")
-    set fuoptions+=maxhorz
+  set fuoptions+=maxhorz
 endif
 " }
 
@@ -123,13 +123,18 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
 " Shortcuts {
 
+if has("gui_macvim")
+  set macmeta " allow alt/option to act as meta key
+endif
+
 " M-a switches between alternative files (.cpp <=> .hpp)
 nmap <M-a> :A<CR>
 imap <M-a> <ESC>:A<CR>
 
 " M-r opens the most recently used file list
-nmap <M-r> :FuzzyFinderMruFile<CR>
-imap <M-r> <ESC>:FuzzyFinderMruFile<CR>
+nmap <M-r> :MRU<CR>
+imap <M-r> <ESC>:MRU<CR>
+let MRU_Max_Entries = 100
 
 " Compilation and quickfix
 nmap <F9> :make<CR><CR><CR>:copen<CR><C-W><C-W>k
@@ -146,9 +151,6 @@ nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 
 " Alt-Backspace is delete word back, like bash/emacs
 cmap <M-Backspace> <C-W>
-
-" Key mapping for that nice buffer switching plugin.
-nmap <silent> <unique> <C-B> :IncBufSwitch<CR>
 
     " Tab through open buffers {
         map <C-Tab> <ESC>:bn<RETURN>
