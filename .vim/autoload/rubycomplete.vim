@@ -49,7 +49,7 @@ endif
 " }}} configuration failsafe initialization
 
 " {{{ vim-side support functions
-let s:rubycomplete_debug = 1
+let s:rubycomplete_debug = 0
 
 function! s:ErrMsg(msg)
     echohl ErrorMsg
