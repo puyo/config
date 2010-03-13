@@ -1,5 +1,5 @@
-" vim: set foldmarker={,} foldlevel=0 spell:
-
+" vim: set foldmarker={,} foldlevel=0 spell :
+"
 " Basics {
 set nocompatible " no vi-compatible mode
 set noexrc " don't use local .vimrc files
@@ -16,8 +16,9 @@ helptags ~/.vim/doc " add help searching for user installed packages
 
 " Folding {
 set foldenable " turn on folding
-set foldmarker={,} " fold C style code (only use this as default if you use a high foldlevel)
-set foldmethod=marker " fold on the marker
+"set foldmarker={,} " fold C style code (only use this as default if you use a high foldlevel)
+"set foldmethod=marker " fold on the marker
+set foldmethod=syntax " fold on syntax contructs
 set foldlevel=100 " don't autofold anything (but I can still fold manually)
 set foldopen=block,hor,mark,percent,quickfix,tag,search,undo " what movements open folds
 function! SimpleFoldText()
