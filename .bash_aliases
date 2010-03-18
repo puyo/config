@@ -43,3 +43,7 @@ railsgrep() {
     re_find_from_current -regex ".*(rb|erb|haml|yml|html|css|js|Rakefile|Gemfile)$" \
         -print0 | xargs -0 grep --color=always "$@"
 }
+
+svngrep() {
+    find . -path "*/.svn" -prune -o -type f -print0 | xargs -0 grep --color=always "$@"
+}
