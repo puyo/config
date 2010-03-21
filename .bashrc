@@ -20,4 +20,7 @@ case "$TERM" in xterm*|rxvt*)
 esac
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
-[ -f /etc/bash_completion ] && . /etc/bash_completion
+
+for file in /etc/bash_completion /opt/local/etc/bash_completion; do
+    [ -f $file ] && . $file
+done
