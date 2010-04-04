@@ -7,3 +7,5 @@
 	status = auto
 [alias]
 	st = !PAGER= git status
+[push]
+	default = matching
