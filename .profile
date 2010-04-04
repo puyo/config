@@ -27,6 +27,5 @@ export EDITOR=/usr/bin/vim
 export DICTIONARY=british
 export PAGER="/usr/bin/less -R"
 export OOO_FORCE_DESKTOP=gnome
-export SDL_AUDIODRIVER=dsp
 export LL_BAD_OPENAL_DRIVER=x
 export HISTCONTROL=ignoreboth
