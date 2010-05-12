@@ -1,0 +1,28 @@
+install freetds +odbc 
+install ruby19 +nosuffix 
+install allegro 
+install irssi 
+install openssl 
+install git-core +bash_completion+doc+svn
+install autoconf 
+install automake
+install bash
+install bash-completion 
+install boost 
+install bzip2
+install ctags
+install dos2unix 
+install glut 
+install gmake 
+install gnupg 
+install irssi 
+install libxml2 
+install libxslt 
+install MacVim 
+install mpc 
+install mpd 
+install sqlite3 
+install synergy 
+install unrar 
+install wine-devel 
+install wireshark 
