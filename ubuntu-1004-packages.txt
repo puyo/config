@@ -190,7 +190,7 @@ gettext-base					install
 ghostscript					install
 ghostscript-cups				install
 ghostscript-x					install
-git-core					install
+git-core					deinstall
 gksu						install
 gnome-about					install
 gnome-accessibility-themes			install
@@ -413,7 +413,6 @@ libdecoration0					install
 libdesktopcouch-glib-1.0-2			install
 libdevkit-power-gobject1			install
 libdevmapper1.02.1				install
-libdigest-sha1-perl				install
 libdirectfb-1.2-0				install
 libdjvulibre-text				install
 libdjvulibre21					install
@@ -437,7 +436,6 @@ libegroupwise1.2-13				install
 libelf1						install
 libenchant1c2a					install
 libept0						install
-liberror-perl					install
 libesd0						install
 libespeak1					install
 libevdocument2					install
