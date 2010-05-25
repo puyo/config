@@ -3,7 +3,6 @@
 " Basics {
 set nocompatible " no vi-compatible mode
 set noexrc " don't use local .vimrc files
-set background=dark " use light foreground colours
 set cpoptions+=a " :read updates alternative file name
 set cpoptions+=A " :write updates alternative file name
 set cpoptions+=c " continue searching after the current match
@@ -39,13 +38,12 @@ set autowrite " autowrite, save the file when calling external commands
 
 " Appearance {
 syntax on " syntax highlighting
-" syntax highlighting colour scheme
-if has('gui_running')
-    colorscheme candycode
+if has("gui_running")
+    colorscheme candycode " syntax highlighting colour scheme
 else
-    colorscheme desert
+    colorscheme desert " syntax highlighting colour scheme
+    set background=light " use light foreground colours
 end
-"colorscheme desert " syntax highlighting colour scheme
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
@@ -115,7 +113,8 @@ augroup filetypedetect
     au FileType eruby setl et sw=2 sts=2 makeprg=rake
     au FileType css setl et ts=2 sw=2 sts=2 makeprg=rake
     au FileType actionscript setl nowrap sw=2 ts=2 sts=0 noet smartindent
-    au FileType text setl wrap linebreak textwidth=0
+    au FileType text setl textwidth=78
+    au FileType aspvbs setl ts=4
 augroup END
 " }
 
