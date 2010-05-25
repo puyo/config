@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.07 for greg on Tue Jul 21 09:53:24 2009.
+# Written by xscreensaver-demo 5.10 for greg on Tue May 25 22:13:48 2010.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -17,21 +17,21 @@ demoCommand:	xscreensaver-demo
 prefsCommand:	xscreensaver-demo -prefs
 nice:		10
 memoryLimit:	0
-fade:		True
+fade:		False
 unfade:		False
 fadeSeconds:	0:00:03
 fadeTicks:	20
 captureStderr:	True
 ignoreUninstalledPrograms:False
 font:		*-medium-r-*-140-*-m-*
-dpmsEnabled:	False
-dpmsStandby:	2:00:00
-dpmsSuspend:	2:00:00
-dpmsOff:	4:00:00
+dpmsEnabled:	True
+dpmsStandby:	0:30:00
+dpmsSuspend:	1:00:00
+dpmsOff:	2:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: True
-imageDirectory:	/home/greg/wallpaper
+imageDirectory:	/home/greg/pictures/wallpaper
 
 mode:		random
 selected:	-1
@@ -221,7 +221,7 @@ programs:								      \
   GL: 				antinspect -root			    \n\
 -				fireworkx -root				    \n\
 				fuzzyflakes -root			    \n\
-				interaggregate -root			    \n\
+				interaggregate -root -growth-delay 0	    \n\
 -				intermomentary -root			    \n\
 -				memscroller -root			    \n\
 -				mismunch -root				    \n\
@@ -230,7 +230,8 @@ programs:								      \
   GL: 				pinion -root				    \n\
   GL: 				polyhedra -root				    \n\
 - GL: 				providence -root			    \n\
-				substrate -root				    \n\
+				substrate -root -growth-delay 0		      \
+				  -max-cycles 21634			    \n\
 				wormhole -root				    \n\
 - GL: 				antmaze -root				    \n\
 - GL: 				boing -root				    \n\
@@ -277,6 +278,9 @@ programs:								      \
   GL: 				plasma --root				    \n\
   GL: 				sundancer2 --root			    \n\
   GL: 		 "BusySpheres" 	busyspheres --root			    \n\
+  GL: 				photopile -root				    \n\
+  GL: 				surfaces -root				    \n\
+  GL: 				rubikblocks -root			    \n\
 
 
 pointerPollTime:    0:00:05
