@@ -1,5 +1,5 @@
-" vim: set foldmarker={,} foldlevel=0 spell :
-"
+" vim: set foldmethod=marker foldmarker={,} foldlevel=0 spell:
+
 " Basics {
 set nocompatible " no vi-compatible mode
 set noexrc " don't use local .vimrc files
@@ -11,6 +11,7 @@ set cpoptions+=F " :write updates current buffer file name
 set cpoptions+=m " show match parens after .5s
 set cpoptions+=q " when joining lines, leave the cursor between lines
 set history=100  " keep this many lines of command line history
+set mousemodel=popup " right mouse button pops up a menu
 helptags ~/.vim/doc " add help searching for user installed packages
 " }
 
@@ -18,7 +19,7 @@ helptags ~/.vim/doc " add help searching for user installed packages
 set foldenable " turn on folding
 "set foldmarker={,} " fold C style code (only use this as default if you use a high foldlevel)
 "set foldmethod=marker " fold on the marker
-set foldmethod=syntax " fold on syntax contructs
+set foldmethod=syntax " fold on syntax constructs
 set foldlevel=100 " don't autofold anything (but I can still fold manually)
 set foldopen=block,hor,mark,percent,quickfix,tag,search,undo " what movements open folds
 function! SimpleFoldText()
@@ -38,7 +39,12 @@ set autowrite " autowrite, save the file when calling external commands
 
 " Appearance {
 syntax on " syntax highlighting
-colorscheme candycode " syntax highlighting colour scheme
+" syntax highlighting colour scheme
+if has('gui_running')
+    colorscheme candycode
+else
+    colorscheme desert
+end
 "colorscheme desert " syntax highlighting colour scheme
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
@@ -53,6 +59,9 @@ set scrolloff=10 " always show 10 lines above and below cursor
 set sidescrolloff=10 " always show 10 lines side of cursor
 set guioptions-=m " hide menu bar
 set guioptions-=T " hide tool bar
+set guioptions+=l " left scroll bar always
+set guioptions-=r " don't always display right scroll bar
+set guioptions+=R " display right scroll when vertical split
 set nowrap " do not wrap long lines
 "set cursorcolumn " highlight current column
 set cursorline " highlight current line
@@ -69,7 +78,7 @@ set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
             \*.jpg,*.gif,*.png,*~,*.swp
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
 if has("gui_macvim")
-  set fuoptions+=maxhorz
+  set fuoptions+=maxhorz " full screen options on mac
 endif
 " }
 
@@ -99,13 +108,14 @@ augroup filetypedetect
     au BufNewFile,BufRead *.mxml setl filetype=xml number
     au BufNewFile,BufRead *.wiki setl filetype=Wikipedia
     au BufNewFile,BufRead *.json setl nowrap sw=2 ts=2 sts=0 noet smartindent
+    au BufNewFile,BufRead *.txt setl filetype=text
 
     au FileType c setl et sw=4 sts=4 makeprg=make
     au FileType ruby setl et sw=2 sts=2 makeprg=rake
     au FileType eruby setl et sw=2 sts=2 makeprg=rake
     au FileType css setl et ts=2 sw=2 sts=2 makeprg=rake
     au FileType actionscript setl nowrap sw=2 ts=2 sts=0 noet smartindent
-    au FileType text setl textwidth=78
+    au FileType text setl wrap linebreak textwidth=0
 augroup END
 " }
 
@@ -127,6 +137,9 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 if has("gui_macvim")
   set macmeta " allow alt/option to act as meta key
 endif
+
+" M-t transposes comma separated arguments
+map <M-t> "qdiwdwep"qp
 
 " M-a switches between alternative files (.cpp <=> .hpp)
 nmap <M-a> :A<CR>
@@ -197,3 +210,4 @@ cmap <M-Backspace> <C-W>
     " }
 " }
 
+set runtimepath+=~/.vim/ultisnips
