@@ -29,3 +29,4 @@ export PAGER="/usr/bin/less -R"
 export OOO_FORCE_DESKTOP=gnome
 export LL_BAD_OPENAL_DRIVER=x
 export HISTCONTROL=ignoreboth
+
