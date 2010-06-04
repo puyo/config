@@ -47,3 +47,6 @@ railsgrep() {
 svngrep() {
     find . -path "*/.svn" -prune -o -type f -print0 | xargs -0 grep --color=always "$@"
 }
+
+alias gs='git status'
+alias gcm='git commit -m'
