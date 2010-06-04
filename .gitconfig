@@ -5,7 +5,5 @@
 	branch = auto
 	diff = auto
 	status = auto
-[alias]
-	st = !PAGER= git status
 [push]
 	default = matching
