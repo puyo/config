@@ -1,15 +1,6 @@
 #!/bin/sh
 
-# irssi in a screen session on a commonly accessible host
-irc() {
-    HOST=jube
-    while [ 1 ]; do
-        ssh -t $HOST screen -dAar
-        sleep 10
-    done
-}
-
-# enable color support of ls and also add handy aliases
+# colors
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
@@ -19,13 +10,17 @@ else
     alias ls='ls -G'
     alias dir='ls -lhG'
 fi
-
 alias less='less -R' # deal with colours
+
+alias irc='ssh -t jube screen -dAar'
 
 alias psxiso='pcsx -nogui -runcd -cdfile'
 alias psxcd='pcsx -nogui -runcd'
 alias danim="dosbox -c 'c:' -c 'cd danim' -exit 'dpa'"
+
+# gvim
 [ -x /opt/local/bin/mvim ] && alias gvim='mvim'
+alias g='gvim --remote-silent'
 
 rbgrep() {
     find . -name "*.rb" -print0 | xargs -0 grep --color=always "$@"

@@ -9,10 +9,13 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # $PATH
-[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-[ -d "/usr/X11/bin" ] && PATH="/usr/X11/bin:$PATH"
-[ -d "/opt/local/bin" ] && PATH="/opt/local/bin:$PATH"
-[ -d "/opt/local/sbin" ] && PATH="/opt/local/sbin:$PATH"
+paths=( \
+    "/opt/local/lib/postgresql84/bin" \
+    "/usr/X11/bin" \
+    "/opt/local/bin" \
+    "/opt/local/sbin" \
+    "$HOME/bin" )
+for p in $paths; do [ -d $p ] && PATH="$p:$PATH"; done
 export PATH
 
 # $BROWSER
@@ -29,3 +32,4 @@ export PAGER="/usr/bin/less -R"
 export OOO_FORCE_DESKTOP=gnome
 export LL_BAD_OPENAL_DRIVER=x
 export HISTCONTROL=ignoreboth
+
