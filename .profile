@@ -9,13 +9,14 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # $PATH
-paths=( \
-    "/opt/local/lib/postgresql84/bin" \
-    "/usr/X11/bin" \
-    "/opt/local/bin" \
-    "/opt/local/sbin" \
-    "$HOME/bin" )
-for p in $paths; do [ -d $p ] && PATH="$p:$PATH"; done
+paths="/opt/local/lib/postgresql84/bin \
+    /usr/X11/bin \
+    /opt/local/bin \
+    /opt/local/sbin \
+    $HOME/bin"
+for p in $paths; do 
+    [ -d $p ] && PATH="$p:$PATH"
+done
 export PATH
 
 # $BROWSER
