@@ -20,7 +20,6 @@ alias danim="dosbox -c 'c:' -c 'cd danim' -exit 'dpa'"
 
 # gvim
 [ -x /opt/local/bin/mvim ] && alias gvim='mvim'
-alias g='gvim --remote-silent'
 
 rbgrep() {
     find . -name "*.rb" -print0 | xargs -0 grep --color=always "$@"
@@ -45,3 +44,4 @@ svngrep() {
 
 alias gs='git status'
 alias gcm='git commit -m'
+alias cucumber='cucumber --require features' # if you have features in subdirs
