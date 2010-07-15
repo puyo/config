@@ -17,6 +17,7 @@ alias irc='ssh -t jube screen -dAar'
 alias psxiso='pcsx -nogui -runcd -cdfile'
 alias psxcd='pcsx -nogui -runcd'
 alias danim="dosbox -c 'c:' -c 'cd danim' -exit 'dpa'"
+alias xlock='xscreensaver-command -lock'
 
 # gvim
 [ -x /opt/local/bin/mvim ] && alias gvim='mvim'
