@@ -1,9 +1,9 @@
-[user]
-	name = Greg McIntyre
-	email = blue.puyo@gmail.com
 [color]
-	branch = auto
-	diff = auto
-	status = auto
+    ui = true
 [push]
-	default = matching
+    default = matching
+[user]
+    name = Gregory McIntyre
+    email = blue.puyo@gmail.com
+[alias]
+    get = !git fetch && ( git rebase -v origin/master || ( git stash && ( git rebase -v origin/master || echo "WARNING: Run 'git stash pop' manually!" ) && git stash pop ) )
