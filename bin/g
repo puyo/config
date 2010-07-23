@@ -1,18 +1,27 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 #
 # Greg's gvim wrapper. Parses arguments and opens all sorts of random junk I
 # paste into it. ;)
 
+require 'rbconfig'
+
+def executable
+  case Config::CONFIG['target_os']
+  when /darwin/ then 'mvim'
+  when /linux/ then 'gvim'
+  end
+end
+
 def gvim(file, line=nil)
   if line.nil?
-    system('gvim', '--remote-send', ":e #{file}<CR>") || system('gvim', file)
+    system(executable, '--remote-send', ":e #{file}<CR>") || system(executable, file)
   else
-    system('gvim', '--remote-send', ":e +#{line} #{file}<CR>") || system('gvim', file, "+#{line}")
+    system(executable, '--remote-send', ":e +#{line} #{file}<CR>") || system(executable, file, "+#{line}")
   end
 end
 
 if ARGV.empty?
-  system('gvim')
+  system(executable)
 else
   ARGV.each do |arg|
     file_path = line = nil
