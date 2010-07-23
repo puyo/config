@@ -8,7 +8,7 @@ if [ -x /usr/bin/dircolors ]; then
 else
     # OSX
     alias ls='ls -G'
-    alias dir='ls -lhG'
+    alias dir='ls -ohG'
 fi
 alias less='less -R' # deal with colours
 
