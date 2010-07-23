@@ -133,10 +133,6 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
 " Shortcuts {
 
-if has("gui_macvim")
-  set macmeta " allow alt/option to act as meta key
-endif
-
 " M-t transposes comma separated arguments
 map <M-t> "qdiwdwep"qp
 
