@@ -14,7 +14,7 @@ end
 
 def gvim(file, line=nil)
   if line.nil?
-    system(executable, '--remote-send', ":e #{file}<CR>") || system(executable, file)
+    system(executable, '--remote-silent', file)
   else
     system(executable, '--remote-send', ":e +#{line} #{file}<CR>") || system(executable, file, "+#{line}")
   end
