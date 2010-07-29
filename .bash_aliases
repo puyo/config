@@ -12,7 +12,7 @@ else
 fi
 alias less='less -R' # deal with colours
 
-alias irc='ssh -t jube screen -dAar'
+alias irc='ssh -t greg@jube screen -dAar'
 
 alias psxiso='pcsx -nogui -runcd -cdfile'
 alias psxcd='pcsx -nogui -runcd'
@@ -46,3 +46,6 @@ svngrep() {
 alias gs='git status'
 alias gcm='git commit -m'
 alias cucumber='cucumber --require features' # if you have features in subdirs
+if [ `uname` == 'Darwin' ]; then
+    alias mate='/Applications/TextMate.app/Contents/Resources/mate'
+fi
