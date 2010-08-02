@@ -1,3 +1,3 @@
-deb http://ppa.launchpad.net/bogdanb/ppa/ubuntu jaunty main
-deb-src http://ppa.launchpad.net/bogdanb/ppa/ubuntu jaunty main
+deb http://ppa.launchpad.net/bogdanb/ppa/ubuntu lucid main
+deb-src http://ppa.launchpad.net/bogdanb/ppa/ubuntu lucid main
 
