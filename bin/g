@@ -5,23 +5,17 @@
 
 require 'rbconfig'
 
-def executable
-  case Config::CONFIG['target_os']
-  when /darwin/ then 'mvim'
-  when /linux/ then 'gvim'
-  end
-end
-
 def gvim(file, line=nil)
+  file = File.expand_path(file)
   if line.nil?
-    system(executable, '--remote-silent', file)
+    system('gvim', '--remote-send', ":e #{file}<CR>") || system('gvim', file)
   else
-    system(executable, '--remote-send', ":e +#{line} #{file}<CR>") || system(executable, file, "+#{line}")
+    system('gvim', '--remote-send', ":e +#{line} #{file}<CR>") || system('gvim', file, "+#{line}")
   end
 end
 
 if ARGV.empty?
-  system(executable)
+  system('gvim')
 else
   ARGV.each do |arg|
     file_path = line = nil

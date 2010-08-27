@@ -46,6 +46,3 @@ svngrep() {
 alias gs='git status'
 alias gcm='git commit -m'
 alias cucumber='cucumber --require features' # if you have features in subdirs
-if [ `uname` == 'Darwin' ]; then
-    alias mate='/Applications/TextMate.app/Contents/Resources/mate'
-fi
