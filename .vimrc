@@ -34,6 +34,17 @@ set fileformats=unix,dos,mac " support all three, in this order
 set directory=~/.vim/tmp
 set hidden " let me open multiple unsaved buffers
 set autowrite " autowrite, save the file when calling external commands
+
+" Strip trailing whitespace when I save source files.
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css} :call <SID>StripTrailingWhitespaces()
+
 " }
 
 " Appearance {
@@ -161,48 +172,77 @@ nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 " Alt-Backspace is delete word back, like bash/emacs
 cmap <M-Backspace> <C-W>
 
-    " Tab through open buffers {
-        map <C-Tab> <ESC>:bn<RETURN>
-        map <C-S-Tab> <ESC>:bp<RETURN>
-    " }
+" :bd does not disturb the split layout
+cabbrev bd Kwbd
 
-    " Eclipse moving blocks of text {
-        nmap <M-j> :<C-U>move .+1<CR>==
-        nmap <M-k> :<C-U>move .-2<CR>==
-        imap <M-j> <C-o>:<C-u>move .+1<CR><C-o>==
-        imap <M-k> <C-o>:<C-u>move .-2<CR><C-o>==
-        vmap <M-j> :move '>+1<CR>gv
-        vmap <M-k> :move '<-2<CR>gv
-        nmap <M-h> <<
-        nmap <M-l> >>
-        imap <M-h> <C-o><<
-        imap <M-l> <C-o>>>
-        vmap <M-h> <gv
-        vmap <M-l> >gv
-    " }
+" :q quits reliably
+cabbrev q qall
+
+" :wq writes and quits reliably
+cabbrev wq wqall
+
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1
+let g:miniBufExplorerMoreThanOne=0
+
+" Navigate through open buffers with C-Tab/C-S-Tab or M-Left/Right {
+    map <M-Left> <ESC>:bp<RETURN>
+    map <M-Right> <ESC>:bn<RETURN>
+" }
+
+" Eclipse moving blocks of text {
+    nmap <M-j> :<C-U>move .+1<CR>==
+    nmap <M-k> :<C-U>move .-2<CR>==
+    imap <M-j> <C-o>:<C-u>move .+1<CR><C-o>==
+    imap <M-k> <C-o>:<C-u>move .-2<CR><C-o>==
+    vmap <M-j> :move '>+1<CR>gv
+    vmap <M-k> :move '<-2<CR>gv
+    nmap <M-h> <<
+    nmap <M-l> >>
+    imap <M-h> <C-o><<
+    imap <M-l> <C-o>>>
+    vmap <M-h> <gv
+    vmap <M-l> >gv
+" }
+
+" Rspec (!s and !S) {
+function! RunSpec(args)
+    if filereadable("script/spec")
+        let spec = "script/spec"
+    else
+        let spec = "spec"
+    end 
+    call Send_to_Screen(spec . " " . expand("%:p") . " " . a:args . "\n")
+endfunction
+map !s :call RunSpec("-l " . line('.'))<CR>
+map !S :call RunSpec("")<CR>
+" }
+
 " }
 
 " TagList Settings {
-    let Tlist_Auto_Open=0 " let the tag list open automagically
-    let Tlist_Compact_Format = 1 " show small menu
-    let Tlist_Ctags_Cmd = 'ctags' " location of ctags
-    let Tlist_Enable_Fold_Column = 0 " do show folding tree
-    let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
-    let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
-    let Tlist_Sort_Type = "name" " order by
-    let Tlist_Use_Right_Window = 1 " split to the right side of the screen
-    let Tlist_WinWidth = 40 " 40 cols wide
+let Tlist_Auto_Open=0 " let the tag list open automagically
+let Tlist_Compact_Format = 1 " show small menu
+let Tlist_Ctags_Cmd = 'ctags' " location of ctags
+let Tlist_Enable_Fold_Column = 0 " do show folding tree
+let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
+let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
+let Tlist_Sort_Type = "name" " order by
+let Tlist_Use_Right_Window = 1 " split to the right side of the screen
+let Tlist_WinWidth = 40 " 40 cols wide
 
-    " Language Specifics {
-        " just functions and classes please
-        let tlist_aspjscript_settings = 'asp;f:function;c:class'
-        " just functions and subs please
-        let tlist_aspvbs_settings = 'asp;f:function;s:sub'
-        " don't show variables in freaking php
-        let tlist_php_settings = 'php;c:class;d:constant;f:function'
-        " just functions and classes please
-        let tlist_vb_settings = 'asp;f:function;c:class'
-    " }
+" Language Specifics {
+" just functions and classes please
+let tlist_aspjscript_settings = 'asp;f:function;c:class'
+" just functions and subs please
+let tlist_aspvbs_settings = 'asp;f:function;s:sub'
+" don't show variables in freaking php
+let tlist_php_settings = 'php;c:class;d:constant;f:function'
+" just functions and classes please
+let tlist_vb_settings = 'asp;f:function;c:class'
+" }
 " }
 
 set runtimepath+=~/.vim/ultisnips
