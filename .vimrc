@@ -89,6 +89,7 @@ set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
 if has("gui_macvim")
   set fuoptions+=maxhorz " full screen options on mac
+  set macmeta
 endif
 " }
 
@@ -112,7 +113,7 @@ set iskeyword+=_,$,@,%,#,? " these are not word dividers
 " File types {
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.rb,*.rjs,*.rbw,*.gem,*.gemspec setl filetype=ruby
+    au BufNewFile,BufRead *.rb,*.rjs,*.rbw,*.gem,*.gemspec setl filetype=ruby path+=lib
     au BufNewFile,BufRead *.as setl filetype=actionscript efm=%f(%l):\ col:\ %c\ Error:\ %m
     au BufNewFile,BufRead *.tex setl spell
     au BufNewFile,BufRead *.mxml setl filetype=xml number
