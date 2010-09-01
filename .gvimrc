@@ -3,6 +3,9 @@ if has("gui_macvim")
   nmap <D-t> :CommandT<CR>
   nmap <D-Left> :bprev<CR>
   nmap <D-Right> :bnext<CR>
+  nmap <D-R> :<CR>
+  map <D-R> :call RunSpec(":".line('.'))<CR>
+  map <D-r> :call RunSpec("")<CR>
 else
   nmap <M-t> :CommandT<CR>
   nmap <M-Left> :bprev<CR>
