@@ -128,6 +128,7 @@ augroup filetypedetect
     au FileType actionscript setl nowrap sw=2 ts=2 sts=0 noet smartindent
     au FileType text setl textwidth=78
     au FileType aspvbs setl ts=4
+    au FileType cucumber setl et ts=2 sw=2 sts=2
 augroup END
 " }
 
@@ -216,9 +217,9 @@ function! RunSpec(args)
     else
         let spec = "spec"
     end 
-    call Send_to_Screen(spec . " " . expand("%:p") . " " . a:args . "\n")
+    call Send_to_Screen(spec." ".expand("%:p").a:args."\n")
 endfunction
-map !s :call RunSpec("-l " . line('.'))<CR>
+map !s :call RunSpec(":".line('.'))<CR>
 map !S :call RunSpec("")<CR>
 " }
 
