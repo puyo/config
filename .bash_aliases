@@ -36,7 +36,7 @@ re_find_from_current() {
 
 railsgrep() {
     re_find_from_current -regex ".*(feature|rb|erb|haml|yml|html|css|js|Rakefile|Gemfile)$" \
-        -print0 | xargs -0 grep --color=always "$@"
+        -print0 | xargs -0 grep --color=always --exclude "*_packaged.*" --exclude "*min.js" "$@"
 }
 
 svngrep() {
