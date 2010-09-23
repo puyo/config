@@ -1,0 +1,4 @@
+#!/bin/sh
+# Fetch the current file and line number from vim.
+
+exec gvim --remote-expr "expand('%').':'.line('.')"
