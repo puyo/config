@@ -129,6 +129,7 @@ augroup filetypedetect
     au FileType text setl textwidth=78
     au FileType aspvbs setl ts=4
     au FileType cucumber setl et ts=2 sw=2 sts=2
+    au FileType scss setl et ts=2 sw=2 sts=2
 augroup END
 " }
 
@@ -136,6 +137,7 @@ augroup END
 
 " HTMLize - TOhtml then strip the cruft
 let html_use_css = 1
+let html_number_lines = 0
 function! HTMLize(line1, line2) range
     exec (a:line1. ',' . a:line2) . 'TOhtml'
     exec '0,/<body/d'
@@ -146,6 +148,14 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 " }
 
 " Shortcuts {
+
+" Don't lose highlight
+vnoremap < <gv
+vnoremap > >gv
+
+" Disable commands I never want to use, in case I hit them accidentally
+nmap <F1> <Esc>
+imap <F1> <Esc>a
 
 " M-t transposes comma separated arguments
 map <M-t> "qdiwdwep"qp
