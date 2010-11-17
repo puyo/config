@@ -257,3 +257,6 @@ let tlist_php_settings = 'php;c:class;d:constant;f:function'
 let tlist_vb_settings = 'asp;f:function;c:class'
 " }
 " }
+
+" Pathogen
+call pathogen#runtime_append_all_bundles() 
