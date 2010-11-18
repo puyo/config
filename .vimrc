@@ -1,5 +1,11 @@
 " vim: set foldmethod=marker foldmarker={,} foldlevel=0 spell:
 
+" Pathogen {
+call pathogen#runtime_append_all_bundles() 
+filetype off
+filetype plugin indent on
+" }
+
 " Basics {
 set nocompatible " no vi-compatible mode
 set noexrc " don't use local .vimrc files
@@ -11,7 +17,7 @@ set cpoptions+=m " show match parens after .5s
 set cpoptions+=q " when joining lines, leave the cursor between lines
 set history=100  " keep this many lines of command line history
 set mousemodel=popup " right mouse button pops up a menu
-helptags ~/.vim/doc " add help searching for user installed packages
+"helptags ~/.vim/doc " add help searching for user installed packages
 " }
 
 " Folding {
@@ -28,7 +34,8 @@ set foldtext=SimpleFoldText() " custom fold text function (cleaner than default)
 " }
 
 " Files and buffers {
-set backup " make backup files
+set nobackup " don't backup files
+set noswapfile " don't create swapfiles
 set backupdir=~/.vim/backup " where to put backup files
 set fileformats=unix,dos,mac " support all three, in this order
 set directory=~/.vim/tmp
@@ -238,7 +245,7 @@ map !S :call RunSpec("")<CR>
 " TagList Settings {
 let Tlist_Auto_Open=0 " let the tag list open automagically
 let Tlist_Compact_Format = 1 " show small menu
-let Tlist_Ctags_Cmd = 'ctags' " location of ctags
+let Tlist_Ctags_Cmd = 'tags' " location of ctags
 let Tlist_Enable_Fold_Column = 0 " do show folding tree
 let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
 let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
@@ -257,6 +264,3 @@ let tlist_php_settings = 'php;c:class;d:constant;f:function'
 let tlist_vb_settings = 'asp;f:function;c:class'
 " }
 " }
-
-" Pathogen
-call pathogen#runtime_append_all_bundles() 
