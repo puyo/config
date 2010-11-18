@@ -22,4 +22,5 @@ else
   vmap <M-v> d"+P
   vmap <M-c> "+y
   vmap <M-x> "+d
+  nmap <M-q> :qall<CR>
 endif
