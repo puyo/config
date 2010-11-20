@@ -58,7 +58,7 @@ autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css} :call <SID>
 " Appearance {
 syntax on " syntax highlighting
 if has("gui_running")
-    colorscheme candycode " syntax highlighting colour scheme
+    colorscheme molakai " syntax highlighting colour scheme
 else
     colorscheme desert " syntax highlighting colour scheme
     set background=light " use light foreground colours
@@ -105,8 +105,8 @@ set backspace=indent,eol,start " allow backspacing over everything
 set nojoinspaces " only insert one space when joining sentences
 set expandtab " no actual tabs by default
 set tabstop=8  " tab size (how many characters wide tabs are)
-set shiftwidth=4 " general purpose indent/unindent size
-set softtabstop=4 " number of spaces to insert instead of a tab
+set shiftwidth=2 " general purpose indent/unindent size
+set softtabstop=2 " number of spaces to insert instead of a tab
 set shiftround " round up to the next indentation column
 set completeopt= " don't use a pop up menu for completions
 set ignorecase " ignore case in patterns
