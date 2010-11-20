@@ -58,7 +58,7 @@ autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css} :call <SID>
 " Appearance {
 syntax on " syntax highlighting
 if has("gui_running")
-    colorscheme molakai " syntax highlighting colour scheme
+    colorscheme molokai " syntax highlighting colour scheme
 else
     colorscheme desert " syntax highlighting colour scheme
     set background=light " use light foreground colours
