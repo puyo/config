@@ -10,6 +10,7 @@ if has("gui_macvim")
   nmap <D-w> :bd<CR>
   nmap <D-[> :bp<CR>
   nmap <D-]> :bn<CR>
+  set guifont=Menlo\ Regular:h12
 else
   nmap <M-t> :CommandT<CR>
   nmap <M-Left> :bprev<CR>
@@ -25,3 +26,4 @@ else
   vmap <M-x> "+d
   nmap <M-q> :qall<CR>
 endif
+
