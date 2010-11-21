@@ -124,24 +124,17 @@ set iskeyword+=_,$,@,%,#,? " these are not word dividers
 filetype plugin indent on
 augroup filetypedetect
     au BufNewFile,BufRead *.rb,*.rjs,*.rbw,*.gem,*.gemspec setl filetype=ruby path+=lib
-    au BufNewFile,BufRead *.as setl filetype=actionscript efm=%f(%l):\ col:\ %c\ Error:\ %m
-    au BufNewFile,BufRead *.tex setl spell
-    au BufNewFile,BufRead *.mxml setl filetype=xml number
-    au BufNewFile,BufRead *.wiki setl filetype=Wikipedia
-    au BufNewFile,BufRead *.json setl nowrap sw=2 ts=2 sts=0 noet smartindent
+    au BufNewFile,BufRead *.json setl nowrap smartindent
     au BufNewFile,BufRead *.txt setl filetype=text
 
-    au FileType c setl et sw=4 sts=4 makeprg=make
-    au FileType ruby setl et sw=2 sts=2 makeprg=rake
-    au FileType eruby setl et sw=2 sts=2 makeprg=rake
-    au FileType css setl et ts=2 sw=2 sts=2 makeprg=rake
-    au FileType actionscript setl nowrap sw=2 ts=2 sts=0 noet smartindent
+    au FileType c setl sw=4 sts=4 makeprg=make
+    au FileType ruby setl makeprg=rake
+    au FileType eruby setl makeprg=rake
+    au FileType css setl makeprg=rake
     au FileType text setl textwidth=78
-    au FileType aspvbs setl ts=4
-    au FileType cucumber setl et ts=2 sw=2 sts=2
-    au FileType scss setl et ts=2 sw=2 sts=2
+    au FileType aspvbs setl noet ts=4 sw=4 sts=4
     au FileType python setl et ts=4 sw=4 sts=4
-    au FileType lua setl et ts=4 sw=4 sts=4
+    au FileType plaintex setl spell
 augroup END
 " }
 
