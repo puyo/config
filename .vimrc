@@ -74,11 +74,14 @@ set nohlsearch " don't highlight the last search, I find it distracting
 set showmatch " parens matching (like Emacs paren blink)
 set scrolloff=10 " always show 10 lines above and below cursor
 set sidescrolloff=10 " always show 10 lines side of cursor
+set guioptions+=c " use console dialogs for simple choices
 set guioptions-=m " hide menu bar
 set guioptions-=T " hide tool bar
-set guioptions+=l " left scroll bar always
-set guioptions-=r " don't always display right scroll bar
-set guioptions+=R " display right scroll when vertical split
+set guioptions-=l " hide left scroll bar
+set guioptions-=r " hide right scroll bar
+"set guioptions+=l " left scroll bar always
+"set guioptions-=r " don't always display right scroll bar
+"set guioptions+=R " display right scroll when vertical split
 set nowrap " do not wrap long lines
 "set cursorcolumn " highlight current column
 set cursorline " highlight current line
@@ -137,6 +140,8 @@ augroup filetypedetect
     au FileType aspvbs setl ts=4
     au FileType cucumber setl et ts=2 sw=2 sts=2
     au FileType scss setl et ts=2 sw=2 sts=2
+    au FileType python setl et ts=4 sw=4 sts=4
+    au FileType lua setl et ts=4 sw=4 sts=4
 augroup END
 " }
 
