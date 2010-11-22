@@ -1,6 +1,7 @@
 if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
   macmenu &File.Close key=<nop>
+  macmenu &File.Print key=<nop>
   nmap <D-t> :CommandT<CR>
   nmap <D-Left> :bprev<CR>
   nmap <D-Right> :bnext<CR>
