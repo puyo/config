@@ -51,7 +51,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css} :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call <SID>StripTrailingWhitespaces()
 
 " }
 
@@ -123,7 +123,7 @@ set iskeyword+=_,$,@,%,#,? " these are not word dividers
 " File types {
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.rb,*.rjs,*.rbw,*.gem,*.gemspec setl filetype=ruby path+=lib
+    au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setl filetype=ruby path+=lib
     au BufNewFile,BufRead *.json setl nowrap smartindent
     au BufNewFile,BufRead *.txt setl filetype=text
 
