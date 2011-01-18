@@ -262,3 +262,9 @@ let tlist_php_settings = 'php;c:class;d:constant;f:function'
 let tlist_vb_settings = 'asp;f:function;c:class'
 " }
 " }
+
+" JSLint {
+
+au FileType javascript setl makeprg=jsl\ -nologo\ -nocontext\ -nosummary\ -process\ % errorformat=%f(%l):\ %m
+
+" }
