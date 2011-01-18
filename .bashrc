@@ -9,9 +9,16 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 
     # prompt
     case "$TERM" in xterm*|rxvt*|screen) 
-	GIT_BRANCH="\[\033[31m\]\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1) ')\"\`\[\033[37m\]"
-	USER_AND_HOST='\[\033[01;32m\]\u@\h'
-	DIR='\[\033[01;34m\]\w\[\033[00m\]'
+        RED="\[\033[01;31m\]"
+        GREEN="\[\033[01;32m\]"
+        YELLOW="\[\033[01;33m\]"
+        BLUE="\[\033[01;34m\]"
+        PINK="\[\033[01;35m\]"
+        RESET="\[\033[00m\]"
+
+	GIT_BRANCH="${YELLOW}\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '\1 ')\"\`\[\033[37m\]"
+	USER_AND_HOST="${GREEN}\u@\h"
+	DIR="${BLUE}\w${RESET}"
 	DATE='$(date +%T)'
 	PS1="${USER_AND_HOST} ${GIT_BRANCH}${DIR}\n${DATE} \$ "
     esac
