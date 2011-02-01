@@ -41,8 +41,6 @@ unzip
 update-manager
 update-notifier
 vim-gtk
-wmaker
-wmakerconf
 wmcpuload
 wmhdplop
 wmitime
