@@ -154,6 +154,12 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
 " Shortcuts {
 
+" use ; instead of : because it is quicker
+nnoremap ; :
+
+" Use ;w!! to sudo save a file
+cmap w!! w !sudo tee % >/dev/null
+
 " Don't lose highlight
 vnoremap < <gv
 vnoremap > >gv
@@ -162,8 +168,8 @@ vnoremap > >gv
 nmap <F1> <Esc>
 imap <F1> <Esc>a
 
-" M-t transposes comma separated arguments
-map <M-t> "qdiwdwep"qp
+" M-t transposes comma separated arguments using swap_parameters.vim
+nmap <M-t> :call SwapParams("forwards")<CR>
 
 " M-a switches between alternative files (.cpp <=> .hpp)
 nmap <M-a> :A<CR>
@@ -204,6 +210,10 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1 
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplorerMoreThanOne=0
+
+" Textmate-like
+
+imap <C-l> <space>=><space>
 
 " Navigate through open buffers with C-Tab/C-S-Tab or M-Left/Right {
     map <M-Left> <ESC>:bp<RETURN>
