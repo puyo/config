@@ -135,6 +135,8 @@ augroup filetypedetect
     au FileType aspvbs setl noet ts=4 sw=4 sts=4
     au FileType python setl et ts=4 sw=4 sts=4
     au FileType plaintex setl spell
+
+    au User Rails		Rabbrev! AD
 augroup END
 " }
 
@@ -234,6 +236,9 @@ imap <C-l> <space>=><space>
     vmap <M-h> <gv
     vmap <M-l> >gv
 " }
+
+vmap <D-Bslash> :Align<Bar><CR>gv=gv
+nmap <D-Bslash> vii:Align<Bar><CR>gv=
 
 " Rspec (!s and !S) {
 function! RunSpec(args)
