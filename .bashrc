@@ -1,5 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+# node.js
+[ -d $HOME/local/bin ] && PATH=$HOME/local/bin:$PATH
+
 if [[ ! -z "$PS1" ]] ; then # if running interactively
     shopt -s histappend # append to history file, don't overwrite
     shopt -s checkwinsize # update LINES and COLUMNS
