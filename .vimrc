@@ -1,7 +1,7 @@
 " vim: set foldmethod=marker foldmarker={,} foldlevel=0 spell:
 
 " Pathogen {
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 filetype off
 filetype plugin indent on
 " }
@@ -47,7 +47,7 @@ set autoread " reload file from disk if it changed before I modified it
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
-    %s/\s\+$//e
+    %s/\(\S\+\)\s\+$/\1/e
     call cursor(l, c)
 endfun
 
@@ -207,9 +207,9 @@ cabbrev q qall
 " :wq writes and quits reliably
 cabbrev wq wqall
 
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplorerMoreThanOne=0
 
@@ -246,7 +246,7 @@ function! RunSpec(args)
         let spec = "script/spec"
     else
         let spec = "spec"
-    end 
+    end
     call Send_to_Screen(spec." ".expand("%:p").a:args."\n")
 endfunction
 map !s :call RunSpec(":".line('.'))<CR>
