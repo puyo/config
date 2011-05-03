@@ -1,9 +1,9 @@
 "here is a more exotic version of my original Kwbd script
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
-function s:Kwbd(kwbdStage)
+function! s:Kwbd(kwbdStage)
   if(a:kwbdStage == 1)
     if(!buflisted(winbufnr(0)))
-      bd!
+      bd
       return
     endif
     let s:kwbdBufNum = bufnr("%")
@@ -37,7 +37,10 @@ function s:Kwbd(kwbdStage)
       execute s:kwbdWinNum . 'wincmd w'
     endif
     if(buflisted(s:kwbdBufNum) || s:kwbdBufNum == bufnr("%"))
-      execute "bd! " . s:kwbdBufNum
+      execute "bd " . s:kwbdBufNum
+      if(buflisted(s:kwbdBufNum))
+        b #
+      endif
     endif
     if(!s:buflistedLeft)
       set buflisted
@@ -58,7 +61,7 @@ function s:Kwbd(kwbdStage)
 endfunction
 
 command! Kwbd call <SID>Kwbd(1)
-nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
+"nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 
 " Create a mapping (e.g. in your .vimrc) like this:
 "nmap <C-W>! <Plug>Kwbd
