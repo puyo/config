@@ -18,13 +18,17 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
       YELLOW="\[\033[01;33m\]"
       BLUE="\[\033[01;34m\]"
       PINK="\[\033[01;35m\]"
+      CYAN="\[\033[0;36m\]"
+      GRAY="\[\033[01;30m\]"
       RESET="\[\033[00m\]"
 
-      GIT_BRANCH="${YELLOW}\`ruby -e \"print %x{git branch 2> /dev/null}.match(/\* (.+)$/).to_a.last\"\`\[\033[37m\] "
-      USER_AND_HOST="${GREEN}\u@\h"
-      DIR="${BLUE}\w${RESET}"
+      USER_AND_HOST='\u@\h'
+      RVM='$([ -f .rvmrc ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
+      GIT='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
+      DIR=' \w'
       DATE='$(date +%T)'
-      PS1="${USER_AND_HOST} ${GIT_BRANCH}${DIR}\n${DATE} \$ "
+      PS1="${GREEN}${USER_AND_HOST}${CYAN}${RVM}${YELLOW}${GIT}${BLUE}${DIR}${RESET}\n${GRAY}${DATE}${RESET} \$ "
+      unset USER_AND_HOST RVM GIT DIR DATE
   esac
 
   # window title "user@host dir"
