@@ -6,6 +6,9 @@
 [ -f $HOME/.mongo_funcs.sh ] && . $HOME/.mongo_funcs.sh
 
 if [[ ! -z "$PS1" ]] ; then # if running interactively
+  case "$TERM" in rxvt*)
+    export TERM=rxvt ;;
+  esac
   shopt -s histappend # append to history file, don't overwrite
   shopt -s checkwinsize # update LINES and COLUMNS
 
