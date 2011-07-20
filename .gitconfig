@@ -7,3 +7,5 @@
     email = blue.puyo@gmail.com
 [alias]
     get = !git fetch && ( git rebase -v origin/master || ( git stash && ( git rebase -v origin/master || echo "WARNING: Run 'git stash pop' manually!" ) && git stash pop ) )
+[core]
+	editor = /usr/bin/vim
