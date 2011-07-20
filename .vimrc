@@ -51,7 +51,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call <SID>StripTrailingWhitespaces()
+"autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call <SID>StripTrailingWhitespaces()
 
 " }
 
@@ -118,6 +118,7 @@ set smartcase " infer case in searches
 set formatoptions+=r " auto-insert comment leader when pressing enter
 set formatoptions+=q " format comments with gq
 set iskeyword+=_,$,@,%,#,? " these are not word dividers
+set complete=.,b,t " complete using current buffer, then all open buffers and then tags
 " }
 
 " File types {
