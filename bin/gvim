@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -x /usr/bin/gvim ]; then
-    exec /usr/bin/gvim "$@"
-else
-    exec mvim "$@"
-fi
