@@ -1,5 +1,0 @@
-if [[ -x /opt/local/bin/mysql5 ]]; then
-  /opt/local/bin/mysql5 "$@"
-else
-  /usr/bin/mysql "$@"
-fi
