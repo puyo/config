@@ -3,23 +3,25 @@
 # Greg's gvim wrapper. Parses arguments and opens all sorts of random junk I
 # paste into it. ;)
 
-require 'rbconfig'
-
-def gvim(file, line=nil)
-  file = File.expand_path(file)
-  if line.nil?
-    system('gvim', '--remote-send', ":e #{file}<CR>") || system('gvim', file)
+def gvim(file=nil, line=nil)
+  if file
+    file = File.expand_path(file)
+    if line.nil?
+      system('bash', '-c', "gvim --remote-send ':e #{file}<CR>' 2>/dev/null") || system('gvim', file)
+    else
+      system('bash', '-c', "gvim --remote-send ':e +#{line} #{file}<CR>' 2>/dev/null") || system('gvim', file, "+#{line}")
+    end
   else
-    system('gvim', '--remote-send', ":e +#{line} #{file}<CR>") || system('gvim', file, "+#{line}")
+    system('gvim')
   end
 end
 
 if ARGV.empty?
-  system('gvim')
+  gvim
 else
   ARGV.each do |arg|
     file_path = line = nil
-    if match = /^(.+):(\d+):?$/.match(arg) # standard error format (gcc, pylint, ruby, grep -n)
+    if match = /^(.+):(\d+):?\)?$/.match(arg) # standard error format (gcc, pylint, ruby, grep -n)
       file_path, line = match[1], match[2]
     elsif match = /^(.+?):/.match(arg) # grep without -n
       file_path = match[1]
