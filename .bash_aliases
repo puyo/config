@@ -11,9 +11,13 @@ else
     alias dir='ls -ohG'
 fi
 alias less='less -R' # deal with colours
-
-alias irc='ssh -t greg@jube screen -dAar'
-
+function ip() {
+  curl -s 'https://secure.internode.on.net/webtools/showmyip?textonly=1'
+}
+function irc() {
+  myip=ip
+  ssh -t greg@$myip screen -dAar
+}
 alias psxiso='pcsx -nogui -runcd -cdfile'
 alias psxcd='pcsx -nogui -runcd'
 alias danim="dosbox -c 'c:' -c 'cd danim' -exit 'dpa'"
