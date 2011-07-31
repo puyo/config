@@ -5,12 +5,12 @@ if has("gui_macvim")
   nmap <D-t> :CommandT<CR>
   nmap <D-Left> :bprev<CR>
   nmap <D-Right> :bnext<CR>
-  map <D-R> :call RunSpec(":".line('.'))<CR>
-  map <D-r> :call RunSpec("")<CR>
   nmap <D-w> :bd<CR>
   nmap <D-[> :bp<CR>
   nmap <D-]> :bn<CR>
   set guifont=Menlo\ Regular:h12
+  au User Rails nmap <D-r> :silent !touch tmp/restart.txt && open -a 'Google Chrome'<CR>
+  au User Rails imap <D-r> <ESC>:silent !touch tmp/restart.txt<CR>a
 else
   nmap <M-t> :CommandT<CR>
   nmap <M-Left> :bprev<CR>

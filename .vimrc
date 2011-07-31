@@ -137,7 +137,7 @@ augroup filetypedetect
     au FileType python setl et ts=4 sw=4 sts=4
     au FileType plaintex setl spell
 
-    au User Rails		Rabbrev! AD
+    au User Rails Rabbrev! AD
 augroup END
 " }
 
