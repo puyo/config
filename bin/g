@@ -3,31 +3,19 @@
 # Greg's gvim wrapper. Parses arguments and opens all sorts of random junk I
 # paste into it. ;)
 
-def gvim(file=nil, line=nil)
-  if file
-    file = File.expand_path(file)
-    if line.nil?
-      system('bash', '-c', "gvim --remote-send ':e #{file}<CR>' 2>/dev/null") || system('gvim', file)
-    else
-      system('bash', '-c', "gvim --remote-send ':e +#{line} #{file}<CR>' 2>/dev/null") || system('gvim', file, "+#{line}")
-    end
-  else
-    system('gvim')
-  end
+def osx?
+  File.exist?('/Applications')
 end
 
-if ARGV.empty?
-  gvim
-else
-  ARGV.each do |arg|
-    file_path = line = nil
-    if match = /^(.+):(\d+):?\)?$/.match(arg) # standard error format (gcc, pylint, ruby, grep -n)
-      file_path, line = match[1], match[2]
-    elsif match = /^(.+?):/.match(arg) # grep without -n
-      file_path = match[1]
-    else
-      file_path = arg
-    end
-    gvim(file_path, line)
-  end
+def vim
+  if osx? then 'mvim' else 'gvim' end
 end
+
+file, line = ARGV.first.split(':')
+ARGV[0] = file
+if osx?
+  system('open', '-a', 'MacVim', *ARGV)
+else
+  system('gvim', '--remote-silent', *ARGV)
+end
+system(vim, '--remote-send', ":#{line}<CR>") if line

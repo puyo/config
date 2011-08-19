@@ -53,6 +53,8 @@ endfun
 
 "autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call <SID>StripTrailingWhitespaces()
 
+let g:buftabs_only_basename=1
+
 " }
 
 " Appearance {
@@ -284,3 +286,4 @@ let tlist_vb_settings = 'asp;f:function;c:class'
 au FileType javascript setl makeprg=jsl\ -nologo\ -nocontext\ -nosummary\ -process\ % errorformat=%f(%l):\ %m
 
 " }
+

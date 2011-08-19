@@ -23,9 +23,6 @@ alias psxcd='pcsx -nogui -runcd'
 alias danim="dosbox -c 'c:' -c 'cd danim' -exit 'dpa'"
 alias xlock='xscreensaver-command -lock'
 
-# gvim
-[ -x /opt/local/bin/mvim ] && alias gvim='mvim'
-
 rbgrep() {
     find . -name "*.rb" -print0 | xargs -0 grep --color=always "$@"
 }
