@@ -18,6 +18,7 @@ set cpoptions+=q " when joining lines, leave the cursor between lines
 set history=100  " keep this many lines of command line history
 set mousemodel=popup " right mouse button pops up a menu
 "helptags ~/.vim/doc " add help searching for user installed packages
+set t_Co=256 " use all 256 colours in 256 colour terminals
 " }
 
 " Folding {

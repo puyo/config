@@ -6,9 +6,6 @@
 [ -f $HOME/.mongo_funcs.sh ] && . $HOME/.mongo_funcs.sh
 
 if [[ ! -z "$PS1" ]] ; then # if running interactively
-  case "$TERM" in rxvt*)
-    export TERM=rxvt ;;
-  esac
   shopt -s histappend # append to history file, don't overwrite
   shopt -s checkwinsize # update LINES and COLUMNS
 
@@ -17,7 +14,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 
   # prompt
   case "$TERM" in
-    xterm*|rxvt*|screen)
+    xterm*|rxvt*|screen*)
       RED="\[\033[01;31m\]"
       GREEN="\[\033[01;32m\]"
       YELLOW="\[\033[01;33m\]"
