@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/fugitive"]
 	path = .vim/bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/bundle/cucumber"]
+	path = .vim/bundle/cucumber
+	url = git@github.com:puyo/vim-cucumber.git
