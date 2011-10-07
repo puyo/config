@@ -136,7 +136,6 @@ augroup filetypedetect
     au FileType eruby setl makeprg=rake
     au FileType css setl makeprg=rake
     au FileType text setl textwidth=78
-    au FileType aspvbs setl noet ts=4 sw=4 sts=4
     au FileType python setl et ts=4 sw=4 sts=4
     au FileType plaintex setl spell
 
@@ -271,14 +270,7 @@ let Tlist_Use_Right_Window = 1 " split to the right side of the screen
 let Tlist_WinWidth = 40 " 40 cols wide
 
 " Language Specifics {
-" just functions and classes please
-let tlist_aspjscript_settings = 'asp;f:function;c:class'
-" just functions and subs please
-let tlist_aspvbs_settings = 'asp;f:function;s:sub'
-" don't show variables in freaking php
-let tlist_php_settings = 'php;c:class;d:constant;f:function'
-" just functions and classes please
-let tlist_vb_settings = 'asp;f:function;c:class'
+let tlist_php_settings = 'php;c:class;d:constant;f:function' " don't show variables in freaking php
 " }
 " }
 
