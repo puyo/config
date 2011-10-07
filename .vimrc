@@ -60,12 +60,7 @@ let g:buftabs_only_basename=1
 
 " Appearance {
 syntax on " syntax highlighting
-if has("gui_running")
-    colorscheme molokai " syntax highlighting colour scheme
-else
-    colorscheme desert " syntax highlighting colour scheme
-    set background=light " use light foreground colours
-end
+colorscheme molokai " syntax highlighting colour scheme
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
@@ -202,7 +197,7 @@ nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 cmap <M-Backspace> <C-W>
 
 " :bd does not disturb the split layout
-cabbrev bd Kwbd
+"cabbrev bd Kwbd
 
 " :q quits reliably
 cabbrev q qall

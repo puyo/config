@@ -5,7 +5,7 @@ if has("gui_macvim")
   nmap <D-t> :CommandT<CR>
   nmap <D-Left> :bprev<CR>
   nmap <D-Right> :bnext<CR>
-  nmap <D-w> :bd<CR>
+  nmap <D-w> :Kwbd<CR>
   nmap <D-[> :bp<CR>
   nmap <D-]> :bn<CR>
   set guifont=Menlo\ Regular:h12
@@ -18,7 +18,7 @@ else
   nmap <M-[> :bp<CR>
   nmap <M-]> :bn<CR>
   nmap <M-s> :w<CR>
-  nmap <M-w> :bd<CR>
+  nmap <M-w> :Kwbd<CR>
   nmap <M-v> "+p
   imap <M-v> <ESC>"+pi
   vmap <M-v> d"+P
