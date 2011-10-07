@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/rdoc"]
 	path = .vim/bundle/rdoc
 	url = https://github.com/depuracao/vim-rdoc.git
+[submodule ".vim/bundle/repeat"]
+	path = .vim/bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
