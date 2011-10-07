@@ -40,6 +40,3 @@
 [submodule ".vim/bundle/surround"]
 	path = .vim/bundle/surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".vim/bundle/swap-parameters"]
-	path = .vim/bundle/swap-parameters
-	url = https://github.com/vim-scripts/swap-parameters.git
