@@ -1,9 +1,9 @@
 [color]
-    ui = true
+  ui = true
 [push]
-    default = matching
+  default = matching
 [user]
-    name = Gregory McIntyre
-    email = blue.puyo@gmail.com
+  name = Gregory McIntyre
+  email = blue.puyo@gmail.com
 [core]
-	editor = /usr/bin/vim
+  editor = /usr/bin/vim
