@@ -43,6 +43,7 @@ set directory=~/.vim/tmp
 set hidden " let me open multiple unsaved buffers
 set autowrite " autowrite, save the file when calling external commands
 set autoread " reload file from disk if it changed before I modified it
+set wildignore+=*.o,*.obj,.git,.sass-cache,tmp
 
 " Strip trailing whitespace when I save source files.
 fun! <SID>StripTrailingWhitespaces()
