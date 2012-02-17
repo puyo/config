@@ -123,12 +123,13 @@ set complete=.,b,t " complete using current buffer, then all open buffers and th
 " File types {
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setl filetype=ruby path+=lib
+    au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setl filetype=ruby
+    au BufNewFile,BufRead Gemfile setl filetype=ruby
     au BufNewFile,BufRead *.json setl nowrap smartindent
     au BufNewFile,BufRead *.txt setl filetype=text
 
     au FileType c setl sw=4 sts=4 makeprg=make
-    au FileType ruby setl makeprg=rake
+    au FileType ruby setl makeprg=rake path+=lib
     au FileType eruby setl makeprg=rake
     au FileType css setl makeprg=rake
     au FileType text setl textwidth=78
