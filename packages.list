@@ -67,6 +67,7 @@ nfs-common
 ntfs-3g
 openssh-client
 openssh-server
+par
 pidgin
 preload
 pykaraoke
@@ -74,6 +75,7 @@ qiv
 rsync
 ruby
 rxvt-unicode
+sabnzbdplus
 samba
 screen
 smbclient
