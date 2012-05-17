@@ -26,7 +26,6 @@ fi
 export EDITOR="/home/greg/bin/g"
 export DICTIONARY="british"
 export PAGER="/usr/bin/less -R"
-export OOO_FORCE_DESKTOP="gnome"
 export HISTCONTROL="ignoreboth"
 export HISTSIZE="100000"
 export PATH
