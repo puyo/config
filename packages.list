@@ -43,6 +43,8 @@ libgl1-mesa-dev
 libjpeg62-dev
 libpcre3-dev
 libpng12-dev
+libreoffice
+libreoffice-gtk
 libsdl-gfx1.2-dev
 libsdl-image1.2-dev
 libsdl-mixer1.2-dev
@@ -76,6 +78,7 @@ rsync
 ruby
 rxvt-unicode
 sabnzbdplus
+sabnzbdplus-theme-smpl
 samba
 screen
 smbclient
@@ -102,4 +105,3 @@ xscreensaver-gl-extra
 xubuntu-desktop
 zip
 zsnes
-sabnzbdplus-theme-smpl
