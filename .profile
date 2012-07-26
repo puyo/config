@@ -23,7 +23,7 @@ if [ -x "/usr/bin/chromium-browser" ] ; then
   export BROWSER="/usr/bin/chromium-browser"
 fi
 
-export EDITOR="/home/greg/g"
+export EDITOR="/usr/bin/vim"
 export DICTIONARY="british"
 export PAGER="/usr/bin/less -R"
 export OOO_FORCE_DESKTOP="gnome"
