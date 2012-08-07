@@ -1,5 +1,0 @@
-if [[ -x /opt/local/bin/mysqldump5 ]]; then
-  /opt/local/bin/mysqldump5 "$@"
-else
-  /usr/bin/mysqldump "$@"
-fi
