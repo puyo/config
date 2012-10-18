@@ -1,9 +1,11 @@
 [color]
   ui = true
 [push]
-  default = matching
+  default = current
 [user]
   name = Gregory McIntyre
-  email = blue.puyo@gmail.com
+  email = greg@gregorymcintyre.com
 [core]
   editor = /usr/bin/vim
+[branch]
+  autosetuprebase = always
