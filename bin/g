@@ -3,15 +3,20 @@
 # Greg's gvim wrapper. Parses arguments and opens all sorts of random junk I
 # paste into it. ;)
 
-osx = File.exist?('/Applications')
-vim = if osx then 'mvim' else 'gvim' end
+vim = 'gvim'
 file = line = nil
 
+running = system("#{vim} --serverlist | grep -q VIM")
 if ARGV.any?
   file, line = ARGV.first.split(':')
   ARGV[0] = file
-  system(vim, '--remote-silent', *ARGV)
-  system(vim, '--remote-send', ":#{line}<CR>") if line
 else
-  system(vim)
+  file = line = nil
 end
+
+if running && (file || line)
+  system(vim, '--remote-silent', *ARGV)
+else
+  system(vim, *ARGV)
+end
+system(vim, '--remote-send', ":#{line}<CR>") if line
