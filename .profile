@@ -13,7 +13,8 @@ paths="/opt/local/lib/postgresql84/bin \
     /usr/X11/bin \
     /opt/local/bin \
     /opt/local/sbin \
-    $HOME/bin"
+    $HOME/bin \
+    /usr/local/bin"
 for p in $paths; do 
     [ -d $p ] && PATH="$p:$PATH"
 done
