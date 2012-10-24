@@ -116,8 +116,8 @@ set infercase " infer case in patterns
 set smartcase " infer case in searches
 set formatoptions+=r " auto-insert comment leader when pressing enter
 set formatoptions+=q " format comments with gq
-set iskeyword+=_,$,@,%,#,? " these are not word dividers
-set complete=.,b,t " complete using current buffer, then all open buffers and then tags
+set iskeyword+=-,_,$,@,%,#,? " these are not word dividers
+set complete=.,b " complete using current buffer, then all open buffers and then tags
 " }
 
 " File types {
@@ -127,6 +127,7 @@ augroup filetypedetect
     au BufNewFile,BufRead {Gemfile,Guardfile} setl filetype=ruby
     au BufNewFile,BufRead *.json setl nowrap smartindent
     au BufNewFile,BufRead *.txt setl filetype=text
+    au BufNewFile,BufRead *.ejs set filetype=html
 
     au FileType c setl sw=4 sts=4 makeprg=make
     au FileType ruby setl makeprg=rake path+=lib
@@ -135,6 +136,7 @@ augroup filetypedetect
     au FileType text setl textwidth=78
     au FileType python setl et ts=4 sw=4 sts=4
     au FileType plaintex setl spell
+    au FileType markdown setl iskeyword-=/
 
     au User Rails Rabbrev! AD
 augroup END
@@ -196,7 +198,7 @@ cmap %/ <C-R>=expand("%:p:h")."/"<CR>
 nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 
 " Alt-Backspace is delete word back, like bash/emacs
-cmap <M-Backspace> <C-W>
+cmap <M-BS> <C-W>
 
 " :bd does not disturb the split layout
 "cabbrev bd Kwbd
