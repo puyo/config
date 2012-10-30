@@ -38,8 +38,12 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 
   [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
-  for file in /etc/bash_completion /opt/local/etc/bash_completion; do
-    [ -f $file ] && . $file
+  for dir in /etc/bash_completion /usr/local/etc/bash_completion.d; do
+    if [ -d $dir ]; then
+      for file in $dir/*; do
+        . $file 2> /dev/null
+      done
+    fi
   done
 
   [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
