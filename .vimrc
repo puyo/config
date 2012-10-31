@@ -1,13 +1,38 @@
 " vim: set foldmethod=marker foldmarker={,} foldlevel=0 spell:
 
-" Pathogen {
-call pathogen#runtime_append_all_bundles()
+" Vundle {
+set nocompatible " improved!
 filetype off
 filetype plugin indent on
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+Bundle 'depuracao/vim-rdoc'
+Bundle 'ervandew/supertab'
+Bundle 'gmarik/sudo-gui.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'puyo/vim-align'
+Bundle 'puyo/vim-cucumber'
+Bundle 'rgarver/Kwbd.vim'
+Bundle 'tomasr/molokai'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+
+filetype plugin indent on     " required!
 " }
 
 " Basics {
-set nocompatible " no vi-compatible mode
 set noexrc " don't use local .vimrc files
 set cpoptions+=a " :read updates alternative file name
 set cpoptions+=A " :write updates alternative file name
