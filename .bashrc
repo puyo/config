@@ -6,9 +6,6 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   shopt -s histappend # append to history file, don't overwrite
   shopt -s checkwinsize # update LINES and COLUMNS
 
-  # make less more friendly for non-text input files, see lesspipe(1)
-  [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
   # prompt
   case "$TERM" in
     xterm*|rxvt*|screen*)
