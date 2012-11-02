@@ -2,17 +2,20 @@ if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
   macmenu &File.Close key=<nop>
   macmenu &File.Print key=<nop>
-  nmap <D-Left> :bprev<CR>
-  nmap <D-Right> :bnext<CR>
+  macmenu &Tools.Make key=<nop>
   nmap <D-w> :Kwbd<CR>
   nmap <D-[> :bp<CR>
   nmap <D-]> :bn<CR>
+  nmap <D-t> :CtrlP<CR>
+  nmap <D-r> :CtrlPMRUFiles<CR>
+  nmap <D-b> :CtrlPBuffer<CR>
   set guifont=Menlo\ Regular:h12
   au User Rails nmap <D-r> :silent !touch tmp/restart.txt && open -a 'Google Chrome'<CR>
   au User Rails imap <D-r> <ESC>:silent !touch tmp/restart.txt<CR>a
 else
-  nmap <M-Left> :bprev<CR>
-  nmap <M-Right> :nnext<CR>
+  nmap <M-t> :CtrlP<CR>
+  nmap <M-r> :CtrlPMRUFiles<CR>
+  nmap <M-b> :CtrlPBuffer<CR>
   nmap <M-[> :bp<CR>
   nmap <M-]> :bn<CR>
   nmap <M-s> :w<CR>
