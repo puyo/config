@@ -195,9 +195,6 @@ vnoremap > >gv
 nmap <F1> <Esc>
 imap <F1> <Esc>a
 
-" M-t transposes comma separated arguments using swap_parameters.vim
-nmap <M-t> :call SwapParams("forwards")<CR>
-
 " M-a switches between alternative files (.cpp <=> .hpp)
 nmap <M-a> :A<CR>
 imap <M-a> <ESC>:A<CR>
@@ -211,9 +208,6 @@ let MRU_Max_Entries = 100
 nmap <F9> :make<CR><CR><CR>:copen<CR><C-W><C-W>k
 nmap <F10> :cnext<CR>
 nmap <F11> :cprev<CR>
-
-" Tag list
-nmap <F12> :TlistToggle<CR>
 
 " Allow %/ to be put in :e lines and be expanded to the currently open file's
 " directory.
@@ -231,12 +225,6 @@ cabbrev q qall
 
 " :wq writes and quits reliably
 cabbrev wq wqall
-
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplorerMoreThanOne=0
 
 " Textmate-like
 
