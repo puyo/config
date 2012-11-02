@@ -3,13 +3,9 @@
 " Vundle {
 set nocompatible " improved!
 filetype off
-filetype plugin indent on
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
 Bundle 'gmarik/vundle'
 
 Bundle 'depuracao/vim-rdoc'
@@ -88,6 +84,7 @@ let g:buftabs_only_basename=1
 " Appearance {
 syntax on " syntax highlighting
 colorscheme molokai " syntax highlighting colour scheme
+hi Comment guifg=#75715E
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
