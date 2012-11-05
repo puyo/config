@@ -45,8 +45,6 @@ set t_Co=256 " use all 256 colours in 256 colour terminals
 
 " Folding {
 set foldenable " turn on folding
-"set foldmarker={,} " fold C style code (only use this as default if you use a high foldlevel)
-"set foldmethod=marker " fold on the marker
 set foldmethod=syntax " fold on syntax constructs
 set foldlevel=100 " don't autofold anything (but I can still fold manually)
 set foldopen=block,hor,mark,percent,quickfix,tag,search,undo " what movements open folds
@@ -82,6 +80,7 @@ let g:buftabs_only_basename=1
 " }
 
 " Appearance {
+
 syntax on " syntax highlighting
 colorscheme molokai " syntax highlighting colour scheme
 hi Comment guifg=#75715E
@@ -181,6 +180,15 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
 " Shortcuts {
 
+" easier split navigation {
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+nmap <bar> <C-w>v
+nmap - <C-w>s
+" }
+
 " use ; instead of : because it is quicker
 nnoremap ; :
 
@@ -194,15 +202,11 @@ vnoremap > >gv
 " Disable commands I never want to use, in case I hit them accidentally
 nmap <F1> <Esc>
 imap <F1> <Esc>a
+nmap K <nop>
 
 " M-a switches between alternative files (.cpp <=> .hpp)
 nmap <M-a> :A<CR>
 imap <M-a> <ESC>:A<CR>
-
-" M-r opens the most recently used file list
-nmap <M-r> :MRU<CR>
-imap <M-r> <ESC>:MRU<CR>
-let MRU_Max_Entries = 100
 
 " Compilation and quickfix
 nmap <F9> :make<CR><CR><CR>:copen<CR><C-W><C-W>k
@@ -218,7 +222,7 @@ nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 cmap <M-BS> <C-W>
 
 " :bd does not disturb the split layout
-"cabbrev bd Kwbd
+cabbrev bd Kwbd
 
 " :q quits reliably
 cabbrev q qall
@@ -229,6 +233,10 @@ cabbrev wq wqall
 " Textmate-like
 
 imap <C-l> <space>=><space>
+
+function! ReplaceHashes(args)
+  exec '%s/:\([^ ]*\)\(\s*\)=>/\1:/gc'
+endfunction
 
 " Navigate through open buffers with C-Tab/C-S-Tab or M-Left/Right {
     map <M-Left> <ESC>:bp<RETURN>
