@@ -10,15 +10,12 @@ if has("gui_macvim")
   nmap <D-r> :CtrlPMRUFiles<CR>
   nmap <D-b> :CtrlPBuffer<CR>
   set guifont=Menlo\ Regular:h12
-  au User Rails nmap <D-r> :silent !touch tmp/restart.txt && open -a 'Google Chrome'<CR>
-  au User Rails imap <D-r> <ESC>:silent !touch tmp/restart.txt<CR>a
 else
   nmap <M-t> :CtrlP<CR>
   nmap <M-r> :CtrlPMRUFiles<CR>
   nmap <M-b> :CtrlPBuffer<CR>
   nmap <M-[> :bp<CR>
   nmap <M-]> :bn<CR>
-  nmap <M-s> :w<CR>
   nmap <M-w> :Kwbd<CR>
   nmap <M-v> "+p
   imap <M-v> <ESC>"+pi
@@ -27,4 +24,3 @@ else
   vmap <M-x> "+d
   nmap <M-q> :qall<CR>
 endif
-
