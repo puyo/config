@@ -16,11 +16,11 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'puyo/vim-align'
 Bundle 'puyo/vim-cucumber'
+Bundle 'puyo/vim-haml'
 Bundle 'rgarver/Kwbd.vim'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-repeat'
@@ -63,19 +63,19 @@ set directory=~/.vim/tmp
 set hidden " let me open multiple unsaved buffers
 set autowrite " autowrite, save the file when calling external commands
 set autoread " reload file from disk if it changed before I modified it
-set wildignore+=*.o,*.obj,.git,.sass-cache,tmp
+set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage
 
 " Strip trailing whitespace when I save source files.
-fun! <SID>StripTrailingWhitespaces()
+fun! StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
     %s/\(\S\+\)\s\+$/\1/e
     call cursor(l, c)
 endfun
 
-"autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call <SID>StripTrailingWhitespaces()
+"autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
-let g:buftabs_only_basename=1
+let g:ctrlp_match_window_reversed = 0
 
 " }
 
@@ -222,7 +222,7 @@ nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 cmap <M-BS> <C-W>
 
 " :bd does not disturb the split layout
-cabbrev bd Kwbd
+cabbrev bd silent Kwbd
 
 " :q quits reliably
 cabbrev q qall

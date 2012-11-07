@@ -3,7 +3,7 @@ if has("gui_macvim")
   macmenu &File.Close key=<nop>
   macmenu &File.Print key=<nop>
   macmenu &Tools.Make key=<nop>
-  nmap <D-w> :Kwbd<CR>
+  nmap <D-w> :silent Kwbd<CR>
   nmap <D-[> :bp<CR>
   nmap <D-]> :bn<CR>
   nmap <D-t> :CtrlP<CR>
