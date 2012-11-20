@@ -11,10 +11,12 @@ Bundle 'gmarik/vundle'
 Bundle 'depuracao/vim-rdoc'
 Bundle 'ervandew/supertab'
 Bundle 'gmarik/sudo-gui.vim'
+Bundle 'godlygeek/tabular'
+Bundle 'kana/vim-textobj-user'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'puyo/vim-align'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'puyo/vim-cucumber'
 Bundle 'puyo/vim-haml'
 Bundle 'rgarver/Kwbd.vim'
@@ -25,6 +27,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tsaleh/vim-matchit'
 
 filetype plugin indent on     " required!
 " }
@@ -139,7 +142,7 @@ set smartcase " infer case in searches
 set formatoptions+=r " auto-insert comment leader when pressing enter
 set formatoptions+=q " format comments with gq
 set iskeyword+=-,_,$,@,%,#,? " these are not word dividers
-set complete=.,b " complete using current buffer, then all open buffers and then tags
+set complete=.,b " complete using current buffer, then all open buffers
 " }
 
 " File types {
@@ -234,7 +237,7 @@ cabbrev wq wqall
 
 imap <C-l> <space>=><space>
 
-function! ReplaceHashes(args)
+function! ReplaceHashes()
   exec '%s/:\([^ ]*\)\(\s*\)=>/\1:/gc'
 endfunction
 
@@ -258,8 +261,8 @@ endfunction
     vmap <M-l> >gv
 " }
 
-vmap <D-Bslash> :Align<Bar><CR>gv=gv
-nmap <D-Bslash> vii:Align<Bar><CR>gv=
+" vmap <D-Bslash> :Align<Bar><CR>gv=gv
+" nmap <D-Bslash> vii:Align<Bar><CR>gv=
 
 " Rspec (!s and !S) {
 function! RunSpec(args)
@@ -295,6 +298,21 @@ let tlist_php_settings = 'php;c:class;d:constant;f:function' " don't show variab
 " JSLint {
 
 au FileType javascript setl makeprg=jsl\ -nologo\ -nocontext\ -nosummary\ -process\ % errorformat=%f(%l):\ %m
+
+" }
+
+" Tabularize {
+
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:<CR>
+  vmap <Leader>a: :Tabularize /:<CR>
+  nmap <Leader>a:: :Tabularize /:\zs<CR>
+  vmap <Leader>a:: :Tabularize /:\zs<CR>
+  nmap <Leader>a, :Tabularize /,<CR>
+  vmap <Leader>a, :Tabularize /,<CR>
+  nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+  vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " }
 
