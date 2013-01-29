@@ -9,10 +9,9 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # $PATH
-paths="/opt/local/lib/postgresql84/bin \
+paths="
+    /usr/local/share/npm/lib/node_modules/coffee-script/bin/ \
     /usr/X11/bin \
-    /opt/local/bin \
-    /opt/local/sbin \
     $HOME/bin \
     /usr/local/bin"
 for p in $paths; do 
