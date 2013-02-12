@@ -10,11 +10,12 @@ fi
 
 # $PATH
 paths="
-    /usr/local/share/npm/lib/node_modules/coffee-script/bin/ \
+    /usr/local/share/npm/bin \
+    /usr/local/share/npm/lib/node_modules/coffee-script/bin \
     /usr/X11/bin \
     $HOME/bin \
     /usr/local/bin"
-for p in $paths; do 
+for p in $paths; do
     [ -d $p ] && PATH="$p:$PATH"
 done
 
