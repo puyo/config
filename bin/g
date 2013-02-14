@@ -14,6 +14,8 @@ else
   file = line = nil
 end
 
+file.gsub!(/^[ab]\//, '') # git
+
 if running && (file || line)
   system(vim, '--remote-silent', *ARGV)
 else
