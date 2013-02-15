@@ -9,14 +9,14 @@ file = line = nil
 running = system("#{vim} --serverlist | grep -q VIM")
 if ARGV.any?
   file, line = ARGV.first.split(':')
+  file.gsub!(/^[ab]\//, '') # git diff
   ARGV[0] = file
 else
+  ARGV = '.'
   file = line = nil
 end
 
-file.gsub!(/^[ab]\//, '') # git
-
-if running && (file || line)
+if running
   system(vim, '--remote-silent', *ARGV)
 else
   system(vim, *ARGV)
