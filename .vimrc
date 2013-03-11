@@ -28,6 +28,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-matchit'
+Bundle 'vim-scripts/a.vim'
 
 filetype plugin indent on     " required!
 " }
