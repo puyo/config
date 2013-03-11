@@ -12,7 +12,7 @@ if ARGV.any?
   file.gsub!(/^[ab]\//, '') # git diff
   ARGV[0] = file
 else
-  ARGV = '.'
+  ARGV[0] = '.'
   file = line = nil
 end
 
