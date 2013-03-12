@@ -29,6 +29,8 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'vim-scripts/a.vim'
+Bundle 'chriskempson/base16-vim'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 filetype plugin indent on     " required!
 " }
@@ -86,7 +88,7 @@ let g:ctrlp_match_window_reversed = 0
 " Appearance {
 
 syntax on " syntax highlighting
-colorscheme molokai " syntax highlighting colour scheme
+colorscheme Tomorrow-Night-Eighties " syntax highlighting colour scheme
 hi Comment guifg=#75715E
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
