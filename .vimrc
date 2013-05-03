@@ -75,7 +75,7 @@ set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage
 fun! StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
-    %s/\(\S\+\)\s\+$/\1/e
+    %s/\s\+$/\1/e
     call cursor(l, c)
 endfun
 
@@ -88,7 +88,7 @@ let g:ctrlp_match_window_reversed = 0
 " Appearance {
 
 syntax on " syntax highlighting
-colorscheme Tomorrow-Night-Eighties " syntax highlighting colour scheme
+colorscheme molokai " syntax highlighting colour scheme
 hi Comment guifg=#75715E
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
@@ -299,29 +299,34 @@ let tlist_php_settings = 'php;c:class;d:constant;f:function' " don't show variab
 " }
 
 " JSLint {
-
 au FileType javascript setl makeprg=jsl\ -nologo\ -nocontext\ -nosummary\ -process\ % errorformat=%f(%l):\ %m
-
 " }
 
 " Tabularize {
-
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:<CR>
-  vmap <Leader>a: :Tabularize /:<CR>
-  nmap <Leader>a:: :Tabularize /:\zs<CR>
-  vmap <Leader>a:: :Tabularize /:\zs<CR>
-  nmap <Leader>a, :Tabularize /,<CR>
-  vmap <Leader>a, :Tabularize /,<CR>
-  nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-  vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
 
+" Highlight superfluous whitespace on the ends of lines {
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+" }
+
+" Create missing directories on save {
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
+augroup END
+" }
