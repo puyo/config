@@ -8,31 +8,32 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-Bundle 'depuracao/vim-rdoc'
-Bundle 'ervandew/supertab'
-Bundle 'gmarik/sudo-gui.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'kana/vim-textobj-user'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'puyo/vim-cucumber'
-Bundle 'puyo/vim-haml'
-Bundle 'rgarver/Kwbd.vim'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tsaleh/vim-matchit'
-Bundle 'vim-scripts/a.vim'
-Bundle 'chriskempson/base16-vim'
-Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'chriskempson/base16-vim'          " colour scheme
+Bundle 'chriskempson/vim-tomorrow-theme'  " colour scheme
+Bundle 'depuracao/vim-rdoc'               " .rdoc syntax highlighting
+Bundle 'ervandew/supertab'                " press <Tab> to complete the current word
+Bundle 'gmarik/sudo-gui.vim'              " :W! to sudo write
+Bundle 'godlygeek/tabular'                " align code. e.g. :Tabularize / ,
+Bundle 'kana/vim-textobj-user'            " allows custom text objects
+Bundle 'kchmck/vim-coffee-script'         " .coffee syntax highlighting
+Bundle 'kien/ctrlp.vim'                   " jump to files: in directory tree, most-recently-used, open buffers
+Bundle 'michaeljsmith/vim-indent-object'  " 'i' is a text object that selects the current indentation level. e.g. vii
+Bundle 'nelstrom/vim-textobj-rubyblock'   " 'r' is a text object that selects the current Ruby structure. e.g. vir
+Bundle 'puyo/vim-cucumber'                " .feature syntax highlighting
+Bundle 'puyo/vim-haml'                    " .haml syntax highlighting
+Bundle 'rgarver/Kwbd.vim'                 " kill buffers without closing their window
+Bundle 'tomasr/molokai'                   " colour scheme
+Bundle 'tpope/vim-commentary'             " press \\ or \\\ to toggle comments on a line
+Bundle 'tpope/vim-eunuch'                 " UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
+Bundle 'tpope/vim-fugitive'               " Git commands :Ggrep
+Bundle 'tpope/vim-markdown'               " .md syntax highlighting
+Bundle 'tpope/vim-rails'                  " Rails project mode
+Bundle 'tpope/vim-repeat'                 " press . to repeat more sophisticated things
+Bundle 'tpope/vim-surround'               " Edit quotes and brackets more easily
+Bundle 'tsaleh/vim-matchit'               " press % to jump between Ruby keywords. e.g. do and end
+Bundle 'vim-scripts/a.vim'                " :A to jump to the 'alternative' file
 
-filetype plugin indent on     " required!
+filetype plugin indent on     " auto indenting
 " }
 
 " Basics {
@@ -51,13 +52,8 @@ set t_Co=256 " use all 256 colours in 256 colour terminals
 
 " Folding {
 set foldenable " turn on folding
-set foldmethod=syntax " fold on syntax constructs
+set foldmethod=indent " fold on indent
 set foldlevel=100 " don't autofold anything (but I can still fold manually)
-set foldopen=block,hor,mark,percent,quickfix,tag,search,undo " what movements open folds
-function! SimpleFoldText()
-    return getline(v:foldstart).' '
-endfunction
-set foldtext=SimpleFoldText() " custom fold text function (cleaner than default)
 " }
 
 " Files and buffers {
