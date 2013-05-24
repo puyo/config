@@ -8,30 +8,54 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-Bundle 'chriskempson/base16-vim'          " colour scheme
-Bundle 'chriskempson/vim-tomorrow-theme'  " colour scheme
-Bundle 'depuracao/vim-rdoc'               " .rdoc syntax highlighting
-Bundle 'ervandew/supertab'                " press <Tab> to complete the current word
-Bundle 'gmarik/sudo-gui.vim'              " :W! to sudo write
-Bundle 'godlygeek/tabular'                " align code. e.g. :Tabularize / ,
-Bundle 'kana/vim-textobj-user'            " allows custom text objects
-Bundle 'kchmck/vim-coffee-script'         " .coffee syntax highlighting
-Bundle 'kien/ctrlp.vim'                   " jump to files: in directory tree, most-recently-used, open buffers
-Bundle 'michaeljsmith/vim-indent-object'  " 'i' is a text object that selects the current indentation level. e.g. vii
-Bundle 'nelstrom/vim-textobj-rubyblock'   " 'r' is a text object that selects the current Ruby structure. e.g. vir
-Bundle 'puyo/vim-cucumber'                " .feature syntax highlighting
-Bundle 'puyo/vim-haml'                    " .haml syntax highlighting
-Bundle 'rgarver/Kwbd.vim'                 " kill buffers without closing their window
-Bundle 'tomasr/molokai'                   " colour scheme
-Bundle 'tpope/vim-commentary'             " press \\ or \\\ to toggle comments on a line
-Bundle 'tpope/vim-eunuch'                 " UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
-Bundle 'tpope/vim-fugitive'               " Git commands :Ggrep
-Bundle 'tpope/vim-markdown'               " .md syntax highlighting
-Bundle 'tpope/vim-rails'                  " Rails project mode
-Bundle 'tpope/vim-repeat'                 " press . to repeat more sophisticated things
-Bundle 'tpope/vim-surround'               " Edit quotes and brackets more easily
-Bundle 'tsaleh/vim-matchit'               " press % to jump between Ruby keywords. e.g. do and end
-Bundle 'vim-scripts/a.vim'                " :A to jump to the 'alternative' file
+" colour scheme
+Bundle 'chriskempson/base16-vim'
+" colour scheme
+Bundle 'chriskempson/vim-tomorrow-theme'
+" .rdoc syntax highlighting
+Bundle 'depuracao/vim-rdoc'
+" press <Tab> to complete the current word
+Bundle 'ervandew/supertab'
+" :W! to sudo write
+Bundle 'gmarik/sudo-gui.vim'
+" align code. e.g. :Tabularize / ,
+Bundle 'godlygeek/tabular'
+" allows custom text objects
+Bundle 'kana/vim-textobj-user'
+" .coffee syntax highlighting
+Bundle 'kchmck/vim-coffee-script'
+" jump to files: in directory tree, most-recently-used, open buffers
+Bundle 'kien/ctrlp.vim'
+" 'i' is a text object that selects the current indentation level. e.g. vii
+Bundle 'michaeljsmith/vim-indent-object'
+" 'r' is a text object that selects the current Ruby structure. e.g. vir
+Bundle 'nelstrom/vim-textobj-rubyblock'
+" .feature syntax highlighting
+Bundle 'puyo/vim-cucumber'
+" .haml syntax highlighting
+Bundle 'puyo/vim-haml'
+" kill buffers without closing their window
+Bundle 'rgarver/Kwbd.vim'
+" colour scheme
+Bundle 'tomasr/molokai'
+" press \\ or \\\ to toggle comments on a line
+Bundle 'tpope/vim-commentary'
+" UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
+Bundle 'tpope/vim-eunuch'
+" Git commands :Ggrep
+Bundle 'tpope/vim-fugitive'
+" .md syntax highlighting
+Bundle 'tpope/vim-markdown'
+" Rails project mode
+Bundle 'tpope/vim-rails'
+" press . to repeat more sophisticated things
+Bundle 'tpope/vim-repeat'
+" Edit quotes and brackets more easily
+Bundle 'tpope/vim-surround'
+" press % to jump between Ruby keywords. e.g. do and end
+Bundle 'tsaleh/vim-matchit'
+" :A to jump to the 'alternative' file
+Bundle 'vim-scripts/a.vim'
 
 filetype plugin indent on     " auto indenting
 " }
