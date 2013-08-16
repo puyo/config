@@ -1,6 +1,5 @@
 # Executable file path
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-[ -d "/opt/local/bin" ] && PATH="/opt/local/bin:$PATH"
 export PATH
 
 # Path to your oh-my-zsh configuration.
@@ -26,7 +25,7 @@ export CASE_SENSITIVE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rvm macports gem bundler)
+plugins=(git rvm gem bundler)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
