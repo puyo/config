@@ -24,7 +24,7 @@ if [ -x "/usr/bin/chromium-browser" ] ; then
   export BROWSER="/usr/bin/chromium-browser"
 fi
 
-export EDITOR="/usr/bin/vim"
+export EDITOR="$HOME/bin/g"
 export DICTIONARY="british"
 export PAGER="/usr/bin/less -R"
 export HISTCONTROL="ignoreboth"
