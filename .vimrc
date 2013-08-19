@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldmarker={,} foldlevel=0 spell:
+" vim: set foldmethod=marker foldmarker={,} foldlevel=0
 
 " Vundle {
 set nocompatible " improved!
@@ -206,46 +206,61 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
 " Shortcuts {
 
+" All those commands that start with <Leader> now start with , not \
+let mapleader=","
+
+nnoremap <Leader>t :CtrlP<CR>
+nnoremap <Leader>r :CtrlPMRUFiles<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>s :w<CR>
+nnoremap <Leader>a :wall<CR>
+nnoremap <Leader>p "+p
+vnoremap <Leader>c "+y
+
+"nnoremap <C-s> :update<CR>
+"inoremap <C-s> <C-o>:update<CR>
+"vnoremap <C-s> <Esc>:update<CR>gv
+
 " easier split navigation {
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-nmap <bar> <C-w>v
-nmap - <C-w>s
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <bar> <C-w>v
+nnoremap - <C-w>s
 " }
 
 " use ; instead of : because it is quicker
 nnoremap ; :
 
 " Use ;w!! to sudo save a file
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " Don't lose highlight
 vnoremap < <gv
 vnoremap > >gv
 
 " Disable commands I never want to use, in case I hit them accidentally
-nmap <F1> <Esc>
-imap <F1> <Esc>a
-nmap K <nop>
+nnoremap <F1> <Esc>
+inoremap <F1> <Esc>a
+nnoremap K <nop>
 
 " M-a switches between alternative files (.cpp <=> .hpp)
-nmap <M-a> :A<CR>
-imap <M-a> <ESC>:A<CR>
+nnoremap <M-a> :A<CR>
+inoremap <M-a> <ESC>:A<CR>
 
 " Compilation and quickfix
-nmap <F9> :make<CR><CR><CR>:copen<CR><C-W><C-W>k
-nmap <F10> :cnext<CR>
-nmap <F11> :cprev<CR>
+nnoremap <F9> :copen<CR>
+nnoremap <F10> :cnext<CR>
+nnoremap <F11> :cprev<CR>
 
 " Allow %/ to be put in :e lines and be expanded to the currently open file's
 " directory.
-cmap %/ <C-R>=expand("%:p:h")."/"<CR>
-nmap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
+cnoremap %/ <C-R>=expand("%:p:h")."/"<CR>
+nnoremap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
 
 " Alt-Backspace is delete word back, like bash/emacs
-cmap <M-BS> <C-W>
+cnoremap <M-BS> <C-W>
 
 " :bd does not disturb the split layout
 cabbrev bd silent Kwbd
@@ -255,10 +270,6 @@ cabbrev q qall
 
 " :wq writes and quits reliably
 cabbrev wq wqall
-
-" Textmate-like
-
-imap <C-l> <space>=><space>
 
 function! ReplaceHashes()
   exec '%s/:\([^ ]*\)\(\s*\)=>/\1:/gc'
