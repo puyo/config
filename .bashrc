@@ -1,5 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+stty -ixon # disable C-s and C-q pause and resume buttons
+
 [ -f $HOME/.mongo_funcs.sh ] && . $HOME/.mongo_funcs.sh
 
 if [[ ! -z "$PS1" ]] ; then # if running interactively
