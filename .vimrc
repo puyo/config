@@ -171,20 +171,21 @@ set complete=.,b " complete using current buffer, then all open buffers
 " File types {
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setl filetype=ruby
-    au BufNewFile,BufRead {Gemfile,Guardfile} setl filetype=ruby
-    au BufNewFile,BufRead *.json setl nowrap smartindent
-    au BufNewFile,BufRead *.txt setl filetype=text
-    au BufNewFile,BufRead *.ejs set filetype=html
+    au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setlocal filetype=ruby
+    au BufNewFile,BufRead {Gemfile,Guardfile} setlocal filetype=ruby
+    au BufNewFile,BufRead *.json setlocal nowrap smartindent
+    au BufNewFile,BufRead *.txt setlocal filetype=text
+    au BufNewFile,BufRead *.ejs setlocal filetype=html
+    au BufNewFile,BufRead *.hamlc setlocal filetype=haml
 
-    au FileType c setl sw=4 sts=4 makeprg=make
-    au FileType ruby setl makeprg=rake path+=lib
-    au FileType eruby setl makeprg=rake
-    au FileType css setl makeprg=rake
-    au FileType text setl textwidth=78
-    au FileType python setl et ts=4 sw=4 sts=4
-    au FileType plaintex setl spell
-    au FileType markdown setl iskeyword-=/
+    au FileType c setlocal sw=4 sts=4 makeprg=make
+    au FileType ruby setlocal makeprg=rake path+=lib
+    au FileType eruby setlocal makeprg=rake
+    au FileType css setlocal makeprg=rake
+    au FileType text setlocal textwidth=78
+    au FileType python setlocal et ts=4 sw=4 sts=4
+    au FileType plaintex setlocal spell
+    au FileType markdown setlocal iskeyword-=/
 
     au User Rails Rabbrev! AD
 augroup END
