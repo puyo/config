@@ -4,6 +4,7 @@ avahi-daemon
 blender
 build-essential
 chromium-browser
+clementine
 cmake
 curl
 dict
@@ -16,7 +17,6 @@ gdb
 gimp
 gimp-gap
 git
-glade
 gnome-do
 gnupg
 graphviz
