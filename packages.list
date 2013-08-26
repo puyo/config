@@ -68,6 +68,9 @@ manpages-dev
 mednafen
 mesa-utils
 milkytracker
+museekd
+museekd-tools
+museeq
 nfs-common
 nginx
 ntfs-3g
@@ -86,6 +89,7 @@ screen
 seahorse
 smbclient
 smbfs
+spotify-client
 sqlite3
 subversion
 swig
