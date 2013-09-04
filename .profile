@@ -8,12 +8,16 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+export ANDROID_HOME="$HOME/Android/sdk"
+
 # $PATH
 paths="
     /usr/local/share/npm/bin \
     /usr/local/share/npm/lib/node_modules/coffee-script/bin \
     /usr/X11/bin \
     $HOME/bin \
+    $ANDROID_HOME/tools \
+    $ANDROID_HOME/platform-tools \
     /usr/local/bin"
 for p in $paths; do
     [ -d $p ] && PATH="$p:$PATH"
