@@ -12,11 +12,14 @@ else
 fi
 
 function featurebranch() {
-  git branch "$@" origin/master
-  git checkout "$@"
-  git config branch."$@".remote origin
-  git config branch."$@".merge refs/heads/"$@"
-  git config branch."$@".rebase true
+  if [ "$@" != "" ]; then
+    git fetch
+    git branch "$@" origin/master
+    git checkout "$@"
+    git config branch."$@".remote origin
+    git config branch."$@".merge refs/heads/"$@"
+    git config branch."$@".rebase true
+  fi
 }
 
 alias hopla='rake hopla FORCE_INDEX=1'
