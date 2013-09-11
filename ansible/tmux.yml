@@ -1,0 +1,5 @@
+- name: tmux
+  hosts: all
+  tasks:
+  - name: package
+    apt: pkg=tmux

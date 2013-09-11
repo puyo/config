@@ -1,0 +1,15 @@
+- name: Common config
+  hosts: all
+  sudo: no
+
+- include: apt.yml
+- include: cron.yml
+- include: ntp.yml
+
+- include: tmux.yml
+- include: irssi.yml
+
+- include: user.yml
+- include: nginx.yml
+- include: vhost.yml
+- include: znc.yml

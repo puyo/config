@@ -1,0 +1,18 @@
+- name: nginx
+  hosts: all
+
+  tasks:
+    - name: package
+      apt: pkg=nginx state=installed update_cache=true
+      notify:
+        - start nginx
+    - name: disable default site
+      shell: rm -f /etc/nginx/sites-enabled/default
+      notify:
+        - reload nginx
+
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+    - name: reload nginx
+      service: name=nginx state=reloaded

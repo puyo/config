@@ -1,0 +1,8 @@
+- name: znc
+  hosts: all
+
+  tasks:
+    - name: znc package
+      apt: pkg=znc state=installed update_cache=true
+    - name: znc-extra package
+      apt: pkg=znc-extra state=installed update_cache=true

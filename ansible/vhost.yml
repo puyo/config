@@ -1,0 +1,19 @@
+- name: vhost
+  hosts: all
+
+  vars:
+    username: "{{ lookup('env', 'USER') }}"
+    filename: gregorymcintyre.com.conf
+
+  tasks:
+    - name: copy vhost config file
+      template: src=files/nginx/{{filename}} dest=/etc/nginx/sites-available/ mode=0600
+
+    - name: enable vhost
+      shell: ln -sf /etc/nginx/sites-available/{{filename}} /etc/nginx/sites-enabled/{{filename}}
+      notify:
+        - reload nginx
+
+  handlers:
+    - name: reload nginx
+      service: name=nginx state=reloaded
