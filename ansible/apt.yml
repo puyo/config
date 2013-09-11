@@ -1,0 +1,5 @@
+- name: apt
+  hosts: all
+  tasks:
+  - name: upgrade packages
+    apt: update_cache=yes upgrade=safe install_recommends=no

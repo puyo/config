@@ -1,0 +1,14 @@
+- name: cron
+  hosts: all
+  tasks:
+  - name: run system tasks at 2am Sydney time
+    copy: src=files/cron/crontab dest=/etc/crontab mode=0644
+
+  - name: install postfix
+    apt: pkg=postfix
+
+  - name: send cron failmail to me
+    copy: src=files/cron/aliases dest=/etc/aliases mode=0644
+
+  - name: update aliases.db
+    command: /usr/bin/newaliases

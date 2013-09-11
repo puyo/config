@@ -1,0 +1,13 @@
+- name: user
+  hosts: all
+  vars:
+    username: "{{ lookup('env', 'USER') }}"
+  tasks:
+  - name: user
+    user: name={{username}} shell=/bin/bash
+
+  - name: ssh config directory
+    file: path=/home/{{username}}/.ssh state=directory owner={{username}}
+
+  - name: authorized_keys
+    copy: src=files/user/id_rsa.pub dest=/home/{{username}}/.ssh/authorized_keys mode=0600 owner={{username}}
