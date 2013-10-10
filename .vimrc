@@ -179,10 +179,10 @@ augroup filetypedetect
     au BufNewFile,BufRead *.hamlc setlocal filetype=haml
 
     au FileType c setlocal sw=4 sts=4 makeprg=make
-    au FileType ruby setlocal makeprg=rake path+=lib
+    au FileType ruby setlocal makeprg=rake path+=lib tw=78
     au FileType eruby setlocal makeprg=rake
     au FileType css setlocal makeprg=rake
-    au FileType text setlocal textwidth=78
+    au FileType text setlocal wrap linebreak nolist tw=0 wm=0
     au FileType python setlocal et ts=4 sw=4 sts=4
     au FileType plaintex setlocal spell
     au FileType markdown setlocal iskeyword-=/
