@@ -216,8 +216,9 @@ nnoremap <Leader>s :w<CR>
 nnoremap <Leader>a :wall<CR>
 nnoremap <Leader>p "+p
 vnoremap <Leader>c "+y
-nnoremap <Leader>w :silent Kwbd<CR>
+nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>q :qall<CR>
+
 
 "nnoremap <C-s> :update<CR>
 "inoremap <C-s> <C-o>:update<CR>
