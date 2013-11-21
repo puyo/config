@@ -177,15 +177,16 @@ augroup filetypedetect
     au BufNewFile,BufRead *.txt setlocal filetype=text
     au BufNewFile,BufRead *.ejs setlocal filetype=html
     au BufNewFile,BufRead *.hamlc setlocal filetype=haml
+    au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
 
     au FileType c setlocal sw=4 sts=4 makeprg=make
     au FileType ruby setlocal makeprg=rake path+=lib tw=78
     au FileType eruby setlocal makeprg=rake
     au FileType css setlocal makeprg=rake
-    au FileType text setlocal wrap linebreak nolist tw=0 wm=0
+    au FileType text setlocal wrap linebreak nolist tw=0 wm=0 spell
     au FileType python setlocal et ts=4 sw=4 sts=4
     au FileType plaintex setlocal spell
-    au FileType markdown setlocal iskeyword-=/
+    au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
 
     au User Rails Rabbrev! AD
 augroup END
