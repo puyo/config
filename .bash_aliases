@@ -11,10 +11,21 @@ else
     alias dir='ls -ohG'
 fi
 
-function featurebranch() {
+function masterbranch() {
   if [ "$@" != "" ]; then
     git fetch
     git branch "$@" origin/master
+    git checkout "$@"
+    git config branch."$@".remote origin
+    git config branch."$@".merge refs/heads/"$@"
+    git config branch."$@".rebase true
+  fi
+}
+
+function sprintbranch() {
+  if [ "$@" != "" ]; then
+    git fetch
+    git branch "$@" origin/sprint
     git checkout "$@"
     git config branch."$@".remote origin
     git config branch."$@".merge refs/heads/"$@"
