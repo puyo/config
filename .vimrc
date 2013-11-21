@@ -114,7 +114,7 @@ set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
 set noerrorbells " no error bells
-set novisualbell " don't flash the screen
+set visualbell " don't beep
 set t_vb= " terminal code for flashing the screen
 set incsearch " highlight search matches as I type the search query
 set nohlsearch " don't highlight the last search, I find it distracting
