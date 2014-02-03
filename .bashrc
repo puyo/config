@@ -49,3 +49,5 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+. ~/.bash_sticky
