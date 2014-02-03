@@ -110,6 +110,7 @@ let g:ctrlp_match_window_reversed = 0
 syntax on " syntax highlighting
 colorscheme molokai " syntax highlighting colour scheme
 hi Comment guifg=#75715E
+set synmaxcol=200 " faster syntax highlighting
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
@@ -178,6 +179,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.ejs setlocal filetype=html
     au BufNewFile,BufRead *.hamlc setlocal filetype=haml
     au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
+    au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
 
     au FileType c setlocal sw=4 sts=4 makeprg=make
     au FileType ruby setlocal makeprg=rake path+=lib tw=78
