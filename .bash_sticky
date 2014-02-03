@@ -1,0 +1,19 @@
+#!/bin/sh
+
+LASTPWDFILE="${HOME}/.lastpwd"
+
+function savepwd() {
+  echo $PWD > $LASTPWDFILE
+}
+function lastpwd() {
+  if [ ! -f $LASTPWDFILE ]; then
+    return echo $HOME
+  fi
+  lastpwd=`cat ${LASTPWDFILE}`
+  if [ ! -d $lastpwd ]; then
+    return echo $HOME
+  fi
+  echo $lastpwd
+}
+PS1="${PS1}\$(savepwd)"
+cd `lastpwd`
