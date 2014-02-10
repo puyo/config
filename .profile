@@ -34,3 +34,5 @@ export PAGER="/usr/bin/less -R"
 export HISTCONTROL="ignoreboth"
 export HISTSIZE="100000"
 export PATH
+
+[ -d $HOME/.rvm/bin ] && PATH=$PATH:$HOME/.rvm/bin

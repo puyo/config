@@ -45,14 +45,9 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     fi
   done
 
-  [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+  # Remember the PWD between prompts
+  [ -f $HOME/.bash_sticky ] && source $HOME/.bash_sticky
+
+  # Travis
+  [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 fi
-
-# RVM
-PATH=$PATH:$HOME/.rvm/bin
-
-# Remember the PWD when booting more prompts
-. ~/.bash_sticky
-
-# Travis
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
