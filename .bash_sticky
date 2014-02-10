@@ -7,11 +7,13 @@ function savepwd() {
 }
 function lastpwd() {
   if [ ! -f $LASTPWDFILE ]; then
-    return echo $HOME
+    echo $HOME
+    return
   fi
   lastpwd=`cat ${LASTPWDFILE}`
   if [ ! -d $lastpwd ]; then
-    return echo $HOME
+    echo $HOME
+    return
   fi
   echo $lastpwd
 }
