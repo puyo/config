@@ -48,6 +48,11 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# RVM
+PATH=$PATH:$HOME/.rvm/bin
 
+# Remember the PWD when booting more prompts
 . ~/.bash_sticky
+
+# Travis
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh

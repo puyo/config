@@ -52,5 +52,6 @@ alias gpu='git pull'
 alias gcl='git clone'
 alias zr='zeus rspec'
 alias mxmlc="$HOME/flex/bin/mxmlc"
-alias make='make -j3' # use at least 2 processor cores when building things
+alias make="make -j3" # use at least 2 processor cores when building things
 alias tail='tail -1000' # at least 1000 lines by default
+alias be="bundle exec"

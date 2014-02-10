@@ -192,6 +192,16 @@ augroup filetypedetect
 augroup END
 " }
 
+" rails.vim {
+" " app to spec and back
+" autocmd User Rails/app/assets/javascripts/**/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'app/assets', 'spec', ''), '\.js\.coffee', '_spec.js.coffee', '')
+" autocmd User Rails/spec/javascripts/*/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'spec/javascripts', 'app/assets/javascripts', ''), '_spec\.js\.coffee', '.js.coffee', '')
+
+" " lib to spec and back
+" autocmd User Rails/lib/assets/javascripts/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'lib/assets/javascripts', 'spec/javascripts/lib', ''), '\.js\.coffee', '_spec.js.coffee', '')
+" autocmd User Rails/spec/javascripts/lib/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'spec/javascripts/lib', 'lib/assets/javascripts', ''), '_spec\.js\.coffee', '.js.coffee', '')
+" }
+
 " Ex commands {
 
 " HTMLize - TOhtml then strip the cruft
