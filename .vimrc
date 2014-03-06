@@ -286,9 +286,10 @@ cabbrev q qall
 " :wq writes and quits reliably
 cabbrev wq wqall
 
-function! ReplaceHashes()
-  exec '%s/:\([^ ]*\)\(\s*\)=>/\1:/gc'
+function! RubyHashes() range
+  silent execute a:firstline . "," . a:lastline . 's/:\(\w\{-1,}\)\s\{-}=>/\1:/g'
 endfunction
+command! -range=% RubyHashes  <line1>,<line2>call RubyHashes()
 
 " Navigate through open buffers with C-Tab/C-S-Tab or M-Left/Right {
     map <M-Left> <ESC>:bp<RETURN>
