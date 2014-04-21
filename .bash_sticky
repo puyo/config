@@ -6,16 +6,17 @@ function savepwd() {
   echo $PWD > $LASTPWDFILE
 }
 function lastpwd() {
-  if [ ! -f $LASTPWDFILE ]; then
+  if [ ! -f "${LASTPWDFILE}" ]; then
     echo $HOME
     return
   fi
   lastpwd=`cat ${LASTPWDFILE}`
-  if [ ! -d $lastpwd ]; then
+  if [ ! -d "${lastpwd}" ]; then
     echo $HOME
     return
   fi
   echo $lastpwd
 }
 PS1="${PS1}\$(savepwd)"
-cd `lastpwd`
+LASTPWD=`lastpwd`
+cd "${LASTPWD}"
