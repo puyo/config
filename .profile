@@ -18,7 +18,8 @@ paths="
     $HOME/bin \
     $ANDROID_HOME/tools \
     $ANDROID_HOME/platform-tools \
-    /usr/local/bin"
+    /usr/local/bin \
+    /usr/local/sbin"
 for p in $paths; do
     [ -d $p ] && PATH="$p:$PATH"
 done
