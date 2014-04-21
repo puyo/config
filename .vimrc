@@ -287,7 +287,7 @@ cabbrev q qall
 cabbrev wq wqall
 
 function! RubyHashes() range
-  silent execute a:firstline . "," . a:lastline . 's/:\(\w\{-1,}\)\s\{-}=>/\1:/g'
+  silent execute a:firstline . "," . a:lastline . 's/:\([a-z_]\{-1,}\)\s\{-}=>/\1:/Ig'
 endfunction
 command! -range=% RubyHashes  <line1>,<line2>call RubyHashes()
 
