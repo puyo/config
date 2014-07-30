@@ -272,7 +272,7 @@ nnoremap <F11> :cprev<CR>
 " Allow %/ to be put in :e lines and be expanded to the currently open file's
 " directory.
 cnoremap %/ <C-R>=expand("%:p:h")."/"<CR>
-nnoremap ,e :e <C-R>=expand("%:p:h").'/'<CR><BS>/
+nnoremap ,e :e <C-R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g').'/'<CR><BS>/
 
 " Alt-Backspace is delete word back, like bash/emacs
 cnoremap <M-BS> <C-W>
