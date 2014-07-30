@@ -40,6 +40,8 @@ Bundle 'rgarver/Kwbd.vim'
 Bundle 'tomasr/molokai'
 " press \\ or \\\ to toggle comments on a line
 Bundle 'tpope/vim-commentary'
+" tmux integration for running tests
+Bundle 'tpope/vim-dispatch'
 " UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
 Bundle 'tpope/vim-eunuch'
 " Git commands :Ggrep
@@ -56,6 +58,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-matchit'
 " :A to jump to the 'alternative' file
 Bundle 'vim-scripts/a.vim'
+" For running rspecs
+Bundle 'thoughtbot/vim-rspec'
 
 filetype plugin indent on     " auto indenting
 " }
@@ -360,4 +364,12 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
+" }
+
+" vim-dispatch {
+let g:rspec_command = "Dispatch rspec -f d {spec}"
+"map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>R :call RunNearestSpec()<CR>
+map <Leader>r :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
 " }
