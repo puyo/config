@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+gem 'activesupport'
+require 'active_support/core_ext/string/inflections'
+
+snake = ARGV.first
+camel = snake.camelize(:lower)
+
+system %{git grep -l #{snake} app/assets/javascripts/ | xargs ruby -p -i -e '$_.gsub! /#{snake}/, "#{camel}"'}
