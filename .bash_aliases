@@ -55,3 +55,10 @@ alias mxmlc="$HOME/flex/bin/mxmlc"
 alias make="make -j3" # use at least 2 processor cores when building things
 alias tail='tail -1000' # at least 1000 lines by default
 alias be="bundle exec"
+
+
+# Rails spring wrapper helpers so I don't have to care anymore.
+
+function rake { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else `which rake` "$@"; fi }
+function rails { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else `which rails` "$@"; fi }
+function respec { if [ -f './bin/rspec' ]; then ./bin/rspec "$@"; else `which rspec` "$@"; fi }
