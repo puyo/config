@@ -35,5 +35,6 @@ export PAGER="/usr/bin/less -R"
 export HISTCONTROL="ignoreboth"
 export HISTSIZE="100000"
 export PATH
+export ANSIBLE_NOCOWS=1
 
 [ -d $HOME/.rvm/bin ] && PATH=$PATH:$HOME/.rvm/bin
