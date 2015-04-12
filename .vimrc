@@ -4,62 +4,65 @@
 set nocompatible " improved!
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
 " colour scheme
-Bundle 'chriskempson/base16-vim'
+Plugin 'chriskempson/base16-vim'
 " colour scheme
-Bundle 'chriskempson/vim-tomorrow-theme'
+Plugin 'chriskempson/vim-tomorrow-theme'
 " .rdoc syntax highlighting
-Bundle 'depuracao/vim-rdoc'
+Plugin 'depuracao/vim-rdoc'
 " press <Tab> to complete the current word
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 " :W! to sudo write
-Bundle 'gmarik/sudo-gui.vim'
+Plugin 'gmarik/sudo-gui.vim'
 " align code. e.g. :Tabularize / ,
-Bundle 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
 " allows custom text objects
-Bundle 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-user'
 " .coffee syntax highlighting
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'kchmck/vim-coffee-script'
 " jump to files: in directory tree, most-recently-used, open buffers
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 " 'i' is a text object that selects the current indentation level. e.g. vii
-Bundle 'michaeljsmith/vim-indent-object'
+Plugin 'michaeljsmith/vim-indent-object'
 " 'r' is a text object that selects the current Ruby structure. e.g. vir
-Bundle 'nelstrom/vim-textobj-rubyblock'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 " .feature syntax highlighting
-Bundle 'puyo/vim-cucumber'
+Plugin 'puyo/vim-cucumber'
 " .haml syntax highlighting
-Bundle 'puyo/vim-haml'
+Plugin 'puyo/vim-haml'
 " kill buffers without closing their window
-Bundle 'rgarver/Kwbd.vim'
+Plugin 'rgarver/Kwbd.vim'
 " colour scheme
-Bundle 'tomasr/molokai'
+Plugin 'tomasr/molokai'
 " press \\ or \\\ to toggle comments on a line
-Bundle 'tpope/vim-commentary'
+Plugin 'tpope/vim-commentary'
 " tmux integration for running tests
-Bundle 'tpope/vim-dispatch'
+Plugin 'tpope/vim-dispatch'
 " UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
-Bundle 'tpope/vim-eunuch'
+Plugin 'tpope/vim-eunuch'
 " Git commands :Ggrep
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " .md syntax highlighting
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 " Rails project mode
-Bundle 'tpope/vim-rails'
+Plugin 'tpope/vim-rails'
 " press . to repeat more sophisticated things
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 " Edit quotes and brackets more easily
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 " press % to jump between Ruby keywords. e.g. do and end
-Bundle 'tsaleh/vim-matchit'
+Plugin 'tsaleh/vim-matchit'
 " :A to jump to the 'alternative' file
-Bundle 'vim-scripts/a.vim'
+Plugin 'vim-scripts/a.vim'
 " For running rspecs
-Bundle 'thoughtbot/vim-rspec'
+Plugin 'thoughtbot/vim-rspec'
+" Rust mode
+Plugin 'wting/rust.vim'
+call vundle#end()
 
 filetype plugin indent on     " auto indenting
 " }
@@ -184,6 +187,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.hamlc setlocal filetype=haml
     au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
     au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
+    au BufNewFile,BufRead *.as setlocal filetype=javascript
 
     au FileType c setlocal sw=4 sts=4 makeprg=make
     au FileType ruby setlocal makeprg=rake path+=lib tw=78
