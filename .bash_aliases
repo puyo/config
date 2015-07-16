@@ -33,6 +33,17 @@ function sprintbranch() {
   fi
 }
 
+function developbranch() {
+  if [ "$@" != "" ]; then
+    git fetch
+    git branch "$@" origin/develop
+    git checkout "$@"
+    git config branch."$@".remote origin
+    git config branch."$@".merge refs/heads/"$@"
+    git config branch."$@".rebase true
+  fi
+}
+
 alias hopla='rake hopla FORCE_INDEX=1'
 alias grep='grep --color'
 alias less='less -R' # deal with colours
