@@ -62,6 +62,10 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'thoughtbot/vim-rspec'
 " Rust mode
 Plugin 'wting/rust.vim'
+" Elixir mode
+Plugin 'elixir-lang/vim-elixir'
+" Slim
+Bundle 'slim-template/vim-slim.git'
 call vundle#end()
 
 filetype plugin indent on     " auto indenting
