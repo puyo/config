@@ -201,6 +201,7 @@ augroup filetypedetect
     au FileType python setlocal et ts=4 sw=4 sts=4
     au FileType plaintex setlocal spell
     au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
+    au FileType slim setlocal comments+=b:'
 augroup END
 " }
 
