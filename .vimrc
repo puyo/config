@@ -103,12 +103,12 @@ set autoread " reload file from disk if it changed before I modified it
 set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage
 
 " Strip trailing whitespace when I save source files.
-fun! StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$/\1/e
-    call cursor(l, c)
-endfun
+function! StripTrailingWhitespaces() range
+  silent! execute a:firstline . "," . a:lastline . 's/\s\+$/\1/e'
+  normal! g`"
+endfunction
+command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
+
 
 "autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
@@ -300,7 +300,7 @@ cabbrev q qall
 cabbrev wq wqall
 
 function! RubyHashes() range
-  silent execute a:firstline . "," . a:lastline . 's/:\([a-z_]\{-1,}\)\s\{-}=>/\1:/Ig'
+  silent! execute a:firstline . "," . a:lastline . 's/:\([a-z_]\{-1,}\)\s\{-}=>/\1:/Ig'
 endfunction
 command! -range=% RubyHashes  <line1>,<line2>call RubyHashes()
 
