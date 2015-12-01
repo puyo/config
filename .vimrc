@@ -66,6 +66,8 @@ Plugin 'wting/rust.vim'
 Plugin 'elixir-lang/vim-elixir'
 " Slim
 Bundle 'slim-template/vim-slim.git'
+" Emmet
+Plugin 'mattn/emmet-vim'
 call vundle#end()
 
 filetype plugin indent on     " auto indenting
