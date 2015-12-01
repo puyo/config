@@ -1,8 +1,7 @@
-#require 'rubygems'
-# require '~/.irb/irb/gem_loader'
-# require '~/.irb/irb/pry_loader'
+# http://lucapette.me/pry-everywhere/
 
-# if defined? ::Pry
-#   IRB::TopLevel.new.pry
-#   exit
-# end
+# Use Pry everywhere
+require 'rubygems'
+require 'pry'
+Pry.start
+exit
