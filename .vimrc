@@ -196,7 +196,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.as setlocal filetype=javascript
 
     au FileType c setlocal sw=4 sts=4 makeprg=make
-    au FileType ruby setlocal makeprg=rake path+=lib tw=78
+    au FileType ruby setlocal makeprg=rake path+=lib tw=78 ts=2 et sw=2 sts=2
     au FileType eruby setlocal makeprg=rake
     au FileType css setlocal makeprg=rake
     au FileType text setlocal wrap linebreak nolist tw=0 wm=0 spell
