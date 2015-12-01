@@ -51,3 +51,5 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   # Travis
   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
