@@ -66,6 +66,7 @@ alias mxmlc="$HOME/flex/bin/mxmlc"
 alias make="make -j3" # use at least 2 processor cores when building things
 alias tail='tail -1000' # at least 1000 lines by default
 alias be="bundle exec"
+alias hwpr="hub pull-request -b ButenkoT/WDI11_Homework:master"
 
 
 # Rails spring wrapper helpers so I don't have to care anymore.
