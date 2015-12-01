@@ -1,19 +1,29 @@
-require 'rubygems'
-require '~/.irb/irb/gem_loader'
-require '~/.irb/irb/pry_loader'
-require '~/.irb/irb/awesome_print_loader'
-require '~/.irb/irb/bypass_reloader'
-require '~/.irb/irb/rails_env_switcher'
-require '~/.irb/irb/rspec_console'
-require '~/.irb/irb/cucumber_console'
-require '~/.irb/irb/rails_colors'
-#require '~/.irb/irb/mongoid_colors'
-require '~/.irb/irb/plot'
-require '~/.irb/irb/rails_commands'
+#!/usr/bin/ruby
 
-if defined?(PryDebugger)
+begin
+  require 'pry-byebug'
+rescue LoadError
+end
+
+# vim FTW
+Pry.config.editor = "gvim --nofork"
+
+# Prompt with ruby version
+Pry.prompt = [
+  proc { |obj, nest_level| "#{RUBY_VERSION} (#{obj}):#{nest_level} > " },
+  proc { |obj, nest_level| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }
+]
+
+# loading rails configuration if it is running as a rails console
+load File.dirname(__FILE__) + '/.railsrc' if defined?(Rails) && Rails.env
+
+if defined?(PryDebugger) or defined?(PryByebug)
   Pry.commands.alias_command 'c', 'continue'
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
+  Pry::Commands.command /^$/, "repeat last command" do
+    _pry_.run_command Pry.history.to_a.last
+  end
 end
+
