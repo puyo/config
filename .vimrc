@@ -68,6 +68,18 @@ Plugin 'elixir-lang/vim-elixir'
 Bundle 'slim-template/vim-slim.git'
 " Emmet
 Plugin 'mattn/emmet-vim'
+" Argumentative
+Plugin 'wellle/targets.vim'
+" Rainbow parenthesis
+Plugin 'kien/rainbow_parentheses.vim'
+" Jade
+Plugin 'digitaltoad/vim-jade'
+" Stylus
+Plugin 'wavded/vim-stylus'
+" Javascript (more modern JS syntax like backticks)
+Plugin 'pangloss/vim-javascript'
+" Complete delimiters as I type
+Plugin 'Raimondi/delimitMate'
 call vundle#end()
 
 filetype plugin indent on     " auto indenting
@@ -106,8 +118,8 @@ set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage
 
 " Strip trailing whitespace when I save source files.
 function! StripTrailingWhitespaces() range
-  silent! execute a:firstline . "," . a:lastline . 's/\s\+$/\1/e'
-  normal! g`"
+silent! execute a:firstline . "," . a:lastline . 's/\s\+$/\1/e'
+normal! g`"
 endfunction
 command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
 
@@ -121,8 +133,12 @@ let g:ctrlp_match_window_reversed = 0
 " Appearance {
 
 syntax on " syntax highlighting
-colorscheme molokai " syntax highlighting colour scheme
-hi Comment guifg=#75715E
+if has("gui")
+  colorscheme base16-eighties
+else
+  colorscheme molokai
+  hi Comment guifg=#75715E
+endif
 set synmaxcol=200 " faster syntax highlighting
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
@@ -156,11 +172,11 @@ set report=0 " tell us when anything has changed
 set number " line numbers on the left
 set wildmode=list:longest " bash-like tab completion
 set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
-            \*.jpg,*.gif,*.png,*~,*.swp
+\*.jpg,*.gif,*.png,*~,*.swp
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
 if has("gui_macvim")
-  set fuoptions+=maxhorz " full screen options on mac
-  set macmeta
+set fuoptions+=maxhorz " full screen options on mac
+set macmeta
 endif
 " }
 
@@ -185,25 +201,32 @@ set complete=.,b " complete using current buffer, then all open buffers
 " File types {
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setlocal filetype=ruby
-    au BufNewFile,BufRead {Gemfile,Guardfile} setlocal filetype=ruby
-    au BufNewFile,BufRead *.json setlocal nowrap smartindent
-    au BufNewFile,BufRead *.txt setlocal filetype=text
-    au BufNewFile,BufRead *.ejs setlocal filetype=html
-    au BufNewFile,BufRead *.hamlc setlocal filetype=haml
-    au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
-    au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
-    au BufNewFile,BufRead *.as setlocal filetype=javascript
+au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setlocal filetype=ruby
+au BufNewFile,BufRead {Gemfile,Guardfile} setlocal filetype=ruby
+au BufNewFile,BufRead *.json setlocal nowrap smartindent
+au BufNewFile,BufRead *.txt setlocal filetype=text
+au BufNewFile,BufRead *.ejs setlocal filetype=html
+au BufNewFile,BufRead *.hamlc setlocal filetype=haml
+au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
+au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
+au BufNewFile,BufRead *.as setlocal filetype=javascript
 
-    au FileType c setlocal sw=4 sts=4 makeprg=make
-    au FileType ruby setlocal makeprg=rake path+=lib tw=78 ts=2 et sw=2 sts=2
-    au FileType eruby setlocal makeprg=rake
-    au FileType css setlocal makeprg=rake
-    au FileType text setlocal wrap linebreak nolist tw=0 wm=0 spell
-    au FileType python setlocal et ts=4 sw=4 sts=4
-    au FileType plaintex setlocal spell
-    au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
-    au FileType slim setlocal comments+=b:'
+au FileType c setlocal sw=4 sts=4 makeprg=make
+au FileType ruby setlocal makeprg=rake path+=lib tw=78 ts=2 et sw=2 sts=2
+au FileType eruby setlocal makeprg=rake
+au FileType css setlocal makeprg=rake
+au FileType text setlocal wrap linebreak nolist tw=0 wm=0 spell
+au FileType python setlocal et ts=4 sw=4 sts=4
+au FileType plaintex setlocal spell
+au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
+au FileType slim setlocal comments+=b:'
+au FileType coffee setlocal ts=4 sw=4 sts=4
+au FileType javascript setlocal ts=4 sw=4 sts=4
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 augroup END
 " }
 
@@ -223,9 +246,9 @@ augroup END
 let html_use_css = 1
 let html_number_lines = 0
 function! HTMLize(line1, line2) range
-    exec (a:line1. ',' . a:line2) . 'TOhtml'
-    exec '0,/<body/d'
-    exec '$-1,$d'
+exec (a:line1. ',' . a:line2) . 'TOhtml'
+exec '0,/<body/d'
+exec '$-1,$d'
 endfunction
 command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
@@ -302,45 +325,32 @@ cabbrev q qall
 cabbrev wq wqall
 
 function! RubyHashes() range
-  silent! execute a:firstline . "," . a:lastline . 's/:\([a-z_]\{-1,}\)\s\{-}=>/\1:/Ig'
+silent! execute a:firstline . "," . a:lastline . 's/:\([a-z_]\{-1,}\)\s\{-}=>/\1:/Ig'
 endfunction
 command! -range=% RubyHashes  <line1>,<line2>call RubyHashes()
 
 " Navigate through open buffers with C-Tab/C-S-Tab or M-Left/Right {
-    map <M-Left> <ESC>:bp<RETURN>
-    map <M-Right> <ESC>:bn<RETURN>
+map <M-Left> <ESC>:bp<RETURN>
+map <M-Right> <ESC>:bn<RETURN>
 " }
 
 " Eclipse moving blocks of text {
-    nmap <M-j> :<C-U>move .+1<CR>==
-    nmap <M-k> :<C-U>move .-2<CR>==
-    imap <M-j> <C-o>:<C-u>move .+1<CR><C-o>==
-    imap <M-k> <C-o>:<C-u>move .-2<CR><C-o>==
-    vmap <M-j> :move '>+1<CR>gv
-    vmap <M-k> :move '<-2<CR>gv
-    nmap <M-h> <<
-    nmap <M-l> >>
-    imap <M-h> <C-o><<
-    imap <M-l> <C-o>>>
-    vmap <M-h> <gv
-    vmap <M-l> >gv
+nmap <M-j> :<C-U>move .+1<CR>==
+nmap <M-k> :<C-U>move .-2<CR>==
+imap <M-j> <C-o>:<C-u>move .+1<CR><C-o>==
+imap <M-k> <C-o>:<C-u>move .-2<CR><C-o>==
+vmap <M-j> :move '>+1<CR>gv
+vmap <M-k> :move '<-2<CR>gv
+nmap <M-h> <<
+nmap <M-l> >>
+imap <M-h> <C-o><<
+imap <M-l> <C-o>>>
+vmap <M-h> <gv
+vmap <M-l> >gv
 " }
 
 " vmap <D-Bslash> :Align<Bar><CR>gv=gv
 " nmap <D-Bslash> vii:Align<Bar><CR>gv=
-
-" Rspec (!s and !S) {
-function! RunSpec(args)
-    if filereadable("script/spec")
-        let spec = "script/spec"
-    else
-        let spec = "spec"
-    end
-    call Send_to_Screen(spec." ".expand("%:p").a:args."\n")
-endfunction
-map !s :call RunSpec(":".line('.'))<CR>
-map !S :call RunSpec("")<CR>
-" }
 
 " }
 
@@ -372,15 +382,7 @@ autocmd BufWinLeave * call clearmatches()
 
 " Create missing directories on save {
 augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
+autocmd!
+autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
-" }
-
-" vim-dispatch {
-let g:rspec_command = "Dispatch rspec -f d {spec}"
-"map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>R :call RunNearestSpec()<CR>
-map <Leader>r :call RunLastSpec()<CR>
-"map <Leader>a :call RunAllSpecs()<CR>
 " }
