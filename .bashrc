@@ -53,3 +53,4 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:./node_modules/.bin" # Add node modules bin path
