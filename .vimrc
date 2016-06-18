@@ -79,7 +79,9 @@ Plugin 'wavded/vim-stylus'
 " Javascript (more modern JS syntax like backticks)
 Plugin 'pangloss/vim-javascript'
 " Complete delimiters as I type
-Plugin 'Raimondi/delimitMate'
+" Plugin 'Raimondi/delimitMate'
+" Use .editorconfig files
+" Plugin 'editorconfig/editorconfig-vim'
 call vundle#end()
 
 filetype plugin indent on     " auto indenting
