@@ -244,11 +244,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
   (eval-after-load "evil-maps"
-    '(progn
-       (define-key evil-motion-state-map "," nil)
-       )
+    '(progn (define-key evil-motion-state-map "," nil))
     )
-
   )
 
 (defun dotspacemacs/user-config ()
@@ -259,9 +256,32 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-    (global-evil-leader-mode)
-    (evil-leader/set-leader ",")
-    (evil-leader/set-key "e" 'helm-find-files)
+  (global-evil-leader-mode)
+  (evil-leader/set-leader ",")
+  (evil-leader/set-key "e" 'helm-find-files)
+
+  (defun custom-kill-buffer ()
+    "Kill the current buffer"
+    (interactive)
+    (kill-buffer nil))
+
+  ;; fix problem copying and pasting with evil visual mode
+  (fset 'evil-visual-update-x-selection 'ignore)
+
+  ;; set window to max height and 100 characters wide by default
+  (if (window-system)
+      (set-frame-size (selected-frame) 100 50))
+
+  ;; ispell on OSX homebrew doesn't have non-American spelling so use aspell
+  (setq-default ispell-program-name "aspell")
+
+  (global-set-key (kbd "s-r") 'helm-recentf)
+  (global-set-key (kbd "s-b") 'helm-buffers-list)
+  (global-set-key (kbd "s-t") 'helm-projectile-find-file)
+  (global-set-key (kbd "s-p") 'helm-projectile-find-file)
+  (global-set-key (kbd "s-w") 'custom-kill-buffer)
+  (global-set-key (kbd "s-{") 'previous-buffer)
+  (global-set-key (kbd "s-}") 'next-buffer)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -393,26 +413,3 @@ you should place your code here."
 
 ;; (global-set-key (kbd "s-k") 'move-region-up)
 ;; (global-set-key (kbd "s-j") 'move-region-down)
-
-(defun custom-kill-buffer ()
-  "Kill the current buffer"
-  (interactive)
-  (kill-buffer nil))
-
-(global-set-key (kbd "s-r") 'helm-recentf)
-(global-set-key (kbd "s-b") 'helm-buffers-list)
-(global-set-key (kbd "s-t") 'helm-projectile-find-file)
-(global-set-key (kbd "s-p") 'helm-projectile-find-file)
-(global-set-key (kbd "s-w") 'custom-kill-buffer)
-(global-set-key (kbd "s-{") 'previous-buffer)
-(global-set-key (kbd "s-}") 'next-buffer)
-
-;; fix problem copying and pasting with evil visual mode
-(fset 'evil-visual-update-x-selection 'ignore)
-
-;; set window to max height and 100 characters wide by default
-(if (window-system)
-    (set-frame-size (selected-frame) 100 50))
-
-;; ispell on OSX homebrew doesn't have non-American spelling so use aspell
-(setq-default ispell-program-name "aspell")
