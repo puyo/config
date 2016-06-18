@@ -11,22 +11,22 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   # prompt
   case "$TERM" in
     xterm*|rxvt*|screen*)
-      RED="\[\033[01;31m\]"
-      GREEN="\[\033[01;32m\]"
-      YELLOW="\[\033[01;33m\]"
-      BLUE="\[\033[01;34m\]"
-      PINK="\[\033[01;35m\]"
-      CYAN="\[\033[0;36m\]"
-      GRAY="\[\033[01;30m\]"
-      RESET="\[\033[00m\]"
+      red="\[\033[01;31m\]"
+      green="\[\033[01;32m\]"
+      yellow="\[\033[01;33m\]"
+      blue="\[\033[01;34m\]"
+      pink="\[\033[01;35m\]"
+      cyan="\[\033[0;36m\]"
+      gray="\[\033[01;30m\]"
+      reset="\[\033[00m\]"
 
-      USER_AND_HOST='\u@\h'
-      RVM='$([ -f .rvmrc ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
-      GIT='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
-      DIR=' \w'
-      DATE='$(date +%T)'
-      PS1="${GREEN}${USER_AND_HOST}${CYAN}${RVM}${YELLOW}${GIT}${BLUE}${DIR}${RESET}\n${GRAY}${DATE}${RESET} \$ "
-      unset USER_AND_HOST RVM GIT DIR DATE
+      user_and_host='\u@\h'
+      rvm='$([ -f .rvmrc ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
+      git='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
+      dir=' \w'
+      date='$(date +%T)'
+      PS1="${green}${user_and_host}${cyan}${rvm}${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
+      unset user_and_host rvm git dir date
   esac
 
   # window title "user@host dir"
@@ -51,6 +51,3 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   # Travis
   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 fi
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="$PATH:./node_modules/.bin" # Add node modules bin path

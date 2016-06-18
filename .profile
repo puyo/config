@@ -24,12 +24,13 @@ for p in $paths; do
     [ -d $p ] && PATH="$p:$PATH"
 done
 
-# $BROWSER
-if [ -x "/usr/bin/chromium-browser" ] ; then
-  export BROWSER="/usr/bin/chromium-browser"
-fi
+PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+PATH="$PATH:./node_modules/.bin" # Add node modules bin path
 
-export EDITOR="$HOME/bin/g"
+export NVM_DIR="/Users/greg/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+#export EDITOR="$HOME/bin/g"
 export DICTIONARY="british"
 export PAGER="/usr/bin/less -R"
 export HISTCONTROL="ignoreboth"
