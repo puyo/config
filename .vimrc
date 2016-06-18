@@ -128,6 +128,7 @@ command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhit
 
 "autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
+set wildignore+=node_modules
 let g:ctrlp_match_window_reversed = 0
 
 " }
