@@ -4,3 +4,4 @@
 --regex-CoffeeScript=/^[ \t]*@?([A-Za-z.]+):.*[-=]>.*$/\1/f,function/ 
 --regex-CoffeeScript=/^[ \t]*([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\1/f,function/
 --regex-CoffeeScript=/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/
+--exclude=node_modules
