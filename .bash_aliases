@@ -72,3 +72,5 @@ alias hwpr="hub pull-request -b ButenkoT/WDI11_Homework:master"
 function rake { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else `which rake` "$@"; fi }
 function rails { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else `which rails` "$@"; fi }
 function rspec { if [ -f './bin/rspec' ]; then ./bin/rspec "$@"; else `which rspec` "$@"; fi }
+
+[ -f ~/.bash_smu.sh ] && . ~/.bash_smu.sh
