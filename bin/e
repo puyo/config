@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+# Similar to this:
+#
+#     #!/bin/bash
+#
+#     emacsclient -nq "${@}" 2> /dev/null || emacs --chdir "${PWD}" "${@}" &
+#
+# But it handles input like this:
+#
+#     e f1.js:20 f2.js:30
+#
+# Which opens f1.js and f2.js at line numbers 20 and 30 respectively.
+#
+# It opens the current directory if no arguments are provided.
+
+require 'open3'
+
+emacs = 'emacs'
+emacsclient = 'emacsclient'
+file = line = nil
+
+if ARGV.any?
+  args = ARGV.map do |arg|
+    file, line = arg.split(':')
+    if line
+      ["+#{line}", file]
+    else
+      arg
+    end
+  end.flatten
+else
+  args = ['.']
+end
+
+Open3.popen2e('emacsclient', '-nq', *args) do |stdin, stdout_and_stderr, wait_thr|
+  exit_status = wait_thr.value
+  if not exit_status.success?
+    Process.spawn('emacs', '--chdir', Dir.pwd, *args)
+  end
+end
