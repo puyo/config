@@ -260,7 +260,7 @@ you should place your code here."
 
   (global-evil-leader-mode)
   (evil-leader/set-leader ",")
-  (evil-leader/set-key "e" 'helm-find-files)
+  (evil-leader/set-key "e" 'find-file)
 
   (defun custom-kill-buffer ()
     "Kill the current buffer"
