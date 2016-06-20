@@ -43,7 +43,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(evil-leader)
+   dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -258,9 +258,12 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (global-evil-leader-mode)
-  (evil-leader/set-leader ",")
-  (evil-leader/set-key "e" 'find-file)
+  (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+  (define-key my-keys-minor-mode-map (kbd ", e") 'find-file)
+  (define-minor-mode my-keys-minor-mode
+    "A minor mode so that my key settings override annoying major modes."
+    t "" 'my-keys-minor-mode-map)
+  (my-keys-minor-mode t)
 
   (defun custom-kill-buffer ()
     "Kill the current buffer"
