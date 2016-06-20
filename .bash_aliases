@@ -74,3 +74,10 @@ function rails { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else `which rai
 function rspec { if [ -f './bin/rspec' ]; then ./bin/rspec "$@"; else `which rspec` "$@"; fi }
 
 [ -f ~/.bash_smu.sh ] && . ~/.bash_smu.sh
+
+function fixbson() {
+  find node_modules -name index.js -type f | \
+    grep 'bson/ext/index.js' | \
+    xargs ruby -n -i.bak \
+    -e 'print $_.gsub("../build/Release/bson", "../browser_build/bson")'
+}
