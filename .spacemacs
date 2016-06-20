@@ -338,6 +338,7 @@ you should place your code here."
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
  '(magit-diff-use-overlays nil)
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
