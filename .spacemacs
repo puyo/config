@@ -258,12 +258,14 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-  (define-key my-keys-minor-mode-map (kbd ", e") 'find-file)
-  (define-minor-mode my-keys-minor-mode
-    "A minor mode so that my key settings override annoying major modes."
-    t "" 'my-keys-minor-mode-map)
-  (my-keys-minor-mode t)
+  ;; (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+  ;; (define-key my-keys-minor-mode-map (kbd ", e") 'find-file)
+  ;; (define-minor-mode my-keys-minor-mode
+  ;;   "A minor mode so that my key settings override annoying major modes."
+  ;;   t "" 'my-keys-minor-mode-map)
+  ;; (my-keys-minor-mode t)
+
+  (define-key evil-normal-state-map (kbd ", e") 'find-file)
 
   (defun custom-kill-buffer ()
     "Kill the current buffer"
