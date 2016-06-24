@@ -266,6 +266,9 @@ you should place your code here."
   ;; (my-keys-minor-mode t)
 
   (define-key evil-normal-state-map (kbd ", e") 'find-file)
+  (dolist (x (list evil-normal-state-map evil-visual-state-map))
+    (define-key x (kbd "\\ \\") 'spacemacs/comment-or-uncomment-lines)
+    )
 
   (defun custom-kill-buffer ()
     "Kill the current buffer"
