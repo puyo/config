@@ -258,17 +258,14 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;; (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-  ;; (define-key my-keys-minor-mode-map (kbd ", e") 'find-file)
-  ;; (define-minor-mode my-keys-minor-mode
-  ;;   "A minor mode so that my key settings override annoying major modes."
-  ;;   t "" 'my-keys-minor-mode-map)
-  ;; (my-keys-minor-mode t)
-
   (define-key evil-normal-state-map (kbd ", e") 'find-file)
   (dolist (x (list evil-normal-state-map evil-visual-state-map))
     (define-key x (kbd "\\ \\") 'spacemacs/comment-or-uncomment-lines)
     )
+
+  (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
+  (require 'evil-move-region)
+  (evil-move-region-default-bindings)
 
   (defun custom-kill-buffer ()
     "Kill the current buffer"
@@ -395,25 +392,9 @@ you should place your code here."
  '(xterm-color-names-bright
    ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
 
-;; (defun move-region (start end n)
-;;   "Move the current region up or down by N lines."
-;;   (interactive "r\np")
-;;   (let ((line-text (delete-and-extract-region start end)))
-;;     (forward-line n)
-;;     (let ((start (point)))
-;;       (insert line-text)
-;;       (setq deactivate-mark nil)
-;;       (set-mark start))))
-
-;; (defun move-region-up (start end n)
-;;   "Move the current line up by N lines."
-;;   (interactive "r\np")
-;;   (move-region start end (if (null n) -1 (- n))))
-
-;; (defun move-region-down (start end n)
-;;   "Move the current line down by N lines."
-;;   (interactive "r\np")
-;;   (move-region start end (if (null n) 1 n)))
-
-;; (global-set-key (kbd "s-k") 'move-region-up)
-;; (global-set-key (kbd "s-j") 'move-region-down)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
