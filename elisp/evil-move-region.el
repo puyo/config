@@ -1,7 +1,7 @@
 ;;; evil-move-region.el --- Move the region around 1 line at a time like in the Eclipse IDE.
 
 ;; Filename: evil-move-region.el
-;; Description: Move current line or region with s-k, s-j, s-h, s-l.
+;; Description: Move current line or region with M-k, M-j, M-h, M-l.
 ;; Author: Gregory McIntyre <greg@gregorymcintyre.com>
 ;; Copyright (C) 2016, Gregory McIntyre, all rights reserved.
 ;; Keywords: edit
@@ -95,11 +95,11 @@
 
 ;;;###autoload
 (defun evil-move-region-default-bindings ()
-  "Bind `evil-move-up', `evil-move-down`, `evil-move-left' and `evil-move-right' to s-k, s-j, s-h and s-l respectively"
-  (define-key evil-normal-state-map (kbd "s-k") 'evil-move-up)
-  (define-key evil-normal-state-map (kbd "s-j") 'evil-move-down)
-  (define-key evil-normal-state-map (kbd "s-h") 'evil-move-left)
-  (define-key evil-normal-state-map (kbd "s-l") 'evil-move-right)
+  "Bind `evil-move-up', `evil-move-down`, `evil-move-left' and `evil-move-right' to M-k, M-j, M-h and M-l respectively"
+  (define-key evil-normal-state-map (kbd "M-k") 'evil-move-up)
+  (define-key evil-normal-state-map (kbd "M-j") 'evil-move-down)
+  (define-key evil-normal-state-map (kbd "M-h") 'evil-move-left)
+  (define-key evil-normal-state-map (kbd "M-l") 'evil-move-right)
   )
 
 (provide 'evil-move-region)
