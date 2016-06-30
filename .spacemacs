@@ -23,27 +23,27 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
-     ;; better-defaults
-     ;; emacs-lisp
      osx
      git
      markdown
      javascript
      react
+     spell-checking
+     syntax-checking
+     ;; auto-completion
+     ;; better-defaults
+     ;; emacs-lisp
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -267,6 +267,9 @@ you should place your code here."
   (require 'evil-move-region)
   (evil-move-region-default-bindings)
 
+  (require 'editorconfig)
+  (editorconfig-mode 1)
+
   (defun custom-kill-buffer ()
     "Kill the current buffer"
     (interactive)
@@ -337,8 +340,6 @@ you should place your code here."
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
- '(js-indent-level 4)
- '(js2-basic-offset 2)
  '(js2-mode-show-parse-errors t)
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
