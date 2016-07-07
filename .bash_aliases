@@ -12,7 +12,7 @@ else
 fi
 
 function masterbranch() {
-  if [ "$@" != "" ]; then
+  if [[ "$@" != "" ]]; then
     git fetch
     git branch "$@" origin/master
     git checkout "$@"
@@ -23,7 +23,7 @@ function masterbranch() {
 }
 
 function sprintbranch() {
-  if [ "$@" != "" ]; then
+  if [[ "$@" != "" ]]; then
     git fetch
     git branch "$@" origin/sprint
     git checkout "$@"
@@ -34,7 +34,7 @@ function sprintbranch() {
 }
 
 function developbranch() {
-  if [ "$@" != "" ]; then
+  if [[ "$@" != "" ]]; then
     git fetch
     git branch "$@" origin/develop
     git checkout "$@"
