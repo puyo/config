@@ -265,6 +265,8 @@ you should place your code here."
   (eval-after-load "web-mode"
     '(progn (define-key spacemacs-web-mode-map "e" nil)))
 
+  (setq auto-mode-alist (rassq-delete-all 'html-mode auto-mode-alist))
+
   (define-key evil-normal-state-map (kbd ", e") 'find-file)
   (dolist (x (list evil-normal-state-map evil-visual-state-map))
     (define-key x (kbd "\\ \\") 'spacemacs/comment-or-uncomment-lines)
