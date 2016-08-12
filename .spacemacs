@@ -250,8 +250,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
                '(stylus-mode tab-width sws-tab-width))
 
   (eval-after-load "evil-maps"
-    '(progn (define-key evil-motion-state-map "," nil))
-    )
+    '(progn (define-key evil-motion-state-map "," nil)))
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -261,6 +261,9 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  (eval-after-load "web-mode"
+    '(progn (define-key spacemacs-web-mode-map "e" nil)))
 
   (define-key evil-normal-state-map (kbd ", e") 'find-file)
   (dolist (x (list evil-normal-state-map evil-visual-state-map))
