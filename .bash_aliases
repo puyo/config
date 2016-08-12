@@ -7,7 +7,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias dir='ls -lh --color=auto'
 else
     # OSX
-    alias ls='ls -G'
+    alias ls='ls -ohG'
     alias dir='ls -ohG'
 fi
 
