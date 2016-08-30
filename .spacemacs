@@ -30,6 +30,10 @@ values."
      react
      spell-checking
      syntax-checking
+     elixir
+     yaml
+     ruby
+     evil-commentary
      ;; auto-completion
      ;; better-defaults
      ;; emacs-lisp
@@ -43,7 +47,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig stylus-mode yaml-mode)
+   dotspacemacs-additional-packages '(editorconfig stylus-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -357,6 +361,7 @@ you should place your code here."
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(paradox-github-token t)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(projectile-globally-ignored-directories
