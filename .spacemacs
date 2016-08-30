@@ -273,7 +273,7 @@ you should place your code here."
 
   (define-key evil-normal-state-map (kbd ", e") 'find-file)
   (dolist (x (list evil-normal-state-map evil-visual-state-map))
-    (define-key x (kbd "\\ \\") 'spacemacs/comment-or-uncomment-lines)
+    (define-key x (kbd "\\ \\") 'evil-commentary)
     )
 
   (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
