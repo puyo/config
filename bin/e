@@ -18,12 +18,13 @@ require 'open3'
 
 emacs = 'emacs'
 emacsclient = 'emacsclient'
-file = line = nil
 
 if ARGV.any?
   args = ARGV.map do |arg|
-    file, line = arg.split(':')
-    if line
+    file, line, col = arg.split(':')
+    if line && col
+      ["+#{line}:#{col}", file]
+    elsif line
       ["+#{line}", file]
     else
       arg
@@ -33,9 +34,7 @@ else
   args = ['.']
 end
 
-Open3.popen2e('emacsclient', '-nq', *args) do |stdin, stdout_and_stderr, wait_thr|
+Open3.popen2e(emacsclient, '-nq', *args) do |_, _, wait_thr|
   exit_status = wait_thr.value
-  if not exit_status.success?
-    Process.spawn('emacs', '--chdir', Dir.pwd, *args)
-  end
+  exit_status.success? || Process.spawn(emacs, '--chdir', Dir.pwd, *args)
 end
