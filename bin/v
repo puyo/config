@@ -1,4 +1,8 @@
 #!/bin/sh
 # Fetch the current file and line number from vim.
 
-exec gvim --remote-expr "expand('%').':'.line('.')"
+# vim:
+# exec gvim --remote-expr "expand('%').':'.line('.')"
+
+# emacs:
+exec emacsclient --eval '(format "%s" (with-current-buffer (window-buffer (selected-window)) (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos)))))' | sed s'/^\"\(.*\)\"$/\1/'
