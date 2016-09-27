@@ -3,3 +3,4 @@
 .emacs.d
 .bundle/cache/
 .DS_Store
+ansible/*.retry
