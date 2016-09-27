@@ -1,6 +1,6 @@
 - name: Common config
   hosts: all
-  sudo: no
+  become: no
 
 - include: apt.yml
 - include: cron.yml
