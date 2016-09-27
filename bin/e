@@ -16,8 +16,8 @@
 
 require 'open3'
 
-emacs = 'emacs'
-emacsclient = 'emacsclient'
+emacs = '/usr/local/bin/emacs'
+emacsclient = '/usr/local/bin/emacsclient'
 
 if ARGV.any?
   args = ARGV.map do |arg|
