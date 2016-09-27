@@ -1,2 +1,8 @@
 Metrics/LineLength:
   Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/NegatedIf:
+  Enabled: false
