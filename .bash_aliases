@@ -44,29 +44,24 @@ function developbranch() {
   fi
 }
 
-alias hopla='rake hopla FORCE_INDEX=1'
 alias grep='grep --color'
 alias less='less -R' # deal with colours
 alias ga='git add'
-alias gp='git push'
-alias gl='git log'
-alias gs='git status'
+alias gb='git branch'
+alias gc='git commit'
+alias gcl='git clone'
+alias gcm='git commit -m'
+alias gco='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gm='git commit -m'
-alias gma='git commit -am'
-alias gb='git branch'
-alias gc='git checkout'
+alias gl='git log'
+alias gp='git push'
+alias gpu='git pull'
 alias gra='git remote add'
 alias grr='git remote rm'
-alias gpu='git pull'
-alias gcl='git clone'
-alias zr='zeus rspec'
-alias mxmlc="$HOME/flex/bin/mxmlc"
+alias gs='git status'
 alias make="make -j3" # use at least 2 processor cores when building things
 alias tail='tail -1000' # at least 1000 lines by default
-alias be="bundle exec"
-alias hwpr="hub pull-request -b ButenkoT/WDI11_Homework:master"
 
 # Rails spring wrapper helpers so I don't have to care anymore.
 function rake { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else `which rake` "$@"; fi }
