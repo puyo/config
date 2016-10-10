@@ -4,3 +4,4 @@
 .bundle/cache/
 .DS_Store
 ansible/*.retry
+away.log
