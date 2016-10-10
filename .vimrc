@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldmarker={,} foldlevel=0
+" vim: set foldmethod=marker foldmarker={,}:
 
 " Vundle {
 set nocompatible " improved!
@@ -78,10 +78,18 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
 " Javascript (more modern JS syntax like backticks)
 Plugin 'pangloss/vim-javascript'
-" Complete delimiters as I type
-" Plugin 'Raimondi/delimitMate'
 " Use .editorconfig files
-" Plugin 'editorconfig/editorconfig-vim'
+Plugin 'editorconfig/editorconfig-vim'
+" Syntax checking
+Plugin 'scrooloose/syntastic'
+" Status line
+Plugin 'vim-airline/vim-airline'
+" Status line themes
+Plugin 'vim-airline/vim-airline-themes'
+" Exchange text objects
+Plugin 'tommcdo/vim-exchange'
+" Manipulate function arguments
+Plugin 'PeterRincker/vim-argumentative'
 call vundle#end()
 
 filetype plugin indent on     " auto indenting
@@ -137,10 +145,9 @@ let g:ctrlp_match_window_reversed = 0
 
 syntax on " syntax highlighting
 if has("gui")
-  colorscheme base16-eighties
+  colorscheme base16-materia
 else
   colorscheme molokai
-  hi Comment guifg=#75715E
 endif
 set synmaxcol=200 " faster syntax highlighting
 set clipboard+=unnamed " share windows clipboard
@@ -272,6 +279,11 @@ vnoremap <Leader>c "+y
 nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>q :qall<CR>
 
+" Simpler visual mode quoting
+vmap " hS"
+vmap ' hS'
+vmap ) hS)
+vmap ( hS)
 
 "nnoremap <C-s> :update<CR>
 "inoremap <C-s> <C-o>:update<CR>
@@ -388,4 +400,16 @@ augroup BWCCreateDir
 autocmd!
 autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
+" }
+
+" Syntax checking {
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'javascript'], 'passive_filetypes': [] }
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 " }
