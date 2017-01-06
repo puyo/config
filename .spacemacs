@@ -305,6 +305,37 @@ you should place your code here."
   (global-set-key (kbd "s-w") 'custom-kill-buffer)
   (global-set-key (kbd "s-{") 'previous-buffer)
   (global-set-key (kbd "s-}") 'next-buffer)
+
+
+  ;; flycheck flowtype
+  (require 'f)
+  (require 'json)
+  (require 'flycheck)
+  (defun flycheck-parse-flow (output checker buffer)
+    (let ((json-array-type 'list))
+      (let ((o (json-read-from-string output)))
+        (mapcar #'(lambda (errp)
+                    (let ((err (cadr (assoc 'message errp)))
+                          (err2 (cadr (cdr (assoc 'message errp)))))
+                      (flycheck-error-new
+                       :line (cdr (assoc 'line err))
+                       :column (cdr (assoc 'start err))
+                       :level 'error
+                       :message (concat (cdr (assoc 'descr err)) ". " (cdr (assoc 'descr err2)))
+                       :filename (f-relative
+                                  (cdr (assoc 'path err))
+                                  (f-dirname (file-truename
+                                              (buffer-file-name))))
+                       :buffer buffer
+                       :checker checker)))
+                (cdr (assoc 'errors o))))))
+
+  (flycheck-define-checker javascript-flow
+    "Static type checking using Flow."
+    :command ("flow" "--json" source-original)
+    :error-parser flycheck-parse-flow
+    :modes js2-mode)
+  (add-to-list 'flycheck-checkers 'javascript-flow)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
