@@ -23,19 +23,20 @@ servers = (
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
   { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
+
   {
-    address = "chat.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
-    use_ssl = "no";
+    address = "gregorymcintyre.com";
+    chatnet = "freenode";
+    port = "7001";
+    use_ssl = "yes";
     ssl_verify = "no";
     autoconnect = "yes";
   },
   {
-    address = "irc.pirateirc.net";
-    chatnet = "PP";
-    port = "6667";
-    use_ssl = "no";
+    address = "gregorymcintyre.com";
+    chatnet = "ppau";
+    port = "7001";
+    use_ssl = "yes";
     ssl_verify = "no";
   }
 );
@@ -111,6 +112,9 @@ chatnets = {
     max_msgs = "3";
     max_whois = "30";
   };
+  PP = { type = "IRC"; };
+  ZNC = { type = "IRC"; };
+  ppau = { type = "IRC"; };
 };
 
 channels = (
@@ -166,6 +170,7 @@ aliases = {
   ATAG = "WINDOW SERVER";
   UNSET = "set -clear";
   RESET = "set -default";
+  znc = "msg *status";
 };
 
 statusbar = {
@@ -303,3 +308,4 @@ hilights = (
   { text = "puyo"; nick = "yes"; word = "yes"; },
   { text = "greg"; nick = "yes"; word = "yes"; }
 );
+logs = { };
