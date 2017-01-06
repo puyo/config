@@ -1,8 +1,26 @@
 Metrics/LineLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
 Style/MultilineMethodCallIndentation:
   Enabled: false
 
 Style/NegatedIf:
   Enabled: false
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.3
