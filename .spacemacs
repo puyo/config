@@ -277,8 +277,17 @@ you should place your code here."
     )
 
   (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
+
   (require 'evil-move-region)
   (evil-move-region-default-bindings)
+
+  (require 'prettier-js)
+  ;; (add-hook 'js-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'before-save-hook 'prettier)))
+  ;; (add-hook 'react-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'before-save-hook 'prettier)))
 
   (require 'editorconfig)
   (editorconfig-mode 1)
