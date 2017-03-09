@@ -315,7 +315,6 @@ you should place your code here."
   (global-set-key (kbd "s-{") 'previous-buffer)
   (global-set-key (kbd "s-}") 'next-buffer)
 
-
   ;; flycheck flowtype
   (require 'f)
   (require 'json)
@@ -343,8 +342,9 @@ you should place your code here."
     "Static type checking using Flow."
     :command ("flow" "--json" source-original)
     :error-parser flycheck-parse-flow
-    :modes js2-mode)
+    :modes js2-mode react-mode)
   (add-to-list 'flycheck-checkers 'javascript-flow)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
