@@ -35,15 +35,12 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
       PS1="\[\e]0;\u@\h \w\a\]$PS1" ;;
   esac
 
-  [ -f ~/.bash_aliases ] && . ~/.bash_aliases
-
-  for dir in /etc/bash_completion /usr/local/etc/bash_completion.d; do
-    if [ -d $dir ]; then
-      for file in $dir/*; do
-        . $file 2> /dev/null
-      done
-    fi
-  done
+  if ! shopt -oq posix; then
+    for file in /etc/bash_completion /usr/local/etc/bash_completion; do
+      [ -f $file ] && source $file
+    done
+    [ -f ~/.bash_aliases ] && source ~/.bash_aliases
+  fi
 
   # Remember the PWD between prompts
   [ -f $HOME/.bash_sticky ] && source $HOME/.bash_sticky
