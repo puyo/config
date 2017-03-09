@@ -418,6 +418,9 @@ you should place your code here."
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
+ '(tooltip-delay 0.1)
+ '(tooltip-mode t)
+ '(tooltip-short-delay 0)
  '(transient-mark-mode t)
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
