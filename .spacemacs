@@ -315,6 +315,9 @@ you should place your code here."
   (global-set-key (kbd "s-{") 'previous-buffer)
   (global-set-key (kbd "s-}") 'next-buffer)
 
+  (require 'flow-jsx-mode)
+  (add-to-list 'auto-mode-alist '("\\.flow\\'" . flow-jsx-mode))
+
   ;; flycheck flowtype
   (require 'f)
   (require 'json)
