@@ -22,5 +22,20 @@ Style/FrozenStringLiteralComment:
 Style/IfUnlessModifier:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
+Style/RedundantException:
+  Enabled: false
+
+Style/SpaceInsideSquareBrackets:
+  Enabled: false
+
+Style/SpaceInsideBrackets:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
