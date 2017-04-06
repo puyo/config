@@ -67,3 +67,15 @@ for al in `__git_aliases`; do
   complete_func=_git_$(__git_aliased_command $al)
   (declare -f -F $complete_fnc > /dev/null) && __git_complete g$al $complete_func
 done
+
+
+function extract_dat {
+    datexe="${HOME}/bin/allegro4dat.exe"
+    files=`wine ${datexe} "$1" -l | cut -d '-' -f 3 | awk 'NR > 1 { print }'`
+    out=`basename -s .dat "${1}"`
+    echo $out
+    mkdir -p "$out"
+    for f in $files; do
+        wine "${datexe}" $1 -e "$f" -o "$out/"
+    done
+}
