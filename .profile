@@ -23,13 +23,24 @@ for p in $paths; do
     [ -d $p ] && PATH="$p:$PATH"
 done
 
-PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-PATH="$PATH:./node_modules/.bin" # Add node modules bin path
+# --------------------------------------------------
+# Ruby
 
+PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# --------------------------------------------------
+# Node
+
+PATH="$PATH:./node_modules/.bin" # Add node modules bin path
 export NVM_DIR="/Users/greg/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="$PATH:`yarn global bin`" # yarn
 
-#export EDITOR="$HOME/bin/g"
+# --------------------------------------------------
+# irssi
+
+[ -f "$HOME/.irssi/passwords" ] && . "$HOME/.irssi/passwords"
+
 export DICTIONARY="british"
 export PAGER="/usr/bin/less -R"
 export HISTCONTROL="ignoreboth"
