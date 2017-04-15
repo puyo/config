@@ -68,6 +68,8 @@ for al in `__git_aliases`; do
   (declare -f -F $complete_fnc > /dev/null) && __git_complete g$al $complete_func
 done
 
+# ----------------------------------------------------------------------
+# Allegro 4
 
 function extract_dat {
     datexe="${HOME}/bin/allegro4dat.exe"
