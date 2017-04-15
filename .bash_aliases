@@ -81,3 +81,16 @@ function extract_dat {
         wine "${datexe}" $1 -e "$f" -o "$out/"
     done
 }
+
+# ----------------------------------------------------------------------
+# Cataclysm DDA
+
+#catasrc=~/Library/Application\ Support/Cataclysm/save/
+catasrc=/usr/local/Cellar/cataclysm/*/libexec/save/
+catabkp=~/.catabackup/
+function catabackup  {
+    rsync -rvah ${catasrc} ${catabkp}
+}
+function catarestore {
+    rsync -rvah ${catabkp} ${catasrc}
+}
