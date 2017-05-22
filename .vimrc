@@ -55,7 +55,7 @@ Plugin 'tpope/vim-repeat'
 " Edit quotes and brackets more easily
 Plugin 'tpope/vim-surround'
 " press % to jump between Ruby keywords. e.g. do and end
-Plugin 'tsaleh/vim-matchit'
+Plugin 'vim-scripts/matchit.zip'
 " :A to jump to the 'alternative' file
 Plugin 'vim-scripts/a.vim'
 " For running rspecs
