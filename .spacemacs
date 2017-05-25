@@ -253,6 +253,9 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  (push (expand-file-name "~/.asdf/bin") exec-path)
+  (push (expand-file-name "~/.asdf/shims") exec-path)
+
   (add-to-list 'editorconfig-indentation-alist
                ;; Just an example, of course EditorConfig has already included this setting!
                '(stylus-mode tab-width sws-tab-width))
