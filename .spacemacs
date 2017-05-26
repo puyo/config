@@ -304,6 +304,14 @@ you should place your code here."
     (interactive)
     (kill-buffer nil))
 
+  (defun custom-save-buffer ()
+    "Save the buffer but don't muck up evil-repeat"
+    (interactive)
+    (save-buffer nil))
+
+  (evil-declare-not-repeat 'custom-kill-buffer)
+  (evil-declare-not-repeat 'custom-save-buffer)
+
   ;; fix problem copying and pasting with evil visual mode
   (fset 'evil-visual-update-x-selection 'ignore)
 
@@ -321,6 +329,7 @@ you should place your code here."
   (global-set-key (kbd "s-w") 'custom-kill-buffer)
   (global-set-key (kbd "s-{") 'previous-buffer)
   (global-set-key (kbd "s-}") 'next-buffer)
+  (global-set-key (kbd "s-s") 'custom-save-buffer)
 
   (require 'flow-jsx-mode)
   (add-to-list 'auto-mode-alist '("\\.flow\\'" . flow-jsx-mode))
