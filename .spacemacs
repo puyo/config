@@ -62,10 +62,11 @@ values."
 
 (defun dotspacemacs/init ()
   "Initialization function.
-This function is called at the very startup of Spacemacs initialization
-before layers configuration.
-You should not put any user code in there besides modifying the variable
-values."
+  This function is called at the very startup of Spacemacs initialization
+  before layers configuration.
+  You should not put any user code in there besides modifying the variable
+  values."
+
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
@@ -248,101 +249,115 @@ values."
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
-It is called immediately after `dotspacemacs/init', before layer configuration
-executes.
- This function is mostly useful for variables that need to be set
-before packages are loaded. If you are unsure, you should try in setting them in
-`dotspacemacs/user-config' first."
+  It is called immediately after `dotspacemacs/init', before layer configuration
+  executes.
+  This function is mostly useful for variables that need to be set
+  before packages are loaded. If you are unsure, you should try in setting them in
+  `dotspacemacs/user-config' first."
 
   (push (expand-file-name "~/.asdf/bin") exec-path)
   (push (expand-file-name "~/.asdf/shims") exec-path)
-
-  (add-to-list 'editorconfig-indentation-alist
-               ;; Just an example, of course EditorConfig has already included this setting!
-               '(stylus-mode tab-width sws-tab-width))
-
-  (eval-after-load "evil-maps"
-    '(progn (define-key evil-motion-state-map "," nil)))
-
+  (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
   )
+
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
+  This function is called at the very end of Spacemacs initialization after
+  layers configuration.
+  This is the place where most of your configurations should be done. Unless it is
+  explicitly specified that a variable should be set before a package is loaded,
+  you should place your code here."
 
-  (eval-after-load "web-mode"
-    '(progn (define-key spacemacs-web-mode-map "e" nil)))
+  (dotspacemacs/user-init-evil-move-region)
+  (dotspacemacs/user-init-window-size)
+  (dotspacemacs/user-init-spelling)
+  (dotspacemacs/user-init-editorconfig)
+  (dotspacemacs/user-fix-evil-visual)
+  (dotspacemacs/user-fix-large-file-handling)
+  (dotspacemacs/user-init-osx)
+  (dotspacemacs/user-init-elixir)
+  (dotspacemacs/user-init-js)
+  )
 
-  (setq auto-mode-alist (rassq-delete-all 'html-mode auto-mode-alist))
-
-  (define-key evil-normal-state-map (kbd ", e") 'find-file)
-  (dolist (x (list evil-normal-state-map evil-visual-state-map))
-    (define-key x (kbd "\\ \\") 'evil-commentary)
-    )
-
-  (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
-
+(defun dotspacemacs/user-init-evil-move-region ()
+  ;; M-{hjkl} to move blocks of text around
   (require 'evil-move-region)
   (evil-move-region-default-bindings)
+  )
 
-  (require 'prettier-js)
-  ;; (add-hook 'js-mode-hook
-  ;;           (lambda ()
-  ;;             (add-hook 'before-save-hook 'prettier)))
-  ;; (add-hook 'react-mode-hook
-  ;;           (lambda ()
-  ;;             (add-hook 'before-save-hook 'prettier)))
-
-  (require 'editorconfig)
-  (editorconfig-mode 1)
-
-  (defun custom-kill-buffer ()
-    "Kill the current buffer"
-    (interactive)
-    (kill-buffer nil))
-
-  (defun custom-save-buffer ()
-    "Save the buffer but don't muck up evil-repeat"
-    (interactive)
-    (save-buffer nil))
-
-  (evil-declare-not-repeat 'custom-kill-buffer)
-  (evil-declare-not-repeat 'custom-save-buffer)
-
-  ;; fix problem copying and pasting with evil visual mode
-  (fset 'evil-visual-update-x-selection 'ignore)
-
-  ;; set window to max height and 100 characters wide by default
+(defun dotspacemacs/user-init-window-size ()
   (if (window-system)
       (set-frame-size (selected-frame) 100 50))
+  )
 
-  ;; ispell on OSX homebrew doesn't have non-American spelling so use aspell
+(defun dotspacemacs/user-init-spelling ()
+  ;; Use aspell since ispell on OSX homebrew doesn't have non-American spelling
   (setq-default ispell-program-name "aspell")
+  )
 
-  (global-set-key (kbd "s-r") 'helm-recentf)
-  (global-set-key (kbd "s-b") 'helm-buffers-list)
-  (global-set-key (kbd "s-t") 'helm-projectile-find-file)
-  (global-set-key (kbd "s-p") 'helm-projectile-find-file)
-  (global-set-key (kbd "s-w") 'custom-kill-buffer)
-  (global-set-key (kbd "s-{") 'previous-buffer)
-  (global-set-key (kbd "s-}") 'next-buffer)
-  (global-set-key (kbd "s-s") 'custom-save-buffer)
+(defun dotspacemacs/user-init-editorconfig ()
+  ;; Set indentation and other preferences based on project .editorconfig file
+  (require 'editorconfig)
+  (editorconfig-mode 1)
+  )
 
-  ;; Stop asking me about fundamental mode when opening large files
+(defun dotspacemacs/user-fix-evil-visual ()
+  ;; Fix problem copying and pasting with evil visual mode
+  (fset 'evil-visual-update-x-selection 'ignore)
+  )
+
+(defun dotspacemacs/user-fix-large-file-handling ()
+  ;; Stop asking me about fundamental mode when opening any file inside a
+  ;; project that has a large TAGS file
   (defun spacemacs/check-large-file ()
     (when (> (buffer-size) (* 1024 1024))
       (setq buffer-read-only t)
       (buffer-disable-undo)
       (fundamental-mode)))
   (add-hook 'find-file-hook 'spacemacs/check-large-file)
+  )
 
+(defun dotspacemacs/user-init-elixir ()
   ;; Elixir mode on atypical elixir files
   (add-to-list 'auto-mode-alist '("mix\\.lock\\'" . elixir-mode))
+  )
 
+(defun dotspacemacs/user-init-osx ()
+  ;; OS X Apple button based shortcuts: recent, buffers, project files, close,
+  ;; previous buffer, next buffer
+  (global-set-key (kbd "s-r") 'helm-recentf)
+  (global-set-key (kbd "s-b") 'helm-buffers-list)
+  (global-set-key (kbd "s-t") 'helm-projectile-find-file)
+  (global-set-key (kbd "s-p") 'helm-projectile-find-file)
+  (global-set-key (kbd "s-{") 'previous-buffer)
+  (global-set-key (kbd "s-}") 'next-buffer)
+
+  ;; Kill buffer without closing windows
+  (defun custom-kill-buffer ()
+    "Kill the current buffer"
+    (interactive)
+    (kill-buffer nil))
+  (evil-declare-not-repeat 'custom-kill-buffer)
+  (global-set-key (kbd "s-w") 'custom-kill-buffer)
+
+  ;; Save buffer but don't muck up evil-repeat
+  (defun custom-save-buffer ()
+    (interactive)
+    (save-buffer nil))
+  (evil-declare-not-repeat 'custom-save-buffer)
+  (global-set-key (kbd "s-s") 'custom-save-buffer)
+  )
+
+(defun dotspacemacs/user-init-js ()
+  ;; Format JS code via :'<,'>prettier
+  (require 'prettier-js)
+
+  ;; Flow/JSX flychecker
+  (dotspacemacs/user-init-js-flow)
+  )
+
+(defun dotspacemacs/user-init-js-flow ()
   (require 'flow-jsx-mode)
   (add-to-list 'auto-mode-alist '("\\.flow\\'" . flow-jsx-mode))
 
@@ -375,7 +390,6 @@ you should place your code here."
     :error-parser flycheck-parse-flow
     :modes js2-mode react-mode)
   (add-to-list 'flycheck-checkers 'javascript-flow)
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
