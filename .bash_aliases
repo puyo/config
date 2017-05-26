@@ -36,7 +36,7 @@ function sprintbranch() {
 function developbranch() {
   if [[ "$@" != "" ]]; then
     git fetch
-    git branch "$@" origin/development
+    git branch "$@" origin/develop
     git checkout "$@"
     git config branch."$@".remote origin
     git config branch."$@".merge refs/heads/"$@"
