@@ -332,6 +332,17 @@ you should place your code here."
   (global-set-key (kbd "s-}") 'next-buffer)
   (global-set-key (kbd "s-s") 'custom-save-buffer)
 
+  ;; Stop asking me about fundamental mode when opening large files
+  (defun spacemacs/check-large-file ()
+    (when (> (buffer-size) (* 1024 1024))
+      (setq buffer-read-only t)
+      (buffer-disable-undo)
+      (fundamental-mode)))
+  (add-hook 'find-file-hook 'spacemacs/check-large-file)
+
+  ;; Elixir mode on atypical elixir files
+  (add-to-list 'auto-mode-alist '("mix\\.lock\\'" . elixir-mode))
+
   (require 'flow-jsx-mode)
   (add-to-list 'auto-mode-alist '("\\.flow\\'" . flow-jsx-mode))
 
