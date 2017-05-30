@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+test = `v`
+filename = test.split(':').first
+
+if filename.end_with?("_test.exs")
+  filename = filename.sub(/.*apps\/.*?\//, "")
+  cmd = ["nodemon", "-w", ".", "-e", "ex exs", "--exec", "mix test #{filename}"]
+  system(*cmd)
+else
+  puts "Not editing an elixir test file"
+end
