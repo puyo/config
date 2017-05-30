@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+gem 'github-markdown'
+require 'github/markdown'
+
+puts GitHub::Markdown.render_gfm ARGF.read
