@@ -48,9 +48,8 @@ function developbranch() {
 # Default arguments for common commands
 
 alias grep='grep --color'
-#alias less='less -R' # deal with colours
-alias less="vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim'"
-alias make='make -j3' # use more cores
+alias less='less -R' # deal with colours
+alias make="make -j3" # use at least 2 processor cores when building things
 alias tail='tail -1000' # at least 1000 lines by default
 
 # ----------------------------------------------------------------------
