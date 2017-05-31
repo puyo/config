@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-test = `v`
+test = ARGV[0] || `v`
 filename = test.split(':').first
 
 if filename.end_with?("_test.exs")
