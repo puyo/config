@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
-test = ARGV[0] || `v`
-filename = test.split(':').first
+test = ARGV[0] || `v`.split(':').first
 
-if filename.end_with?("_test.exs")
-  filename = filename.sub(/.*apps\/.*?\//, "")
-  cmd = ["nodemon", "-w", ".", "-e", "ex exs", "--exec", "mix test #{filename}"]
+if /_test\.exs/.match(test)
+  test = test.sub(/.*apps\/.*?\//, "")
+  cmd = ["nodemon", "-w", ".", "-e", "ex exs", "--exec", "mix test #{test}"]
   system(*cmd)
 else
   puts "Not editing an elixir test file"
