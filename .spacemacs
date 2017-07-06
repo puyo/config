@@ -513,6 +513,8 @@ you should place your code here."
  '(projectile-globally-ignored-files (quote ("TAGS" "tags" ".tern-port")))
  '(ring-bell-function (quote ignore))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(tags-add-tables nil)
+ '(tags-revert-without-query t)
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(tooltip-delay 0.1)
