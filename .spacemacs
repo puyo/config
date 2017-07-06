@@ -495,6 +495,7 @@ you should place your code here."
  '(js2-mode-show-parse-errors t)
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
+ '(large-file-warning-threshold 100000000)
  '(magit-diff-use-overlays nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(nrepl-message-colors
