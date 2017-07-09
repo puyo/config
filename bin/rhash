@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+print ARGF.read.gsub!(/:([a-z0-9_]+?)\s*?=>/, '\1:')
