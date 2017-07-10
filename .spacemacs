@@ -187,7 +187,7 @@ values."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 1
+   dotspacemacs-large-file-size 100000000
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -367,6 +367,7 @@ you should place your code here."
       (buffer-disable-undo)
       (fundamental-mode)))
   (add-hook 'find-file-hook 'spacemacs/check-large-file)
+  (add-to-list 'auto-mode-alist '("TAGS" . fundamental-mode))
   )
 
 (defun dotspacemacs/user-init-elixir ()
@@ -495,7 +496,7 @@ you should place your code here."
  '(js2-mode-show-parse-errors t)
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
- '(large-file-warning-threshold 100000000)
+ '(large-file-warning-threshold 1000000000)
  '(magit-diff-use-overlays nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(nrepl-message-colors
