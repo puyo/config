@@ -36,10 +36,9 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   esac
 
   if ! shopt -oq posix; then
-    for file in /etc/bash_completion /usr/local/etc/bash_completion; do
+    for file in /etc/bash_completion /usr/local/etc/bash_completion ~/.bash_aliases; do
       [ -f $file ] && source $file
     done
-    [ -f ~/.bash_aliases ] && source ~/.bash_aliases
   fi
 
   # Remember the PWD between prompts
@@ -48,5 +47,3 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   # Travis
   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 fi
-
-export PATH="$HOME/.yarn/bin:$PATH"
