@@ -7,6 +7,7 @@ if has("gui_macvim")
   nnoremap <D-p> :CtrlP<CR>
   nnoremap <D-r> :CtrlPMRUFiles<CR>
   nnoremap <D-b> :CtrlPBuffer<CR>
+  vnoremap <D-/> :Commentary<CR>
   set guifont=Menlo\ Regular:h15
 endif
 
