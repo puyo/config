@@ -1,101 +1,99 @@
 " vim: set foldmethod=marker foldmarker={,}:
 
-" Vundle {
 set nocompatible " improved!
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
+" Plug {
+"
 " colour scheme
-Plugin 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 " colour scheme
-Plugin 'chriskempson/vim-tomorrow-theme'
+Plug 'chriskempson/vim-tomorrow-theme'
 " .rdoc syntax highlighting
-Plugin 'depuracao/vim-rdoc'
+Plug 'depuracao/vim-rdoc'
 " press <Tab> to complete the current word
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 " :W! to sudo write
-Plugin 'gmarik/sudo-gui.vim'
+Plug 'gmarik/sudo-gui.vim'
 " align code. e.g. :Tabularize / ,
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 " allows custom text objects
-Plugin 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-user'
 " .coffee syntax highlighting
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 " jump to files: in directory tree, most-recently-used, open buffers
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 " 'i' is a text object that selects the current indentation level. e.g. vii
-Plugin 'michaeljsmith/vim-indent-object'
+Plug 'michaeljsmith/vim-indent-object'
 " 'r' is a text object that selects the current Ruby structure. e.g. vir
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plug 'nelstrom/vim-textobj-rubyblock'
 " .feature syntax highlighting
-Plugin 'puyo/vim-cucumber'
+Plug 'puyo/vim-cucumber'
 " .haml syntax highlighting
-Plugin 'puyo/vim-haml'
+Plug 'puyo/vim-haml'
 " kill buffers without closing their window
-Plugin 'rgarver/Kwbd.vim'
+Plug 'rgarver/Kwbd.vim'
 " colour scheme
-Plugin 'tomasr/molokai'
+Plug 'tomasr/molokai'
 " press \\ or \\\ to toggle comments on a line
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 " tmux integration for running tests
-Plugin 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch'
 " UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 " Git commands :Ggrep
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " .md syntax highlighting
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 " Rails project mode
-Plugin 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
 " press . to repeat more sophisticated things
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 " Edit quotes and brackets more easily
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " press % to jump between Ruby keywords. e.g. do and end
-Plugin 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 " :A to jump to the 'alternative' file
-Plugin 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'
 " For running rspecs
-Plugin 'thoughtbot/vim-rspec'
+Plug 'thoughtbot/vim-rspec'
 " Rust mode
-Plugin 'wting/rust.vim'
+Plug 'wting/rust.vim'
 " Elixir mode
-Plugin 'elixir-lang/vim-elixir'
-" Slim
-Bundle 'slim-template/vim-slim.git'
+Plug 'elixir-lang/vim-elixir'
 " Emmet
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " Argumentative
-Plugin 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 " Rainbow parenthesis
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 " Jade
-Plugin 'digitaltoad/vim-jade'
+Plug 'digitaltoad/vim-jade'
 " Stylus
-Plugin 'wavded/vim-stylus'
+Plug 'wavded/vim-stylus'
 " Javascript (more modern JS syntax like backticks)
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 " Use .editorconfig files
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 " Syntax checking
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 " Status line
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 " Status line themes
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 " Exchange text objects
-Plugin 'tommcdo/vim-exchange'
+Plug 'tommcdo/vim-exchange'
 " Manipulate function arguments
-Plugin 'PeterRincker/vim-argumentative'
-call vundle#end()
-
-filetype plugin indent on     " auto indenting
+Plug 'PeterRincker/vim-argumentative'
+call plug#end()
 " }
 
 " Basics {
+filetype plugin indent on " auto indenting
 set noexrc " don't use local .vimrc files
 set cpoptions+=a " :read updates alternative file name
 set cpoptions+=A " :write updates alternative file name
