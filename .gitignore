@@ -1,4 +1,4 @@
-.vim/bundle
+.vim/plugged
 .emacs.d/elpa
 .emacs.d
 .bundle/cache/
