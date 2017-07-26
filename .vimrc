@@ -47,6 +47,8 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 " Git commands :Ggrep
 Plug 'tpope/vim-fugitive'
+" GitHub commands :Gbrowse
+Plug 'tpope/vim-rhubarb'
 " .md syntax highlighting
 Plug 'tpope/vim-markdown'
 " Rails project mode
@@ -69,8 +71,6 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'mattn/emmet-vim'
 " Argumentative
 Plug 'wellle/targets.vim'
-" Rainbow parenthesis
-Plug 'kien/rainbow_parentheses.vim'
 " Jade
 Plug 'digitaltoad/vim-jade'
 " Stylus
@@ -89,6 +89,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tommcdo/vim-exchange'
 " Manipulate function arguments
 Plug 'PeterRincker/vim-argumentative'
+" Find project root and auto change directory to it
+Plug 'airblade/vim-rooter'
+" Theme
+Plug 'colepeters/spacemacs-theme.vim'
+" Version of :%s that previews that changes that will be made
+Plug 'osyo-manga/vim-over'
 call plug#end()
 " }
 
@@ -131,7 +137,6 @@ function! StripTrailingWhitespaces() range
 endfunction
 command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
 
-
 "autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
 set wildignore+=node_modules
@@ -142,11 +147,17 @@ let g:ctrlp_match_window_reversed = 0
 " Appearance {
 
 syntax on " syntax highlighting
+
+if has("termguicolors")
+  set termguicolors
+endif
 if has("gui")
-  colorscheme base16-materia
+  colorscheme spacemacs-theme
+  set background=dark
 else
   colorscheme molokai
 endif
+
 set synmaxcol=200 " faster syntax highlighting
 set clipboard+=unnamed " share windows clipboard
 set ruler " show the cursor position all the time
@@ -208,17 +219,19 @@ set complete=.,b " complete using current buffer, then all open buffers
 
 " File types {
 filetype plugin indent on
+
 augroup filetypedetect
 au BufNewFile,BufRead *.{rjs,rbw,gem,gemspec,ru} setlocal filetype=ruby
 au BufNewFile,BufRead {Gemfile,Guardfile} setlocal filetype=ruby
-au BufNewFile,BufRead *.json setlocal nowrap smartindent
 au BufNewFile,BufRead *.txt setlocal filetype=text
 au BufNewFile,BufRead *.ejs setlocal filetype=html
 au BufNewFile,BufRead *.hamlc setlocal filetype=haml
 au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
 au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
 au BufNewFile,BufRead *.as setlocal filetype=javascript
+augroup END
 
+augroup filetypes
 au FileType c setlocal sw=4 sts=4 makeprg=make
 au FileType ruby setlocal makeprg=rake path+=lib tw=78 ts=2 et sw=2 sts=2
 au FileType eruby setlocal makeprg=rake
@@ -230,12 +243,9 @@ au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
 au FileType slim setlocal comments+=b:'
 au FileType coffee setlocal ts=2 sw=2 sts=2
 au FileType javascript setlocal ts=4 sw=4 sts=4
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au FileType json setlocal nowrap smartindent
 augroup END
+
 " }
 
 " rails.vim {
@@ -276,6 +286,10 @@ nnoremap <Leader>p "+p
 vnoremap <Leader>c "+y
 nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>q :qall<CR>
+
+" Surround binding for visual mode, same as Spacemacs
+
+vmap s S
 
 " Simpler visual mode quoting
 vmap " hS"
@@ -323,7 +337,10 @@ nnoremap <F11> :cprev<CR>
 " Allow %/ to be put in :e lines and be expanded to the currently open file's
 " directory.
 cnoremap %/ <C-R>=expand("%:p:h")."/"<CR>
-nnoremap ,e :e <C-R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g').'/'<CR><BS>/
+nnoremap ,e :e
+  \ <C-R>=
+  \ substitute(expand("%:p:h"), ' ', '\\ ', 'g')
+  \ .'/'<CR><BS>/
 
 " Alt-Backspace is delete word back, like bash/emacs
 cnoremap <M-BS> <C-W>
