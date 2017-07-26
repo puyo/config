@@ -6,6 +6,7 @@ Metrics/LineLength: {Enabled: false}
 Metrics/MethodLength: {Enabled: false}
 Style/BlockDelimiters: {Enabled: false}
 Style/Documentation: {Enabled: false}
+Style/DotPosition: {Enabled: false}
 Style/FrozenStringLiteralComment: {Enabled: false}
 Style/GuardClause: {Enabled: false}
 Style/IfUnlessModifier: {Enabled: false}
