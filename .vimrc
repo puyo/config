@@ -39,7 +39,7 @@ Plug 'puyo/vim-haml'
 Plug 'rgarver/Kwbd.vim'
 " colour scheme
 Plug 'tomasr/molokai'
-" press \\ or \\\ to toggle comments on a line
+" gc to toggle comments
 Plug 'tpope/vim-commentary'
 " tmux integration for running tests
 Plug 'tpope/vim-dispatch'
