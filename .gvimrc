@@ -9,5 +9,7 @@ if has("gui_macvim")
   nnoremap <D-b> :CtrlPBuffer<CR>
   vnoremap <D-/> :Commentary<CR>
   set guifont=Menlo\ Regular:h12
+  set fuoptions+=maxhorz " full screen options on mac
+  set macmeta " option key works as M- key modifier
 endif
 
