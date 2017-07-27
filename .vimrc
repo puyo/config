@@ -151,6 +151,7 @@ syntax on " syntax highlighting
 if has("termguicolors")
   set termguicolors
 endif
+
 if has("gui")
   colorscheme spacemacs-theme
   set background=dark
@@ -193,10 +194,6 @@ set wildmode=list:longest " bash-like tab completion
 set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
 \*.jpg,*.gif,*.png,*~,*.swp
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
-if has("gui_macvim")
-set fuoptions+=maxhorz " full screen options on mac
-set macmeta
-endif
 " }
 
 " Text and code editing {
@@ -287,27 +284,16 @@ vnoremap <Leader>c "+y
 nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>q :qall<CR>
 
-" Surround binding for visual mode, same as Spacemacs
-
+" Quoting {
+"
+" Press s to surround selection with quotes, same as Spacemacs
 vmap s S
 
-" Simpler visual mode quoting
+" Or just type the quote you want
 vmap " hS"
 vmap ' hS'
 vmap ) hS)
 vmap ( hS)
-
-"nnoremap <C-s> :update<CR>
-"inoremap <C-s> <C-o>:update<CR>
-"vnoremap <C-s> <Esc>:update<CR>gv
-
-" easier split navigation {
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <bar> <C-w>v
-nnoremap - <C-w>s
 " }
 
 " use ; instead of : because it is quicker
@@ -316,14 +302,15 @@ nnoremap ; :
 " Use ;w!! to sudo save a file
 cnoremap w!! w !sudo tee % >/dev/null
 
-" Don't lose highlight
+" Don't lose highlight after indenting it
 vnoremap < <gv
 vnoremap > >gv
 
-" Disable commands I never want to use, in case I hit them accidentally
+" Disable commands I never want to use, in case I hit them accidentally {
 nnoremap <F1> <Esc>
 inoremap <F1> <Esc>a
 nnoremap K <nop>
+" }
 
 " M-a switches between alternative files (.cpp <=> .hpp)
 nnoremap <M-a> :A<CR>
@@ -353,16 +340,6 @@ cabbrev q qall
 
 " :wq writes and quits reliably
 cabbrev wq wqall
-
-function! RubyHashes() range
-  silent! execute a:firstline . "," . a:lastline . 's/:\([a-z_]\{-1,}\)\s\{-}=>/\1:/Ig'
-endfunction
-command! -range=% RubyHashes  <line1>,<line2>call RubyHashes()
-
-" Navigate through open buffers with C-Tab/C-S-Tab or M-Left/Right {
-map <M-Left> <ESC>:bp<RETURN>
-map <M-Right> <ESC>:bn<RETURN>
-" }
 
 " Eclipse moving blocks of text {
 nmap <M-j> :<C-U>move .+1<CR>==
