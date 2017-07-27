@@ -356,15 +356,6 @@ vmap <M-h> <gv
 vmap <M-l> >gv
 " }
 
-" vmap <D-Bslash> :Align<Bar><CR>gv=gv
-" nmap <D-Bslash> vii:Align<Bar><CR>gv=
-
-" }
-
-" JSLint {
-au FileType javascript setl makeprg=jsl\ -nologo\ -nocontext\ -nosummary\ -process\ % errorformat=%f(%l):\ %m
-" }
-
 " Tabularize {
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
@@ -376,6 +367,8 @@ nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+" }
+
 " }
 
 " Highlight superfluous whitespace on the ends of lines {
