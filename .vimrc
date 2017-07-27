@@ -316,10 +316,12 @@ nnoremap K <nop>
 nnoremap <M-a> :A<CR>
 inoremap <M-a> <ESC>:A<CR>
 
-" Compilation and quickfix
-nnoremap <F9> :copen<CR>
-nnoremap <F10> :cnext<CR>
-nnoremap <F11> :cprev<CR>
+" Compilation and quickfix {
+nnoremap co :copen<CR>
+nnoremap cc :cclose<CR>
+nnoremap c] :cnext<CR>
+nnoremap c[ :cprev<CR>
+" }
 
 " Allow %/ to be put in :e lines and be expanded to the currently open file's
 " directory.
