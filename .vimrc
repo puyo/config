@@ -142,6 +142,15 @@ command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhit
 set wildignore+=node_modules
 let g:ctrlp_match_window_reversed = 0
 
+" Multiple VCS's:
+let g:ctrlp_user_command = {
+  \ 'types': {
+  \   1: ['.git', 'cd %s && git ls-files'],
+  \   },
+  \ 'fallback': 'find %s -type f'
+  \ }
+
+
 " }
 
 " Appearance {
