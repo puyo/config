@@ -142,6 +142,15 @@ command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhit
 set wildignore+=node_modules
 let g:ctrlp_match_window_reversed = 0
 
+" Multiple VCS's:
+let g:ctrlp_user_command = {
+  \ 'types': {
+  \   1: ['.git', 'cd %s && git ls-files'],
+  \   },
+  \ 'fallback': 'find %s -type f'
+  \ }
+
+
 " }
 
 " Appearance {
@@ -239,7 +248,7 @@ au FileType plaintex setlocal spell
 au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
 au FileType slim setlocal comments+=b:'
 au FileType coffee setlocal ts=2 sw=2 sts=2
-au FileType javascript setlocal ts=4 sw=4 sts=4
+au FileType javascript setlocal ts=2 sw=2 sts=2
 au FileType json setlocal nowrap smartindent
 augroup END
 
