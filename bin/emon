@@ -4,7 +4,14 @@ test = ARGV[0] || `v`.split(':').first
 
 if /_test\.exs/.match(test)
   test = test.sub(/.*apps\/.*?\//, "")
-  cmd = ["nodemon", "-w", ".", "-e", "ex exs", "--exec", "mix test #{test}"]
+  cmd = ["nodemon",
+         "--verbose",
+         "--ignore", "erl_crash.dump",
+         "--ignore", "deps",
+         "--ignore", "_build",
+         "--watch", ".",
+         "--ext", "ex exs",
+         "--exec", "mix test #{test}"]
   system(*cmd)
 else
   puts "Not editing an elixir test file"
