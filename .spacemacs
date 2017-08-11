@@ -312,9 +312,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (with-eval-after-load 'evil
     (defalias #'forward-evil-word #'forward-evil-symbol))
 
+  ;; asdf
   (push (expand-file-name "~/.asdf/bin") exec-path)
   (push (expand-file-name "~/.asdf/shims") exec-path)
 
+  ;; Path to my elisp additions
   (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
   )
 
