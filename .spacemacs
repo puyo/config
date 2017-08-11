@@ -308,6 +308,10 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  ;; Make _ a word character so long_identifier is one word
+  (with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol))
+
   (push (expand-file-name "~/.asdf/bin") exec-path)
   (push (expand-file-name "~/.asdf/shims") exec-path)
 
