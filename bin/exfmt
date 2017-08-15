@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd ~/projects/exfmt
-exec mix exfmt --pipe
+exec mix exfmt --stdin
