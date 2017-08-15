@@ -79,8 +79,6 @@ Plug 'wavded/vim-stylus'
 Plug 'pangloss/vim-javascript'
 " Use .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
-" Syntax checking
-Plug 'scrooloose/syntastic'
 " Status line
 Plug 'vim-airline/vim-airline'
 " Status line themes
@@ -95,6 +93,8 @@ Plug 'airblade/vim-rooter'
 Plug 'colepeters/spacemacs-theme.vim'
 " Version of :%s that previews that changes that will be made
 Plug 'osyo-manga/vim-over'
+" Async lint engine
+Plug 'w0rp/ale'
 call plug#end()
 " }
 
@@ -283,6 +283,9 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 " All those commands that start with <Leader> now start with , not \
 let mapleader=","
 
+" Spacemacs!
+nnoremap <SPACE> :
+
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>r :CtrlPMRUFiles<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
@@ -398,14 +401,3 @@ autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%
 augroup END
 " }
 
-" Syntax checking {
-let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'javascript'], 'passive_filetypes': [] }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" }
