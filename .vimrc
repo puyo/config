@@ -355,6 +355,9 @@ cabbrev q qall
 " :wq writes and quits reliably
 cabbrev wq wqall
 
+" Spacemacs like keybinding for switching between two files
+nnoremap <SPACE><TAB> :execute 'edit ' . (ctrlp#mrufiles#list()[1])<CR>
+
 " Eclipse moving blocks of text {
 nmap <M-j> :<C-U>move .+1<CR>==
 nmap <M-k> :<C-U>move .-2<CR>==
