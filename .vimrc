@@ -404,3 +404,6 @@ autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%
 augroup END
 " }
 
+" Ale config {
+let g:ale_sign_column_always = 1
+" }
