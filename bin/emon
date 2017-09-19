@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-test = ARGV[0] || `v`.split(':').first
+path = ARGV[0] || `v`.split(':').first
 
 def run_test(test_path)
   test_path.sub!(/.*apps\/.*?\//, "") # account for umbrella apps
@@ -15,8 +15,8 @@ def run_test(test_path)
   system(*cmd)
 end
 
-if /_test\.exs/.match(test)
-  run_test(test_path)
+if /_test\.exs/.match(path)
+  run_test(path)
 else
   test_filename = File.basename(test.gsub(/.ex/, '_test.exs'))
   test_path = Dir.glob(File.join("**", test_filename)).first
