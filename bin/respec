@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+PATH = '.respec'
+
+if File.exist?(PATH)
+  failed_specs = File.read(PATH).each_line.map do |line|
+    line.strip.gsub(/^rspec (.*?) #.*$/, '\1')
+  end
+  cmd = ['bundle', 'exec', 'rspec', *failed_specs, *ARGV]
+  puts cmd.join(' ')
+  exec(*cmd)
+end
