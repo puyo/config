@@ -2,8 +2,8 @@
 
 test = ARGV[0] || `v`.split(':').first
 
-if /_test\.exs/.match(test)
-  test = test.sub(/.*apps\/.*?\//, "")
+def run_test(test_path)
+  test_path.sub!(/.*apps\/.*?\//, "") # account for umbrella apps
   cmd = ["nodemon",
          "--verbose",
          "--ignore", "erl_crash.dump",
@@ -11,8 +11,18 @@ if /_test\.exs/.match(test)
          "--ignore", "_build",
          "--watch", ".",
          "--ext", "ex exs",
-         "--exec", "mix test #{test}"]
+         "--exec", "mix test #{test_path}"]
   system(*cmd)
+end
+
+if /_test\.exs/.match(test)
+  run_test(test_path)
 else
-  puts "Not editing an elixir test file"
+  test_filename = File.basename(test.gsub(/.ex/, '_test.exs'))
+  test_path = Dir.glob(File.join("**", test_filename)).first
+  if test_path
+    run_test(test_path)
+  else
+    puts "Cannot figure out which test to run from: #{test.inspect}"
+  end
 end
