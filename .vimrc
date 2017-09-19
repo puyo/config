@@ -95,6 +95,8 @@ Plug 'colepeters/spacemacs-theme.vim'
 Plug 'osyo-manga/vim-over'
 " Async lint engine
 Plug 'w0rp/ale'
+" Idris mode
+Plug 'idris-hackers/idris-vim'
 call plug#end()
 " }
 
