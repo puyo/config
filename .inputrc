@@ -6,3 +6,5 @@ set convert-meta on
 
 M-n: history-search-forward
 M-p: history-search-backward
+set show-all-if-ambiguous on
+set completion-ignore-case on
