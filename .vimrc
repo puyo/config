@@ -408,4 +408,15 @@ augroup END
 
 " Ale config {
 let g:ale_sign_column_always = 1
+
+" Be strict please Credo
+call ale#linter#Define('elixir', {
+\   'name': 'credo',
+\   'executable': 'mix',
+\   'command': 'mix credo suggest --strict --format=flycheck --read-from-stdin %s',
+\   'callback': 'ale_linters#elixir#credo#Handle',
+\})
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " }
