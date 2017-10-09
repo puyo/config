@@ -45,6 +45,8 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
     ;;
   esac
 
+  autoload -Uz compinit && compinit
+
   user_sources=(.bash_aliases)
 
   for file in "${user_sources[@]}"; do
