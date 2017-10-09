@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+path = ARGV[0] || `v`.split(':').first
+
+def run_test(test_path)
+  cmd = ["nodemon",
+         "--quiet",
+         "--ignore", "./vendor",
+         "--watch", ".",
+         "--ext", "rb erb haml",
+         "--exec", "bundle exec spring rspec #{test_path}"]
+  system(*cmd)
+end
+
+if /_spec\.rb/.match(path)
+  run_test(path)
+else
+  test_filename = File.basename(path.gsub(/.rb$/, '_spec.rb'))
+  test_path = Dir.glob(File.join("**", test_filename)).first
+  if test_path
+    run_test(test_path)
+  else
+    puts "Cannot figure out which test to run from: #{path.inspect}"
+  end
+end
