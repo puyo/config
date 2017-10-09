@@ -62,11 +62,14 @@ function rspec { if [ -f './bin/rspec' ]; then ./bin/rspec "$@"; else `which rsp
 # ----------------------------------------------------------------------
 # Git
 
-for al in `__git_aliases`; do
-  alias g$al="git $al"
-  complete_func=_git_$(__git_aliased_command $al)
-  (declare -f -F $complete_fnc > /dev/null) && __git_complete g$al $complete_func
-done
+
+if type __git_aliases > /dev/null; then
+  for al in `__git_aliases`; do
+    alias g$al="git $al"
+    complete_func=_git_$(__git_aliased_command $al)
+    (declare -f -F $complete_fnc > /dev/null) && __git_complete g$al $complete_func
+  done
+fi
 
 # ----------------------------------------------------------------------
 # Allegro 4
