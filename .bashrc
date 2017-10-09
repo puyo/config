@@ -1,14 +1,13 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
-stty -ixon # disable C-s and C-q pause and resume buttons
-
-[ -f $HOME/.mongo_funcs.sh ] && . $HOME/.mongo_funcs.sh
+# avoid everything in this file, if in --posix mode
+shopt -oq posix && return
 
 if [[ ! -z "$PS1" ]] ; then # if running interactively
   shopt -s histappend # append to history file, don't overwrite
   shopt -s checkwinsize # update LINES and COLUMNS
+  stty -ixon # disable C-s and C-q pause and resume buttons
 
-  # prompt
   case "$TERM" in
     xterm*|rxvt*|screen*)
       red="\[\033[01;31m\]"
@@ -27,23 +26,19 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
       date='$(date +%T)'
       PS1="${green}${user_and_host}${cyan}${rvm}${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
       unset user_and_host rvm git dir date
+
+      # window title "user@host dir"
+      PS1="\[\e]0;\u@\h \w\a\]$PS1"
+    ;;
   esac
 
-  # window title "user@host dir"
-  case "$TERM" in
-    xterm*|rxvt*)
-      PS1="\[\e]0;\u@\h \w\a\]$PS1" ;;
-  esac
+  for file in /etc/bash_completion /usr/local/etc/bash_completion; do
+    [ -f "$file" ] && source "$file"
+  done
 
-  if ! shopt -oq posix; then
-    for file in /etc/bash_completion /usr/local/etc/bash_completion ~/.bash_aliases; do
-      [ -f $file ] && source $file
-    done
-  fi
+  user_sources=(.bash_aliases .bash_sticky)
 
-  # Remember the PWD between prompts
-  [ -f $HOME/.bash_sticky ] && source $HOME/.bash_sticky
-
-  # Travis
-  [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+  for file in "${user_sources[@]}"; do
+    [ -f "$HOME/$file" ] && source "$HOME/$file"
+  done
 fi
