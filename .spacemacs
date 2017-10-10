@@ -471,6 +471,7 @@ you should place your code here."
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
+ '(delete-selection-mode t)
  '(evil-ex-search-persistent-highlight nil)
  '(evil-want-Y-yank-to-eol nil)
  '(exec-path-from-shell-check-startup-files nil)
