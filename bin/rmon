@@ -8,7 +8,7 @@ def run_test(test_path)
          "--ignore", "./vendor",
          "--watch", ".",
          "--ext", "rb erb haml",
-         "--exec", "bundle exec spring rspec #{test_path}"]
+         "--exec", "bundle exec spring rspec --format documentation #{test_path}"]
   system(*cmd)
 end
 
