@@ -5,3 +5,5 @@
 .DS_Store
 ansible/*.retry
 away.log
+tags
+TAGS

@@ -1,17 +1,19 @@
 [color]
-  ui = true
+	ui = true
 [push]
-  default = current
+	default = current
 [user]
-  name = Gregory McIntyre
-  email = greg@gregorymcintyre.com
+	name = Gregory McIntyre
+	email = greg@gregorymcintyre.com
 [core]
-  editor = /usr/bin/vim
+	editor = /usr/bin/vim
+	excludesfile = ~/.gitignore
 [branch]
-  autosetuprebase = always
+	autosetuprebase = always
 [pager]
-        diff = diff-so-fancy | less --tabs=1,5 -RFX
-        show = diff-so-fancy | less --tabs=1,5 -RFX
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
+	log = diff-so-fancy | less --tabs=1,5 -RFX
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -45,3 +47,20 @@
 
 	# list aliases
 	la = "!git config -l | grep alias | cut -c 7-"
+
+	cb = rev-parse --symbolic-full-name --abbrev-ref HEAD
+	gp = !git push --set-upstream origin HEAD:$(git cb)
+	gup = !git fetch --prune origin && git rebase -p origin/$(git cb)
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	trustExitCode = true
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
