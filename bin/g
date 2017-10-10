@@ -4,21 +4,20 @@
 # paste into it. ;)
 
 vim = 'gvim'
-file = line = nil
+line = nil
 
 running = system("#{vim} --serverlist | grep -q VIM")
-if ARGV.any?
-  file, line = ARGV.first.split(':')
-  file.gsub!(/^[ab]\//, '') # git diff
-  ARGV[0] = file
-else
-  ARGV[0] = '.'
-  file = line = nil
-end
+args = if ARGV.any?
+         file, line = ARGV.first.split(':')
+         file.gsub!(%r{^[ab]/}, '') # git diff
+         [file]
+       else
+         ['.']
+       end
 
 if running
-  system(vim, '--remote-silent', *ARGV)
+  system(vim, '--remote-silent', *args)
 else
-  system(vim, *ARGV)
+  system(vim, *args)
 end
 system(vim, '--remote-send', ":#{line}<CR>") if line
