@@ -19,20 +19,21 @@ require 'open3'
 emacs = '/usr/local/bin/emacs'
 emacsclient = '/usr/local/bin/emacsclient'
 
-if ARGV.any?
-  args = ARGV.map do |arg|
-    file, line, col = arg.split(':')
-    if line && col
-      ["+#{line}:#{col}", file]
-    elsif line
-      ["+#{line}", file]
-    else
-      arg
-    end
-  end.flatten
-else
-  args = ['.']
-end
+args = if ARGV.any?
+         ARGV.map do |arg|
+           file, line, col = arg.split(':')
+           file.gsub!(%r{^[ab]/}, '') # git diff
+           if line && col
+             ["+#{line}:#{col}", file]
+           elsif line
+             ["+#{line}", file]
+           else
+             arg
+           end
+         end.flatten
+       else
+         ['.']
+       end
 
 Open3.popen2e(emacsclient, '-nq', *args) do |_, _, wait_thr|
   exit_status = wait_thr.value
