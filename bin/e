@@ -27,6 +27,8 @@ args = if ARGV.any?
              ["+#{line}:#{col}", file]
            elsif line
              ["+#{line}", file]
+           elsif file != line
+             file
            else
              arg
            end
