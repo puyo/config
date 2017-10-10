@@ -4,7 +4,8 @@ set bell-style visible
 # We are using a UTF terminal.
 set convert-meta on
 
+# Press tab once instead of twice
+set show-all-if-ambiguous on
+
 M-n: history-search-forward
 M-p: history-search-backward
-set show-all-if-ambiguous on
-set completion-ignore-case on
