@@ -7,3 +7,4 @@ ansible/*.retry
 away.log
 tags
 TAGS
+.respec
