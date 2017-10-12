@@ -338,7 +338,13 @@ you should place your code here."
   (dotspacemacs/user-init-osx)
   (dotspacemacs/user-init-elixir)
   (dotspacemacs/user-init-js)
+  (dotspacemacs/user-init-elixir-max-line-length)
   )
+
+(defun dotspacemacs/user-init-elixir-max-line-length ()
+  (add-hook 'elixir-mode-hook
+            (lambda ()
+              (set-fill-column 120))))
 
 (defun dotspacemacs/user-init-evil-move-region ()
   ;; M-{hjkl} to move blocks of text around
