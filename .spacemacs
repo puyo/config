@@ -542,6 +542,7 @@ you should place your code here."
  '(tooltip-delay 0.1)
  '(tooltip-mode t)
  '(tooltip-short-delay 0)
+ '(typescript-indent-level 2)
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
    (quote
