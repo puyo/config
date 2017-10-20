@@ -15,7 +15,7 @@ end
 if /_spec\.rb/.match(path)
   run_test(path)
 else
-  test_filename = File.basename(path.gsub(/.rb$/, '_spec.rb'))
+  test_filename = File.basename(path.gsub(/\.rb$/, '_spec.rb'))
   test_path = Dir.glob(File.join("**", test_filename)).first
   if test_path
     run_test(test_path)

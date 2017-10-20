@@ -18,11 +18,11 @@ end
 if /_test\.exs/.match(path)
   run_test(path)
 else
-  test_filename = File.basename(path.gsub(/.ex/, '_test.exs'))
+  test_filename = File.basename(path.gsub(/\.ex$/, '_test.exs'))
   test_path = Dir.glob(File.join("**", test_filename)).first
   if test_path
     run_test(test_path)
   else
-    puts "Cannot figure out which test to run from: #{test.inspect}"
+    puts "Cannot figure out which test to run from: #{path.inspect}"
   end
 end
