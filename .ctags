@@ -4,7 +4,6 @@
 --regex-CoffeeScript=/^[ \t]*@?([A-Za-z.]+):.*[-=]>.*$/\1/f,function/ 
 --regex-CoffeeScript=/^[ \t]*([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\1/f,function/
 --regex-CoffeeScript=/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/
---exclude=node_modules
 
 --langdef=Elixir
 --langmap=Elixir:.ex.exs
@@ -20,8 +19,19 @@
 --regex-Elixir=/^[ \t]*Record\.defrecord[ \t]+:([a-zA-Z0-9_]+)/\1/r,records,records (defrecord...)/
 --regex-Elixir=/^[ \t]*test[ \t]+\"([a-z_][a-zA-Z0-9_?! ]*)\"*/\1/t,tests,tests (test ...)/
 
+--regex-Ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/c,class,constant/
+--regex-Ruby=/^[ \t]*attr_(reader|writer|accessor) (:[a-z0-9_]+, )*:([a-z0-9_]+)/\3/A,attr/
+
+--langmap=JavaScript:+.jsx
+--regex-JavaScript=/^[ \t]*([A-Z][A-Z0-9._$]+)[ \t]*[=:][ \t]*([0-9"'\[\{]|null)/\1/n,constants/
+--regex-JavaScript=/^[ \t]*([A-Za-z_$][A-Za-z0-9._$]*):.*function[ \t*](.*)[ \t*]{/\1/f,functions/
+--regex-JavaScript=/^[ \t]*([A-Za-z_$][A-Za-z0-9._$]*)[ \t]*(.*)[ \t*]{$/\1/f,functions/
+
+--exclude=node_modules
+--exclude=bower_components
 --exclude=vendor
 --exclude=public
-
+--exclude=dist
+--exclude=*.min.js
+--exclude=tmp
 --recurse=yes
-
