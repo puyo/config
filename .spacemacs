@@ -530,6 +530,7 @@ you should place your code here."
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "node_modules")))
  '(projectile-globally-ignored-files (quote ("TAGS" "tags" ".tern-port")))
+ '(projectile-use-git-grep t)
  '(recentf-exclude
    (quote
     ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")))
