@@ -400,6 +400,7 @@ you should place your code here."
   (global-set-key (kbd "s-p") 'helm-projectile-find-file)
   (global-set-key (kbd "s-{") 'previous-buffer)
   (global-set-key (kbd "s-}") 'next-buffer)
+  (global-set-key (kbd "s-o") 'spacemacs/helm-find-files)
 
   ;; Kill buffer without closing windows
   (defun custom-kill-buffer ()
