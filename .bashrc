@@ -20,7 +20,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
       reset="\[\033[00m\]"
 
       user_and_host='\u@\h'
-      rvm='$([ -f .rvmrc ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
+      rvm='$([ -f .ruby-version ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
       git='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
       dir=' \w'
       date='$(date +%T)'
