@@ -54,9 +54,9 @@ alias make='make -j3' # use more cores
 # ----------------------------------------------------------------------
 # Rails
 
-function rake { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else `which rake` "$@"; fi }
-function rails { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else `which rails` "$@"; fi }
-function rspec { if [ -f './bin/rspec' ]; then ./bin/rspec "$@"; else `which rspec` "$@"; fi }
+function rake { if [ -f './bin/rake' ]; then bundle exec ./bin/rake "$@"; else `which rake` "$@"; fi }
+function rails { if [ -f './bin/rails' ]; then bundle exec ./bin/rails "$@"; else `which rails` "$@"; fi }
+function rspec { if [ -f './bin/rspec' ]; then bundle exec ./bin/rspec "$@"; else `which rspec` "$@"; fi }
 
 # ----------------------------------------------------------------------
 # Git
