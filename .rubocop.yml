@@ -24,3 +24,5 @@ Style/StringLiterals: {Enabled: false}
 Style/TrailingCommaInArguments: {Enabled: false}
 Style/TrailingCommaInLiteral: {Enabled: false}
 Style/WordArray: {Enabled: false}
+Lint/InterpolationCheck: {Enabled: false}
+Layout/IndentHeredoc: {Enabled: false}
