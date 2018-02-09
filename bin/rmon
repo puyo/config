@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'shellwords'
+
 path = ARGV[0] || `v`.split(':').first
 
 def run_test(test_path)
@@ -9,14 +11,19 @@ def run_test(test_path)
          "--watch", ".",
          "--ext", "rb erb haml",
          "--exec", "bundle exec spring rspec --format documentation #{test_path}"]
+  puts Shellwords.join(cmd)
   system(*cmd)
 end
 
 if /_spec\.rb/.match(path)
   run_test(path)
 else
-  test_filename = File.basename(path.gsub(/\.rb$/, '_spec.rb'))
-  test_path = Dir.glob(File.join("**", test_filename)).first
+  if path.match(/\bspec\b|_spec\.rb/)
+    test_path = path
+  else
+    test_filename = File.basename(path.gsub(/\.rb$/, '_spec.rb'))
+    test_path = Dir.glob(File.join("**", test_filename)).first
+  end
   if test_path
     run_test(test_path)
   else
