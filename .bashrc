@@ -21,7 +21,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
         local reset="\[\033[00m\]"
 
         local user_and_host='\u@\h'
-        #local rvm='$([ -f .rvmrc ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
+        #local rvm='$([ -f .ruby-version ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
         local ruby='$(if [ ! -z "$RUBY_VERSION" ]; then echo -n " ruby $RUBY_VERSION"; fi)'
         local git='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
         local dir=' \w'
