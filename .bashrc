@@ -10,25 +10,28 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 
   case "$TERM" in
     xterm*|rxvt*|screen*)
-      red="\[\033[01;31m\]"
-      green="\[\033[01;32m\]"
-      yellow="\[\033[01;33m\]"
-      blue="\[\033[01;34m\]"
-      pink="\[\033[01;35m\]"
-      cyan="\[\033[0;36m\]"
-      gray="\[\033[01;30m\]"
-      reset="\[\033[00m\]"
+      _set_prompt() {
+        local red="\[\033[01;31m\]"
+        local green="\[\033[01;32m\]"
+        local yellow="\[\033[01;33m\]"
+        local blue="\[\033[01;34m\]"
+        local pink="\[\033[01;35m\]"
+        local cyan="\[\033[0;36m\]"
+        local gray="\[\033[01;30m\]"
+        local reset="\[\033[00m\]"
 
-      user_and_host='\u@\h'
-      rvm='$([ -f .rvmrc ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
-      git='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
-      dir=' \w'
-      date='$(date +%T)'
-      PS1="${green}${user_and_host}${cyan}${rvm}${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
-      unset user_and_host rvm git dir date
+        local user_and_host='\u@\h'
+        #local rvm='$([ -f .rvmrc ] && [ $PWD != $HOME ] && echo "" $(~/.rvm/bin/rvm-prompt i v g))'
+        local ruby='$(if [ ! -z "$RUBY_VERSION" ]; then echo -n " ruby $RUBY_VERSION"; fi)'
+        local git='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
+        local dir=' \w'
+        local date='$(date +%T)'
+        PS1="${green}${user_and_host}${cyan}${ruby}${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
 
-      # window title "user@host dir"
-      PS1="\[\e]0;\u@\h \w\a\]$PS1"
+        # add window title "user@host dir"
+        PS1="\[\e]0;\u@\h \w\a\]$PS1"
+      }
+      _set_prompt
     ;;
   esac
 
