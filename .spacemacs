@@ -481,6 +481,7 @@ you should place your code here."
  '(cua-read-only-cursor-color "#859900")
  '(delete-selection-mode t)
  '(evil-ex-search-persistent-highlight nil)
+ '(evil-want-C-i-jump t)
  '(evil-want-Y-yank-to-eol nil)
  '(exec-path-from-shell-check-startup-files nil)
  '(flycheck-elixir-credo-strict t)
