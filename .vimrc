@@ -101,6 +101,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'idris-hackers/idris-vim'
 " Mustache/handlebars
 Plug 'mustache/vim-mustache-handlebars'
+" Elm
+Plug 'elmcast/elm-vim'
 call plug#end()
 " }
 
