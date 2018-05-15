@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'shellwords'
+
 path = ARGV[0] || `v`.split(':').first
 
 def run_test(test_path)
@@ -12,6 +14,7 @@ def run_test(test_path)
          "--watch", ".",
          "--ext", "ex exs",
          "--exec", "mix test #{test_path}"]
+  puts Shellwords.join(cmd)
   system(*cmd)
 end
 
