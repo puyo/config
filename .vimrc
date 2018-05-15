@@ -19,8 +19,6 @@ Plug 'depuracao/vim-rdoc'
 Plug 'ervandew/supertab'
 " :W! to sudo write
 Plug 'gmarik/sudo-gui.vim'
-" align code. e.g. :Tabularize / ,
-Plug 'godlygeek/tabular'
 " allows custom text objects
 Plug 'kana/vim-textobj-user'
 " .coffee syntax highlighting
@@ -103,6 +101,8 @@ Plug 'idris-hackers/idris-vim'
 Plug 'mustache/vim-mustache-handlebars'
 " Elm
 Plug 'elmcast/elm-vim'
+" Align stuff
+Plug 'junegunn/vim-easy-align'
 call plug#end()
 " }
 
@@ -379,19 +379,6 @@ imap <M-h> <C-o><<
 imap <M-l> <C-o>>>
 vmap <M-h> <gv
 vmap <M-l> >gv
-" }
-
-" Tabularize {
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
 
 " }
