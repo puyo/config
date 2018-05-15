@@ -1,17 +1,17 @@
-AllCops: {TargetRubyVersion: 2.4}
-
 Layout/DotPosition: {Enabled: false}
+Layout/IndentHeredoc: {Enabled: false}
 Layout/MultilineMethodCallIndentation: {Enabled: false}
 Layout/SpaceBeforeBlockBraces: {Enabled: false}
 Layout/SpaceInLambdaLiteral: {Enabled: false}
 Layout/SpaceInsideBlockBraces: {Enabled: false}
-Layout/SpaceInsideBrackets: {Enabled: false}
 Lint/AssignmentInCondition: {Enabled: false}
+Lint/InterpolationCheck: {Enabled: false}
 Metrics/BlockLength: {Enabled: false}
 Metrics/ClassLength: {Enabled: false}
 Metrics/LineLength: {Enabled: false}
 Metrics/MethodLength: {Enabled: false}
 Style/BlockDelimiters: {Enabled: false}
+Style/BracesAroundHashParameters: {Enabled: false}
 Style/Documentation: {Enabled: false}
 Style/FrozenStringLiteralComment: {Enabled: false}
 Style/GuardClause: {Enabled: false}
@@ -24,5 +24,3 @@ Style/StringLiterals: {Enabled: false}
 Style/TrailingCommaInArguments: {Enabled: false}
 Style/TrailingCommaInLiteral: {Enabled: false}
 Style/WordArray: {Enabled: false}
-Lint/InterpolationCheck: {Enabled: false}
-Layout/IndentHeredoc: {Enabled: false}
