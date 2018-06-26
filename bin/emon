@@ -8,6 +8,8 @@ def run_test(test_path)
   test_path = test_path.sub(/.*apps\/.*?\//, "") # account for umbrella apps
   cmd = ["nodemon",
          "--verbose",
+         "--ignore", "TAGS",
+         "--ignore", "tags",
          "--ignore", "erl_crash.dump",
          "--ignore", "deps",
          "--ignore", "_build",
