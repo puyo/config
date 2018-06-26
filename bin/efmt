@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec ~/projects/vendor/elixir/bin/elixir ~/projects/vendor/elixir/bin/mix format "$@"
