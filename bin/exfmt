@@ -5,23 +5,87 @@
 
 ENV['ASDF_ELIXIR_VERSION'] = '1.6.6'
 
-if ARGV.empty?
-  input = ARGF.read
+module Exfmt
+  def self.format(input, output_stream)
+    leading = input.match(/\A(^\s*\n)*/m).captures.first || ''
+    indent = input.match(/([ \t]*)\S/).captures.first
+    trailing = input.match(/(^\s*\n)*\Z/m).captures.first || ''
 
-  leading = input.match(/\A(^\s+\n)*/m).captures.first
-  indent = input.match(/([ \t]*)\S/).captures.first
-  trailing = input.match(/(^\s+\n)*\Z/m).captures.first
+    leading.each_line { output_stream.print "\n" }
+    IO.popen(['mix', 'format', '-'], 'r+') do |pipe|
+      pipe.print input
+      pipe.close_write
+      pipe.each_line do |line|
+        output_stream.print indent if line.strip != ''
+        output_stream.print line
+      end
+    end
+    trailing.each_line { output_stream.print "\n" }
+  end
+end
 
-  leading.each_line { print "\n" }
-  IO.popen(['mix', 'format', '-'], 'r+') do |pipe|
-    pipe.print input
-    pipe.close_write
-    pipe.readlines.each do |line|
-      $stdout.print indent if line.strip != ''
-      $stdout.print line
+if ARGV.first == '--test'
+  require 'minitest/autorun'
+  require 'minitest/pride'
+  require 'stringio'
+
+  ARGV.shift
+
+  class TestMeme < Minitest::Test
+    def test_complex_simple
+      input = <<-ELIXIR
+        {:ok, _} = @client.create_matches([%{student: student, ext_student: ext_student}], school, :student_matches)
+      ELIXIR
+      expected = <<-ELIXIR
+        {:ok, _} =
+          @client.create_matches(
+            [%{student: student, ext_student: ext_student}],
+            school,
+            :student_matches
+          )
+      ELIXIR
+      output_stream = StringIO.new
+      Exfmt.format(input, output_stream)
+      assert_equal expected, output_stream.string
+    end
+
+    def test_complex_example
+      input = <<-ELIXIR
+
+        with {:ok, school} <- @client.get_school(:ext, object[:school]),
+            student_attributes <- map.put(student_attributes, :"school-id", school.id),
+            {:ok, student} <- @client.create_student(student_attributes),
+            {:ok, _} <- @client.create_matches([%{student: student, ext_student: ext_student}], school, :student_matches) do
+          :ok
+        end
+
+
+      ELIXIR
+      expected = <<-ELIXIR
+
+        with {:ok, school} <- @client.get_school(:ext, object[:school]),
+             student_attributes <- map.put(student_attributes, :"school-id", school.id),
+             {:ok, student} <- @client.create_student(student_attributes),
+             {:ok, _} <-
+               @client.create_matches(
+                 [%{student: student, ext_student: ext_student}],
+                 school,
+                 :student_matches
+               ) do
+          :ok
+        end
+
+
+      ELIXIR
+      output_stream = StringIO.new
+      Exfmt.format(input, output_stream)
+      assert_equal expected, output_stream.string
     end
   end
-  trailing.each_line { print "\n" }
+
+  exit 0
+elsif ARGV.empty?
+  Exfmt.format(ARGF.read, $stdout)
 else
   exec('mix', 'format', *ARGV)
 end
