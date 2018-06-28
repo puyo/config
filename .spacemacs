@@ -331,6 +331,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (dotspacemacs/user-init-fix-m-backspace)
   (dotspacemacs/user-init-evil-move-region)
   (dotspacemacs/user-init-window-size)
   (dotspacemacs/user-init-spelling)
@@ -342,6 +343,24 @@ you should place your code here."
   (dotspacemacs/user-init-js)
   (dotspacemacs/user-init-elixir-max-line-length)
   )
+
+(defun delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (if (use-region-p)
+      (delete-region (region-beginning) (region-end))
+    (delete-region (point) (progn (forward-word arg) (point)))))
+
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-word (- arg)))
+
+(defun dotspacemacs/user-init-fix-m-backspace ()
+  "From https://www.emacswiki.org/emacs/BackwardDeleteWord"
+  (global-set-key (read-kbd-macro "<M-DEL>") 'backward-delete-word))
 
 (defun dotspacemacs/user-init-elixir-max-line-length ()
   (add-hook 'elixir-mode-hook
