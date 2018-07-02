@@ -68,7 +68,7 @@ if ARGV.first == '--test'
 
   ARGV.shift
 
-  class TestMeme < Minitest::Test
+  class TestExfmt < Minitest::Test
     def test_complex_simple
       input = <<-ELIXIR
         {:ok, _} = @client.create_matches([%{student: student, ext_student: ext_student}], school, :student_matches)
