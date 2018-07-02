@@ -37,7 +37,7 @@ module Exfmt
         pipe.print input
         pipe.close_write
         pipe.each_line do |line|
-          output_stream.print indent if line != ''
+          output_stream.print indent if line.strip != ''
           output_stream.print line
         end
       end
