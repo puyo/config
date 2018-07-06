@@ -15,7 +15,7 @@ def run_test(test_path)
          "--ignore", "**/_build",
          "--watch", ".",
          "--ext", "ex exs",
-         "--exec", "mix test #{test_path}"]
+         "--exec", "mix test --color #{test_path}"]
   cmd_s = Shellwords.join(cmd)
   cmd_s = "(#{cmd_s} 2>&1) | grep -E -v '(^Test patterns did not match|^==>)'"
   puts cmd_s
