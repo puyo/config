@@ -508,6 +508,7 @@ With argument, do this that many times."
  '(flyspell-persistent-highlight nil)
  '(global-linum-mode t)
  '(global-vi-tilde-fringe-mode nil)
+ '(helm-adaptive-sort-by-frequent-recent-usage nil)
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-symbol-colors
    (--map
