@@ -3,13 +3,15 @@
 # Wraps around Elixir 1.6 `mix format -` to preserve leading space, so I can run
 # :!exfmt in Vim or Spacemacs to format highlighted Elixir code.
 
+require 'tmpdir'
+
 ENV['ASDF_ELIXIR_VERSION'] = '1.6.6'
 ENV['MIX_QUIET'] = '1'
 
 module Exfmt
   class << self
     def format(input, output_stream)
-      format_fork(input, 120, output_stream)
+      format_asdf(input, 120, output_stream)
     end
 
     private
@@ -18,9 +20,7 @@ module Exfmt
       project = File.join(ENV['HOME'], 'projects', 'elixir')
       elixir = File.join(project, 'bin', 'elixir')
       mix = File.join(project, 'bin', 'mix')
-      indent_length = indent(input).chars.size
-      effective_line_length = line_length - indent_length
-      File.open('.formatter.exs', 'w') { |f| f.puts "[line_length: #{effective_line_length.to_i}]" }
+      write_formatter_exs(input, line_length)
       IO.popen([elixir, mix, 'format', '-'], 'r+') do |pipe|
         pipe.print input
         pipe.close_write
@@ -30,20 +30,21 @@ module Exfmt
       end
     end
 
-    # todo: support line_length
-
-    def format_asdf(input, _line_length, output_stream)
+    def format_asdf(input, line_length, output_stream)
       leading = leading(input)
       indent = indent(input)
       trailing = trailing(input)
 
       output_stream.print leading
-      IO.popen(['mix', 'format', '-'], 'r+') do |pipe|
-        pipe.print input
-        pipe.close_write
-        pipe.each_line do |line|
-          output_stream.print indent if line.strip != ''
-          output_stream.print line
+      in_temp_dir do
+        write_formatter_exs(input, line_length)
+        IO.popen(['mix', 'format', '-'], 'r+') do |pipe|
+          pipe.print input
+          pipe.close_write
+          pipe.each_line do |line|
+            output_stream.print indent if line.strip != ''
+            output_stream.print line
+          end
         end
       end
       output_stream.print trailing
@@ -62,6 +63,19 @@ module Exfmt
     def indent(input)
       m = input.match(/([ \t]*)\S/)
       m && m.captures.first || ''
+    end
+
+    def effective_line_length(input, line_length)
+      indent_length = indent(input).chars.size
+      line_length.to_i - indent_length
+    end
+
+    def write_formatter_exs(input, line_length)
+      File.open('.formatter.exs', 'w') { |f| f.puts "[line_length: #{effective_line_length(input, line_length)}]" }
+    end
+
+    def in_temp_dir(&block)
+      Dir.mktmpdir { |dir| Dir.chdir(dir, &block) }
     end
   end
 end
