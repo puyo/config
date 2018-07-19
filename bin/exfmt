@@ -9,15 +9,18 @@ ENV['MIX_QUIET'] = '1'
 module Exfmt
   class << self
     def format(input, output_stream)
-      format_asdf(input, output_stream)
+      format_fork(input, 120, output_stream)
     end
 
     private
 
-    def format_fork(input, output_stream)
+    def format_fork(input, line_length, output_stream)
       project = File.join(ENV['HOME'], 'projects', 'elixir')
       elixir = File.join(project, 'bin', 'elixir')
       mix = File.join(project, 'bin', 'mix')
+      indent_length = indent(input).chars.size
+      effective_line_length = line_length - indent_length
+      File.open('.formatter.exs', 'w') { |f| f.puts "[line_length: #{effective_line_length.to_i}]" }
       IO.popen([elixir, mix, 'format', '-'], 'r+') do |pipe|
         pipe.print input
         pipe.close_write
@@ -27,7 +30,9 @@ module Exfmt
       end
     end
 
-    def format_asdf(input, output_stream)
+    # todo: support line_length
+
+    def format_asdf(input, _line_length, output_stream)
       leading = leading(input)
       indent = indent(input)
       trailing = trailing(input)
@@ -71,14 +76,15 @@ if ARGV.first == '--test'
   class TestExfmt < Minitest::Test
     def test_complex_simple
       input = <<-ELIXIR
-        {:ok, _} = @client.create_matches([%{student: student, ext_student: ext_student}], school, :student_matches)
+        {:ok, _} = @client.create_matches([%{student: student, ext_student: ext_student}], school, :student_matches, :something_really_long)
       ELIXIR
       expected = <<-ELIXIR
         {:ok, _} =
           @client.create_matches(
             [%{student: student, ext_student: ext_student}],
             school,
-            :student_matches
+            :student_matches,
+            :something_really_long
           )
       ELIXIR
       output_stream = StringIO.new
@@ -104,16 +110,13 @@ if ARGV.first == '--test'
              student_attributes <- map.put(student_attributes, :"school-id", school.id),
              {:ok, student} <- @client.create_student(student_attributes),
              {:ok, _} <-
-               @client.create_matches(
-                 [%{student: student, ext_student: ext_student}],
-                 school,
-                 :student_matches
-               ) do
+               @client.create_matches([%{student: student, ext_student: ext_student}], school, :student_matches) do
           :ok
         end
 
 
       ELIXIR
+
       output_stream = StringIO.new
       Exfmt.format(input, output_stream)
       assert_equal expected, output_stream.string
