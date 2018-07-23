@@ -11,8 +11,9 @@ def run_test(test_path)
          "--ignore", "**/TAGS",
          "--ignore", "**/tags",
          "--ignore", "**/*.dump",
-         "--ignore", "**/deps",
-         "--ignore", "**/_build",
+         "--ignore", "**/*.beam",
+         "--ignore", "**/deps/**/*",
+         "--ignore", "**/_build/**/*",
          "--watch", ".",
          "--ext", "ex exs",
          "--exec", "mix test --color #{test_path}"]
