@@ -64,7 +64,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode)
+   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -342,24 +342,26 @@ you should place your code here."
   (dotspacemacs/user-init-elixir)
   (dotspacemacs/user-init-js)
   (dotspacemacs/user-init-elixir-max-line-length)
+  (dotspacemacs/user-init-sonic-pi)
   )
-
-(defun delete-word (arg)
-  "Delete characters forward until encountering the end of a word.
-With argument, do this that many times."
-  (interactive "p")
-  (if (use-region-p)
-      (delete-region (region-beginning) (region-end))
-    (delete-region (point) (progn (forward-word arg) (point)))))
-
-(defun backward-delete-word (arg)
-  "Delete characters backward until encountering the end of a word.
-With argument, do this that many times."
-  (interactive "p")
-  (delete-word (- arg)))
 
 (defun dotspacemacs/user-init-fix-m-backspace ()
   "From https://www.emacswiki.org/emacs/BackwardDeleteWord"
+
+  (defun delete-word (arg)
+    "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+    (interactive "p")
+    (if (use-region-p)
+        (delete-region (region-beginning) (region-end))
+      (delete-region (point) (progn (forward-word arg) (point)))))
+
+  (defun backward-delete-word (arg)
+    "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+    (interactive "p")
+    (delete-word (- arg)))
+
   (global-set-key (read-kbd-macro "<M-DEL>") 'backward-delete-word))
 
 (defun dotspacemacs/user-init-elixir-max-line-length ()
@@ -481,6 +483,29 @@ With argument, do this that many times."
   (add-to-list 'flycheck-checkers 'javascript-flow)
   )
 
+(defun dotspacemacs/user-init-sonic-pi ()
+  (require 'sonic-pi)
+
+  (setq sonic-pi-path "/Applications/Sonic Pi.app/app")
+  (setq sonic-pi-server-bin             "server/ruby/bin/sonic-pi-server.rb")
+  (setq sonic-pi-compile-extensions-bin "server/ruby/bin/compile-extensions.rb")
+  (setq sonic-pi-ruby-bin               "server/native/ruby/bin/ruby")
+  (defun sonic-pi-server-cmd () (format "%s/%s %s/%s" sonic-pi-path sonic-pi-ruby-bin sonic-pi-path sonic-pi-server-bin))
+
+  (add-hook 'sonic-pi-mode-hook
+            (lambda ()
+
+              (add-hook 'after-save-hook 'sonic-pi-send-buffer nil t)
+
+              (define-key ruby-mode-map (kbd "<s-return>") 'sonic-pi-send-buffer)
+              (define-key ruby-mode-map (kbd "s-.") 'sonic-pi-stop-all)
+
+              (sonic-pi-connect)
+
+              (load-theme 'spacemacs-dark)
+              ))
+  )
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -499,6 +524,9 @@ With argument, do this that many times."
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   (quote
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(delete-selection-mode t)
  '(evil-ex-search-persistent-highlight nil)
  '(evil-want-C-i-jump t)
@@ -545,7 +573,7 @@ With argument, do this that many times."
  '(ns-pop-up-frames nil)
  '(package-selected-packages
    (quote
-    (csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-plus-contrib org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash orgit open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+    (osc sonic-pi counsel-dash xpm csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-plus-contrib org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash orgit open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
  '(paradox-github-token t)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
