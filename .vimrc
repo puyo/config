@@ -8,101 +8,119 @@ set nocompatible " improved!
 call plug#begin('~/.vim/plugged')
 
 " Plug {
-"
-" colour scheme
+
+" colour schemes
 Plug 'chriskempson/base16-vim'
-" colour scheme
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'tomasr/molokai'
+Plug 'zefei/cake16'
+
+Plug 'puyo/vim-colors-pencil-warm'
+
 " .rdoc syntax highlighting
 Plug 'depuracao/vim-rdoc'
+
 " press <Tab> to complete the current word
 Plug 'ervandew/supertab'
+
 " :W! to sudo write
 Plug 'gmarik/sudo-gui.vim'
+
 " allows custom text objects
 Plug 'kana/vim-textobj-user'
-" .coffee syntax highlighting
-Plug 'kchmck/vim-coffee-script'
+
 " jump to files: in directory tree, most-recently-used, open buffers
 Plug 'kien/ctrlp.vim'
+
 " 'i' is a text object that selects the current indentation level. e.g. vii
 Plug 'michaeljsmith/vim-indent-object'
+
 " 'r' is a text object that selects the current Ruby structure. e.g. vir
 Plug 'nelstrom/vim-textobj-rubyblock'
-" .feature syntax highlighting
-Plug 'puyo/vim-cucumber'
-" .haml syntax highlighting
-Plug 'puyo/vim-haml'
+
+" File types
+Plug 'digitaltoad/vim-jade'             " .jade
+Plug 'elixir-lang/vim-elixir'           " .ex, exs
+Plug 'elmcast/elm-vim'                  " .elm
+Plug 'idris-hackers/idris-vim'          " .idr
+Plug 'kchmck/vim-coffee-script'         " .coffee
+Plug 'leafgarland/typescript-vim'       " .ts
+Plug 'mustache/vim-mustache-handlebars' " .hbr
+Plug 'pangloss/vim-javascript'          " .js
+Plug 'puyo/vim-cucumber'                " .feature
+Plug 'puyo/vim-haml'                    " .haml
+Plug 'slashmili/alchemist.vim'          " .ex, .exs
+Plug 'tpope/vim-rails'                  " .rb, .erb
+Plug 'wavded/vim-stylus'                " .stylus
+Plug 'wting/rust.vim'                   " .rs
+
 " kill buffers without closing their window
 Plug 'rgarver/Kwbd.vim'
-" colour scheme
-Plug 'tomasr/molokai'
+
 " gc to toggle comments
 Plug 'tpope/vim-commentary'
-" tmux integration for running tests
-Plug 'tpope/vim-dispatch'
+
 " UNIX commands :Unlink :Remove :Move :Chmod :Find :Locate :SudoWrite :W
 Plug 'tpope/vim-eunuch'
+
 " Git commands :Ggrep
 Plug 'tpope/vim-fugitive'
+
 " GitHub commands :Gbrowse
 Plug 'tpope/vim-rhubarb'
+
 " .md syntax highlighting
 Plug 'tpope/vim-markdown'
-" Rails project mode
-Plug 'tpope/vim-rails'
+
 " press . to repeat more sophisticated things
 Plug 'tpope/vim-repeat'
+
 " Edit quotes and brackets more easily
 Plug 'tpope/vim-surround'
+
 " press % to jump between Ruby keywords. e.g. do and end
 Plug 'vim-scripts/matchit.zip'
-" :A to jump to the 'alternative' file
-Plug 'vim-scripts/a.vim'
-" For running rspecs
-Plug 'thoughtbot/vim-rspec'
-" Rust mode
-Plug 'wting/rust.vim'
-" Elixir mode
-Plug 'elixir-lang/vim-elixir'
+
 " Emmet
 Plug 'mattn/emmet-vim'
-" Argumentative
+
+" Argument text objects - ia, aa
 Plug 'wellle/targets.vim'
-" Jade
-Plug 'digitaltoad/vim-jade'
-" Stylus
-Plug 'wavded/vim-stylus'
-" Javascript (more modern JS syntax like backticks)
-Plug 'pangloss/vim-javascript'
+
 " Use .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
+
 " Status line
 Plug 'vim-airline/vim-airline'
+
 " Status line themes
 Plug 'vim-airline/vim-airline-themes'
+
 " Exchange text objects
 Plug 'tommcdo/vim-exchange'
+
 " Manipulate function arguments
-Plug 'PeterRincker/vim-argumentative'
+" Plug 'PeterRincker/vim-argumentative'
+
 " Find project root and auto change directory to it
-Plug 'airblade/vim-rooter'
-" Theme
-Plug 'colepeters/spacemacs-theme.vim'
+" Plug 'airblade/vim-rooter'
+
 " Version of :%s that previews that changes that will be made
 Plug 'osyo-manga/vim-over'
+
 " Async lint engine
 Plug 'w0rp/ale'
-" Typescript
-Plug 'leafgarland/typescript-vim'
-" Idris
-Plug 'idris-hackers/idris-vim'
-" Mustache/handlebars
-Plug 'mustache/vim-mustache-handlebars'
-" Elm
-Plug 'elmcast/elm-vim'
+
 " Align stuff
 Plug 'junegunn/vim-easy-align'
+
+" Cycle themes
+Plug 'vim-scripts/CycleColor'
+
+" Project mode
+Plug 'tpope/vim-projectionist'
+
 call plug#end()
 " }
 
@@ -170,11 +188,21 @@ if has("termguicolors")
 endif
 
 if has("gui")
-  colorscheme spacemacs-theme
-  set background=dark
+  " colorscheme spacemacs-theme
+  let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
+  let g:airline_theme = 'pencil'
+
+  set background=light
+
+  colorscheme pencil-warm
+
+  hi! link elixirStringDelimiter  String
+  hi! link elixirAtom             Symbol
 else
-  colorscheme molokai
+  set background=dark
+  colorscheme pencil-warm
 endif
+
 
 set synmaxcol=200 " faster syntax highlighting
 set clipboard+=unnamed " share windows clipboard
@@ -314,6 +342,10 @@ vmap " hS"
 vmap ' hS'
 vmap ) hS)
 vmap ( hS)
+
+let g:surround_37 = "%{\r}"
+let g:surround_109 = "%{\r}"
+
 " }
 
 " use ; instead of : because it is quicker
@@ -397,6 +429,43 @@ augroup BWCCreateDir
 autocmd!
 autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
+" }
+
+" Projectionist {
+let g:projectionist_heuristics = {
+\  "web/router.ex": {
+\    "web/controllers/*_controller.ex": {
+\      "type": "controller",
+\      "alternate": "test/controllers/{}_controller_test.exs",
+\    },
+\    "web/models/*.ex": {
+\      "type": "model",
+\      "alternate": "test/models/{}_test.exs",
+\    },
+\    "web/views/*_view.ex": {
+\      "type": "view",
+\      "alternate": "test/views/{}_view_test.exs",
+\    },
+\    "web/templates/*.html.eex": {
+\      "type": "template",
+\      "alternate": "web/views/{dirname|basename}_view.ex"
+\    },
+\    "test/*_test.exs": {
+\      "type": "test",
+\      "alternate": "web/{}.ex",
+\    }
+\  },
+\  "mix.exs": {
+\    "lib/*.ex": { "alternate": "test/{}_test.exs" },
+\    "test/*_test.exs": { "alternate": "lib/{}.ex" }
+\  }
+\}
+noremap <leader>ec :Econtroller<Space>
+noremap <leader>em :Emodel<Space>
+noremap <leader>et :Etemplate<Space>
+noremap <leader>eT :Etest<Space>
+noremap <leader>ev :Eview<Space>
+noremap <leader>a  :A<CR>
 " }
 
 " Ale config {
