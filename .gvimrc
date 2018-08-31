@@ -13,7 +13,7 @@ if has("gui_macvim")
     \ <C-R>=
     \ substitute(expand("%:p:h"), ' ', '\\ ', 'g')
     \ .'/'<CR><BS>/
-  set guifont=Menlo\ Regular:h12
+  set guifont=Menlo\ Regular:h13
   set fuoptions+=maxhorz " full screen options on mac
   set macmeta " option key works as M- key modifier
 endif
