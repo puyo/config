@@ -100,11 +100,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Exchange text objects
 Plug 'tommcdo/vim-exchange'
 
-" Manipulate function arguments
-" Plug 'PeterRincker/vim-argumentative'
-
 " Find project root and auto change directory to it
-" Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-rooter'
 
 " Version of :%s that previews that changes that will be made
 Plug 'osyo-manga/vim-over'
@@ -468,7 +465,7 @@ noremap <leader>ev :Eview<Space>
 noremap <leader>a  :A<CR>
 " }
 
-" Ale config {
+" Ale {
 let g:ale_sign_column_always = 1
 
 " " Be strict please Credo
