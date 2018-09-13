@@ -31,14 +31,14 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
      auto-completion
+     csv
+     docker
      elixir
      elm
      emacs-lisp
      erlang
      evil-commentary
-     docker
      git
      github
      go
@@ -47,6 +47,7 @@ values."
      html
      idris
      javascript
+     markdown
      markdown
      osx
      python
@@ -64,7 +65,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi)
+   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi tabbar)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -310,7 +311,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
   ;; Make _ a word character so long_identifier is one word
   (with-eval-after-load 'evil
     (defalias #'forward-evil-word #'forward-evil-symbol))
@@ -331,6 +331,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+
+  (dotspacemacs/user-init-tabbar)
   (dotspacemacs/user-init-fix-m-backspace)
   (dotspacemacs/user-init-evil-move-region)
   (dotspacemacs/user-init-window-size)
@@ -343,6 +345,41 @@ you should place your code here."
   (dotspacemacs/user-init-js)
   (dotspacemacs/user-init-elixir-max-line-length)
   (dotspacemacs/user-init-sonic-pi)
+  (dotspacemacs/user-init-add-buffer-switches-to-recentf)
+  )
+
+(defun dotspacemacs/user-init-tabbar ()
+  (require 'tabbar)
+  (tabbar-mode)
+
+  (defun tabbar-buffer-groups ()
+    (list
+     (cond
+      ((string-equal "*" (substring (buffer-name) 0 1))
+       "Emacs"
+       )
+      ((string-equal " *" (substring (buffer-name) 0 2))
+       "Emacs"
+       )
+      ((member (buffer-name) '("tags" "TAGS"))
+       "Emacs"
+       )
+      (t
+       "User"
+       )
+      )))
+
+  (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+  )
+
+(defun dotspacemacs/user-init-add-buffer-switches-to-recentf ()
+  (require 'recentf-mode)
+
+  (defun switched-buffer ()
+    (recentf-track-opened-file)
+    )
+
+  (add-hook 'buffer-list-update-hook 'switched-buffer)
   )
 
 (defun dotspacemacs/user-init-fix-m-backspace ()
@@ -420,8 +457,8 @@ With argument, do this that many times."
   (global-set-key (kbd "s-b") 'helm-buffers-list)
   (global-set-key (kbd "s-t") 'helm-projectile-find-file)
   (global-set-key (kbd "s-p") 'helm-projectile-find-file)
-  (global-set-key (kbd "s-{") 'previous-buffer)
-  (global-set-key (kbd "s-}") 'next-buffer)
+  (global-set-key (kbd "s-{") 'tabbar-backward)
+  (global-set-key (kbd "s-}") 'tabbar-forward)
   (global-set-key (kbd "s-o") 'spacemacs/helm-find-files)
 
   ;; Kill buffer without closing windows
@@ -604,6 +641,10 @@ With argument, do this that many times."
  '(ring-bell-function (quote ignore))
  '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(tabbar-background-color "#e1dfd7")
+ '(tabbar-mwheel-mode nil)
+ '(tabbar-separator (quote (" ")))
+ '(tabbar-use-images nil)
  '(tags-add-tables nil)
  '(tags-case-fold-search nil)
  '(tags-revert-without-query t)
@@ -651,4 +692,10 @@ With argument, do this that many times."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight normal :height 150 :width normal)))))
+ '(tabbar-button ((t (:inherit tabbar-default :box nil))))
+ '(tabbar-default ((t (:background "#e1dfd7" :foreground "#3a81c3"))))
+ '(tabbar-modified ((t (:inherit tabbar-default :foreground "green3"))))
+ '(tabbar-selected ((t (:inherit tabbar-default :background "#fbf8ef" :foreground "blue" :weight normal))))
+ '(tabbar-selected-modified ((t (:inherit tabbar-selected :foreground "green3"))))
+ '(tabbar-unselected ((t (:inherit tabbar-default :background "#e1dfd7" :slant normal :weight light)))))
+
