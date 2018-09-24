@@ -43,7 +43,7 @@
 	cop = checkout -p
 
 	# list branches sorted by last modified
-	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname:short)' refs/heads"
 
 	# list aliases
 	la = "!git config -l | grep alias | cut -c 7-"
@@ -51,6 +51,7 @@
 	cb = rev-parse --symbolic-full-name --abbrev-ref HEAD
 	gp = !git push --set-upstream origin HEAD:$(git cb)
 	gup = !git fetch --prune origin && git rebase -p origin/$(git cb)
+
 [diff]
 	tool = diffmerge
 [difftool "diffmerge"]
