@@ -1,0 +1,17 @@
+#!/bin/bash
+
+OSX_PATH=/Applications/VLC.app/Contents/MacOS/VLC
+
+if [ -x "${OSX_PATH}" ]; then
+  VLC="${OSX_PATH}"
+else
+  VLC=vlc
+fi
+
+ARGS="$@"
+
+if [ -z "${ARGS}" ]; then
+  ARGS=`pbpaste`
+fi
+
+exec youtube-dl -o - "${ARGS}" | "${VLC}" -
