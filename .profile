@@ -75,7 +75,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     export PATH="$PATH:`yarn global bin --offline`" # yarn
 
     # --------------------------------------------------
-    # asdf (Elixir)
+    # asdf (Elixir, Ruby, Erlang)
 
     if [ -d "$HOME/.asdf" ]; then
         source $HOME/.asdf/asdf.sh
