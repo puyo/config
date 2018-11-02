@@ -52,11 +52,13 @@ alias less='less -R' # deal with colours
 alias make='make -j3' # use more cores
 
 # ----------------------------------------------------------------------
-# Rails
+# Ruby
 
 function rake { if [ -f './bin/rake' ]; then bundle exec ./bin/rake "$@"; else `which rake` "$@"; fi }
 function rails { if [ -f './bin/rails' ]; then bundle exec ./bin/rails "$@"; else `which rails` "$@"; fi }
 function rspec { if [ -f './bin/rspec' ]; then bundle exec ./bin/rspec "$@"; else `which rspec` "$@"; fi }
+
+alias be='bundle exec'
 
 # ----------------------------------------------------------------------
 # Git
@@ -85,12 +87,12 @@ function extract_dat {
 # ----------------------------------------------------------------------
 # Cataclysm DDA
 
-#catasrc=~/Library/Application\ Support/Cataclysm/save/
-catasrc=/usr/local/Cellar/cataclysm/*/libexec/save/
+catasrc="$HOME/Library/Application Support/Cataclysm/save/"
+#catasrc=/usr/local/Cellar/cataclysm/*/libexec/save/
 catabkp=~/.catabackup/
 function catabackup  {
-    rsync -rvah ${catasrc} ${catabkp}
+    rsync -rvah "${catasrc}" "${catabkp}"
 }
 function catarestore {
-    rsync -rvah ${catabkp} ${catasrc}
+    rsync -rvah "${catabkp}" "${catasrc}"
 }
