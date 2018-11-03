@@ -16,6 +16,11 @@
 
 require 'open3'
 
+ENV['GEM_HOME'] = nil
+ENV['GEM_PATH'] = nil
+ENV['GEM_ROOT'] = nil
+ENV['RUBY_VERSION'] = nil
+
 emacs = '/usr/local/bin/emacs'
 emacsclient = '/usr/local/bin/emacsclient'
 
