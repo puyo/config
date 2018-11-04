@@ -47,9 +47,12 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
 
   autoload -Uz compinit && compinit
 
-  user_sources=(.bash_aliases)
+  # user_sources=(.bash_aliases)
 
-  for file in "${user_sources[@]}"; do
-    [ -f "$HOME/$file" ] && source "$HOME/$file"
-  done
+  # for file in "${user_sources[@]}"; do
+  #   [ -f "$HOME/$file" ] && source "$HOME/$file"
+  # done
 fi
+
+source $HOME/.asdf/asdf.sh
+source $HOME/.asdf/completions/asdf.bash
