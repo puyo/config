@@ -50,3 +50,10 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     [ -f "$HOME/$file" ] && source "$HOME/$file"
   done
 fi
+
+if [ -d "$HOME/.asdf" ]; then
+  source $HOME/.asdf/asdf.sh
+  source $HOME/.asdf/completions/asdf.bash
+fi
+
+# export PATH=$PATH:/Users/greg/Blake/bs/bin/
