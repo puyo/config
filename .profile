@@ -4,6 +4,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     # --------------------------------------------------
     # $PATH
     paths="
+    $HOME/.cargo/bin \
     /usr/local/share/npm/bin \
     /usr/X11/bin \
     $HOME/bin \
