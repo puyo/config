@@ -54,6 +54,7 @@ values."
      react
      ruby
      ruby-on-rails
+     rust
      spell-checking
      sql
      syntax-checking
@@ -602,6 +603,7 @@ With argument, do this that many times."
  '(evil-want-C-i-jump t)
  '(evil-want-Y-yank-to-eol nil)
  '(exec-path-from-shell-check-startup-files nil)
+ '(flycheck-disabled-checkers (quote (rust rust-cargo)))
  '(flycheck-elixir-credo-strict t)
  '(flyspell-persistent-highlight nil)
  '(global-linum-mode t)
@@ -656,10 +658,10 @@ With argument, do this that many times."
    (quote
     ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")))
  '(ring-bell-function (quote ignore))
+ '(rust-format-on-save t)
  '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(tabbar-background-color "#e1dfd7")
- '(tabbar-mwheel-mode nil)
  '(tabbar-separator (quote (" ")))
  '(tabbar-use-images nil)
  '(tags-add-tables nil)
@@ -668,7 +670,6 @@ With argument, do this that many times."
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(tooltip-delay 0.1)
- '(tooltip-mode t)
  '(tooltip-short-delay 0)
  '(typescript-indent-level 2)
  '(vc-annotate-background "#2B2B2B")
