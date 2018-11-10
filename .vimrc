@@ -118,6 +118,9 @@ Plug 'vim-scripts/CycleColor'
 " Project mode
 Plug 'tpope/vim-projectionist'
 
+" Haskell
+Plug 'dag/vim2hs'
+
 call plug#end()
 " }
 
