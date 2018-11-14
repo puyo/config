@@ -121,6 +121,9 @@ Plug 'tpope/vim-projectionist'
 " Haskell
 Plug 'dag/vim2hs'
 
+" AsyncRun ...
+Plug 'skywind3000/asyncrun.vim'
+
 call plug#end()
 " }
 
@@ -487,4 +490,8 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:haskell_conceal = 0
 
+" }
+
+" AsyncRun {
+let g:asyncrun_open = 20 " height of quickfix window
 " }

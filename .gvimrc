@@ -3,6 +3,7 @@ if has("gui_macvim")
   macmenu &File.Open\.\.\. key=<nop>
   macmenu &File.Close key=<nop>
   macmenu &File.Print key=<nop>
+  macmenu &Edit.Find.Find\ Next key=<nop>
   macmenu &Tools.Make key=<nop>
   nnoremap <D-w> :silent Kwbd<CR>
   nnoremap <D-p> :CtrlP<CR>
@@ -13,6 +14,7 @@ if has("gui_macvim")
     \ <C-R>=
     \ substitute(expand("%:p:h"), ' ', '\\ ', 'g')
     \ .'/'<CR><BS>/
+  nnoremap <D-g> :AsyncRun git grep -n<Space>
   set guifont=Menlo\ Regular:h13
   set fuoptions+=maxhorz " full screen options on mac
   set macmeta " option key works as M- key modifier
