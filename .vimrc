@@ -53,7 +53,7 @@ Plug 'puyo/vim-haml'                    " .haml
 Plug 'slashmili/alchemist.vim'          " .ex, .exs
 Plug 'tpope/vim-rails'                  " .rb, .erb
 Plug 'wavded/vim-stylus'                " .stylus
-Plug 'wting/rust.vim'                   " .rs
+Plug 'rust-lang/rust.vim'                   " .rs
 
 " kill buffers without closing their window
 Plug 'rgarver/Kwbd.vim'
@@ -494,4 +494,12 @@ let g:haskell_conceal = 0
 
 " AsyncRun {
 let g:asyncrun_open = 20 " height of quickfix window
+" }
+
+" Rust {
+let g:rustfmt_autosave = 1
+" }
+
+" rooter {
+let g:rooter_silent_chdir = 1
 " }
