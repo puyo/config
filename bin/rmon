@@ -5,13 +5,16 @@ require 'shellwords'
 path = ARGV.shift || `v`.split(':').first
 
 def run_test(test_path, args)
+  has_spring = system("which spring 2> /dev/null")
+  spring_str = if has_spring then 'spring ' else '' end
+
   cmd = [
     'nodemon',
     '--quiet',
     '--ignore', './vendor',
     '--watch', '.',
     '--ext', 'rb erb haml',
-    '--exec', "bundle exec spring rspec --format documentation #{test_path}#{args.any? ? ' ' : ''}#{Shellwords.join(args)}",
+    '--exec', "bundle exec #{spring_str}rspec --format documentation #{test_path}#{args.any? ? ' ' : ''}#{Shellwords.join(args)}",
   ]
   puts Shellwords.join(cmd)
   system(*cmd)
