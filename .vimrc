@@ -169,7 +169,15 @@ command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhit
 "autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
 set wildignore+=node_modules
+
+" CtrlP {
+
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_prompt_mappings = {
+\ 'PrtInsert("c")':       ['<c-v>', '<insert>', '<MiddleMouse>'],
+\ }
+
+" }
 
 " Multiple VCS's:
 let g:ctrlp_user_command = {
@@ -178,7 +186,6 @@ let g:ctrlp_user_command = {
   \   },
   \ 'fallback': 'find %s -type f'
   \ }
-
 
 " }
 
@@ -321,9 +328,6 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 
 " All those commands that start with <Leader> now start with , not \
 let mapleader=","
-
-" Spacemacs!
-nnoremap <SPACE> :
 
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>r :CtrlPMRUFiles<CR>
@@ -472,6 +476,7 @@ noremap <leader>a  :A<CR>
 " }
 
 " Ale {
+"
 let g:ale_sign_column_always = 1
 
 " " Be strict please Credo
@@ -484,6 +489,11 @@ let g:ale_sign_column_always = 1
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" For Ruby, everything except 'ruby -w -c' which was causing long lived 100%
+" CPU processes (?)
+let g:ale_linters = {'ruby': ['brakeman', 'rails_best_practices', 'reek', 'rubocop', 'rufo', 'solargraph', 'standardrb']}
+
 " }
 
 " Haskell {
@@ -503,3 +513,5 @@ let g:rustfmt_autosave = 1
 " rooter {
 let g:rooter_silent_chdir = 1
 " }
+"
+"
