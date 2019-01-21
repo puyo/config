@@ -102,3 +102,5 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     export ANSIBLE_NOCOWS=1
     export ERL_AFLAGS="-kernel shell_history enabled"
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
