@@ -658,6 +658,7 @@ With argument, do this that many times."
    (quote
     ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")))
  '(ring-bell-function (quote ignore))
+ '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
  '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
