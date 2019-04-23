@@ -490,9 +490,16 @@ let g:ale_sign_column_always = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" For Ruby, everything except 'ruby -w -c' which was causing long lived 100%
-" CPU processes (?)
-let g:ale_linters = {'ruby': ['brakeman', 'rails_best_practices', 'reek', 'rubocop', 'rufo', 'solargraph', 'standardrb']}
+" Set specific linters
+let g:ale_linters = {
+      \ 'javascript': ['eslint'],
+      \ 'ruby': ['rubocop'],
+      \ }
+
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 " }
 
