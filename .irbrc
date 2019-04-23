@@ -1,7 +1,10 @@
 # http://lucapette.me/pry-everywhere/
 
 # Use Pry everywhere
-require 'rubygems'
-require 'pry'
-Pry.start
-exit
+begin
+  require 'rubygems'
+  require 'pry'
+  Pry.start
+  exit
+rescue
+end
