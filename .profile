@@ -13,7 +13,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     /usr/local/bin \
     /usr/local/sbin"
     for p in $paths; do
-        [ -d $p ] && PATH="$p:$PATH"
+        [ -d $p ] && PATH="$PATH:$p"
     done
     export PATH
 
@@ -103,4 +103,4 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     export ERL_AFLAGS="-kernel shell_history enabled"
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
