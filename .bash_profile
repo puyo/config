@@ -1,13 +1,3 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [ -f "$HOME/.blake" ] && . "$HOME/.blake"
-
-# Setting PATH for Python 3.7
-# The original version is saved in .bash_profile.pysave
-PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.7/bin"
-export PATH
-
-# Setting PATH for Python 3.6
-# The original version is saved in .bash_profile.pysave
-PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.6/bin"
-export PATH
