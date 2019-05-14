@@ -124,6 +124,9 @@ Plug 'dag/vim2hs'
 " AsyncRun ...
 Plug 'skywind3000/asyncrun.vim'
 
+" chruby support
+Plug 'mikepjb/vim-chruby'
+
 call plug#end()
 " }
 
