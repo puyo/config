@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+
+# Correlates rubocop and git blame
+
+require 'pp'
+require 'json'
+require 'open3'
+
+puts 'bundle exec rubocop .'
+json, status = Open3.capture2('bundle', 'exec', 'rubocop', '.', '--format', 'json')
+rubocop_data = JSON.parse(json)
+offenses = Hash.new { |h, k| h[k] = [] }
+
+rubocop_data['files'].each do |file_data|
+  if file_data['offenses'].any?
+    offenses[file_data['path']].push(*file_data['offenses'])
+  end
+end
+
+offenses = offenses.to_a.map do |k, v|
+  [k, v.group_by { |o| o['location']['line'] }]
+end.to_h
+
+offenses.each_with_index do |(path, offenses_by_line), i|
+  printf "(%0.2f) git blame %s\n", 100.0 * (i + 1) / offenses.size, path
+
+  git_out, status = Open3.capture2('git', '--no-pager', 'blame', '-c', '-e', '-w', path)
+
+  blame = git_out.each_line.map do |line|
+    parts = line.split("\t")
+    name = parts[1][1..-1].strip[1..-2]
+    line = parts[-1].split(')').first.to_i
+    [line, name]
+  end.to_h
+
+  offenses_by_line.each do |line, file_offenses|
+    file_offenses.each do |offense|
+      offense['blame'] = blame[line]
+      offense['path'] = path
+      offense['line'] = line
+    end
+  end
+end
+puts
+
+flat_offenses = offenses.values.flat_map(&:values).flatten(1)
+
+by_person =
+  flat_offenses
+  .group_by { |o| o['blame'] }
+  .reject { |name, _| name.nil? }
+  .sort_by { |_, os| -os.size }
+
+counts = by_person.map { |name, os| [name, os.size] }
+counts_formatted =
+  counts.map do |name, count|
+    format("%<count>3d\t%<name>s", count: count, name: name)
+  end
+
+puts counts_formatted
+puts
+
+by_person.each do |person, person_offenses|
+  print "\e[35m"
+  puts person
+  print "\e[1m\e[30m"
+  person_offenses.each do |offense|
+    printf(
+      "    %<path>s:%<line>s: %<message>s\n",
+      path: offense['path'],
+      line: offense['line'],
+      message: offense['message']
+    )
+  end
+  print "\e[0m"
+end
