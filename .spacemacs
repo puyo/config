@@ -348,6 +348,11 @@ you should place your code here."
   (dotspacemacs/user-init-elixir-max-line-length)
   (dotspacemacs/user-init-sonic-pi)
   (dotspacemacs/user-init-add-buffer-switches-to-recentf)
+  (dotspacemacs/user-init-magit-blame-fix)
+  )
+
+(defun dotspacemacs/user-init-magit-blame-fix ()
+  (spacemacs/set-leader-keys "gb" 'magit-blame-addition)
   )
 
 (defun dotspacemacs/user-init-flycheck-popups ()
