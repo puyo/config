@@ -57,7 +57,8 @@ for filename in filenames
 
   if replaced and ask
     puts "Replace all? [y]"
-    if STDIN.gets.strip[0] == ?y
+    line = STDIN.gets
+    if line.nil? || line.strip[0] == ?y
       File::rename(filename, filename + "~")
       File::open(filename, 'w') do |f|
         f.puts result
