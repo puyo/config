@@ -345,6 +345,7 @@ you should place your code here."
   (dotspacemacs/user-init-osx)
   (dotspacemacs/user-init-elixir)
   (dotspacemacs/user-init-js)
+  (dotspacemacs/user-init-js-flow)
   (dotspacemacs/user-init-elixir-max-line-length)
   (dotspacemacs/user-init-sonic-pi)
   (dotspacemacs/user-init-add-buffer-switches-to-recentf)
@@ -373,43 +374,48 @@ you should place your code here."
   )
 
 (defun dotspacemacs/user-init-tabbar ()
-  (require 'tabbar)
-  (tabbar-mode)
+  (use-package tabbar
+    :config
 
-  (defun string/ends-with (string suffix)
-    "Return t if STRING ends with SUFFIX."
-    (and (string-match (rx-to-string `(: ,suffix eos) t)
-                       string)
-         t))
+    (tabbar-mode)
 
-  (defun tabbar-buffer-groups ()
-    (list
-     (cond
-      ((string-equal "*" (substring (buffer-name) 0 1))
-       "Emacs"
-       )
-      ((string-equal " *" (substring (buffer-name) 0 2))
-       "Emacs"
-       )
-      ((member (file-name-nondirectory (buffer-file-name)) '("tags" "TAGS"))
-       "Emacs"
-       )
-      (t
-       "User"
-       )
-      )))
+    (defun string/ends-with (string suffix)
+      "Return t if STRING ends with SUFFIX."
+      (and (string-match (rx-to-string `(: ,suffix eos) t)
+                         string)
+           t))
 
-  (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+    (defun tabbar-buffer-groups ()
+      (list
+       (cond
+        ((string-equal "*" (substring (buffer-name) 0 1))
+         "Emacs"
+         )
+        ((string-equal " *" (substring (buffer-name) 0 2))
+         "Emacs"
+         )
+        ((member (file-name-nondirectory (buffer-file-name)) '("tags" "TAGS"))
+         "Emacs"
+         )
+        (t
+         "User"
+         )
+        )))
+
+    (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+    )
   )
 
 (defun dotspacemacs/user-init-add-buffer-switches-to-recentf ()
-  (require 'recentf-mode)
+  (use-package recentf-mode
+    :config
 
-  (defun switched-buffer ()
-    (recentf-track-opened-file)
+    (defun switched-buffer ()
+      (recentf-track-opened-file)
+      )
+
+    (add-hook 'buffer-list-update-hook 'switched-buffer)
     )
-
-  (add-hook 'buffer-list-update-hook 'switched-buffer)
   )
 
 (defun dotspacemacs/user-init-fix-m-backspace ()
@@ -454,8 +460,10 @@ With argument, do this that many times."
 
 (defun dotspacemacs/user-init-editorconfig ()
   ;; Set indentation and other preferences based on project .editorconfig file
-  (require 'editorconfig)
-  (editorconfig-mode 1)
+  (use-package editorconfig
+    :config
+    (editorconfig-mode 1)
+    )
   )
 
 (defun dotspacemacs/user-fix-evil-visual ()
@@ -511,68 +519,75 @@ With argument, do this that many times."
 
 (defun dotspacemacs/user-init-js ()
   ;; Format JS code via :'<,'>prettier
-  (require 'prettier-js)
 
-  ;; Flow/JSX flychecker
-  (dotspacemacs/user-init-js-flow)
+  (use-package prettier-js
+    :hook js2-mode
+    )
   )
 
 (defun dotspacemacs/user-init-js-flow ()
-  (require 'flow-jsx-mode)
-  (add-to-list 'auto-mode-alist '("\\.flow\\'" . flow-jsx-mode))
+  ;; Flow/JSX flychecker
+  (use-package flow-jsx-mode
+    :hook js2-mode
+    :config
 
-  ;; flycheck flowtype
-  (require 'f)
-  (require 'json)
-  (require 'flycheck)
-  (defun flycheck-parse-flow (output checker buffer)
-    (let ((json-array-type 'list))
-      (let ((o (json-read-from-string output)))
-        (mapcar #'(lambda (errp)
-                    (let ((err (cadr (assoc 'message errp)))
-                          (err2 (cadr (cdr (assoc 'message errp)))))
-                      (flycheck-error-new
-                       :line (cdr (assoc 'line err))
-                       :column (cdr (assoc 'start err))
-                       :level 'error
-                       :message (concat (cdr (assoc 'descr err)) ". " (cdr (assoc 'descr err2)))
-                       :filename (f-relative
-                                  (cdr (assoc 'path err))
-                                  (f-dirname (file-truename
-                                              (buffer-file-name))))
-                       :buffer buffer
-                       :checker checker)))
-                (cdr (assoc 'errors o))))))
+    (add-to-list 'auto-mode-alist '("\\.flow\\'" . flow-jsx-mode))
 
-  (flycheck-define-checker javascript-flow
-    "Static type checking using Flow."
-    :command ("flow" "--json" source-original)
-    :error-parser flycheck-parse-flow
-    :modes js2-mode react-mode)
-  (add-to-list 'flycheck-checkers 'javascript-flow)
+    ;; flycheck flowtype
+    (require 'f)
+    (require 'json)
+    (require 'flycheck)
+    (defun flycheck-parse-flow (output checker buffer)
+      (let ((json-array-type 'list))
+        (let ((o (json-read-from-string output)))
+          (mapcar #'(lambda (errp)
+                      (let ((err (cadr (assoc 'message errp)))
+                            (err2 (cadr (cdr (assoc 'message errp)))))
+                        (flycheck-error-new
+                         :line (cdr (assoc 'line err))
+                         :column (cdr (assoc 'start err))
+                         :level 'error
+                         :message (concat (cdr (assoc 'descr err)) ". " (cdr (assoc 'descr err2)))
+                         :filename (f-relative
+                                    (cdr (assoc 'path err))
+                                    (f-dirname (file-truename
+                                                (buffer-file-name))))
+                         :buffer buffer
+                         :checker checker)))
+                  (cdr (assoc 'errors o))))))
+
+    (flycheck-define-checker javascript-flow
+      "Static type checking using Flow."
+      :command ("flow" "--json" source-original)
+      :error-parser flycheck-parse-flow
+      :modes js2-mode react-mode)
+    (add-to-list 'flycheck-checkers 'javascript-flow)
+    )
   )
 
 (defun dotspacemacs/user-init-sonic-pi ()
-  (require 'sonic-pi)
+  (use-package sonic-pi
+    :hook ruby-mode
+    :config
+    (setq sonic-pi-path "/Applications/Sonic Pi.app/app")
+    (setq sonic-pi-server-bin             "server/ruby/bin/sonic-pi-server.rb")
+    (setq sonic-pi-compile-extensions-bin "server/ruby/bin/compile-extensions.rb")
+    (setq sonic-pi-ruby-bin               "server/native/ruby/bin/ruby")
+    (defun sonic-pi-server-cmd () (format "%s/%s %s/%s" sonic-pi-path sonic-pi-ruby-bin sonic-pi-path sonic-pi-server-bin))
 
-  (setq sonic-pi-path "/Applications/Sonic Pi.app/app")
-  (setq sonic-pi-server-bin             "server/ruby/bin/sonic-pi-server.rb")
-  (setq sonic-pi-compile-extensions-bin "server/ruby/bin/compile-extensions.rb")
-  (setq sonic-pi-ruby-bin               "server/native/ruby/bin/ruby")
-  (defun sonic-pi-server-cmd () (format "%s/%s %s/%s" sonic-pi-path sonic-pi-ruby-bin sonic-pi-path sonic-pi-server-bin))
+    (add-hook 'sonic-pi-mode-hook
+              (lambda ()
 
-  (add-hook 'sonic-pi-mode-hook
-            (lambda ()
+                (add-hook 'after-save-hook 'sonic-pi-send-buffer nil t)
 
-              (add-hook 'after-save-hook 'sonic-pi-send-buffer nil t)
+                (define-key ruby-mode-map (kbd "<s-return>") 'sonic-pi-send-buffer)
+                (define-key ruby-mode-map (kbd "s-.") 'sonic-pi-stop-all)
 
-              (define-key ruby-mode-map (kbd "<s-return>") 'sonic-pi-send-buffer)
-              (define-key ruby-mode-map (kbd "s-.") 'sonic-pi-stop-all)
+                (sonic-pi-connect)
 
-              (sonic-pi-connect)
-
-              (load-theme 'spacemacs-dark)
-              ))
+                (load-theme 'spacemacs-dark)
+                ))
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
