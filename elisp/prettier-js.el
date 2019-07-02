@@ -219,4 +219,6 @@ function."
      (delete-file bufferfile)
      (delete-file outputfile)))
 
+(defun prettier-js ())
+
 (provide 'prettier-js)
