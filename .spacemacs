@@ -407,7 +407,7 @@ you should place your code here."
   )
 
 (defun dotspacemacs/user-init-add-buffer-switches-to-recentf ()
-  (use-package recentf-mode
+  (use-package recentf
     :config
 
     (defun switched-buffer ()
