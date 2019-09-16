@@ -1,0 +1,49 @@
+{
+    "window.zoomLevel": 0,
+    "keyboard.dispatch": "keyCode",
+    "explorer.confirmDragAndDrop": false,
+    "breadcrumbs.enabled": true,
+    "editor.codeLens": false,
+    "razor.devmode": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.activityBar.visible": false,
+    "editor.minimap.enabled": false,
+    "editor.highlightActiveIndentGuide": false,
+    "editor.renderIndentGuides": false,
+    "editor.occurrencesHighlight": false,
+    "editor.renderLineHighlight": "none",
+    "editor.matchBrackets": false,
+    "terminal.integrated.cursorBlinking": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "workbench.colorTheme": "Spacemacs - light",
+    "editor.fontSize": 13,
+    "html.format.indentHandlebars": true,
+    "editor.tabSize": 2,
+    "editor.renderFinalNewline": false,
+    "files.insertFinalNewline": true,
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "entity.name.function",
+                "settings": {
+                    "fontStyle": "bold",
+                    "foreground": "#5d4d7a"
+                }
+            },
+            {
+                "scope": "storage.type",
+                "settings": {
+                    "fontStyle": "bold",
+                    "foreground": "#ce537a"
+                }
+            },
+            {
+                "scope": "keyword.control",
+                "settings": {
+                    "fontStyle": "bold",
+                    "foreground": "#4f97d7"
+                }
+            },
+        ]
+    }
+}
