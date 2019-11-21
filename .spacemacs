@@ -346,7 +346,6 @@ you should place your code here."
   (dotspacemacs/user-init-elixir)
   (dotspacemacs/user-init-js)
   (dotspacemacs/user-init-js-flow)
-  (dotspacemacs/user-init-elixir-max-line-length)
   (dotspacemacs/user-init-sonic-pi)
   (dotspacemacs/user-init-add-buffer-switches-to-recentf)
   (dotspacemacs/user-init-magit-blame-fix)
@@ -437,11 +436,6 @@ With argument, do this that many times."
 
   (global-set-key (read-kbd-macro "<M-DEL>") 'backward-delete-word))
 
-(defun dotspacemacs/user-init-elixir-max-line-length ()
-  (add-hook 'elixir-mode-hook
-            (lambda ()
-              (set-fill-column 120))))
-
 (defun dotspacemacs/user-init-evil-move-region ()
   ;; M-{hjkl} to move blocks of text around
   (require 'evil-move-region)
@@ -486,6 +480,22 @@ With argument, do this that many times."
 (defun dotspacemacs/user-init-elixir ()
   ;; Elixir mode on atypical elixir files
   (add-to-list 'auto-mode-alist '("mix\\.lock\\'" . elixir-mode))
+
+  ;; ;; elixir-mode hook
+  ;; (add-hook 'elixir-mode-hook
+  ;;           (lambda () (add-hook 'before-save-hook 'mix-format-before-save)))
+  ;; https://github.com/syl20bnr/spacemacs/issues/9284
+  ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
+  (add-hook
+   'elixir-mode-hook
+   (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+  (add-hook
+   'mix-format-hook
+   '(lambda ()
+      (if (projectile-project-p)
+          (setq mixfmt-args (list "--dot-formatter" (concat (projectile-project-root) "/.formatter.exs")))
+        (setq mixfmt-args nil))))
   )
 
 (defun dotspacemacs/user-init-osx ()
@@ -629,7 +639,7 @@ With argument, do this that many times."
      (60 . evil-surround-read-tag)
      (102 . evil-surround-function)
      (37 "%{" . "}"))))
- '(evil-want-C-i-jump t)
+ '(evil-want-C-i-jump t t)
  '(evil-want-Y-yank-to-eol nil)
  '(exec-path-from-shell-check-startup-files nil)
  '(flycheck-disabled-checkers (quote (rust rust-cargo)))
@@ -674,7 +684,7 @@ With argument, do this that many times."
  '(ns-pop-up-frames nil)
  '(package-selected-packages
    (quote
-    (tabbar org-plus-contrib lv transient reformatter flycheck-popup-tip toml-mode racer flycheck-rust cargo rust-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy osc sonic-pi counsel-dash xpm csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash orgit open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+    (nadvice tabbar org-plus-contrib lv transient reformatter flycheck-popup-tip toml-mode racer flycheck-rust cargo rust-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy osc sonic-pi counsel-dash xpm csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash orgit open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
  '(paradox-github-token t)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -685,7 +695,7 @@ With argument, do this that many times."
  '(projectile-use-git-grep t)
  '(recentf-exclude
    (quote
-    ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")))
+    ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")) t)
  '(ring-bell-function (quote ignore))
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
