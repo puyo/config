@@ -18,7 +18,6 @@ def run_test(test_path)
          "--ext", "ex exs",
          "--exec", "mix test --color #{test_path}"]
   cmd_s = Shellwords.join(cmd)
-  cmd_s = "(#{cmd_s} 2>&1) | grep -E -v '(^Paths given to .*? did not match|^Test patterns did not match|^==>)'"
   puts cmd_s
   system cmd_s
 end
