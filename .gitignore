@@ -9,3 +9,6 @@ tags
 TAGS
 .respec
 vendor.*
+
+# Emacs
+*-emacs-elixir-format.exs
