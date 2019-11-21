@@ -49,7 +49,7 @@ function developbranch() {
 
 alias grep='grep --color'
 alias less='less -R' # deal with colours
-alias make='make -j3' # use more cores
+alias make='make -j17' # use more cores
 
 # ----------------------------------------------------------------------
 # Ruby
