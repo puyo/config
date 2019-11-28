@@ -1,35 +1,66 @@
 #!/usr/bin/env ruby
 
 require 'shellwords'
+require 'optparse'
 
-path = ARGV[0] || `v`.split(':').first
+def run_test(test_path, options)
+  exec_value = [
+    'mix',
+    options[:coveralls] ? 'coveralls.html' : 'test',
+    '--color',
+    test_path
+  ].compact.shelljoin
 
-def run_test(test_path)
-  test_path = test_path.sub(/.*apps\/.*?\//, "") # account for umbrella apps
-  cmd = ["nodemon",
-         "--verbose",
-         "--ignore", "**/TAGS",
-         "--ignore", "**/tags",
-         "--ignore", "**/*.dump",
-         "--ignore", "**/*.beam",
-         "--ignore", "**/deps/**/*",
-         "--ignore", "**/_build/**/*",
-         "--watch", ".",
-         "--ext", "ex exs",
-         "--exec", "mix test --color #{test_path}"]
+  cmd = [
+    'nodemon',
+    '--verbose',
+    '--ignore', '**/TAGS',
+    '--ignore', '**/tags',
+    '--ignore', '**/*.dump',
+    '--ignore', '**/*.beam',
+    '--ignore', '**/deps/**/*',
+    '--ignore', '**/_build/**/*',
+    '--watch', '.',
+    '--ext', 'ex exs',
+    '--exec', exec_value
+  ]
+
   cmd_s = Shellwords.join(cmd)
-  puts cmd_s
+  puts exec_value
   system cmd_s
 end
 
-if /_test\.exs/.match(path)
-  run_test(path)
-else
-  test_filename = File.basename(path.gsub(/\.ex$/, '_test.exs'))
-  test_path = Dir.glob(File.join("**", test_filename)).first
-  if test_path
-    run_test(test_path)
+def parse_options
+  options = {}
+  OptionParser.new do |opts|
+    opts.banner = "Usage: emon [options] [files]"
+
+    opts.on("-c", "--[no-]coveralls-html", "Run mix coveralls.html rather than mix test") do |v|
+      options[:coveralls] = v
+    end
+  end.parse!
+  options
+end
+
+def guess_test_path(path)
+  if /_test\.exs/.match(path)
+    result = path
   else
-    puts "Cannot figure out which test to run from: #{path.inspect}"
+    test_filename = File.basename(path.gsub(/\.ex$/, '_test.exs'))
+    result = Dir.glob(File.join("**", test_filename)).first
+  end
+  p result: result
+  if result.nil? || result.empty?
+    nil
+  else
+    result.sub(/.*apps\/.*?\//, '') # account for umbrella apps
   end
 end
+
+def run
+  options = parse_options
+  path = ARGV[0]
+  run_test(guess_test_path(path), options)
+end
+
+run
