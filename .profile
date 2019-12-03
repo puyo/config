@@ -17,14 +17,6 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     done
     export PATH
 
-    # if running bash
-    if [ -n "$BASH_VERSION" ]; then
-        # include .bashrc if it exists
-        if [ -f "$HOME/.bashrc" ]; then
-            source "$HOME/.bashrc"
-        fi
-    fi
-
     # --------------------------------------------------
     # Ruby
 
@@ -67,6 +59,14 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     fi
 
     # --------------------------------------------------
+    # asdf (Elixir, Ruby, Erlang)
+
+    if [ -d "$HOME/.asdf" ]; then
+      source $HOME/.asdf/asdf.sh
+      source $HOME/.asdf/completions/asdf.bash
+    fi
+
+    # --------------------------------------------------
     # Node
 
     # PATH="$PATH:./node_modules/.bin" # Add node modules bin path
@@ -104,3 +104,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
 fi
 
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+export GOPATH=$HOME/go
+export PATH=$PATH:${GOPATH//://bin:}/bin
