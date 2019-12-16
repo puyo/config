@@ -1,0 +1,11 @@
+barrier
+chromedriver
+docker
+dotnet-sdk
+firefox
+gimp
+google-chrome
+imageoptim
+skype
+wine-stable
+xquartz
