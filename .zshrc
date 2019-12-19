@@ -56,3 +56,6 @@ fi
 
 source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
+
+export GOPATH=$HOME/go
+PATH=$PATH:${GOPATH//://bin:}/bin
