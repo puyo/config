@@ -16,7 +16,6 @@
     "terminal.integrated.cursorBlinking": true,
     "editor.hideCursorInOverviewRuler": true,
     "workbench.colorTheme": "Spacemacs - light",
-    "editor.fontSize": 13,
     "html.format.indentHandlebars": true,
     "editor.tabSize": 2,
     "editor.renderFinalNewline": false,
@@ -50,5 +49,11 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.fontFamily": "Monaco, 'Courier New', monospace",
+    "editor.defaultFormatter": "saratravi.elixir-formatter",
+    "gitlens.currentLine.enabled": false,
+    "elixirLS.fetchDeps": false,
+    "files.simpleDialog.enable": true,
+
 }
