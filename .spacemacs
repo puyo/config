@@ -47,6 +47,7 @@ values."
      idris
      ivy
      javascript
+     lsp
      markdown
      markdown
      osx
@@ -491,11 +492,13 @@ With argument, do this that many times."
    (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
 
   (add-hook
-   'mix-format-hook
-   '(lambda ()
-      (if (projectile-project-p)
-          (setq mixfmt-args (list "--dot-formatter" (concat (projectile-project-root) "/.formatter.exs")))
-        (setq mixfmt-args nil))))
+   'elixir-format-hook
+   (lambda ()
+     (if (projectile-project-p)
+         (setq elixir-format-arguments
+               (list "--dot-formatter"
+                     (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
+       (setq elixir-format-arguments nil))))
   )
 
 (defun dotspacemacs/user-init-osx ()
