@@ -43,13 +43,14 @@ def parse_options
 end
 
 def guess_test_path(path)
-  if /_test\.exs/.match(path)
+  if path.nil?
+    nil
+  elsif /_test\.exs/.match(path)
     result = path
   else
     test_filename = File.basename(path.gsub(/\.ex$/, '_test.exs'))
     result = Dir.glob(File.join("**", test_filename)).first
   end
-  p result: result
   if result.nil? || result.empty?
     nil
   else
