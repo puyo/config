@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # In a Vim phase at the moment...
-# exec "#{ENV['HOME']}/bin/g", *ARGV
+exec "#{ENV['HOME']}/bin/g", *ARGV
 
 # Similar to this:
 #
