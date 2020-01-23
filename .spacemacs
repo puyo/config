@@ -642,7 +642,7 @@ With argument, do this that many times."
      (60 . evil-surround-read-tag)
      (102 . evil-surround-function)
      (37 "%{" . "}"))))
- '(evil-want-C-i-jump t t)
+ '(evil-want-C-i-jump t)
  '(evil-want-Y-yank-to-eol nil)
  '(exec-path-from-shell-check-startup-files nil)
  '(flycheck-disabled-checkers (quote (rust rust-cargo)))
@@ -698,7 +698,7 @@ With argument, do this that many times."
  '(projectile-use-git-grep t)
  '(recentf-exclude
    (quote
-    ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")) t)
+    ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")))
  '(ring-bell-function (quote ignore))
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
