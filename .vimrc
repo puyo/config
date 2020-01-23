@@ -501,8 +501,10 @@ let g:ale_linters = {
 
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
-
 let g:ale_ruby_rubocop_executable = 'bundle'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
 
 " }
 
