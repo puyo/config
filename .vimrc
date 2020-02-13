@@ -53,7 +53,10 @@ Plug 'puyo/vim-haml'                    " .haml
 Plug 'slashmili/alchemist.vim'          " .ex, .exs
 Plug 'tpope/vim-rails'                  " .rb, .erb
 Plug 'wavded/vim-stylus'                " .stylus
-Plug 'rust-lang/rust.vim'                   " .rs
+Plug 'rust-lang/rust.vim'               " .rs
+
+" elixir: mix format on save
+Plug 'mhinz/vim-mix-format'
 
 " kill buffers without closing their window
 Plug 'rgarver/Kwbd.vim'
@@ -526,4 +529,7 @@ let g:rustfmt_autosave = 1
 let g:rooter_silent_chdir = 1
 " }
 "
-"
+
+" vim-mix-format {
+let g:mix_format_on_save = 1
+" }
