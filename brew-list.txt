@@ -177,7 +177,6 @@ watchman
 webp
 weechat
 wget
-wireshark
 wxmac # erlang observer
 x264
 x265

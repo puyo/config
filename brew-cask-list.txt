@@ -12,3 +12,4 @@ skype
 sonic-pi
 wine-stable
 xquartz
+wireshark
