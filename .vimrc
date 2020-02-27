@@ -130,6 +130,9 @@ Plug 'skywind3000/asyncrun.vim'
 " chruby support
 Plug 'mikepjb/vim-chruby'
 
+" Svelte
+Plug 'evanleck/vim-svelte'
+
 call plug#end()
 " }
 
