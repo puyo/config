@@ -4,9 +4,10 @@
 shopt -oq posix && return
 
 if [[ ! -z "$PS1" ]] ; then # if running interactively
-  shopt -s histappend # append to history file, don't overwrite
-  shopt -s checkwinsize # update LINES and COLUMNS
-  stty -ixon # disable C-s and C-q pause and resume buttons
+  shopt -s histappend    # append to history file, don't overwrite
+  shopt -s checkwinsize  # update LINES and COLUMNS
+  shopt -s globstar      # allow ** file patterns
+  stty -ixon             # disable C-s and C-q pause and resume buttons
 
   case "$TERM" in
     xterm*|rxvt*|screen*)
