@@ -6,7 +6,7 @@
 	name = Gregory McIntyre
 	email = greg@gregorymcintyre.com
 [core]
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/gvim
 	excludesfile = ~/.gitignore
 [branch]
 	autosetuprebase = always
