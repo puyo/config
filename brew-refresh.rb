@@ -12,8 +12,8 @@ to_remove = installed - wanted
 to_install = wanted - installed
 
 system('brew', 'update')
-system('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
-system('brew', 'install', *wanted)
+system('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove) if to_remove.any?
+system('brew', 'install', *wanted) if wanted.any?
 system('brew', 'upgrade')
 system('brew', 'cleanup')
 
