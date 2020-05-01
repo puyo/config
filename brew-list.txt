@@ -42,7 +42,7 @@ mysql@5.6
 ncurses
 netpbm
 open-completion
-openssl
+openssl@1.1
 pcre
 pcre2
 postgresql@10
