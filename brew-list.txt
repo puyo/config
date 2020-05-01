@@ -16,6 +16,7 @@ ctags
 curl
 diff-so-fancy
 docker-completion
+dos2unix
 editorconfig
 emacs-plus
 ffmpeg
