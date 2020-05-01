@@ -133,6 +133,9 @@ Plug 'mikepjb/vim-chruby'
 " Svelte
 Plug 'evanleck/vim-svelte'
 
+" Racket
+Plug 'wlangstroth/vim-racket'
+
 call plug#end()
 " }
 
