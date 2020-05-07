@@ -20,18 +20,33 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
         local cyan="\[\033[0;36m\]"
         local gray="\[\033[01;30m\]"
         local reset="\[\033[00m\]"
-
         local user_and_host='\u@\h'
-        local chruby='$(if [ ! -z "$RUBY_VERSION" ]; then echo -n " ruby $RUBY_VERSION"; fi)'
+
+        __ruby_prompt() {
+          local ruby="$(ruby --version | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')"
+          case $(which ruby) in
+            *asdf/shims/ruby)
+              ruby=" ruby-${ruby} (asdf)"
+              ;;
+            *.rubies*)
+              ruby=" ruby-${ruby} (chruby)"
+              ;;
+            *)
+              ruby=" ruby-${ruby} (os)"
+              ;;
+          esac
+          echo $ruby
+        }
         local git='$(__git_ps1 | sed "s/[()]//g" 2>/dev/null)'
         local dir=' \w'
         local date='$(date +%T)'
-        PS1="${green}${user_and_host}${cyan}${chruby}${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
+        PS1="${green}${user_and_host}${cyan} \$(__ruby_prompt)${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
 
         # add window title "user@host dir"
         PS1="\[\e]0;\u@\h \w\a\]$PS1"
       }
       _set_prompt
+      unset _set_prompt
     ;;
   esac
 
@@ -45,3 +60,6 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     [ -f "$HOME/$file" ] && source "$HOME/$file"
   done
 fi
+
+export GOPATH=$HOME/go
+PATH=$PATH:${GOPATH//://bin:}/bin
