@@ -341,6 +341,8 @@ command! -range=% HTMLize :call HTMLize(<line1>, <line2>)
 " All those commands that start with <Leader> now start with , not \
 let mapleader=","
 
+nnoremap <C-]> g<C-]>
+
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>r :CtrlPMRUFiles<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
