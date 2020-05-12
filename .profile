@@ -60,7 +60,9 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
 
     if [ -d "$HOME/.asdf" ]; then
       source $HOME/.asdf/asdf.sh
-      source $HOME/.asdf/completions/asdf.bash
+      if [ -n "$BASH_VERSION" ]; then
+        source $HOME/.asdf/completions/asdf.bash
+      fi
     fi
 
     # --------------------------------------------------
