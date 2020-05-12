@@ -37,7 +37,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
           esac
           echo $ruby
         }
-        local git='$(__git_ps1 | sed "s/[()]//g" 2>/dev/null)'
+        local git='$(__git_ps1 " %s")'
         local dir=' \w'
         local date='$(date +%T)'
         PS1="${green}${user_and_host}${cyan} \$(__ruby_prompt)${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
