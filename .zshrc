@@ -18,6 +18,8 @@ export CASE_SENSITIVE="true"
 bindkey '^[p' history-beginning-search-backward
 bindkey '^[n' history-beginning-search-forward
 
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+
 if [[ ! -z "$PROMPT" ]] ; then # if running interactively
 
   stty -ixon # disable C-s and C-q pause and resume buttons
@@ -25,23 +27,29 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
 
   case "$TERM" in
     xterm*|rxvt*|screen*)
-      # red="\[\033[01;31m\]"
-      # green="\[\033[01;32m\]"
-      # yellow="\[\033[01;33m\]"
-      # blue="\[\033[01;34m\]"
-      # pink="\[\033[01;35m\]"
-      # cyan="\[\033[0;36m\]"
-      # gray="\[\033[01;30m\]"
-      # reset="\[\033[00m\]"
+      local user_and_host='%n@%m'
+      local git='$(__git_ps1 " %s")'
+      local dir='%~'
+      local date='%*'
+      local newline=$'\n'
 
-      user_and_host='%n@%m'
-      git='$(/usr/bin/ruby -e '\''print `git branch 2> /dev/null`.match(/\*(.+)$/).to_a.last.to_s'\'')'
-      dir='%~'
-      date='%*'
-      newline=$'\n'
+      __ruby_prompt() {
+        ruby="$(ruby --version | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')"
+        case $(which ruby) in
+          *asdf/shims/ruby)
+            ruby=" ruby-${ruby} (asdf)"
+            ;;
+          *.rubies*)
+            ruby=" ruby-${ruby} (chruby)"
+            ;;
+          *)
+            ruby=" ruby-${ruby} (os)"
+            ;;
+        esac
+        echo $ruby
+      }
 
-      PROMPT="%F{118}${user_and_host}%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{238}${date}%f \$ "
-      unset user_and_host rvm git dir date
+      PROMPT="%F{118}${user_and_host}%F{cyan}\${__ruby_prompt}%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{238}${date}%f \$ "
     ;;
   esac
 
