@@ -14,6 +14,10 @@ export CASE_SENSITIVE="true"
 # Uncomment following line if you want to disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
 
+# Set history file
+export HISTFILE="$HOME/.zhistory"
+export SAVEHIST=10000
+
 # alt-p and alt-n search history with what was typed so far
 bindkey '^[p' history-beginning-search-backward
 bindkey '^[n' history-beginning-search-forward
