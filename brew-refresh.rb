@@ -7,36 +7,83 @@
 # installed. No casks are uninstalled at this time.
 
 require 'pp'
+require 'shellwords'
+
+def confirm(prompt)
+  loop do
+    puts "#{prompt} (y/N) "
+    x = gets.strip.downcase
+    case x
+    when 'y'
+      yield
+      break
+    when 'n'
+      puts "Cancelled"
+      break
+    end
+  end
+end
+
+def system_verbose(*args)
+  blue = "\033[01;34m"
+  reset = "\033[00m"
+  print blue
+  puts Shellwords.join(args)
+  print reset
+  system(*args)
+end
+
+def read_brew_command(*cmd)
+  IO.popen(cmd).readlines.map(&:strip)
+end
+
+def read_brew_list_file(path)
+  File.readlines(path).map{|w| w.sub(/#.*$/, '').strip }
+end
 
 # brew
 
-installed = IO.popen(['brew', 'list']).readlines.map(&:strip)
-wanted = File.readlines('brew-list.txt').map{|w| w.sub(/#.*$/, '').strip }
-wanted_deps = IO.popen(['brew', 'deps', '--union', *wanted]).readlines.map(&:strip)
+installed = read_brew_command('brew', 'list')
+wanted = read_brew_list_file('brew-list.txt')
+wanted_deps = read_brew_command('brew', 'deps', '--union', *wanted)
 wanted += wanted_deps
 to_remove = installed - wanted
 to_install = wanted - installed
 
-system('brew', 'update')
+system_verbose('brew', 'update')
+
 if to_remove.any?
-  begin
-    puts to_remove.join(' ') + "\n\nRemove these packages? (y/N) "
-    x = gets
-  end until x.strip.downcase == 'y'
-  system('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
+  confirm("\n#{to_remove.join(' ')}\n\nRemove these packages?") do
+    system_verbose('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
+  end
 end
 
 if to_install.any?
-  begin
-    puts to_install.join(' ') + "\n\nInstall these packages? (y/N) "
-    x = gets
-  end until x.strip.downcase == 'y'
-  system('brew', 'install', *to_install)
+  confirm("\n#{to_install.join(' ')}\n\nInstall these packages?") do
+    system_verbose('brew', 'install', *to_install)
+  end
 end
-system('brew', 'upgrade')
-system('brew', 'cleanup')
+
+system_verbose('brew', 'upgrade')
+system_verbose('brew', 'cleanup')
 
 # brew cask
 
-cask_wanted = File.readlines('brew-cask-list.txt').map{|w| w.sub(/#.*$/, '').strip }
-system('brew', 'cask', 'install', *cask_wanted)
+wanted = read_brew_list_file('brew-cask-list.txt')
+installed = read_brew_command('brew', 'cask', 'list')
+to_remove = installed - wanted
+to_install = wanted - installed
+
+if to_remove.any?
+  confirm("\n#{to_remove.join(' ')}\n\nRemove these cask packages?") do
+    system_verbose('brew', 'cask', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
+  end
+end
+
+if to_install.any?
+  confirm("\n#{to_install.join(' ')}\n\nInstall these cask packages?") do
+    system_verbose('brew', 'cask', 'install', *to_install)
+  end
+end
+
+system_verbose('brew', 'cask', 'upgrade')

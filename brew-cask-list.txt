@@ -9,7 +9,9 @@ google-chrome
 imageoptim
 libreoffice
 skype
-sonic-pi
+openttd
+racket       # lisp dialect IDE
+sonic-pi     # music
 wine-stable
 xquartz
 wireshark

@@ -5,23 +5,29 @@ astyle
 autoconf
 automake
 awscli
+awscli@1
 awslogs
 bash
 bash-completion
 bundler-completion
+carthage # iOS package manager
 cataclysm
 chruby
 cmake
+coreutils
 ctags
 curl
 diff-so-fancy
+docker
 docker-completion
+docker-compose
 dos2unix
 editorconfig
 emacs-plus
 ffmpeg
 gcc
 gem-completion
+gh
 git
 gnupg
 graphviz
@@ -32,6 +38,7 @@ imageoptim-cli
 jq
 kubernetes-cli
 lftp
+libssh
 macvim
 make
 memcached
@@ -43,12 +50,15 @@ mysql@5.6
 ncurses
 netpbm
 open-completion
-openssl@1.1
+openssl     # ruby dep
+openssl@1.1 # ruby dep
 pcre
 pcre2
+portable-openssl # old ruby dep
 postgresql@10
 privoxy
 procmail
+protobuf
 pstree
 rails-completion
 rake-completion
