@@ -45,7 +45,12 @@ end
 
 installed = read_brew_command('brew', 'list')
 wanted = read_brew_list_file('brew-list.txt')
+
 wanted_deps = read_brew_command('brew', 'deps', '--union', *wanted)
+# begin
+#   new_wanted_deps = read_brew_command('brew', 'deps', '--union', *wanted, *wanted_deps)
+#   wanted_deps |= new_wanted_deps
+# end while wanted_deps != new_wanted_deps
 wanted += wanted_deps
 to_remove = installed - wanted
 to_install = wanted - installed
@@ -54,7 +59,9 @@ system_verbose('brew', 'update')
 
 if to_remove.any?
   confirm("\n#{to_remove.join(' ')}\n\nRemove these packages?") do
-    system_verbose('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
+    # force means all versions
+    #system_verbose('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
+    system_verbose('brew', 'uninstall', '--force', *to_remove)
   end
 end
 
