@@ -1,91 +1,88 @@
-ack
-allegro
-aspell
-astyle
-autoconf
-automake
-awscli
-awscli@1
-awslogs
-bash
-bash-completion
-bundler-completion
-carthage # iOS package manager
-cataclysm
-chruby
-cmake
-coreutils
-ctags
-curl
-diff-so-fancy
-docker
-docker-completion
-docker-compose
-dos2unix
-editorconfig
-emacs-plus
-ffmpeg
-gcc
-gem-completion
-gh
-git
-gnupg
-graphviz
-htop
-hub
-imagemagick
-imageoptim-cli
-jq
-kubernetes-cli
-lftp
-libssh
-macvim
-make
-memcached
-mix-completion
-mono
-moreutils
-mpfr
-mysql@5.6
-ncurses
-netpbm
-open-completion
-openssl     # ruby dep
-openssl@1.1 # ruby dep
-pcre
-pcre2
-portable-openssl # old ruby dep
-postgresql@10
-privoxy
-procmail
-protobuf
-pstree
-r                # R language
-rails-completion
-rake-completion
-readline
-redis
-ripgrep
-rsync
-ruby-completion
-ruby-install
-rustup-init
-sdl2
-sdl2_gfx
-sdl2_image
-sdl2_mixer
-sdl2_ttf
-siege
-spring-completion
-sqlite
-telnet
-the_silver_searcher
-tmux
-unrar
-watch
-webp
-weechat
-wget
-wxmac # erlang observer
-yarn-completion
-youtube-dl
+ack                 # grep like tool
+allegro             # game library
+aspell              # spelling
+astyle              # C/C++ code formatter
+autoconf            # for compiling packages from source
+automake            # for compiling packages from source
+awscli              # AWS
+awscli@1            # AWS
+awslogs             # AWS
+bash                # newer version of bash than built-in OS version
+bash-completion     # tab completion
+bundler-completion  # tab completion for bundle
+carthage            # iOS package manager
+cataclysm           # roguelike game
+chruby              # ruby version manager
+cmake               # for compiling packages from source
+coreutils           # checksums such as sha256sum
+ctags               # code indexing
+curl                # CLI HTTP tool
+diff-so-fancy       # nicer git diffs
+docker              # docker command for working with containers
+docker-completion   # tab completion for docker
+docker-compose      # higher level docker command
+dos2unix            # converts competing line ending formats on text files
+editorconfig        # configure various code editors to match project preferences
+emacs-plus          # code editor
+ffmpeg              # manipulate videos
+gcc                 # C compiler
+gdal                # R geological packages
+gem-completion      # tab completion for gem
+gh                  # Github
+git                 # distributed revision control system for managing source code
+gnupg               # encryption
+graphviz            # graph tool
+htop                # nicer version of top
+hub                 # github
+imagemagick         # manipulate images
+imageoptim-cli      # minimise image file size
+jq                  # format JSON nicely
+kubernetes-cli      # cloud infrastructure management
+lftp                # FTP client
+macvim              # code editor
+make                # for compiling packages from source
+memcached           # distributed cache used for work
+mix-completion      # tab completion for mix
+mono                # dot net runtime for VS Code
+moreutils           # handy tools like ts and parallel
+mysql@5.6           # database for work
+ncurses             # text based GUI library
+netpbm              # image manipulation for old file formats
+open-completion     # tab completion for open
+openssl             # ruby dep
+openssl@1.1         # ruby dep
+portable-openssl    # ruby dep for ruby < 2.4
+postgresql@10       # database for work
+privoxy             # web proxy
+procmail            # just for the lockfile command
+protobuf            # compact wire transmissions for work
+pstree              # displays processes
+r                   # R language
+rails-completion    # tab completion for rails
+rake-completion     # tab completion for rake
+readline            # library for command line consoles with history and shared keyboard shortcuts, ruby dep
+redis               # key-value database
+ripgrep             # grepalike
+rsync               # efficient file updating
+ruby-completion     # tab completion for ruby
+ruby-install        # tool used by chruby to install versions of ruby in ~/.rubies
+rustup-init         # rust version manager rustup
+sdl2                # library for rendering graphics, for game dev
+sdl2_gfx            # library for graphics primitives, for game dev
+sdl2_image          # library for image manipulation, for game dev
+sdl2_mixer          # library for audio, for game dev
+sdl2_ttf            # library for fonts, for game dev
+siege               # benchmarking tool for web servers
+spring-completion   # tab completion for spring
+sqlite              # SQL database that uses simple files
+telnet              # for testing network problems
+the_silver_searcher # grepalike
+tmux                # multiple shells inside one terminal
+unrar               # decompress rar files
+watch               # show changes to a command's output every 2 seconds
+webp                # library for new image format by google
+weechat             # IRC client
+wget                # CLI tool to fetch web sites
+wxmac               # erlang observer
+yarn-completion     # tab completion for yarn
+youtube-dl          # download youtube videos
