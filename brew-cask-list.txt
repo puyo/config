@@ -1,16 +1,17 @@
-barrier
-blender
-chromedriver
+barrier      # keyboard and mouse sharing client/server
+blender      # 3D graphics
+chromedriver # browser automation
 docker
-dotnet-sdk
+dotnet-sdk   # for MS Code + Unity
 firefox
-gimp
+gimp         # image manipulation
 google-chrome
-imageoptim
+imageoptim   # optimise image size
 libreoffice
 skype
-openttd
+openttd      # open transport tycoon deluxe
 racket       # lisp dialect IDE
+rstudio      # R language IDE, relies on 'brew install r'
 sonic-pi     # music
 wine-stable
 xquartz

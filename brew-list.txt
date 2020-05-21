@@ -60,6 +60,7 @@ privoxy
 procmail
 protobuf
 pstree
+r                # R language
 rails-completion
 rake-completion
 readline
