@@ -55,9 +55,6 @@ Plug 'tpope/vim-rails'                  " .rb, .erb
 Plug 'wavded/vim-stylus'                " .stylus
 Plug 'rust-lang/rust.vim'               " .rs
 
-" elixir: mix format on save
-Plug 'mhinz/vim-mix-format'
-
 " kill buffers without closing their window
 Plug 'rgarver/Kwbd.vim'
 
@@ -110,7 +107,7 @@ Plug 'airblade/vim-rooter'
 Plug 'osyo-manga/vim-over'
 
 " Async lint engine
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " Align stuff
 Plug 'junegunn/vim-easy-align'
@@ -177,8 +174,6 @@ function! StripTrailingWhitespaces() range
   normal! g`"
 endfunction
 command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
-
-"autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
 set wildignore+=node_modules
 
@@ -309,6 +304,8 @@ au FileType coffee setlocal ts=2 sw=2 sts=2
 au FileType javascript setlocal ts=2 sw=2 sts=2
 au FileType json setlocal nowrap smartindent
 augroup END
+
+"autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
 " }
 
@@ -491,32 +488,47 @@ noremap <leader>a  :A<CR>
 
 " Ale {
 "
-let g:ale_sign_column_always = 1
-
-" " Be strict please Credo
-" call ale#linter#Define('elixir', {
-" \   'name': 'credo',
-" \   'executable': 'mix',
-" \   'command': 'mix credo suggest --strict --format=flycheck --read-from-stdin %s',
-" \   'callback': 'ale_linters#elixir#credo#Handle',
-" \})
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Set specific linters
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'ruby': ['rubocop'],
-      \ }
-
-" Only run linters named in ale_linters settings.
-let g:ale_linters_explicit = 1
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+let g:ale_linters = {}
+let g:ale_linters.scss = ['stylelint']
+let g:ale_linters.css = ['stylelint']
+let g:ale_linters.elixir = ['credo', 'dialyxir', 'elixir-ls']
+let g:ale_linters.ruby = ['rubocop', 'ruby']
+
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.scss = ['stylelint']
+let g:ale_fixers.css = ['stylelint']
+let g:ale_fixers.elm = ['format']
+let g:ale_fixers.ruby = ['rubocop']
+let g:ale_fixers.elixir = ['mix_format']
+
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
+let g:ale_elixir_credo_strict = 1
+
+let g:airline#extensions#ale#enabled = 1
+
+"let g:ale_set_loclist = 0
+"let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+"let g:ale_keep_list_window_open = 1
+
+augroup ale
+  au FileType elixir let g:ale_fix_on_save=1
+augroup END
+" }
+
+" Markdown {
+let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript']
 " }
 
 " Haskell {
@@ -535,10 +547,4 @@ let g:rustfmt_autosave = 1
 
 " rooter {
 let g:rooter_silent_chdir = 1
-" }
-"
-
-" vim-mix-format {
-let g:mix_format_on_save = 1
-let g:mix_format_silent_errors = 1
 " }
