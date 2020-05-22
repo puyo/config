@@ -39,22 +39,6 @@ Plug 'michaeljsmith/vim-indent-object'
 " 'r' is a text object that selects the current Ruby structure. e.g. vir
 Plug 'nelstrom/vim-textobj-rubyblock'
 
-" File types
-Plug 'digitaltoad/vim-jade'             " .jade
-Plug 'elixir-lang/vim-elixir'           " .ex, exs
-Plug 'elmcast/elm-vim'                  " .elm
-Plug 'idris-hackers/idris-vim'          " .idr
-Plug 'kchmck/vim-coffee-script'         " .coffee
-Plug 'leafgarland/typescript-vim'       " .ts
-Plug 'mustache/vim-mustache-handlebars' " .hbr
-Plug 'pangloss/vim-javascript'          " .js
-Plug 'puyo/vim-cucumber'                " .feature
-Plug 'puyo/vim-haml'                    " .haml
-Plug 'slashmili/alchemist.vim'          " .ex, .exs
-Plug 'tpope/vim-rails'                  " .rb, .erb
-Plug 'wavded/vim-stylus'                " .stylus
-Plug 'rust-lang/rust.vim'               " .rs
-
 " kill buffers without closing their window
 Plug 'rgarver/Kwbd.vim'
 
@@ -118,20 +102,30 @@ Plug 'vim-scripts/CycleColor'
 " Project mode
 Plug 'tpope/vim-projectionist'
 
-" Haskell
-Plug 'dag/vim2hs'
-
 " AsyncRun ...
 Plug 'skywind3000/asyncrun.vim'
 
 " chruby support
-Plug 'mikepjb/vim-chruby'
+" Plug 'mikepjb/vim-chruby'
 
-" Svelte
-Plug 'evanleck/vim-svelte'
-
-" Racket
-Plug 'wlangstroth/vim-racket'
+" File types
+Plug 'digitaltoad/vim-jade'             " .jade
+Plug 'elixir-lang/vim-elixir'           " .ex, exs
+Plug 'elmcast/elm-vim'                  " .elm
+Plug 'idris-hackers/idris-vim'          " .idr
+Plug 'kchmck/vim-coffee-script'         " .coffee
+Plug 'leafgarland/typescript-vim'       " .ts
+Plug 'mustache/vim-mustache-handlebars' " .hbr
+Plug 'pangloss/vim-javascript'          " .js
+Plug 'puyo/vim-cucumber'                " .feature
+Plug 'puyo/vim-haml'                    " .haml
+Plug 'slashmili/alchemist.vim'          " .ex, .exs
+Plug 'tpope/vim-rails'                  " .rb, .erb
+Plug 'wavded/vim-stylus'                " .stylus
+Plug 'rust-lang/rust.vim'               " .rs
+Plug 'wlangstroth/vim-racket'           " .rkt
+Plug 'evanleck/vim-svelte'              " svelte
+Plug 'dag/vim2hs'                       " .hs
 
 call plug#end()
 " }
@@ -492,38 +486,53 @@ noremap <leader>a  :A<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+let g:ale_shell = '/bin/sh'
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 0
 
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
-let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
-let g:ale_linters.elixir = ['credo', 'dialyxir', 'elixir-ls']
+let g:ale_linters.elixir = ['credo', 'dialyxir']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
+let g:ale_linters.scss = ['stylelint']
 
 let g:ale_fixers = {}
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
-let g:ale_fixers.elm = ['format']
-let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.elixir = ['mix_format']
+let g:ale_fixers.elm = ['format']
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.ruby = ['rubocop']
+let g:ale_fixers.scss = ['stylelint']
 
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
 let g:ale_elixir_credo_strict = 1
+let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 let g:airline#extensions#ale#enabled = 1
 
-"let g:ale_set_loclist = 0
-"let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
-"let g:ale_keep_list_window_open = 1
+" Overwrite these ale functions to work with umbrella projects
+
+function! ale_linters#elixir#credo#GetCommand(buffer) abort
+    let l:project_root = ale#handlers#elixir#FindMixUmbrellaRoot(a:buffer)
+    let l:mode = ale_linters#elixir#credo#GetMode()
+    return ale#path#CdString(l:project_root)
+    \ . 'mix help credo && '
+    \ . 'mix credo ' . ale_linters#elixir#credo#GetMode()
+    \ . ' --format=flycheck --read-from-stdin %s'
+endfunction
+
+function! ale_linters#elixir#dialyxir#GetCommand(buffer) abort
+    let l:project_root = ale#handlers#elixir#FindMixUmbrellaRoot(a:buffer)
+    return ale#path#CdString(l:project_root)
+    \ . ' mix help dialyzer && mix dialyzer'
+endfunction
 
 augroup ale
-  au FileType elixir let g:ale_fix_on_save=1
+  au FileType elixir let g:ale_fix_on_save = 1
 augroup END
 " }
 
