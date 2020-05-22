@@ -515,6 +515,9 @@ let g:ale_ruby_rubocop_executable = 'bundle'
 let g:airline#extensions#ale#enabled = 1
 
 " Overwrite these ale functions to work with umbrella projects
+"
+" - https://github.com/dense-analysis/ale/pull/2759
+" - https://github.com/dense-analysis/ale/pull/3081
 
 function! ale_linters#elixir#credo#GetCommand(buffer) abort
     let l:project_root = ale#handlers#elixir#FindMixUmbrellaRoot(a:buffer)
