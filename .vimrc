@@ -91,7 +91,8 @@ Plug 'airblade/vim-rooter'
 Plug 'osyo-manga/vim-over'
 
 " Async lint engine
-Plug 'dense-analysis/ale'
+" fork of dense-analysis/ale to fix dialyxir and credo
+Plug 'puyo/ale'
 
 " Align stuff
 Plug 'junegunn/vim-easy-align'
@@ -483,71 +484,9 @@ noremap <leader>a  :A<CR>
 " }
 
 " Ale {
-"
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" Fix ale credo
-"
-" - https://github.com/dense-analysis/ale/pull/2759
-" - https://github.com/dense-analysis/ale/pull/3081
-
-function! CredoGetCommand(buffer) abort
-    let l:project_root = ale#handlers#elixir#FindMixUmbrellaRoot(a:buffer)
-    let l:mode = ale_linters#elixir#credo#GetMode()
-    return ale#path#CdString(l:project_root)
-    \ . 'mix help credo && '
-    \ . 'mix credo ' . ale_linters#elixir#credo#GetMode()
-    \ . ' --format=flycheck --read-from-stdin %s'
-endfunction
-
-call ale#linter#Define('elixir', {
-\   'name': 'credo2',
-\   'executable': 'mix',
-\   'command': function('CredoGetCommand'),
-\   'callback': 'ale_linters#elixir#credo#Handle',
-\})
-
-" Fix ale dialyxir
-"
-function! DialyxirHandle(buffer, lines) abort
-    " Matches patterns line the following:
-    "
-    " lib/filename.ex:19: Function fname/1 has no local return
-    let l:pattern = '\v(.+):(\d+):(.+)$'
-    let l:output = []
-    let l:type = 'W'
-    let l:bufname = bufname(a:buffer)
-    let l:umbrella_bufname = substitute(bufname(a:buffer), '^apps/[^/]*/', '', 'g')
-
-    for l:match in ale#util#GetMatches(a:lines, l:pattern)
-        if l:match[1] == l:bufname || l:match[1] == l:umbrella_bufname
-            call add(l:output, {
-            \   'bufnr': a:buffer,
-            \   'lnum': l:match[2] + 0,
-            \   'col': 0,
-            \   'type': l:type,
-            \   'text': l:match[3],
-            \})
-        endif
-    endfor
-
-    return l:output
-endfunction
-
-function! DialyxirGetCommand(buffer) abort
-    let l:project_root = ale#handlers#elixir#FindMixUmbrellaRoot(a:buffer)
-    return ale#path#CdString(l:project_root)
-    \ . ' mix help dialyzer && mix dialyzer --format=short 2>&1'
-endfunction
-
-call ale#linter#Define('elixir', {
-\   'name': 'dialyxir2',
-\   'executable': 'mix',
-\   'command': function('DialyxirGetCommand'),
-\   'callback': 'DialyxirHandle',
-\})
 
 let g:ale_shell = '/bin/sh'
 let g:ale_sign_column_always = 1
@@ -559,7 +498,7 @@ let g:ale_keep_list_window_open = 0
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_linters.css = ['stylelint']
-let g:ale_linters.elixir = ['credo2', 'dialyxir2']
+let g:ale_linters.elixir = ['credo', 'dialyxir']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
 
