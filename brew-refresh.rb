@@ -8,6 +8,8 @@
 
 require 'pp'
 require 'shellwords'
+require 'open3'
+require 'set'
 
 def confirm(prompt)
   loop do
@@ -34,24 +36,46 @@ def system_verbose(*args)
 end
 
 def read_brew_command(*cmd)
-  IO.popen(cmd).readlines.map(&:strip)
+  output, status = Open3.capture2(*cmd)
+  if status.success?
+    output.split($/)
+  else
+    warn "Command failed with exit status #{status.exitstatus}: #{Shellwords.join(cmd)}"
+    exit status.exitstatus
+  end
 end
 
 def read_brew_list_file(path)
   File.readlines(path).map{|w| w.sub(/#.*$/, '').strip }
 end
 
-# brew
+# brew taps
+
+wanted_taps = read_brew_list_file('brew-taps.txt')
+installed_taps = read_brew_command('brew', 'tap')
+to_install_taps = wanted_taps - installed_taps
+if to_install_taps.any?
+  to_install_taps.each do |tap|
+    system_verbose "brew", "tap", tap
+  end
+end
+
+# brew packages
 
 installed = read_brew_command('brew', 'list')
 wanted = read_brew_list_file('brew-list.txt')
 
-wanted_deps = read_brew_command('brew', 'deps', '--union', *wanted)
-# begin
-#   new_wanted_deps = read_brew_command('brew', 'deps', '--union', *wanted, *wanted_deps)
-#   wanted_deps |= new_wanted_deps
-# end while wanted_deps != new_wanted_deps
-wanted += wanted_deps
+wanted_deps = Hash.new {|h, k| h[k] = [] }
+wanted_deps_for_each = read_brew_command('brew', 'deps', '--union', '--for-each', *wanted)
+wanted_deps_for_each.each do |line|
+  pkg, deps = line.split(':')
+  deps = deps.split(' ')
+  deps.each do |dep|
+    wanted_deps[dep] << pkg
+  end
+end
+
+wanted += wanted_deps.keys
 to_remove = installed - wanted
 to_install = wanted - installed
 
@@ -60,13 +84,20 @@ system_verbose('brew', 'update')
 if to_remove.any?
   confirm("\n#{to_remove.join(' ')}\n\nRemove these packages?") do
     # force means all versions
-    #system_verbose('brew', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
     system_verbose('brew', 'uninstall', '--force', *to_remove)
   end
 end
 
 if to_install.any?
-  confirm("\n#{to_install.join(' ')}\n\nInstall these packages?") do
+  msg = to_install.map{|dep|
+    pkgs = wanted_deps[dep]
+    if pkgs.any?
+      "#{dep} (used by #{wanted_deps[dep].join(', ')})"
+    else
+      dep
+    end
+  }.join("\n")
+  confirm("\n#{msg}\n\nInstall these packages?") do
     system_verbose('brew', 'install', *to_install)
   end
 end
