@@ -114,7 +114,7 @@ to_install = wanted - installed
 
 if to_remove.any?
   confirm("\n#{to_remove.join(' ')}\n\nRemove these cask packages?") do
-    system_verbose('brew', 'cask', 'uninstall', '--ignore-dependencies', '--force', *to_remove)
+    system_verbose('brew', 'cask', 'uninstall', *to_remove)
   end
 end
 
