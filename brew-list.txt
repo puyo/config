@@ -51,6 +51,7 @@ netpbm              # image manipulation for old file formats
 open-completion     # tab completion for open
 openssl             # ruby dep
 openssl@1.1         # ruby dep
+pkg-config          # needed to build some ruby gems
 portable-openssl    # ruby dep for ruby < 2.4
 postgresql@10       # database for work
 privoxy             # web proxy
