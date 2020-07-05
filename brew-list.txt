@@ -76,6 +76,7 @@ sdl2_ttf            # library for fonts, for game dev
 siege               # benchmarking tool for web servers
 spring-completion   # tab completion for spring
 sqlite              # SQL database that uses simple files
+svgo                # compress SVG images
 telnet              # for testing network problems
 the_silver_searcher # grepalike
 tmux                # multiple shells inside one terminal
