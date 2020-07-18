@@ -704,6 +704,7 @@ With argument, do this that many times."
  '(rust-format-on-save t)
  '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(sonic-pi-path "/Applications/Sonic Pi.app/Resources/app")
  '(tabbar-background-color "#e1dfd7")
  '(tabbar-separator (quote (" ")))
  '(tabbar-use-images nil)
