@@ -129,6 +129,7 @@ Plug 'rust-lang/rust.vim'               " .rs
 Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'evanleck/vim-svelte'              " svelte
 Plug 'dag/vim2hs'                       " .hs
+" Plug 'dermusikman/sonicpi.vim'          " .sonicpi
 
 call plug#end()
 " }
@@ -201,18 +202,16 @@ if has("termguicolors")
   set termguicolors
 endif
 
-if has("gui")
+if has("gui_running")
   " colorscheme spacemacs-theme
   let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
   let g:airline_theme = 'pencil'
-
   set background=light
-
   colorscheme pencil-warm
-
   hi! link elixirStringDelimiter  String
   hi! link elixirAtom             Symbol
 else
+  let g:airline_theme = 'pencil'
   set background=dark
   colorscheme pencil-warm
 endif
@@ -263,7 +262,7 @@ set tabstop=8  " tab size (how many characters wide tabs are)
 set shiftwidth=2 " general purpose indent/unindent size
 set softtabstop=2 " number of spaces to insert instead of a tab
 set shiftround " round up to the next indentation column
-set completeopt= " don't use a pop up menu for completions
+set completeopt=menu,menuone,noinsert " don't use a pop up menu for completions
 set ignorecase " ignore case in patterns
 set infercase " infer case in patterns
 set smartcase " infer case in searches
