@@ -7,10 +7,15 @@ cmd = [
   './',
   's3://puyofiles/',
   '--profile', 'puyo',
+  '--exclude', '.DS_Store',
   '--exclude', 'photos/*',
   '--delete',
-  *ARGV
 ]
+
+pre_cmd = cmd + ['--dryrun']
+
+puts pre_cmd.shelljoin
+system(*pre_cmd)
 
 puts cmd.shelljoin
 print "OK? y/n "
