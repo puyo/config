@@ -7,7 +7,7 @@ cmd = [
   './',
   's3://puyofiles/',
   '--profile', 'puyo',
-  '--exclude', '.DS_Store',
+  '--exclude', '*/.DS_Store',
   '--exclude', 'photos/*',
   '--delete',
 ]
