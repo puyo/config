@@ -5,14 +5,15 @@ docker
 dotnet-sdk   # for MS Code + Unity
 firefox
 gimp         # image manipulation
-google-chrome
+godot        # game dev
 imageoptim   # optimise image size
 libreoffice
-skype
 openttd      # open transport tycoon deluxe
 racket       # lisp dialect IDE
 rstudio      # R language IDE, relies on 'brew install r'
+skype
 sonic-pi     # music
+veracrypt
 wine-stable
-xquartz
 wireshark
+xquartz
