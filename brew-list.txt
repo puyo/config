@@ -60,8 +60,9 @@ pstree              # displays processes
 r                   # R language
 rails-completion    # tab completion for rails
 rake-completion     # tab completion for rake
-readline            # library for command line consoles with history and shared keyboard shortcuts, ruby dep
+readline            # lib for CLI consoles with history and keyboard shortcuts, ruby dep
 redis               # key-value database
+rename              # handy CLI tool to rename files using a regexp
 ripgrep             # grepalike
 rsync               # efficient file updating
 ruby-completion     # tab completion for ruby
