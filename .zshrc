@@ -70,3 +70,9 @@ source $HOME/.asdf/asdf.sh
 
 export GOPATH=$HOME/go
 PATH=$PATH:${GOPATH//://bin:}/bin
+
+autoload -Uz bashcompinit
+
+bashcompinit
+
+source $HOME/.asdf/completions/asdf.bash
