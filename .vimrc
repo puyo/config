@@ -111,6 +111,9 @@ Plug 'skywind3000/asyncrun.vim'
 
 Plug 'tpope/vim-scriptease'
 
+" Writing mode
+Plug 'junegunn/goyo.vim'
+
 " File types
 Plug 'digitaltoad/vim-jade'             " .jade
 Plug 'elixir-lang/vim-elixir'           " .ex, exs
@@ -147,6 +150,7 @@ set history=100  " keep this many lines of command line history
 set mousemodel=popup " right mouse button pops up a menu
 "helptags ~/.vim/doc " add help searching for user installed packages
 set t_Co=256 " use all 256 colours in 256 colour terminals
+set spelllang=en_au
 " }
 
 " Folding {
@@ -539,4 +543,33 @@ let g:rustfmt_autosave = 1
 
 " rooter {
 let g:rooter_silent_chdir = 1
+" }
+
+" Goyo {
+function! s:goyo_enter()
+  setlocal background=dark
+  setlocal noshowmode
+  setlocal noshowcmd
+  setlocal scrolloff=999
+  setlocal nospell
+  noremap <silent> k gk
+  noremap <silent> j gj
+  noremap <silent> 0 g0
+  noremap <silent> $ g$
+endfunction
+
+function! s:goyo_leave()
+  " set background=light
+  " set showmode
+  " set showcmd
+  " set scrolloff=5
+  " set spell
+  noremap <silent> k k
+  noremap <silent> j j
+  noremap <silent> 0 0
+  noremap <silent> $ $
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }
