@@ -57,6 +57,7 @@ privoxy             # web proxy
 procmail            # just for the lockfile command
 protobuf            # compact wire transmissions for work
 pstree              # displays processes
+python              # emacs dependency
 r                   # R language
 rails-completion    # tab completion for rails
 rake-completion     # tab completion for rake
