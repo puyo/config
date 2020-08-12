@@ -9,6 +9,7 @@ godot        # game dev
 imageoptim   # optimise image size
 libreoffice
 openttd      # open transport tycoon deluxe
+osxfuse      # required by veracrypt
 racket       # lisp dialect IDE
 rstudio      # R language IDE, relies on 'brew install r'
 skype
