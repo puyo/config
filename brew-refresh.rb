@@ -10,6 +10,7 @@ require 'pp'
 require 'shellwords'
 require 'open3'
 require 'set'
+require 'json'
 
 def confirm(prompt)
   loop do
@@ -49,6 +50,18 @@ def read_brew_list_file(path)
   File.readlines(path).map{|w| w.sub(/#.*$/, '').strip }
 end
 
+def brew_aliases(pkgs)
+  output, status = Open3.capture2('brew', 'info', '--json', *pkgs)
+  if status.success?
+    data = JSON.parse(output)
+    alias_lists = data.map{|d| [d['name']] + d['aliases'] }
+    pkgs.flat_map{|p| alias_lists.find{|l| l.include?(p) } }
+  else
+    warn "Command failed with exit status #{status.exitstatus}: #{Shellwords.join(cmd)}"
+    exit status.exitstatus
+  end
+end
+
 # brew taps
 
 wanted_taps = read_brew_list_file('brew-taps.txt')
@@ -63,6 +76,8 @@ end
 # brew packages
 
 installed = read_brew_command('brew', 'list')
+installed += installed.select{|i| i.include?('@') }.map{|i| i.split('@').first }
+installed.uniq!
 wanted = read_brew_list_file('brew-list.txt')
 
 wanted_deps = Hash.new {|h, k| h[k] = [] }
@@ -70,14 +85,15 @@ wanted_deps_for_each = read_brew_command('brew', 'deps', '--union', '--for-each'
 wanted_deps_for_each.each do |line|
   pkg, deps = line.split(':')
   deps = deps.split(' ')
+  deps += deps.select{|i| i.include?('@') }.map{|i| i.split('@').first }
   deps.each do |dep|
     wanted_deps[dep] << pkg
   end
 end
 
 wanted += wanted_deps.keys
-to_remove = installed - wanted
-to_install = wanted - installed
+to_remove = installed - wanted - brew_aliases(wanted)
+to_install = wanted - installed - brew_aliases(installed)
 
 system_verbose('brew', 'update')
 

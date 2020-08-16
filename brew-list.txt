@@ -45,19 +45,18 @@ memcached           # distributed cache used for work
 mix-completion      # tab completion for mix
 mono                # dot net runtime for VS Code
 moreutils           # handy tools like ts and parallel
-mysql@5.6           # database for work
+mysql@8.0           # database for work
 ncurses             # text based GUI library
 netpbm              # image manipulation for old file formats
 open-completion     # tab completion for open
 openssl@1.1         # ruby dep
 pkg-config          # needed to build some ruby gems
 portable-openssl    # ruby dep for ruby < 2.4
-postgresql@10       # database for work
+postgresql@12       # database for work
 privoxy             # web proxy
 procmail            # just for the lockfile command
 protobuf            # compact wire transmissions for work
 pstree              # displays processes
-python              # emacs dependency
 r                   # R language
 rails-completion    # tab completion for rails
 rake-completion     # tab completion for rake
