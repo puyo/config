@@ -10,11 +10,13 @@ imageoptim   # optimise image size
 libreoffice
 openttd      # open transport tycoon deluxe
 osxfuse      # required by veracrypt
+qgis         # mapping software
 racket       # lisp dialect IDE
 rstudio      # R language IDE, relies on 'brew install r'
 skype
 sonic-pi     # music
 veracrypt
+virtualbox   # for testing web sites in IE
 wine-stable
 wireshark
 xquartz
