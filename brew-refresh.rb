@@ -76,8 +76,6 @@ end
 # brew packages
 
 installed = read_brew_command('brew', 'list')
-installed += installed.select{|i| i.include?('@') }.map{|i| i.split('@').first }
-installed.uniq!
 wanted = read_brew_list_file('brew-list.txt')
 
 wanted_deps = Hash.new {|h, k| h[k] = [] }
@@ -85,7 +83,6 @@ wanted_deps_for_each = read_brew_command('brew', 'deps', '--union', '--for-each'
 wanted_deps_for_each.each do |line|
   pkg, deps = line.split(':')
   deps = deps.split(' ')
-  deps += deps.select{|i| i.include?('@') }.map{|i| i.split('@').first }
   deps.each do |dep|
     wanted_deps[dep] << pkg
   end
