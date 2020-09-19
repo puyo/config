@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 
-system("aws s3 sync ./ s3://puyofiles/ --profile puyo --exclude '*' --include 'photos/*' --delete")
+system("aws s3 sync ./photos/ s3://puyofiles/photos/ --profile puyo --exclude '*' --include 'photos/*'")
