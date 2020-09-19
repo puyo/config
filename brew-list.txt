@@ -67,7 +67,6 @@ ripgrep             # grepalike
 rsync               # efficient file updating
 ruby-completion     # tab completion for ruby
 ruby-install        # tool used by chruby to install versions of ruby in ~/.rubies
-rustup-init         # rust version manager rustup
 sdl2                # library for rendering graphics, for game dev
 sdl2_gfx            # library for graphics primitives, for game dev
 sdl2_image          # library for image manipulation, for game dev
