@@ -10,6 +10,7 @@ imageoptim   # optimise image size
 libreoffice
 openttd      # open transport tycoon deluxe
 osxfuse      # required by veracrypt
+qbittorrent  # bittorrent client
 qgis         # mapping software
 racket       # lisp dialect IDE
 rstudio      # R language IDE, relies on 'brew install r'
