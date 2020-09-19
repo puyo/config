@@ -137,37 +137,38 @@ Plug 'dag/vim2hs'                       " .hs
 call plug#end()
 " }
 
-" Basics {
+                          " Basics {
 filetype plugin indent on " auto indenting
-set noexrc " don't use local .vimrc files
-set cpoptions+=a " :read updates alternative file name
-set cpoptions+=A " :write updates alternative file name
-set cpoptions+=c " continue searching after the current match
-set cpoptions+=F " :write updates current buffer file name
-set cpoptions+=m " show match parens after .5s
-set cpoptions+=q " when joining lines, leave the cursor between lines
-set history=100  " keep this many lines of command line history
-set mousemodel=popup " right mouse button pops up a menu
-"helptags ~/.vim/doc " add help searching for user installed packages
-set t_Co=256 " use all 256 colours in 256 colour terminals
-set spelllang=en_au
-" }
+set noexrc                " don't use local .vimrc files
+set cpoptions+=a          " :read updates alternative file name
+set cpoptions+=A          " :write updates alternative file name
+set cpoptions+=c          " continue searching after the current match
+set cpoptions+=F          " :write updates current buffer file name
+set cpoptions+=m          " show match parens after .5s
+set cpoptions+=q          " when joining lines, leave the cursor between lines
+set history=100           " keep this many lines of command line history
+set mousemodel=popup      " right mouse button pops up a menu
+                          " helptags ~/.vim/doc " add help searching for user installed packages
+set t_Co=256              " use all 256 colours in 256 colour terminals
+set spelllang=en_au       " Australian English
+set conceallevel=0        " Don't show and hide things like markdown fencing - it's distracting
+                          " }
 
 " Folding {
-set foldenable " turn on folding
+set foldenable        " turn on folding
 set foldmethod=indent " fold on indent
-set foldlevel=100 " don't autofold anything (but I can still fold manually)
+set foldlevel=100     " don't autofold anything (but I can still fold manually)
 " }
 
 " Files and buffers {
-set nobackup " don't backup files
-set noswapfile " don't create swapfiles
-set backupdir=~/.vim/backup " where to put backup files
+set nobackup                 " don't backup files
+set noswapfile               " don't create swapfiles
+set backupdir=~/.vim/backup  " where to put backup files
 set fileformats=unix,dos,mac " support all three, in this order
-set directory=~/.vim/tmp
-set hidden " let me open multiple unsaved buffers
-set autowrite " autowrite, save the file when calling external commands
-set autoread " reload file from disk if it changed before I modified it
+set directory=~/.vim/tmp     " put swap files here
+set hidden                   " let me open multiple unsaved buffers
+set autowrite                " autowrite, save the file when calling external commands
+set autoread                 " reload file from disk if it changed before I modified it
 set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage
 
 " Strip trailing whitespace when I save source files.
@@ -217,7 +218,7 @@ if has("gui_running")
 else
   let g:airline_theme = 'pencil'
   set background=dark
-  colorscheme pencil-warm
+  colorscheme Tomorrow-Night-Eighties
 endif
 
 
@@ -524,7 +525,9 @@ augroup END
 " }
 
 " Markdown {
-let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript']
+let g:vim_markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript', 'sql']
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 " }
 
 " Haskell {
@@ -572,4 +575,17 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" }
+
+" gx to open a URL {
+function! HandleURL()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;)]*')
+  echo s:uri
+  if s:uri != ""
+    silent exec "!open '".s:uri."'"
+  else
+    echo "No URI found in line."
+  endif
+endfunction
+nmap gx :call HandleURL()<cr>
 " }
