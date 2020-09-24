@@ -22,8 +22,30 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
         local reset="\[\033[00m\]"
         local user_and_host='\u@\h'
 
+        __which_tool() {
+          p=$PWD
+          tool=$1
+
+          while [ ! -z "${p}" ]; do
+            path="${p}/.tool-versions"
+            if [ -f "${path}" ]; then
+              result=`grep $tool "${path}"`
+              if [ ! -z "${result}" ]; then
+                echo $result
+                return 0
+              fi
+            fi
+            path="${p}/.ruby-versions"
+            if [ -f "${path}" ]; then
+              cat "${path}"
+              return 0
+            fi
+            p=${p%/*}
+          done
+        }
+
         __ruby_prompt() {
-          local ruby="$(ruby --version | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')"
+          local ruby=$(__which_tool ruby | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')
           case $(which ruby) in
             *asdf/shims/ruby)
               ruby=" ruby-${ruby} (asdf)"
