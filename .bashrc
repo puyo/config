@@ -35,7 +35,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
                 return 0
               fi
             fi
-            path="${p}/.ruby-versions"
+            path="${p}/.ruby-version"
             if [ -f "${path}" ]; then
               cat "${path}"
               return 0
