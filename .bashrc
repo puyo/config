@@ -46,23 +46,22 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
 
         __ruby_prompt() {
           local ruby=$(__which_tool ruby | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')
+          export ASDF_RUBY_VERSION=$ruby
           case $(which ruby) in
             *asdf/shims/ruby)
-              ruby=" ruby-${ruby} (asdf)"
+              echo " ruby-${ruby} (asdf)"
               ;;
             *.rubies*)
-              ruby=" ruby-${ruby} (chruby)"
+              echo " ruby-${ruby} (chruby)"
               ;;
             *)
-              ruby=" ruby-${ruby} (os)"
               ;;
           esac
-          echo $ruby
         }
         local git='$(__git_ps1 " %s")'
         local dir=' \w'
         local date='$(date +%T)'
-        PS1="${green}${user_and_host}${cyan} \$(__ruby_prompt)${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
+        PS1="${green}${user_and_host}${cyan}\$(__ruby_prompt)${yellow}${git}${blue}${dir}${reset}\n${gray}${date}${reset} \$ "
 
         # add window title "user@host dir"
         PS1="\[\e]0;\u@\h \w\a\]$PS1"
