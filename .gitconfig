@@ -51,7 +51,7 @@
 	cb = rev-parse --symbolic-full-name --abbrev-ref HEAD
 	gp = !git push --set-upstream origin HEAD:$(git cb)
 	up = !git fetch --prune origin && git rebase -p origin/$(git cb)
-	gup = !git fetch --prune origin && git rebase --rebase-merges origin/$(git cb)
+	gup = !git fetch --prune origin && git rebase -p origin/$(git cb)
 
 	cleanup = "!git branch --merged origin/master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 	tags = !.git/hooks/ctags
