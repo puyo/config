@@ -1,0 +1,169 @@
+/* ==UserStyle==
+@name           Oh Jira
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@homepageURL    https://github.com/puyo/config/tree/master/usercss
+@updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
+@description    Jira changes - more compact, less busy, utilitarian
+@author         Gregory McIntyre
+==/UserStyle== */
+
+@-moz-document regexp("https://[^.]+.atlassian.net.*") {
+    #dashboard {
+        overflow: visible !important;
+    }
+    .page-type-dashboard .aui-page-header {
+        padding: 0 !important;
+    }
+    .aui-page-header-actions {
+        padding: 0 !important;
+    }
+    .aui-page-header h1 {
+        margin-bottom: 1rem !important;
+    }
+    .gadget {
+        margin-bottom: 1rem !important;
+        margin-left: 0 !important;
+        margin-right: 8px !important;
+    }
+    .gadget[style*="left: 50%;"] {
+        margin-left: 8px !important;
+        margin-right: 0 !important;
+    }
+    .gadget-container {
+        margin: 0 !important;
+    }
+    .search-results-dashboard-item-issue-table .project {
+        white-space: nowrap;
+    }
+    .search-results-dashboard-item-issue-table .status {
+        overflow-x: scroll;
+    }
+    .dashboard-item-content {
+        padding: 0 1rem !important;
+    }
+    .dashboard-item-title {
+        padding: 0.5rem 1rem !important;
+        margin: 0 !important;
+        visibility: visible !important;
+    }
+    .ag-inner-area {
+        padding: 0 0 !important;
+    }
+    .ag-name-sprint a {
+        color: inherit !important;
+        font-size: 16px;
+    }
+    .ag-name-board {
+        color: inherit !important;
+        font-size: 16px;
+    }
+    .ag-name-lane {
+        font-size: inherit !important;
+    }
+    .ag-name-lane.add-bottom {
+        display: none;
+    }
+    h3 > strong {
+        font-weight: inherit !important;
+    }
+    .ag-meta-section sup {
+        font-size: inherit !important;
+        vertical-align: baseline;
+        padding-right: 0.25em;
+    }
+    .ag-label {
+        font-size: inherit !important;
+        display: inline;
+    }
+    .ag-metric-value {
+        font-size: inherit !important;
+        display: inline !important;
+    }
+    .ag-time-remaining {
+        white-space: nowrap;
+    }
+    .ag-name-lane h3 {
+        font-size: inherit !important;
+        margin: 0 !important;
+    }
+    .ag-time-remaining {
+        color: inherit !important;
+    }
+    .ag-status-header {
+        margin: 0 !important;
+    }
+    .ag-status-header h1 {
+        font-size: 16px;
+    }
+    .ag-header-region {
+        border: none !important;
+    }
+    .ag-progress-group {
+        margin-bottom: 0.25rem;
+    }
+    .ag-meta-group {
+        padding: 0 !important;
+        display: block !important;
+        margin-bottom: 0.25rem;
+    }
+    .ag-meta-section {
+        color: inherit !important;
+        text-align: left !important;
+        text-transform: lowercase;
+        display: inline-block !important;
+        margin-right: 0.5em !important;
+        overflow: initial !important;
+    }
+    .issue-table thead {
+        border: none !important;
+    }
+    .issue-table tbody {
+        border: none !important;
+    }
+    .aui > tbody > tr > td {
+        padding: 4px 4px !important;
+    }
+    .aui-lozenge {
+        font-size: 0.7rem !important;
+    }
+    .empty-results.search-results-dashboard-item {
+        padding: 0 !important;
+        margin-bottom: 1rem;
+    }
+    [data-testid="atlassian-navigation--header"] {
+        height: 36px !important;
+    }
+    [data-testid="atlassian-navigation--header"],
+    [data-testid="atlassian-navigation--header"] button,
+    [data-testid="atlassian-navigation--header"] a,
+    [data-testid="atlassian-navigation--header"] input {
+        background-color: #abd6e8 !important;
+    }
+    [data-testid="atlassian-navigation--primary-actions"]::after {
+        display: none !important;
+    }
+    #dashboard-content {
+        box-sizing: border-box !important;
+    }
+    [data-testid="Navigation"] {
+        top: 36px !important;
+    }
+    #page-body > #content {
+        border-top: 36px solid transparent !important;
+    }
+    .ag-progress,
+    .ag-progress-group {
+        display: none !important;
+    }
+    .ghx-chart .legend {
+        display: none;
+    }
+    #ghx-chart-data,
+    #ghx-chart-legend {
+        display: none;
+    }
+    #ghx-chart-panel-content {
+        padding: 0px;
+    }
+}
