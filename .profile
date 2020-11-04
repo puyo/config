@@ -65,7 +65,6 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
 fi
 
 export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH=$PATH:${GOPATH//://bin:}/bin
