@@ -528,6 +528,7 @@ augroup END
 let g:vim_markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript', 'sql']
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
+let g:markdown_syntax_conceal = 0
 " }
 
 " Haskell {
