@@ -39,6 +39,9 @@
     .search-results-dashboard-item-issue-table .status {
         overflow-x: scroll;
     }
+    .search-results-dashboard-item-issue-table .summary {
+        word-break: break-word;
+    }
     .dashboard-item-content {
         padding: 0 1rem !important;
     }
