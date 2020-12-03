@@ -612,7 +612,7 @@ With argument, do this that many times."
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
- '(compilation-message-face (quote default))
+ '(compilation-message-face 'default)
  '(create-lockfiles nil)
  '(css-indent-offset 2)
  '(cua-global-mark-cursor-color "#2aa198")
@@ -620,13 +620,11 @@ With argument, do this that many times."
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(delete-selection-mode t)
  '(evil-ex-search-persistent-highlight nil)
  '(evil-surround-pairs-alist
-   (quote
-    ((40 "( " . " )")
+   '((40 "( " . " )")
      (91 "[ " . " ]")
      (123 "{ " . " }")
      (41 "(" . ")")
@@ -639,73 +637,64 @@ With argument, do this that many times."
      (116 . evil-surround-read-tag)
      (60 . evil-surround-read-tag)
      (102 . evil-surround-function)
-     (37 "%{" . "}"))))
+     (37 "%{" . "}")))
  '(evil-want-C-i-jump t)
  '(evil-want-Y-yank-to-eol nil)
  '(exec-path-from-shell-check-startup-files nil)
- '(flycheck-disabled-checkers (quote (rust rust-cargo)))
+ '(flycheck-disabled-checkers '(rust rust-cargo))
  '(flycheck-elixir-credo-strict t)
  '(flyspell-persistent-highlight nil)
  '(global-linum-mode t)
  '(global-vi-tilde-fringe-mode nil)
  '(helm-adaptive-sort-by-frequent-recent-usage nil)
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
+ '(highlight-changes-colors '("#FD5FF0" "#AE81FF"))
  '(highlight-symbol-colors
    (--map
     (solarized-color-blend it "#002b36" 0.25)
-    (quote
-     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+    '("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2")))
  '(highlight-symbol-foreground-color "#93a1a1")
  '(highlight-tail-colors
-   (quote
-    (("#49483E" . 0)
+   '(("#49483E" . 0)
      ("#67930F" . 20)
      ("#349B8D" . 30)
      ("#21889B" . 50)
      ("#968B26" . 60)
      ("#A45E0A" . 70)
      ("#A41F99" . 85)
-     ("#49483E" . 100))))
+     ("#49483E" . 100)))
  '(hl-bg-colors
-   (quote
-    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+   '("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00"))
  '(hl-fg-colors
-   (quote
-    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+   '("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36"))
  '(js-indent-level 2)
  '(js2-mode-show-parse-errors t)
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
  '(large-file-warning-threshold 1000000000)
  '(magit-diff-use-overlays nil)
- '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
+ '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
  '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(ns-pop-up-frames nil)
  '(package-selected-packages
-   (quote
-    (nadvice tabbar org-plus-contrib lv transient reformatter flycheck-popup-tip toml-mode racer flycheck-rust cargo rust-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy osc sonic-pi counsel-dash xpm csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash orgit open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+   '(nadvice tabbar org-plus-contrib lv transient reformatter flycheck-popup-tip toml-mode racer flycheck-rust cargo rust-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy osc sonic-pi counsel-dash xpm csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash orgit open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))
  '(paradox-github-token t)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(projectile-globally-ignored-directories
-   (quote
-    (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "node_modules")))
- '(projectile-globally-ignored-files (quote ("TAGS" "tags" ".tern-port")))
+   '(".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "node_modules"))
+ '(projectile-globally-ignored-files '("TAGS" "tags" ".tern-port"))
  '(projectile-use-git-grep t)
  '(recentf-exclude
-   (quote
-    ("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS")))
- '(ring-bell-function (quote ignore))
+   '("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS"))
+ '(ring-bell-function 'ignore)
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
  '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(sonic-pi-path "/Applications/Sonic Pi.app/Resources/app")
  '(tabbar-background-color "#e1dfd7")
- '(tabbar-separator (quote (" ")))
- '(tabbar-use-images nil)
+ '(tabbar-separator '(" "))
  '(tags-add-tables nil)
  '(tags-case-fold-search nil)
  '(tags-revert-without-query t)
@@ -716,8 +705,7 @@ With argument, do this that many times."
  '(typescript-indent-level 2)
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
-   (quote
-    ((20 . "#BC8383")
+   '((20 . "#BC8383")
      (40 . "#CC9393")
      (60 . "#DFAF8F")
      (80 . "#D0BF8F")
@@ -734,7 +722,7 @@ With argument, do this that many times."
      (300 . "#7CB8BB")
      (320 . "#8CD0D3")
      (340 . "#94BFF3")
-     (360 . "#DC8CC3"))))
+     (360 . "#DC8CC3")))
  '(vc-annotate-very-old-color "#DC8CC3")
  '(vc-follow-symlinks t)
  '(volatile-highlights-mode nil)
