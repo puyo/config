@@ -12,7 +12,6 @@ bash-completion     # tab completion
 bundler-completion  # tab completion for bundle
 carthage            # iOS package manager
 cataclysm           # roguelike game
-chruby              # ruby version manager
 cmake               # for compiling packages from source
 coreutils           # checksums such as sha256sum
 ctags               # code indexing
