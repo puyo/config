@@ -351,6 +351,12 @@ vnoremap <Leader>c "+y
 nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>q :qall<CR>
 
+" If line wrap is enabled, move to the next line visually
+noremap <silent> k gk
+noremap <silent> j gj
+noremap <silent> 0 g0
+noremap <silent> $ g$
+
 " Quoting {
 "
 " Press s to surround selection with quotes, same as Spacemacs
@@ -452,33 +458,40 @@ augroup END
 
 " Projectionist {
 let g:projectionist_heuristics = {
-\  "web/router.ex": {
-\    "web/controllers/*_controller.ex": {
-\      "type": "controller",
-\      "alternate": "test/controllers/{}_controller_test.exs",
-\    },
-\    "web/models/*.ex": {
-\      "type": "model",
-\      "alternate": "test/models/{}_test.exs",
-\    },
-\    "web/views/*_view.ex": {
-\      "type": "view",
-\      "alternate": "test/views/{}_view_test.exs",
-\    },
-\    "web/templates/*.html.eex": {
-\      "type": "template",
-\      "alternate": "web/views/{dirname|basename}_view.ex"
-\    },
-\    "test/*_test.exs": {
-\      "type": "test",
-\      "alternate": "web/{}.ex",
-\    }
-\  },
-\  "mix.exs": {
-\    "lib/*.ex": { "alternate": "test/{}_test.exs" },
-\    "test/*_test.exs": { "alternate": "lib/{}.ex" }
-\  }
-\}
+\   'web/router.ex': {
+\     'web/controllers/*_controller.ex': {
+\       'type': 'controller',
+\       'alternate': 'test/controllers/{}_controller_test.exs',
+\     },
+\     'web/models/*.ex': {
+\       'type': 'model',
+\       'alternate': 'test/models/{}_test.exs',
+\     },
+\     'web/views/*_view.ex': {
+\       'type': 'view',
+\       'alternate': 'test/views/{}_view_test.exs',
+\     },
+\     'web/templates/*.html.eex': {
+\       'type': 'template',
+\       'alternate': 'web/views/{dirname|basename}_view.ex'
+\     },
+\     'test/*_test.exs': {
+\       'type': 'test',
+\       'alternate': 'web/{}.ex',
+\     }
+\   },
+\   'mix.exs': {
+\     'lib/*.ex': { 'alternate': 'test/{}_test.exs' },
+\     'test/*_test.exs': { 'alternate': 'lib/{}.ex' }
+\   },
+\   'app/*.rb': { 'alternate': 'spec/{}_spec.rb' },
+\   'lib/*.rb': { 'alternate': 'spec/lib/{}_spec.rb' },
+\   'lib/tasks/*.rake': { 'alternate': 'spec/lib/tasks/{}_spec.rb' },
+\   'spec/*_spec.rb': { 'alternate': 'app/{}.rb' },
+\   'spec/lib/*_spec.rb': { 'alternate': 'lib/{}.rb' },
+\   'spec/lib/tasks/*_spec.rb': { 'alternate': 'lib/tasks/{}.rake' }
+\ }
+
 noremap <leader>ec :Econtroller<Space>
 noremap <leader>em :Emodel<Space>
 noremap <leader>et :Etemplate<Space>
@@ -556,10 +569,12 @@ function! s:goyo_enter()
   setlocal noshowcmd
   setlocal scrolloff=999
   setlocal nospell
-  noremap <silent> k gk
-  noremap <silent> j gj
-  noremap <silent> 0 g0
-  noremap <silent> $ g$
+  setlocal wrap
+  setlocal linebreak
+  " noremap <silent> k gk
+  " noremap <silent> j gj
+  " noremap <silent> 0 g0
+  " noremap <silent> $ g$
 endfunction
 
 function! s:goyo_leave()
@@ -568,10 +583,13 @@ function! s:goyo_leave()
   " set showcmd
   " set scrolloff=5
   " set spell
-  noremap <silent> k k
-  noremap <silent> j j
-  noremap <silent> 0 0
-  noremap <silent> $ $
+  setlocal background=light
+  " noremap <silent> k k
+  " noremap <silent> j j
+  " noremap <silent> 0 0
+  " noremap <silent> $ $
+  setlocal nowrap
+  setlocal nolinebreak
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
