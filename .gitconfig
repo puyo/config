@@ -60,6 +60,7 @@
 
 [diff]
 	tool = diffmerge
+	renameLimit = 2000
 [difftool "diffmerge"]
 	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
 [merge]
