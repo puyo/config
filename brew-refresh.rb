@@ -75,7 +75,7 @@ end
 
 # brew packages
 
-installed = read_brew_command('brew', 'list')
+installed = read_brew_command('brew', 'list', '--formula')
 wanted = read_brew_list_file('brew-list.txt')
 
 wanted_deps = Hash.new {|h, k| h[k] = [] }
