@@ -121,7 +121,7 @@ system_verbose('brew', 'cleanup')
 # brew cask
 
 wanted = read_brew_list_file('brew-cask-list.txt')
-installed = read_brew_command('brew', 'cask', 'list')
+installed = read_brew_command('brew', 'list', '--cask')
 to_remove = installed - wanted
 to_install = wanted - installed
 
@@ -137,4 +137,4 @@ if to_install.any?
   end
 end
 
-system_verbose('brew', 'cask', 'upgrade')
+system_verbose('brew', 'upgrade', '--cask')
