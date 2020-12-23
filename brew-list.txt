@@ -71,6 +71,7 @@ sdl2_gfx            # library for graphics primitives, for game dev
 sdl2_image          # library for image manipulation, for game dev
 sdl2_mixer          # library for audio, for game dev
 sdl2_ttf            # library for fonts, for game dev
+shellcheck          # static analysis of bash scripts
 siege               # benchmarking tool for web servers
 spring-completion   # tab completion for spring
 sqlite              # SQL database that uses simple files
