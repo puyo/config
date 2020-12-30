@@ -19,6 +19,5 @@ skype
 sonic-pi     # music
 veracrypt
 virtualbox   # for testing web sites in IE
-wine-stable
 wireshark
 xquartz
