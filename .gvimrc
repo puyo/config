@@ -1,6 +1,6 @@
 if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
-  macmenu &File.Open\.\.\. key=<nop>
+  macmenu &File.Open… key=<nop>
   macmenu &File.Close key=<nop>
   macmenu &File.Print key=<nop>
   macmenu &Edit.Find.Find\ Next key=<nop>
