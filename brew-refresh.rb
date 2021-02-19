@@ -51,15 +51,20 @@ def read_brew_list_file(path)
 end
 
 def brew_aliases(pkgs)
-  output, status = Open3.capture2('brew', 'info', '--json', *pkgs)
+  cmd = ['brew', 'info', '--json=v2', *pkgs]
+  output, status = Open3.capture2(*cmd)
   if status.success?
     data = JSON.parse(output)
-    alias_lists = data.map{|d| [d['name']] + d['aliases'] }
+    alias_lists = data['formulae'].map{|d| [d['name']] + d['aliases'] } +
+      data['casks'].map{|d| [d['name']] }
     pkgs.flat_map{|p| alias_lists.find{|l| l.include?(p) } }
   else
     warn "Command failed with exit status #{status.exitstatus}: #{Shellwords.join(cmd)}"
     exit status.exitstatus
   end
+rescue
+  require 'pry'
+  binding.pry
 end
 
 # brew taps
