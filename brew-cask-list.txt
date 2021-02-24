@@ -1,23 +1,23 @@
 barrier      # keyboard and mouse sharing client/server
 blender      # 3D graphics
 chromedriver # browser automation
-docker
+docker       # apps packaged with lightweight OSes
 dotnet-sdk   # for MS Code + Unity
-firefox
+firefox      # browser
 gimp         # image manipulation
 godot        # game dev
 imageoptim   # optimise image size
-libreoffice
+libreoffice  # word/excel but free
 openttd      # open transport tycoon deluxe
 osxfuse      # required by veracrypt
 postman      # API client, testing tool
 qbittorrent  # bittorrent client
 qgis         # mapping software
-racket       # lisp dialect IDE
+#racket       # lisp dialect IDE
 rstudio      # R language IDE, relies on 'brew install r'
-skype
+skype        # voice and video calls
 sonic-pi     # music
-veracrypt
+veracrypt    # encrypted partitions
 virtualbox   # for testing web sites in IE
-wireshark
-xquartz
+wireshark    # examine network traffic
+xquartz      # run X programs on Mac
