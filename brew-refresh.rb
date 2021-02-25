@@ -51,7 +51,7 @@ def read_brew_list_file(path)
 end
 
 def brew_aliases(pkgs)
-  cmd = ['brew', 'info', '--json=v2', *pkgs]
+  cmd = ['brew', 'info', '--formula', '--json=v2', *pkgs]
   output, status = Open3.capture2(*cmd)
   if status.success?
     data = JSON.parse(output)
@@ -79,12 +79,11 @@ if to_install_taps.any?
 end
 
 # brew packages
-
 installed = read_brew_command('brew', 'list', '--formula')
 wanted = read_brew_list_file('brew-list.txt')
 
 wanted_deps = Hash.new {|h, k| h[k] = [] }
-wanted_deps_for_each = read_brew_command('brew', 'deps', '--union', '--for-each', *wanted)
+wanted_deps_for_each = read_brew_command('brew', 'deps', '--formula', '--installed', '--union', '--for-each', *wanted)
 wanted_deps_for_each.each do |line|
   pkg, deps = line.split(':')
   deps = deps.split(' ')
@@ -132,13 +131,13 @@ to_install = wanted - installed
 
 if to_remove.any?
   confirm("\n#{to_remove.join(' ')}\n\nRemove these cask packages?") do
-    system_verbose('brew', 'cask', 'uninstall', *to_remove)
+    system_verbose('brew', 'uninstall', '--cask', *to_remove)
   end
 end
 
 if to_install.any?
   confirm("\n#{to_install.join(' ')}\n\nInstall these cask packages?") do
-    system_verbose('brew', 'cask', 'install', *to_install)
+    system_verbose('brew', 'install', '--cask', *to_install)
   end
 end
 
