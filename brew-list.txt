@@ -80,6 +80,7 @@ telnet              # for testing network problems
 the_silver_searcher # grepalike
 tmux                # multiple shells inside one terminal
 unrar               # decompress rar files
+v8@3.15             # for work project
 watch               # show changes to a command's output every 2 seconds
 webp                # library for new image format by google
 weechat             # IRC client
