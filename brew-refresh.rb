@@ -86,9 +86,11 @@ wanted_deps = Hash.new {|h, k| h[k] = [] }
 wanted_deps_for_each = read_brew_command('brew', 'deps', '--formula', '--installed', '--union', '--for-each', *wanted)
 wanted_deps_for_each.each do |line|
   pkg, deps = line.split(':')
-  deps = deps.split(' ')
-  deps.each do |dep|
-    wanted_deps[dep] << pkg
+  if deps
+    deps = deps.split(' ')
+    deps.each do |dep|
+      wanted_deps[dep] << pkg
+    end
   end
 end
 
