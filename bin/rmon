@@ -5,8 +5,8 @@ require 'shellwords'
 path = ARGV.shift || `v`.split(':').first
 
 def run_test(test_path, args)
-  has_spring = system("which spring 2> /dev/null")
-  spring_str = if has_spring then 'spring ' else '' end
+  has_spring = File.exist?('bin/spring')
+  spring_str = if has_spring then 'bin/spring ' else '' end
 
   cmd = [
     'nodemon',
