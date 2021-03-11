@@ -8,19 +8,56 @@
 @author         Gregory McIntyre
 ==/UserStyle== */
 
+
 @-moz-document url-prefix("https://app.slack.com/client/") {
+
+    /* typography */
+
     .c-link:hover {
         text-decoration: none !important;
     }
+
+
+    /* message */
 
     .c-message_kit__background--hovered {
         background: none !important;
     }
 
+
+    /* message reply bar */
+
+    .c-message__reply_bar {
+        max-width: initial;
+        background: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
+        border-color: transparent !important;
+    }
+
+    .c-message__reply_bar_view_thread {
+        display: none !important;
+    }
+    .c-message__reply_bar_last_reply {
+        opacity: 1 !important;
+    }
+
+    .c-message__reply_bar_arrow {
+        color: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1) !important;
+    }
+
+
+    /* message attachments */
+
     .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__attachments {
         display: none !important;
     }
 
+
+    /* message reactions */
+
+    .c-reaction:hover,
+    .c-reaction_add:hover {
+        background-color: rgba(var(--sk_foreground_min,29,28,29),.04) !important;
+    }
     .c-reaction--reacted {
         box-shadow: none !important;
     }
@@ -31,21 +68,39 @@
 
     .c-reaction--reacted:hover,
     .c-reaction_add:hover {
-        --saf-0: rgba(var(--sk_foreground_high,29,28,29),0.5) !important;
+        --saf-0: rgba(var(--sk_foreground_high, 29, 28, 29), 0.5) !important;
         box-shadow: inset 0 0 0 1px var(--saf-0) !important;
     }
 
-    .c-reaction, .c-reaction_add {
-        border-radius: 5px;
+    .c-reaction,
+    .c-reaction_add {
+        border-radius: 5px !important;
     }
 
-    .c-message__reply_bar {
-        /* background-color: rgba(var(--sk_primary_background,255,255,255),1); */
-        border-color: transparent !important;
+
+    /* message actions - experiment */
+
+    /*
+    .c-message_actions__group {
+        opacity: 0 !important;
     }
 
-    .c-message__actions {
-        top: initial;
-        bottom: 0px;
+    .c-message_actions__group:hover {
+        opacity: 1 !important;
+    }
+    */
+
+
+
+    /* threads view */
+
+    .p-threads_view_load_newer_message,
+    .p-threads_view_load_older_message {
+        background: none !important;
+        text-decoration: none !important;
+    }
+
+    .p-threads_footer__broadcast_controls {
+        display: none;
     }
 }
