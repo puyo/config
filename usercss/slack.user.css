@@ -20,8 +20,55 @@
 
     /* message */
 
+    .c-message_kit__background,
     .c-message_kit__background--hovered {
         background: none !important;
+    }
+
+
+    /* message input field */
+
+    .p-message_input_field {
+        border-color: rgba(var(--sk_foreground_high,29,28,29),.5) !important;
+    }
+
+    .c-texty_input__button[data-qa="texty_mention_button"],
+    .p-shortcuts_menu_trigger_button_left_column,
+    .c-texty_input__button--emoji,
+    .c-texty_input__button--send {
+        display: none !important;
+    }
+
+    .c-icon_button[aria-label="File menu"] {
+        right: 0 !important;
+    }
+
+    .c-texty_input__container[data-buttons="1"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
+        width: 100% !important;
+        padding-right: initial !important;
+    }
+
+    .c-texty_input__container[data-buttons="2"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
+        width: 100% !important;
+        padding-right: initial !important;
+    }
+
+    .c-texty_input__container[data-buttons="3"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
+        width: calc(100% - 34px);
+        padding-right: 34px;
+    }
+
+    .c-texty_input__container[data-buttons="4"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
+        width: calc(100% - 68px);
+        padding-right: 68px;
+    }
+
+    .p-threads_footer__input.p-message_input .p-message_input_field {
+        padding-left: 10px !important;
+    }
+    .c-texty_input .ql-placeholder {
+        left: 8px !important;
+
     }
 
 
@@ -78,7 +125,7 @@
     }
 
 
-    /* message actions - experiment */
+    /* message actions */
 
     /*
     .c-message_actions__group {
