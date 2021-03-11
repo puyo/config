@@ -12,14 +12,12 @@
 @-moz-document url-prefix("https://app.slack.com/client/") {
 
     /* typography */
-
     .c-link:hover {
         text-decoration: none !important;
     }
 
 
     /* message */
-
     .c-message_kit__background,
     .c-message_kit__background--hovered {
         background: none !important;
@@ -27,9 +25,8 @@
 
 
     /* message input field */
-
     .p-message_input_field {
-        border-color: rgba(var(--sk_foreground_high,29,28,29),.5) !important;
+        border-color: rgba(var(--sk_foreground_high, 29, 28, 29), .5) !important;
     }
 
     .c-texty_input__button[data-qa="texty_mention_button"],
@@ -63,17 +60,17 @@
         padding-right: 68px;
     }
 
+    .p-workspace__input.p-message_input .p-message_input_field,
     .p-threads_footer__input.p-message_input .p-message_input_field {
         padding-left: 10px !important;
     }
+
     .c-texty_input .ql-placeholder {
         left: 8px !important;
-
     }
 
 
     /* message reply bar */
-
     .c-message__reply_bar {
         max-width: initial;
         background: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
@@ -93,17 +90,15 @@
 
 
     /* message attachments */
-
     .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__attachments {
         display: none !important;
     }
 
 
     /* message reactions */
-
     .c-reaction:hover,
     .c-reaction_add:hover {
-        background-color: rgba(var(--sk_foreground_min,29,28,29),.04) !important;
+        background-color: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
     }
     .c-reaction--reacted {
         box-shadow: none !important;
@@ -126,7 +121,6 @@
 
 
     /* message actions */
-
     /*
     .c-message_actions__group {
         opacity: 0 !important;
@@ -136,11 +130,7 @@
         opacity: 1 !important;
     }
     */
-
-
-
     /* threads view */
-
     .p-threads_view_load_newer_message,
     .p-threads_view_load_older_message {
         background: none !important;
