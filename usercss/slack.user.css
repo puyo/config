@@ -8,27 +8,62 @@
 @author         Gregory McIntyre
 ==/UserStyle== */
 
-
 @-moz-document url-prefix("https://app.slack.com/client/") {
 
-    /* typography */
+    /*
+     * -------------------------------------------------------
+     * typography
+     */
+
+    /* no hover changes */
     .c-link:hover {
         text-decoration: none !important;
     }
 
+    /*
+     * -------------------------------------------------------
+     * layout
+     */
 
-    /* message */
+    /* no having to resize thead and main views to take up 50% of the space after resizing the browser */
+    .p-workspace-layout {
+    	grid-template-columns: 180px calc(50vw - 90px) calc(50vw - 90px) !important;
+	    grid-template-areas: 'p-workspace__sidebar p-workspace__primary_view p-workspace__secondary_view' !important;
+    }
+
+    /* stop the sidebar auto hiding on small sizes, it's always important */
+    .p-workspace-layout .p-workspace__sidebar--floating {
+        position: relative !important;
+        transform: initial !important;
+    }
+
+    /* no more resizer handles needed now */
+    .p-workspace-layout .p-resizer {
+        display: none !important;
+    }
+
+    /*
+     * -------------------------------------------------------
+     * message
+     */
+
+    /* no hover effects */
     .c-message_kit__background,
     .c-message_kit__background--hovered {
         background: none !important;
     }
 
+    /*
+     * -------------------------------------------------------
+     * message input field
+     */
 
-    /* message input field */
+    /* no focus effects */
     .p-message_input_field {
         border-color: rgba(var(--sk_foreground_high, 29, 28, 29), .5) !important;
     }
 
+    /* no superfluous buttons */
     .c-texty_input__button[data-qa="texty_mention_button"],
     .p-shortcuts_menu_trigger_button_left_column,
     .c-texty_input__button--emoji,
@@ -36,47 +71,53 @@
         display: none !important;
     }
 
+    /* reposition the only useful button */
     .c-icon_button[aria-label="File menu"] {
         right: 0 !important;
     }
 
+    /* widen input on right with no extra buttons */
     .c-texty_input__container[data-buttons="1"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
         width: 100% !important;
         padding-right: initial !important;
     }
-
     .c-texty_input__container[data-buttons="2"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
         width: 100% !important;
         padding-right: initial !important;
     }
-
     .c-texty_input__container[data-buttons="3"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
         width: calc(100% - 34px);
         padding-right: 34px;
     }
-
     .c-texty_input__container[data-buttons="4"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
         width: calc(100% - 68px);
         padding-right: 68px;
     }
 
+    /* widen input on left with no extra buttons */
     .p-workspace__input.p-message_input .p-message_input_field,
     .p-threads_footer__input.p-message_input .p-message_input_field {
         padding-left: 10px !important;
     }
 
+    /* widen placeholder field on left with no extra buttons */
     .c-texty_input .ql-placeholder {
         left: 8px !important;
     }
 
+    /*
+     * -------------------------------------------------------
+     * message reply bar
+     */
 
-    /* message reply bar */
+    /* make it so I can see this important field - the one thing they didn't draw my attention to */
     .c-message__reply_bar {
         max-width: initial;
         background: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
         border-color: transparent !important;
     }
 
+    /* no hover changing the content, arrgh */
     .c-message__reply_bar_view_thread {
         display: none !important;
     }
@@ -84,44 +125,52 @@
         opacity: 1 !important;
     }
 
+    /* no hover effect on the little arrow on the right */
     .c-message__reply_bar_arrow {
         color: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1) !important;
     }
 
+    /*
+     * -------------------------------------------------------
+     * message attachments
+     */
 
-    /* message attachments */
+    /* specific to my worplace, make this channel useable to me by removing the clutter */
     .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__attachments {
         display: none !important;
     }
 
+    /*
+     * -------------------------------------------------------
+     * message reactions
+     */
 
-    /* message reactions */
+    /* no hover changes */
     .c-reaction:hover,
+    .c-reaction--reacted:hover,
     .c-reaction_add:hover {
         background-color: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
     }
-    .c-reaction--reacted {
-        box-shadow: none !important;
-    }
 
+    /* no hover changes */
+    .c-reaction,
+    .c-reaction--reacted,
     .c-reaction_add {
         box-shadow: none !important;
     }
 
-    .c-reaction--reacted:hover,
-    .c-reaction_add:hover {
-        --saf-0: rgba(var(--sk_foreground_high, 29, 28, 29), 0.5) !important;
-        box-shadow: inset 0 0 0 1px var(--saf-0) !important;
-    }
-
+    /* make icons easier to see by reducing border radius a bit */
     .c-reaction,
     .c-reaction_add {
         border-radius: 5px !important;
     }
 
-
-    /* message actions */
     /*
+     * -------------------------------------------------------
+     * message actions
+     */
+
+    /* experiment
     .c-message_actions__group {
         opacity: 0 !important;
     }
@@ -130,13 +179,20 @@
         opacity: 1 !important;
     }
     */
-    /* threads view */
+
+    /*
+     * -------------------------------------------------------
+     * threads view
+     */
+
+    /* no hover changes */
     .p-threads_view_load_newer_message,
     .p-threads_view_load_older_message {
         background: none !important;
         text-decoration: none !important;
     }
 
+    /* no focus changes */
     .p-threads_footer__broadcast_controls {
         display: none;
     }
