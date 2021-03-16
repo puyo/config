@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Slack with less noise
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/slack.user.css
 @description    Remove hover effects and other noisy junk
@@ -130,7 +130,7 @@
 
     /* widen placeholder field on left with no extra buttons */
     .c-texty_input .ql-placeholder {
-        left: 8px !important;
+        left: 10px !important;
     }
 
     /*
