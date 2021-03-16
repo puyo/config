@@ -165,7 +165,10 @@
 
     /* specific to my worplace, make this channel useable to me by removing the clutter */
     .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__attachments {
-        display: none !important;
+        display: none;
+    }
+    .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__background--labels--ephemeral .c-message_kit__attachments {
+        display: block;
     }
 
     /*
