@@ -67,7 +67,7 @@ for alias in `git config --global --name-only --get-regexp alias`; do
   al="${alias/alias./}"
   alias g$al="git $al"
   complete_func=_git_$(__git_aliased_command $al)
-  (declare -f -F $complete_fnc > /dev/null) && __git_complete g$al $complete_func
+  (declare -f -F $complete_func > /dev/null) && __git_complete g$al $complete_func
 done
 
 # ----------------------------------------------------------------------
