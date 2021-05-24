@@ -51,9 +51,10 @@
     },
     "editor.formatOnSave": true,
     "editor.fontFamily": "Monaco, 'Courier New', monospace",
-    "editor.defaultFormatter": "saratravi.elixir-formatter",
     "gitlens.currentLine.enabled": false,
     "elixirLS.fetchDeps": false,
     "files.simpleDialog.enable": true,
-
+    "ruby.rubocop.onSave": true,
+    "ruby.rubocop.useBundler": true,
+    "ruby.rubocop.suppressRubocopWarnings": true
 }
