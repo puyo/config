@@ -49,10 +49,10 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
           export ASDF_RUBY_VERSION=$ruby
           case $(which ruby) in
             *asdf/shims/ruby)
-              echo " ruby-${ruby} (asdf)"
+              echo " ruby-${ruby}"
               ;;
             *.rubies*)
-              echo " ruby-${ruby} (chruby)"
+              echo " ruby-${ruby}"
               ;;
             *)
               ;;
