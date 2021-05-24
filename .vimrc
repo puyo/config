@@ -532,8 +532,10 @@ let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
 let g:ale_ruby_rubocop_executable = 'bundle'
 
 let g:airline#extensions#ale#enabled = 1
+
 augroup ale
   au FileType elixir let g:ale_fix_on_save = 1
+  au FileType ruby let g:ale_fix_on_save = 1
 augroup END
 " }
 
