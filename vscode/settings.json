@@ -56,5 +56,15 @@
     "files.simpleDialog.enable": true,
     "ruby.rubocop.onSave": true,
     "ruby.rubocop.useBundler": true,
-    "ruby.rubocop.suppressRubocopWarnings": true
+    "ruby.rubocop.suppressRubocopWarnings": true,
+    "[elixir]": {
+        "editor.defaultFormatter": "JakeBecker.elixir-ls"
+    },
+    "elixirLS.dialyzerWarnOpts": [
+        "error_handling",
+        "underspecs",
+        "unknown",
+        "overspecs",
+        "specdiffs"
+    ]
 }
