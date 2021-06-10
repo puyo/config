@@ -56,4 +56,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
 
   # aliases
   source $HOME/.zsh_aliases
+
+  # sticky (last working directory recall on new shell)
+  source $HOME/.bash_sticky
 fi
