@@ -7,8 +7,7 @@ automake            # for compiling packages from source
 awscli              # AWS
 awscli@1            # AWS
 awslogs             # AWS
-bash                # newer version of bash than built-in OS version
-bash-completion     # tab completion
+bash-completion     # tab completion (used by zsh too via its bash completion support)
 bundler-completion  # tab completion for bundle
 carthage            # iOS package manager
 cataclysm           # roguelike game
@@ -86,5 +85,4 @@ webp                # library for new image format by google
 weechat             # IRC client
 wget                # CLI tool to fetch web sites
 wxmac               # erlang observer
-yarn-completion     # tab completion for yarn
 youtube-dl          # download youtube videos
