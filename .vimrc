@@ -92,7 +92,8 @@ Plug 'osyo-manga/vim-over'
 
 " Async lint engine
 " fork of dense-analysis/ale to fix dialyxir and credo
-Plug 'puyo/ale'
+" Plug 'puyo/ale'
+Plug 'dense-analysis/ale'
 
 " Align stuff
 Plug 'junegunn/vim-easy-align'
