@@ -1,60 +1,64 @@
 # ~/.profile: executed by the command interpreter for login shells.
 
 if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
-    # --------------------------------------------------
-    # $PATH
-    paths="
-    /usr/local/opt/postgresql@12/bin
-    $HOME/.cargo/bin \
-    /usr/local/share/npm/bin \
-    /usr/X11/bin \
-    $HOME/bin \
-    $ANDROID_HOME/tools \
-    $ANDROID_HOME/platform-tools \
-    /usr/local/bin \
-    /usr/local/sbin"
-    for p in $paths; do
-        [ -d $p ] && PATH="$PATH:$p"
-    done
-    export PATH
+  # --------------------------------------------------
+  # Android
+  export ANDROID_HOME="$HOME/Android/sdk"
 
-    # --------------------------------------------------
-    # asdf (Elixir, Ruby, Erlang, Node)
+  # --------------------------------------------------
+  # $PATH
+  paths=(
+    "/usr/local/opt/postgresql@12/bin"
+    "$HOME/.cargo/bin"
+    "/usr/local/share/npm/bin"
+    "/usr/X11/bin"
+    "$HOME/bin"
+    "$ANDROID_HOME/tools"
+    "$ANDROID_HOME/platform-tools"
+    "/usr/local/bin"
+    "/usr/local/sbin"
+  )
 
-    if [ -d "$HOME/.asdf" ]; then
-      source $HOME/.asdf/asdf.sh
+  for p in ${paths[@]}; do
+    if [ -d "$p" ]; then
+      PATH="${PATH}:$p"
     fi
+  done
+  export PATH
 
-    # --------------------------------------------------
-    # Node (NVM)
+  # --------------------------------------------------
+  # asdf (Elixir, Ruby, Erlang, Node)
 
-    if [ -d "$HOME/.nvm" ]; then
-      PATH="$PATH:./node_modules/.bin" # Add node modules bin path
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-      # export PATH="$PATH:`yarn global bin --offline`" # yarn
-    fi
+  if [ -d "$HOME/.asdf" ]; then
+    source $HOME/.asdf/asdf.sh
+  fi
 
-    # --------------------------------------------------
-    # Android
-    export ANDROID_HOME="$HOME/Android/sdk"
+  # --------------------------------------------------
+  # Node (NVM)
 
-    # --------------------------------------------------
-    # irssi
+  if [ -d "$HOME/.nvm" ]; then
+    PATH="$PATH:./node_modules/.bin" # Add node modules bin path
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    # export PATH="$PATH:`yarn global bin --offline`" # yarn
+  fi
 
-    [ -f "$HOME/.irssi/passwords" ] && source "$HOME/.irssi/passwords"
+  # --------------------------------------------------
+  # irssi
 
-    # --------------------------------------------------
-    # Other
+  [ -f "$HOME/.irssi/passwords" ] && source "$HOME/.irssi/passwords"
 
-    export DICTIONARY="british"
-    export PAGER="/usr/bin/less -R"
-    export HISTCONTROL="ignoreboth"
-    export HISTSIZE="100000"
-    export ANSIBLE_NOCOWS=1
-    export ERL_AFLAGS="-kernel shell_history enabled"
-    export KERL_CONFIGURE_OPTIONS="--without-javac --disable-debug --without-odbc"
+  # --------------------------------------------------
+  # Other
+
+  export DICTIONARY="british"
+  export PAGER="/usr/bin/less -R"
+  export HISTCONTROL="ignoreboth"
+  export HISTSIZE="100000"
+  export ANSIBLE_NOCOWS=1
+  export ERL_AFLAGS="-kernel shell_history enabled"
+  export KERL_CONFIGURE_OPTIONS="--without-javac --disable-debug --without-odbc"
 fi
 
 export GOPATH=$HOME/go
