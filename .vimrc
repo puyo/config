@@ -134,6 +134,7 @@ Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'evanleck/vim-svelte'              " svelte
 Plug 'dag/vim2hs'                       " .hs
 " Plug 'dermusikman/sonicpi.vim'          " .sonicpi
+Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
 
 call plug#end()
 " }
