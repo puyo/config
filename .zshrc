@@ -43,8 +43,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
       local newline=$'\n'
 
       __ruby_prompt() {
-        ruby=" ruby-$(ruby --version | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')"
-        echo $ruby
+        echo " ruby-$(ruby --version | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')"
       }
 
       PROMPT="%B%F{green}${user_and_host}%F{cyan}\$(__ruby_prompt)%B%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{#999}${date}%f%b \$ "
