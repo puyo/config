@@ -4,6 +4,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     # --------------------------------------------------
     # $PATH
     paths="
+    /usr/local/opt/postgresql@12/bin
     $HOME/.cargo/bin \
     /usr/local/share/npm/bin \
     /usr/X11/bin \
@@ -18,18 +19,10 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     export PATH
 
     # --------------------------------------------------
-    # Ruby (Chruby)
-
-    #source ~/.chruby
-
-    # --------------------------------------------------
     # asdf (Elixir, Ruby, Erlang, Node)
 
     if [ -d "$HOME/.asdf" ]; then
       source $HOME/.asdf/asdf.sh
-      if [ -n "$BASH_VERSION" ]; then
-        source $HOME/.asdf/completions/asdf.bash
-      fi
     fi
 
     # --------------------------------------------------
@@ -64,7 +57,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     export KERL_CONFIGURE_OPTIONS="--without-javac --disable-debug --without-odbc"
 fi
 
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH=$PATH:${GOPATH//://bin:}/bin
+
+[ -f "$HOME/.blake" ] && . "$HOME/.blake"
