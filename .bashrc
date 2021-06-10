@@ -80,7 +80,10 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   for file in "${user_sources[@]}"; do
     [ -f "$HOME/$file" ] && source "$HOME/$file"
   done
+
+  export GOPATH=$HOME/go
+  PATH=$PATH:${GOPATH//://bin:}/bin
+
+  source $HOME/.asdf/completions/asdf.bash
 fi
 
-export GOPATH=$HOME/go
-PATH=$PATH:${GOPATH//://bin:}/bin
