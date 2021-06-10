@@ -47,7 +47,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
         echo $ruby
       }
 
-      PROMPT="%B%F{118}${user_and_host}%F{cyan}\$(__ruby_prompt)%B%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{#999}${date}%f%b \$ "
+      PROMPT="%B%F{green}${user_and_host}%F{cyan}\$(__ruby_prompt)%B%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{#999}${date}%f%b \$ "
     ;;
   esac
 
