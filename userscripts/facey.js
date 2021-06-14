@@ -8,6 +8,7 @@
 // @author       Gregory McIntyre
 // @match        https://www.facebook.com/
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/puyo/config/master/userscripts/facey.js
 // @downloadURL  https://raw.githubusercontent.com/puyo/config/master/userscripts/facey.js
 // ==/UserScript==
 
