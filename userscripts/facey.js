@@ -3,7 +3,7 @@
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.3
+// @version      1.4
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -28,9 +28,9 @@
             if (sponsored) {
                 count += 1
                 article.parentNode.removeChild(article)
-                //article.style.display = 'none'
+            } else {
+                article.setAttribute('data-checked', 'true')
             }
-            article.setAttribute('data-checked', 'true')
         })
     }
 
