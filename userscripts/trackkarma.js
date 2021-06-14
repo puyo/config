@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.5
+// @version      2.0
 // @description  Make it easier to mark attendance
 // @author       puyo
 // @include      https://app.trackkarma.com/trainings*
