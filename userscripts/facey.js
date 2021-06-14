@@ -5,7 +5,7 @@
 // @encoding     utf-8
 // @version      1.2
 // @description  Make Facey better
-// @author       Gregory McIntyre
+// @author       puyo
 // @match        https://www.facebook.com/
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/puyo/config/master/userscripts/facey.js

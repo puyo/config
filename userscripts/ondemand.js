@@ -3,13 +3,14 @@
 // @namespace    puyo/demand
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.0
+// @version      1.1
 // @description  Make it better for myself
 // @author       puyo
 // @include      https://www.sbs.com.au/ondemand/*
 // @require      https://jpillora.com/xhook/dist/xhook.js
 // @grant        none
 // @run-at       document-start
+// @downloadURL  https://raw.githubusercontent.com/puyo/config/master/userscripts/ondemand.js
 // @updateURL    https://raw.githubusercontent.com/puyo/config/master/userscripts/ondemand.js
 // ==/UserScript==
 
