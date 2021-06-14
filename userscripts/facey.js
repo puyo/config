@@ -3,7 +3,7 @@
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.1
+// @version      1.2
 // @description  Make Facey better
 // @author       Gregory McIntyre
 // @match        https://www.facebook.com/
