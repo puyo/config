@@ -33,7 +33,7 @@
         })
     }
 
-    const callback = (mutList, obs) => {
+    const callback = (_mutList, _obs) => {
         observer.disconnect()
         removeAds()
         observer.observe(document, mutationObserverConfig)
