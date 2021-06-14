@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Facebook with less junk
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
+@version        1.1.0
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/facebook.user.css
 @description    Facebook changes - more compact, no main feed as it's too full of ads
@@ -113,11 +113,5 @@
     [data-pagelet="LeftRail"] [role="button"] > div > div:nth-child(2) > div {
         padding: 0;
         padding-left: 0.5em;
-    }
-}
-
-@-moz-document url("https://www.facebook.com/") {
-    [role="feed"] {
-        display: none;
     }
 }
