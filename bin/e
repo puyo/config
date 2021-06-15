@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # In a Vim phase at the moment...
-exec "#{ENV['HOME']}/bin/g", *ARGV
+#exec "#{ENV['HOME']}/bin/g", *ARGV
 
 # Similar to this:
 #
@@ -24,8 +24,8 @@ ENV['GEM_PATH'] = nil
 ENV['GEM_ROOT'] = nil
 ENV['RUBY_VERSION'] = nil
 
-emacs = '/usr/local/bin/emacs'
-emacsclient = '/usr/local/bin/emacsclient'
+emacs = 'emacs'
+emacsclient = 'emacsclient'
 
 args = if ARGV.any?
          ARGV.map do |arg|
