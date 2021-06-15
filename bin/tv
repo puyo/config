@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xrandr --output eDP-1 --primary --below HDMI-2 --output HDMI-2 --auto
+pacmd set-default-sink $(pacmd list-sinks | grep index: | tail -1 | sed -r 's/.*([0-9]+)$/\1/')
