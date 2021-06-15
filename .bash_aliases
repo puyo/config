@@ -5,6 +5,10 @@ source $HOME/.aliases
 # ----------------------------------------------------------------------
 # Git
 
+# ensure __git_aliased_command is sourced
+f=/usr/share/bash-completion/completions/git
+[ -f $f ] && source $f
+
 if command -v __git_aliased_command > /dev/null; then
   for alias in `git config --global --name-only --get-regexp alias`; do
     al="${alias/alias./}"
