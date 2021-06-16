@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'webrick'
+
+server = WEBrick::HTTPServer.new(Address: '0.0.0.0', Port: 3333)
+server.mount '/', WEBrick::HTTPServlet::FileHandler, './'
+trap('INT') { server.stop }
+
+puts 'http://localhost:3333'
+server.start
