@@ -2,6 +2,8 @@
 
 if [ -x /usr/bin/open ]; then
   exec /usr/bin/open "$@"
+elif [ -x /usr/bin/exo-open ]; then
+  exec exo-open "$@"
 else
   exec xdg-open "$@"
 fi
