@@ -10,24 +10,27 @@ if has("gui_macvim")
   nnoremap <D-r> :CtrlPMRUFiles<CR>
   nnoremap <D-b> :CtrlPBuffer<CR>
   vnoremap <D-/> :Commentary<CR>
-  nnoremap <D-o> :e
-    \ <C-R>=
-    \ substitute(expand("%:p:h"), ' ', '\\ ', 'g')
-    \ .'/'<CR><BS>/
-  nnoremap <D-g> :AsyncRun git grep -n<Space>
+  nnoremap <D-o> :e  <C-R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g') .'/'<CR><BS>/
   set guifont=Menlo\ Regular:h13
   set fuoptions+=maxhorz " full screen options on mac
   set macmeta " option key works as M- key modifier
 elseif has("gui")
-  nnoremap <leader>w :silent Kwbd<CR>
-  nnoremap <leader>p :CtrlP<CR>
-  nnoremap <leader>r :CtrlPMRUFiles<CR>
-  nnoremap <leader>b :CtrlPBuffer<CR>
-  vnoremap <leader>/ :Commentary<CR>
-  nnoremap <leader>o :e
-    \ <C-R>=
-    \ substitute(expand("%:p:h"), ' ', '\\ ', 'g')
-    \ .'/'<CR><BS>/
-  nnoremap <leader>g :AsyncRun git grep -n<Space>
-endif
+  " gvim + xkeysnail super bindings
+  inoremap <C-M-v> <ESC>"+p
+  nnoremap <C-M-S-c> gcc
+  nnoremap <C-M-a> ggVG
+  nnoremap <C-M-b> :CtrlPBuffer<CR>
+  nnoremap <C-M-o> :e <C-R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g') .'/'<CR><BS>/
+  nnoremap <C-M-p> :CtrlP<CR>
+  nnoremap <C-M-r> :CtrlPMRUFiles<CR>
+  nnoremap <C-M-v> "+p
+  nnoremap <C-M-w> :silent Kwbd<CR>
+  nnoremap <C-M-z> u
+  vnoremap <C-M-S-c> gc
+  vnoremap <C-M-c> "+yi
+  vnoremap <C-M-v> c<ESC>"+p
+  vnoremap <C-M-x> "+c
 
+  " y yanks to OS clipboard, p pastes from OS clipboard
+  set clipboard=unnamedplus
+endif
