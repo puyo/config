@@ -1,3 +1,4 @@
-keycode 66 = Control_L
+! capslock = Escape
+keycode 66 = Escape NoSymbol Escape
 clear Lock
 add Control = Control_L
