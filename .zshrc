@@ -26,6 +26,9 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   bindkey '^[p' history-beginning-search-backward
   bindkey '^[n' history-beginning-search-forward
 
+  # ctrl-alt-e expands like it does in bash
+  bindkey '^[^E' expand-or-complete
+
   # disable C-s and C-q pause and resume buttons
   stty -ixon
 
