@@ -291,6 +291,7 @@ au BufNewFile,BufRead *.hamlc setlocal filetype=haml
 au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
 au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
 au BufNewFile,BufRead *.as setlocal filetype=javascript
+au BufNewFile,BufRead Dockerfile.* setlocal filetype=dockerfile
 augroup END
 
 augroup filetypes
