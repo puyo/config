@@ -12,12 +12,15 @@ define_keymap(re.compile("Firefox", re.IGNORECASE), {
     K("Super-KEY_0"): K("C-KEY_0"),                 # zoom reset
     K("Super-L"): K("C-L"),                         # select address bar
     K("Super-LEFT"): K("M-LEFT"),                   # back history
+    K("Super-Left"): K("HOME"),                     # home
     K("Super-MINUS"): K("C-MINUS"),                 # zoom out
     K("Super-R"): K("C-R"),                         # reload page
     K("Super-RIGHT"): K("M-RIGHT"),                 # forward history
+    K("Super-Right"): K("END"),                     # end
     K("Super-Shift-LEFT_BRACE"): K("C-PAGE_UP"),    # prev tab
     K("Super-Shift-P"): K("C-Shift-P"),             # private window
     K("Super-Shift-RIGHT_BRACE"): K("C-PAGE_DOWN"), # next tab
+    K("Super-Shift-T"): K("C-Shift-T"),             # reopen closed tab
     K("Super-T"): K("C-T"),                         # new tab
     K("Super-V"): K("C-V"),                         # paste
     K("Super-W"): K("C-W"),                         # close tab
