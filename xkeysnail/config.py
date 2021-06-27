@@ -5,6 +5,8 @@ from xkeysnail.transform import *
 define_keymap(re.compile("Firefox", re.IGNORECASE), {
     K("M-B"): K("C-LEFT"),                          # word backwards
     K("M-BACKSPACE"): K("C-BACKSPACE"),             # del word backwards
+    K("M-LEFT"): K("C-LEFT"),                       # word backwards
+    K("M-RIGHT"): K("C-RIGHT"),                     # word forwards
     K("Super-A"): K("C-A"),                         # select all
     K("Super-C"): K("C-C"),                         # copy
     K("Super-EQUAL"): K("C-EQUAL"),                 # zoom in
@@ -14,6 +16,7 @@ define_keymap(re.compile("Firefox", re.IGNORECASE), {
     K("Super-LEFT"): K("M-LEFT"),                   # back history
     K("Super-Left"): K("HOME"),                     # home
     K("Super-MINUS"): K("C-MINUS"),                 # zoom out
+    K("Super-N"): K("C-N"),                         # new window
     K("Super-R"): K("C-R"),                         # reload page
     K("Super-RIGHT"): K("M-RIGHT"),                 # forward history
     K("Super-Right"): K("END"),                     # end
