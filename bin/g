@@ -7,17 +7,21 @@ vim = 'gvim'
 line = nil
 
 running = system("#{vim} --serverlist | grep -q VIM")
-args = if ARGV.any?
-         file, line = ARGV.first.split(':')
-         file.gsub!(%r{^[ab]/}, '') # git diff
-         [file]
-       else
-         ['.']
-       end
+args =
+  if ARGV.size == 1
+    file, line = ARGV.first.split(':')
+    file.gsub!(%r{^[ab]/}, '') # git diff
+    [file]
+  elsif ARGV.size > 1
+    ARGV
+  else
+    ['.']
+  end
 
 if running
-  system(vim, '--remote-silent', *args)
+  args.each { |arg| system(vim, '--remote-silent', arg) }
 else
   system(vim, *args)
 end
+
 system(vim, '--remote-send', ":#{line}<CR>") if line
