@@ -8,7 +8,7 @@
 @author         Gregory McIntyre
 ==/UserStyle== */
 
-@-moz-document regexp("https://[^.]+.atlassian.net.*") {
+@-moz-document regexp("https://.+?.atlassian.net.*") {
     #dashboard {
         overflow: visible !important;
     }
@@ -167,6 +167,24 @@
         display: none;
     }
     #ghx-chart-panel-content {
-        padding: 0px;
+        padding: 0;
+    }
+
+    /* smart cards */
+    .inlineCardView-content-wrap .card {
+        padding: inherit !important;
+    }
+    .inlineCardView-content-wrap a {
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    .inlineCardView-content-wrap a:hover {
+        text-decoration: underline;
+    }
+    .inlineCardView-content-wrap a span {
+        display: none;
+    }
+    .inlineCardView-content-wrap a::after {
+        content: attr(href);
     }
 }
