@@ -31,26 +31,6 @@ require 'date'
 class Organise
   DATE_RE = /^\d{4}-\d{2}-\d{2}/
 
-  def checksums_path
-    'photo-checksums.yml'
-  end
-
-  def load_checksums
-    YAML.load_file(checksums_path) if File.exist?(checksums_path)
-  end
-
-  def load_dates
-    YAML.load_file(dates_path) if File.exist?(dates_path)
-  end
-
-  def dates_path
-    'photo-dates.yml'
-  end
-
-  def paths
-    @paths ||= Dir.glob('photos/**/*').select { |path| File.exist?(path) && !Dir.exist?(path) }
-  end
-
   def add_new_checksums
     paths.with_progress('checksumming').each do |path|
       next if checksums.key?(path)
@@ -68,23 +48,55 @@ class Organise
   end
 
   def calc_date(path)
-    filename_date(path) || exif_date(path) || '?'
+    calc_filename_date(path) || calc_exif_date(path) || '?'
   end
 
-  def filename_date(path)
-    basename = File.basename(path)
-    basename[0, 10] if DATE_RE.match?(basename)
-  rescue Date::Error
-    nil
-  end
-
-  def exif_date(path)
+  def calc_exif_date(path)
     data = Exif::Data.new(File.open(path))
     exif = data[:exif] || {}
     date_s = data.date_time || exif[:date_time] || exif[:date_time_original] || exif[:date_time_digitized]
     date_s[0, 10].tr(':', '-') if date_s
   rescue Exif::NotReadable
     nil
+  end
+
+  def calc_filename_date(path)
+    basename = File.basename(path)
+    basename[0, 10] if DATE_RE.match?(basename)
+  rescue Date::Error
+    nil
+  end
+
+  def checksums
+    @checksums ||= load_checksums || {}
+  end
+
+  def checksums_path
+    'photo-checksums.yml'
+  end
+
+  def dates
+    @dates ||= load_dates || {}
+  end
+
+  def dates_path
+    'photo-dates.yml'
+  end
+
+  def dest_dir(date)
+    if date == '?'
+      '_date_unknown'
+    else
+      date[0, 7]
+    end
+  end
+
+  def load_checksums
+    YAML.load_file(checksums_path) if File.exist?(checksums_path)
+  end
+
+  def load_dates
+    YAML.load_file(dates_path) if File.exist?(dates_path)
   end
 
   def move_into_date_dirs
@@ -99,12 +111,14 @@ class Organise
     end
   end
 
-  def dest_dir(date)
-    if date == '?'
-      '_date_unknown'
-    else
-      date[0, 7]
-    end
+  def organise
+    puts "#{paths.size} files..."
+    # update_checksums
+    update_dates
+  end
+
+  def paths
+    @paths ||= Dir.glob('photos/**/*').select { |path| File.exist?(path) && !Dir.exist?(path) }
   end
 
   def update_dates
@@ -115,14 +129,6 @@ class Organise
     pp dates.group_by { |_path, date| dest_dir(date) }.map { |dir, files| [dir, files.size] }.sort
 
     # move_into_date_dirs
-  end
-
-  def checksums
-    @checksums ||= load_checksums || {}
-  end
-
-  def dates
-    @dates ||= load_dates || {}
   end
 
   def update_checksums
@@ -143,12 +149,6 @@ class Organise
         redundant.each { |path| FileUtils.rm_rf(path, verbose: true, noop: ENV['FORREALZ'] != '1') }
       end
     end
-  end
-
-  def organise
-    puts "#{paths.size} files..."
-    # update_checksums
-    update_dates
   end
 end
 
