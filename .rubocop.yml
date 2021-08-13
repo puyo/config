@@ -1,0 +1,2 @@
+Metrics/ClassLength: { Enabled: no }
+Metrics/MethodLength: { Enabled: no }
