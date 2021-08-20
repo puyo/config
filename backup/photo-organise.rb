@@ -7,11 +7,12 @@
 
 def ensure_dep(name, version)
   gem name, version
-rescue Gem::LoadError
+rescue Gem::LoadError => e
+  puts e.message
   system('gem', 'install', name, '-v', version) or
     raise("Could not find right version of #{name} (require version #{version})")
-  ok = system($PROGRAM_NAME, *ARGV)
-  exit ok ? 0 : 1
+  system($PROGRAM_NAME, *ARGV)
+  exit $CHILD_STATUS.exitstatus
 end
 
 ensure_dep 'progress', '>= 3.6.0'
@@ -30,8 +31,8 @@ require 'digest'
 #     Organise.new.organise
 #
 class Organise
-  RE_DATE = /^(?:19|20)\d{2}-\d{2}-\d{2}/
-  RE_MONTH = /^(?:19|20)\d{2}-\d{2}/
+  RE_DATE = /^(?:19|20)\d{2}-\d{2}-\d{2}/.freeze
+  RE_MONTH = /^(?:19|20)\d{2}-\d{2}/.freeze
 
   def add_new_info
     paths.with_progress("checking #{paths.size} files").each do |path|
