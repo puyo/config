@@ -45,12 +45,15 @@ class Organise
   end
 
   def calc_date(path)
-    calc_filename_date(path) || calc_exif_date(path) || calc_related_date(path) || calc_same_day_date(path)
+    calc_exif_date(path) ||
+      calc_filename_date(path) ||
+      calc_related_date(path) ||
+      calc_same_day_date(path)
   end
 
   def calc_dupes
     dupes = Hash.new { |h, k| h[k] = [] }
-    info.each { |path, _photo| dupes[photo['sum']] << path }
+    info.each { |path, photo| dupes[photo['sum']] << path }
     dupes.values.select { |paths| paths.size > 1 }
   end
 
@@ -108,13 +111,34 @@ class Organise
   end
 
   def dedupe
+    changes = false
+    found = false
     calc_dupes.each do |paths|
       exists = paths.find { |path| File.exist?(path) }
-      if exists
-        redundant = paths - [exists]
-        redundant.each { |path| FileUtils.rm_rf(path, verbose: true, noop: ENV['FORREALZ'] != '1') }
+      next unless exists
+
+      redundant = paths - [exists]
+      if dedupe?
+        redundant.each do |path|
+          FileUtils.rm_rf(path, verbose: true)
+          info.delete(path)
+          changes = true
+        end
+      else
+        puts "Dedupe: #{exists}"
+        redundant.each { |x| puts "- DUPE: #{x}" }
+        found = true
       end
     end
+    if !dedupe? && found
+      puts
+      puts "Call with FORREALZ=1 #{$PROGRAM_NAME} to make these changes"
+    end
+    write_info if changes
+  end
+
+  def dedupe?
+    ENV['FORREALZ'] == '1'
   end
 
   def dest_base(path, date)
@@ -129,7 +153,7 @@ class Organise
 
   def dest_dir(date)
     if date
-      date[0, 7]
+      date[0, 4]
     else
       '0_unknown_date'
     end
@@ -158,9 +182,15 @@ class Organise
       dest_base = dest_base(path, date)
       dest_dir = dest_dir(date)
       desired_path = "photos/#{dest_dir}/#{dest_base}"
+      next unless path != desired_path
 
-      # p path: path, desired_path: desired_path
+      FileUtils.mkdir_p(File.dirname(desired_path))
+      FileUtils.mv(path, desired_path, verbose: true)
+      info[desired_path] = photo
+      info.delete(desired_path)
     end
+    write_info
+    remove_empty_dirs
   end
 
   # 1. Sync down a subset of all photos (current year + previous year, by
@@ -180,10 +210,11 @@ class Organise
   # 6. Sync up the subset of photos with --delete
   #
   def organise
-    update_info
+    # update_info
 
-    # dedupe
+    dedupe
 
+    # pp info.sort_by { |_path, photo| photo['date'] || '' }
     # pp info.values.map { |photo| dest_dir(photo['date']) }.uniq.sort
     # pp info.group_by { |_path, photo| dest_dir(photo['date']) }.map { |dir, files| [dir, files.size] }.sort
 
@@ -194,10 +225,15 @@ class Organise
     @paths ||= Dir.glob('photos/**/*').select { |path| File.exist?(path) && !Dir.exist?(path) }
   end
 
+  def remove_empty_dirs
+    system('find photos/ -name .DS_Store -type f -delete')
+    system('find photos/ -empty -type d -delete')
+  end
+
   def update_info
     info.delete_if { |path, _photo_info| !File.exist?(path) }
     add_new_info
-    File.open(info_path, 'w') { |f| YAML.dump(info, f) }
+    write_info
   end
 
   def update_photo_date(photo, path)
@@ -208,8 +244,10 @@ class Organise
     when 'skip'
       # OK
     else
-      date = calc_date(path)
-      photo['date'] ||= date if date
+      if photo['date'].nil?
+        date = calc_date(path)
+        photo['date'] = date if date
+      end
     end
     photo
   end
@@ -230,6 +268,10 @@ class Organise
       photo['sum'] ||= calc_sum(path)
     end
     photo
+  end
+
+  def write_info
+    File.open(info_path, 'w') { |f| YAML.dump(info, f) }
   end
 end
 
