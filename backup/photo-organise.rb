@@ -114,10 +114,16 @@ class Organise
     changes = false
     found = false
     calc_dupes.each do |paths|
+      unknown_dates = paths.select { |path| path.include?('0_unknown_date') }
+      known_dates = paths - unknown_dates
+      paths = known_dates.sort + unknown_dates
       exists = paths.find { |path| File.exist?(path) }
-      next unless exists
+      next if exists.nil?
 
       redundant = paths - [exists]
+      redundant = redundant.select { |path| File.exist?(path) }
+      next if redundant.empty?
+
       if dedupe?
         redundant.each do |path|
           FileUtils.rm_rf(path, verbose: true)
@@ -231,7 +237,7 @@ class Organise
   end
 
   def update_info
-    info.delete_if { |path, _photo_info| !File.exist?(path) }
+    # info.delete_if { |path, _photo_info| !File.exist?(path) }
     add_new_info
     write_info
   end
