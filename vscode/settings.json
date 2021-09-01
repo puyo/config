@@ -1,5 +1,4 @@
 {
-    "window.zoomLevel": 0,
     "keyboard.dispatch": "keyCode",
     "explorer.confirmDragAndDrop": false,
     "breadcrumbs.enabled": true,
@@ -11,7 +10,6 @@
     "editor.highlightActiveIndentGuide": false,
     "editor.renderIndentGuides": false,
     "editor.occurrencesHighlight": false,
-    "editor.renderLineHighlight": "none",
     "editor.matchBrackets": false,
     "terminal.integrated.cursorBlinking": true,
     "editor.hideCursorInOverviewRuler": true,
@@ -66,5 +64,16 @@
         "unknown",
         "overspecs",
         "specdiffs"
-    ]
+    ],
+    "prettier.semi": false,
+    "editor.links": false,
+    "git.enabled": false,
+    "editor.cursorBlinking": "solid",
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#ffc000",
+        "terminalCursor.foreground": "#ff00ff"
+    },
+    "editor.scrollbar.horizontal": "hidden",
+    "vim.joinspaces": false
+
 }
