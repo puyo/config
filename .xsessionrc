@@ -1,5 +1,6 @@
 [ -f ~/.bash_profile ] && source ~/.bash_profile
 
+pkill --signal 9 -f auto-switch.rb
 ~/projects/config/pulse/auto-switch.rb &
 
 synclient \
