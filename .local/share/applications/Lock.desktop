@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=TV Audio
+Comment=Switch audio output to TV
+Exec=/home/greg/bin/tv
+Terminal=false
+Type=Application
