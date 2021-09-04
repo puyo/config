@@ -1,3 +1,10 @@
 [ -f ~/.bash_profile ] && source ~/.bash_profile
 
 ~/projects/config/pulse/auto-switch.rb &
+
+synclient \
+  FingerHigh=100 \
+  FingerLow=90 \
+  VertScrollDelta=500 \
+  HorizScrollDelta=500 \
+  CoastingSpeed=1
