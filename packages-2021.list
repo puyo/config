@@ -1,3 +1,5 @@
+albert
+aptitude
 automake
 blender
 build-essential
@@ -7,6 +9,7 @@ dict
 diff-so-fancy
 dosbox
 dosfstools
+emacs
 exuberant-ctags
 gdb
 gimp
@@ -25,6 +28,7 @@ manpages-dev
 mednafen
 milkytracker
 qbittorrent
+ruby
 samba
 spotify-client
 unrar
