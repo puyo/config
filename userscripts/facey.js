@@ -3,7 +3,7 @@
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.6
+// @version      1.7
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -33,15 +33,19 @@
         const articles = document.querySelectorAll('[role=feed] [role=article]:not([data-checked])')
         articles.forEach(article => {
             const sponsored = article.querySelector('[aria-label=Sponsored]')
-            let ad = false
+            let ad
+            const h4 = article.querySelector('h4')
+            const title = h4 && h4.textContent
             if (sponsored != null) {
-                const h4 = article.querySelector('h4')
-                const title = h4 && h4.textContent
                 const textNodes = sponsored.parentNode.childNodes[1].childNodes
                 const text = Array.from(textNodes).map(x => textForNode(x)).join('')
                 ad = (text === 'Sponsored')
-                console.log('Ad detector', {title, text, ad})
+            } else if (article.textContent.includes('Sponsored')) {
+                ad = true
+            } else {
+                ad = false
             }
+            console.log('Ad?', {title, ad})
             if (ad) {
                 count += 1
                 article.parentNode.removeChild(article)
@@ -51,14 +55,13 @@
         })
     }
 
+    removeAds()
+
     const callback = (_mutList, _obs) => {
         observer.disconnect()
         removeAds()
         observer.observe(document, mutationObserverConfig)
     }
-    removeAds()
-
     observer = new MutationObserver(callback)
     observer.observe(document, mutationObserverConfig)
 })();
-
