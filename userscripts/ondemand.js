@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Demand
-// @namespace    puyo/demand
+// @namespace    puyo/ondemand
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.1
+// @version      1.2
 // @description  Make it better for myself
 // @author       puyo
 // @include      https://www.sbs.com.au/ondemand/*
