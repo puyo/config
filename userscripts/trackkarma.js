@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Track Karma
-// @namespace    http://tampermonkey.net/
+// @namespace    puyo/trackkarma
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      2.1
+// @version      2.2
 // @description  Make it easier to mark attendance
 // @author       puyo
 // @include      https://app.trackkarma.com/trainings*
