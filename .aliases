@@ -11,10 +11,12 @@ else
   alias dir='ls -ohG'
 fi
 
-function masterbranch() {
+function gitbranch() {
+  base=$1
+  shift
   if [[ "$@" != "" ]]; then
     git fetch
-    git branch "$@" origin/master
+    git branch "$@" origin/$base
     git checkout "$@"
     git config branch."$@".remote origin
     git config branch."$@".merge refs/heads/"$@"
@@ -22,27 +24,9 @@ function masterbranch() {
   fi
 }
 
-function sprintbranch() {
-  if [[ "$@" != "" ]]; then
-    git fetch
-    git branch "$@" origin/sprint
-    git checkout "$@"
-    git config branch."$@".remote origin
-    git config branch."$@".merge refs/heads/"$@"
-    git config branch."$@".rebase true
-  fi
-}
-
-function developbranch() {
-  if [[ "$@" != "" ]]; then
-    git fetch
-    git branch "$@" origin/develop
-    git checkout "$@"
-    git config branch."$@".remote origin
-    git config branch."$@".merge refs/heads/"$@"
-    git config branch."$@".rebase true
-  fi
-}
+function sprintbranch() { gitbranch sprint "$@" }
+function developbranch() { gitbranch develop "$@" }
+function mainbranch() { gitbranch main "$@" }
 
 # ----------------------------------------------------------------------
 # Default arguments for common commands
