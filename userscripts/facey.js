@@ -3,7 +3,7 @@
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.7
+// @version      1.8
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -29,23 +29,36 @@
         return '' // <span style=...> nodes
     }
 
-    const removeAds = () => {
-        const articles = document.querySelectorAll('[role=feed] [role=article]:not([data-checked])')
+    const removeAds = (debug = false) => {
+        let articles
+        if (debug) {
+            console.log('-----')
+            articles = document.querySelectorAll('[role=feed] [role=article]')
+        } else {
+            articles = document.querySelectorAll('[role=feed] [role=article]:not([data-checked])')
+        }
         articles.forEach(article => {
-            const sponsored = article.querySelector('[aria-label=Sponsored]')
+            const sponsored = article.querySelector('[aria-label=Sponsored]') ||
+                  article.querySelector('a[href^="/ads"]')
             let ad
             const h4 = article.querySelector('h4')
             const title = h4 && h4.textContent
             if (sponsored != null) {
-                const textNodes = sponsored.parentNode.childNodes[1].childNodes
-                const text = Array.from(textNodes).map(x => textForNode(x)).join('')
-                ad = (text === 'Sponsored')
+                const textNodes = sponsored.parentNode.querySelectorAll('*')
+                const text = Array.from(textNodes).map(x => textForNode(x)).join('').replace(/-/g, '')
+                ad = text.includes('Sponsored')
             } else if (article.textContent.includes('Sponsored')) {
                 ad = true
             } else {
-                ad = false
+                const textNodes = article.querySelectorAll('*')
+                const text = Array.from(textNodes).map(x => textForNode(x)).join('').replace(/-/g, '')
+                ad = text.includes('Sponsored')
             }
-            console.log('Ad?', {title, ad})
+            if (debug) {
+                console.log('Ad?', {title, article, sponsored, ad})
+            } else {
+                console.log('Ad?', {title, ad})
+            }
             if (ad) {
                 count += 1
                 article.parentNode.removeChild(article)
@@ -54,6 +67,8 @@
             }
         })
     }
+
+    window.removeAds = () => removeAds(true)
 
     removeAds()
 
