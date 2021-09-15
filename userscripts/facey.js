@@ -3,7 +3,7 @@
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.8
+// @version      1.9
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -19,14 +19,18 @@
     const mutationObserverConfig = { attributes: false, childList: true, subtree: true }
     let count = 0
 
-    const textForNode = (x) => {
-        if (x.data) {
-            return x.data // #text nodes
+    const textForNode = (node) => {
+        if (node.data) {
+            return node.data // #text nodes
         }
-        if (x.attributes && x.attributes.style == null) {
-            return x.textContent // <span> nodes
+        if (node.attributes && node.attributes.style == null) {
+            return node.textContent // <span> nodes
         }
         return '' // <span style=...> nodes
+    }
+
+    const textForChildren = (node) => {
+        return Array.from(node.querySelectorAll('*')).map(textForNode).join('').replace(/-/g, '')
     }
 
     const removeAds = (debug = false) => {
@@ -38,24 +42,16 @@
             articles = document.querySelectorAll('[role=feed] [role=article]:not([data-checked])')
         }
         articles.forEach(article => {
-            const sponsored = article.querySelector('[aria-label=Sponsored]') ||
-                  article.querySelector('a[href^="/ads"]')
+            const ariaLabelSponsoredNode = article.querySelector('[aria-label=Sponsored]')
+            const node = (ariaLabelSponsoredNode && ariaLabelSponsoredNode.parentNode) ||
+                  article.querySelector('a[href^="/ads"]') ||
+                  article
             let ad
             const h4 = article.querySelector('h4')
             const title = h4 && h4.textContent
-            if (sponsored != null) {
-                const textNodes = sponsored.parentNode.querySelectorAll('*')
-                const text = Array.from(textNodes).map(x => textForNode(x)).join('').replace(/-/g, '')
-                ad = text.includes('Sponsored')
-            } else if (article.textContent.includes('Sponsored')) {
-                ad = true
-            } else {
-                const textNodes = article.querySelectorAll('*')
-                const text = Array.from(textNodes).map(x => textForNode(x)).join('').replace(/-/g, '')
-                ad = text.includes('Sponsored')
-            }
+            ad = textForChildren(node).includes('ponsored')
             if (debug) {
-                console.log('Ad?', {title, article, sponsored, ad})
+                console.log('Ad?', {title, article, node, ad})
             } else {
                 console.log('Ad?', {title, ad})
             }
@@ -68,6 +64,7 @@
         })
     }
 
+    window.textForChildren = textForChildren
     window.removeAds = () => removeAds(true)
 
     removeAds()
@@ -80,3 +77,4 @@
     observer = new MutationObserver(callback)
     observer.observe(document, mutationObserverConfig)
 })();
+
