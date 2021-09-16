@@ -17,6 +17,10 @@ if has("gui_macvim")
 elseif has("gui")
   " autokey super bindings
 
+  imap <C-M-s> <ESC><C-M-s>
+  nnoremap <C-M-s> :w<CR>
+  vmap <C-M-s> <ESC><C-M-s>gv
+
   inoremap <C-M-m> <ESC>lma:Commentary<CR>`ai
   nnoremap <C-M-m> :Commentary<CR>
   vnoremap <C-M-m> :Commentary<CR>gv
