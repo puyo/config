@@ -11,7 +11,7 @@ else
   alias dir='ls -ohG'
 fi
 
-function gitbranch() {
+function gitbranch {
   base=$1
   shift
   if [[ "$@" != "" ]]; then
@@ -24,9 +24,15 @@ function gitbranch() {
   fi
 }
 
-function sprintbranch() { gitbranch sprint "$@" }
-function developbranch() { gitbranch develop "$@" }
-function mainbranch() { gitbranch main "$@" }
+function sprintbranch {
+  gitbranch sprint "$@"
+}
+function developbranch {
+  gitbranch develop "$@"
+}
+function mainbranch {
+  gitbranch main "$@"
+}
 
 # ----------------------------------------------------------------------
 # Default arguments for common commands
