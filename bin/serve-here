@@ -2,9 +2,18 @@
 
 require 'webrick'
 
-server = WEBrick::HTTPServer.new(Address: '0.0.0.0', Port: 3333)
-server.mount '/', WEBrick::HTTPServlet::FileHandler, './'
+class CorsFileHandler < WEBrick::HTTPServlet::FileHandler
+  def do_GET(req, res)
+    res['Access-Control-Allow-Origin'] = '*'
+    res['Access-Control-Request-Method'] = '*'
+    super(req, res)
+  end
+end
+
+port = ARGV.first || 3333
+server = WEBrick::HTTPServer.new(Address: '0.0.0.0', Port: port)
+server.mount '/', CorsFileHandler, './'
 trap('INT') { server.stop }
 
-puts 'http://localhost:3333'
+puts "http://localhost:#{port}"
 server.start
