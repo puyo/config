@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # In a Vim phase at the moment...
-#exec "#{ENV['HOME']}/bin/g", *ARGV
+# exec "#{ENV['HOME']}/bin/g", *ARGV
 
 # Similar to this:
 #
@@ -27,23 +27,24 @@ ENV['RUBY_VERSION'] = nil
 emacs = 'emacs'
 emacsclient = 'emacsclient'
 
-args = if ARGV.any?
-         ARGV.map do |arg|
-           file, line, col = arg.split(':')
-           file.gsub!(%r{^[ab]/}, '') # git diff
-           if line && col
-             ["+#{line}:#{col}", file]
-           elsif line
-             ["+#{line}", file]
-           elsif file != line
-             file
-           else
-             arg
-           end
-         end.flatten
-       else
-         ['.']
-       end
+args =
+  if ARGV.any?
+    ARGV.map do |arg|
+      file, line, col = arg.split(':')
+      file.gsub!(%r{^[ab]/}, '') # git diff
+      if line && col
+        ["+#{line}:#{col}", file]
+      elsif line
+        ["+#{line}", file]
+      elsif file != line
+        file
+      else
+        arg
+      end
+    end.flatten
+  else
+    ['.']
+  end
 
 Open3.popen2e(emacsclient, '-nq', *args) do |_, _, wait_thr|
   exit_status = wait_thr.value
