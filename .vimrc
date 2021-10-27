@@ -297,6 +297,7 @@ augroup END
 augroup filetypes
 au FileType c setlocal sw=4 sts=4 makeprg=make
 au FileType ruby setlocal makeprg=rake path+=lib tw=78 ts=2 et sw=2 sts=2
+au FileType ruby let b:surround_114 = "do\n\r\nend"
 au FileType eruby setlocal makeprg=rake
 au FileType css setlocal makeprg=rake
 au FileType text setlocal wrap linebreak nolist tw=0 wm=0 spell
@@ -510,23 +511,26 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:ale_shell = '/bin/sh'
 let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
 let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
+let g:ale_lint_on_text_changed = 'never'
 
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_linters.css = ['stylelint']
-let g:ale_linters.elixir = ['credo', 'dialyxir']
+"let g:ale_linters.elixir = ['credo', 'dialyxir']
+let g:ale_linters.elixir = ['credo']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
+let g:ale_linters.javascript = ['eslint']
 
 let g:ale_fixers = {}
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fixers.elm = ['format']
-let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.javascript = ['prettier', 'eslint']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.scss = ['stylelint']
 
@@ -539,6 +543,7 @@ let g:airline#extensions#ale#enabled = 1
 augroup ale
   au FileType elixir let g:ale_fix_on_save = 1
   au FileType ruby let g:ale_fix_on_save = 1
+  au FileType javascript let g:ale_fix_on_save = 1
 augroup END
 " }
 
