@@ -51,7 +51,7 @@
 	cb = rev-parse --symbolic-full-name --abbrev-ref HEAD
 	gp = !git push --set-upstream origin HEAD:$(git cb)
 	up = !git fetch --prune origin && git rebase --autostash --rebase-merges origin/$(git cb)
-	gup = !git fetch --prune origin && git rebase --autostash --rebase-merges origin/$(git cb)
+	gup = !git fetch --prune origin && git rebase -r origin/$(git cb)
 
 	stashpull = !git -c rebase.autoStash=true pull --rebase
 
@@ -82,3 +82,8 @@
 	whitespace = red reverse
 [init]
 	templatedir = ~/.git_template
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
