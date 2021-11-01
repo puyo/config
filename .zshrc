@@ -9,6 +9,9 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   autoload -Uz compinit && compinit # zsh completion
   autoload -Uz bashcompinit && bashcompinit # bash completion command support
 
+  # ignore commands on the CLI that start with #, rather than complaining about them
+  set -k
+
   # asdf
   source $HOME/.asdf/completions/asdf.bash
 
