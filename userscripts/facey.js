@@ -3,7 +3,7 @@
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
 // @encoding     utf-8
-// @version      1.9
+// @version      1.10
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -23,10 +23,11 @@
         if (node.data) {
             return node.data // #text nodes
         }
-        if (node.attributes && node.attributes.style == null) {
-            return node.textContent // <span> nodes
+        const style = getComputedStyle(node)
+        if (style.display === "none" || style.top !== "0px") {
+            return ''
         }
-        return '' // <span style=...> nodes
+        return node.textContent
     }
 
     const textForChildren = (node) => {
