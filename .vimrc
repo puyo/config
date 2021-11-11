@@ -135,6 +135,7 @@ Plug 'evanleck/vim-svelte'              " svelte
 Plug 'dag/vim2hs'                       " .hs
 " Plug 'dermusikman/sonicpi.vim'          " .sonicpi
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
+Plug 'jparise/vim-graphql'              " .graphql
 
 call plug#end()
 " }
