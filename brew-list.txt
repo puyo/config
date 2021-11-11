@@ -83,5 +83,5 @@ watch               # show changes to a command's output every 2 seconds
 webp                # library for new image format by google
 weechat             # IRC client
 wget                # CLI tool to fetch web sites
-wxmac               # erlang observer
+wxwidgets           # erlang observer
 youtube-dl          # download youtube videos
