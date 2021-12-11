@@ -2,7 +2,7 @@ ack                 # grep like tool
 allegro             # game library
 aspell              # spelling
 astyle              # C/C++ code formatter
-autoconf            # for compiling packages from source
+autoconf@2.69       # for compiling packages from source (erlang requires this version)
 automake            # for compiling packages from source
 awscli              # AWS
 awscli@1            # AWS
