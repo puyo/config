@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'hexapdf'
+require 'fileutils'
+require 'pp'
+
+usage = "#{$0} INPUT.pdf"
+input = ARGV[0] || (fail "Require pdf name")
+output_temp = "#{input}.temp"
+
+doc = HexaPDF::Document.open(input)
+
+doc.catalog[:Names] ||= {}
+doc.catalog[:Names][:Dests] ||= {}
+dests = doc.catalog[:Names][:Dests]
+
+doc.pages.size.times do |n|
+  dests.add_entry("p#{n}", [doc.pages[n], :XYZ, 0, 0, 0])
+end
+
+doc.write(output_temp, optimize: true)
+
+FileUtils.mv(output_temp, input, verbose: true)
