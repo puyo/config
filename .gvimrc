@@ -11,7 +11,7 @@ if has("gui_macvim")
   nnoremap <D-b> :CtrlPBuffer<CR>
   vnoremap <D-/> :Commentary<CR>
   nnoremap <D-o> :e  <C-R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g') .'/'<CR><BS>/
-  set guifont=Menlo\ Regular:h13
+  set guifont=Comic\ Shanns:h13,Menlo\ Regular:h13
   set fuoptions+=maxhorz " full screen options on mac
   set macmeta " option key works as M- key modifier
 elseif has("gui")
