@@ -48,7 +48,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.formatOnSave": true,
-    "editor.fontFamily": "Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "'Comic Mono', Monaco, 'Courier New', monospace",
     "gitlens.currentLine.enabled": false,
     "elixirLS.fetchDeps": false,
     "files.simpleDialog.enable": true,
@@ -74,6 +74,7 @@
         "terminalCursor.foreground": "#ff00ff"
     },
     "editor.scrollbar.horizontal": "hidden",
-    "vim.joinspaces": false
+    "vim.joinspaces": false,
+    "window.zoomLevel": 1
 
 }
