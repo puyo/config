@@ -12,7 +12,7 @@ end
 
 port = ARGV.first || 3333
 server = WEBrick::HTTPServer.new(Address: '0.0.0.0', Port: port)
-server.mount '/', CorsFileHandler, './'
+server.mount '/', CorsFileHandler, './', FancyIndexing: true
 trap('INT') { server.stop }
 
 puts "http://localhost:#{port}"
