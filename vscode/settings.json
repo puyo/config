@@ -75,6 +75,9 @@
     },
     "editor.scrollbar.horizontal": "hidden",
     "vim.joinspaces": false,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.build.forceRecipeUsage": false,
+    "latex-workshop.latex.autoBuild.run": "onSave"
 
 }
