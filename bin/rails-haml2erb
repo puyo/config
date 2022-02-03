@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'excon'
+require 'pp'
+require 'json'
+
+Dir.glob('**/*.haml') do |haml_path|
+  puts haml_path
+
+  req = Excon.post(
+    'https://haml2erb.org/api/convert',
+    body: { haml: File.read(haml_path) }.to_json,
+    headers: { 'Content-Type': 'application/json' }
+  )
+
+  res = JSON.parse(req.body)
+
+  unless res['success']
+    warn res.body
+    next
+  end
+
+  erb = res['erb']
+  erb_path = haml_path.sub(/\.haml$/, '.erb')
+  File.open(erb_path, 'w') do |f|
+    f.puts erb
+  end
+
+  File.delete(haml_path)
+
+  puts "=> #{erb_path}"
+end
