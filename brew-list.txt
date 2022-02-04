@@ -13,6 +13,7 @@ carthage            # iOS package manager
 cataclysm           # roguelike game
 cmake               # for compiling packages from source
 coreutils           # checksums such as sha256sum
+cpdf                # pdf manipulation on the CLI
 ctags               # code indexing
 curl                # CLI HTTP tool
 diff-so-fancy       # nicer git diffs
@@ -28,6 +29,8 @@ gdal                # R geological packages
 gem-completion      # tab completion for gem
 gh                  # Github
 git                 # distributed revision control system for managing source code
+git-filter-repo     # remove files from git history
+git-lfs             # track large files in git but store them elsewhere
 gnupg               # encryption
 graphviz            # graph tool
 htop                # nicer version of top
@@ -35,6 +38,7 @@ hub                 # github
 imagemagick         # manipulate images
 imageoptim-cli      # minimise image file size
 jq                  # format JSON nicely
+kafka               # event queue for large projects
 kubernetes-cli      # cloud infrastructure management
 lftp                # FTP client
 macvim              # code editor
@@ -55,6 +59,7 @@ privoxy             # web proxy
 procmail            # just for the lockfile command
 protobuf            # compact wire transmissions for work
 pstree              # displays processes
+qpdf                # pdf manipulation on the CLI
 rails-completion    # tab completion for rails
 rake-completion     # tab completion for rake
 readline            # lib for CLI consoles with history and keyboard shortcuts, ruby dep
@@ -73,6 +78,7 @@ shellcheck          # static analysis of bash scripts
 siege               # benchmarking tool for web servers
 spring-completion   # tab completion for spring
 sqlite              # SQL database that uses simple files
+stern               # kubernetes stuff
 svgo                # compress SVG images
 telnet              # for testing network problems
 the_silver_searcher # grepalike
@@ -83,5 +89,5 @@ watch               # show changes to a command's output every 2 seconds
 webp                # library for new image format by google
 weechat             # IRC client
 wget                # CLI tool to fetch web sites
-wxwidgets           # erlang observer
+wxwidgets@3.0       # for erlang observer
 youtube-dl          # download youtube videos
