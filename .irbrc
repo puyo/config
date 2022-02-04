@@ -7,7 +7,7 @@ if Gem::Version.new(RbConfig::CONFIG['ruby_version']) < Gem::Version.new('3.0.0'
     require 'pry'
     Pry.start
     exit
-  rescue => e
+  rescue StandardError => e
     warn e
   end
 end
