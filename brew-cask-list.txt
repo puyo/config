@@ -1,24 +1,24 @@
 barrier            # keyboard and mouse sharing client/server
+basictex           # latex tools
 blender            # 3D graphics
 chromedriver       # browser automation
-docker             # apps packaged with lightweight OSes
 dotnet-sdk         # for MS Code + Unity
 firefox            # browser
+flux               # screen colour temperature controller f.lux
 fontforge          # design fonts, export them from pdfs
 gimp               # image manipulation
 godot              # game dev
 imageoptim         # optimise image size
+magicavoxel        # voxel art
 openttd            # open transport tycoon deluxe
 osxfuse            # required by veracrypt
 parsec             # remote desktop streaming
-postman            # API client, testing tool
 pdf-images         # extract images from pdf files
+postman            # API client, testing tool
 qbittorrent        # bittorrent client
-magicavoxel        # voxel art
-basictex           # latex tools
-flux               # screen colour temperature controller f.lux
 qgis               # mapping software
 r                  # R language
+rancher            # docker and k8s server
 rstudio            # R language IDE, relies on r
 signal             # encrypted messaging
 skype              # voice and video calls
