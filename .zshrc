@@ -15,9 +15,22 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   # asdf
   source $HOME/.asdf/completions/asdf.bash
 
-  # set history file
+  # history config
   export HISTFILE="$HOME/.zhistory"
-  export SAVEHIST=10000
+  export HISTSIZE=99999
+  export HISTFILESIZE=999999
+  export SAVEHIST=$HISTSIZE
+  setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+  setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+  setopt SHARE_HISTORY             # Share history between all sessions.
+  setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+  setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+  setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+  setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+  setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+  setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+  setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+  setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
   # alt-backspace deletes the whole path! gah! fix it!
   export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  ;# without /
