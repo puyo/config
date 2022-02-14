@@ -32,6 +32,9 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
   setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
+  # tab completion settings
+  setopt AUTOLIST NO_MENUCOMPLETE
+
   # alt-backspace deletes the whole path! gah! fix it!
   export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  ;# without /
 
