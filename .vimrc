@@ -463,38 +463,22 @@ augroup END
 
 " Projectionist {
 let g:projectionist_heuristics = {
-\   'web/router.ex': {
-\     'web/controllers/*_controller.ex': {
-\       'type': 'controller',
-\       'alternate': 'test/controllers/{}_controller_test.exs',
-\     },
-\     'web/models/*.ex': {
-\       'type': 'model',
-\       'alternate': 'test/models/{}_test.exs',
-\     },
-\     'web/views/*_view.ex': {
-\       'type': 'view',
-\       'alternate': 'test/views/{}_view_test.exs',
-\     },
-\     'web/templates/*.html.eex': {
-\       'type': 'template',
-\       'alternate': 'web/views/{dirname|basename}_view.ex'
-\     },
-\     'test/*_test.exs': {
-\       'type': 'test',
-\       'alternate': 'web/{}.ex',
-\     }
-\   },
 \   'mix.exs': {
 \     'lib/*.ex': { 'alternate': 'test/{}_test.exs' },
 \     'test/*_test.exs': { 'alternate': 'lib/{}.ex' }
 \   },
-\   'app/*.rb': { 'alternate': 'spec/{}_spec.rb' },
-\   'lib/*.rb': { 'alternate': 'spec/lib/{}_spec.rb' },
-\   'lib/tasks/*.rake': { 'alternate': 'spec/lib/tasks/{}_spec.rb' },
-\   'spec/*_spec.rb': { 'alternate': 'app/{}.rb' },
-\   'spec/lib/*_spec.rb': { 'alternate': 'lib/{}.rb' },
-\   'spec/lib/tasks/*_spec.rb': { 'alternate': 'lib/tasks/{}.rake' }
+\   'app/*.rb': {
+\     'app/*.rb': { 'alternate': 'spec/{}_spec.rb' },
+\     'lib/*.rb': { 'alternate': 'spec/lib/{}_spec.rb' },
+\     'lib/tasks/*.rake': { 'alternate': 'spec/lib/tasks/{}_spec.rb' },
+\     'spec/*_spec.rb': { 'alternate': 'app/{}.rb' },
+\     'spec/lib/*_spec.rb': { 'alternate': 'lib/{}.rb' },
+\     'spec/lib/tasks/*_spec.rb': { 'alternate': 'lib/tasks/{}.rake' }
+\   },
+\   'Gemfile': {
+\     'lib/*.rb': { 'alternate': 'spec/{}_spec.rb' },
+\     'spec/*_spec.rb': { 'alternate': 'lib/{}.rb' },
+\   }
 \ }
 
 noremap <leader>ec :Econtroller<Space>
