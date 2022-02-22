@@ -33,6 +33,9 @@ function developbranch {
 function mainbranch {
   gitbranch main "$@"
 }
+function masterbranch {
+  gitbranch master "$@"
+}
 
 # ----------------------------------------------------------------------
 # Default arguments for common commands
