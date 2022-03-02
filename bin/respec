@@ -1,12 +1,19 @@
 #!/usr/bin/env ruby
 
-PATH = '.respec'
+PATH = '.respec'.freeze
+require 'shellwords'
 
 if File.exist?(PATH)
-  failed_specs = File.read(PATH).each_line.map do |line|
-    line.strip.gsub(/^rspec (.*?) #.*$/, '\1')
+  paths = File.read(PATH).each_line.map do |line|
+    if m = line.match(/rspec '?([^ #\[]+)/)
+      m.captures.first
+    end
+  end.compact.uniq
+  if paths.empty?
+    warn 'No specs to run'
+    exit 1
   end
-  cmd = ['bundle', 'exec', 'rspec', *failed_specs, *ARGV]
-  puts cmd.join(' ')
+  cmd = ['bin/rspec', *paths, *ARGV].shelljoin
+  puts cmd
   exec(*cmd)
 end
