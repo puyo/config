@@ -467,17 +467,17 @@ let g:projectionist_heuristics = {
 \     'lib/*.ex': { 'alternate': 'test/{}_test.exs' },
 \     'test/*_test.exs': { 'alternate': 'lib/{}.ex' }
 \   },
-\   'app/*.rb': {
+\   'Gemfile&!app/': {
+\     'lib/*.rb': { 'alternate': 'spec/{}_spec.rb' },
+\     'spec/*_spec.rb': { 'alternate': 'lib/{}.rb' },
+\   },
+\   'Gemfile&app/': {
 \     'app/*.rb': { 'alternate': 'spec/{}_spec.rb' },
 \     'lib/*.rb': { 'alternate': 'spec/lib/{}_spec.rb' },
 \     'lib/tasks/*.rake': { 'alternate': 'spec/lib/tasks/{}_spec.rb' },
 \     'spec/*_spec.rb': { 'alternate': 'app/{}.rb' },
 \     'spec/lib/*_spec.rb': { 'alternate': 'lib/{}.rb' },
 \     'spec/lib/tasks/*_spec.rb': { 'alternate': 'lib/tasks/{}.rake' }
-\   },
-\   'Gemfile': {
-\     'lib/*.rb': { 'alternate': 'spec/{}_spec.rb' },
-\     'spec/*_spec.rb': { 'alternate': 'lib/{}.rb' },
 \   }
 \ }
 
