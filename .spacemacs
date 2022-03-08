@@ -69,7 +69,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist flycheck-pos-tip hl-todo)
+   dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist flycheck-pos-tip hl-todo auto-highlight-symbol)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -377,12 +377,6 @@ you should place your code here."
 
     (tabbar-mode)
 
-    (defun string/ends-with (string suffix)
-      "Return t if STRING ends with SUFFIX."
-      (and (string-match (rx-to-string `(: ,suffix eos) t)
-                         string)
-           t))
-
     (defun tabbar-buffer-groups ()
       (list
        (cond
@@ -536,6 +530,15 @@ With argument, do this that many times."
     )
   )
 
+(defun dotspacemacs/user-init-bundler ()
+  ;; Run Ruby commands through bundler
+
+  (add-hook 'ruby-mode-hook
+            (lambda ()
+              (setq-local flycheck-command-wrapper-function
+                          (lambda (command) (append '("bundle" "exec") command)))))
+  )
+
 (defun dotspacemacs/user-init-js-flow ()
   ;; Flow/JSX flychecker
   (use-package flow-jsx-mode
@@ -644,6 +647,7 @@ With argument, do this that many times."
  '(flycheck-disabled-checkers '(rust rust-cargo))
  '(flycheck-elixir-credo-strict t)
  '(flyspell-persistent-highlight nil)
+ '(global-evil-matchit-mode t)
  '(global-linum-mode t)
  '(global-vi-tilde-fringe-mode nil)
  '(helm-adaptive-sort-by-frequent-recent-usage nil)
@@ -686,7 +690,7 @@ With argument, do this that many times."
  '(projectile-globally-ignored-files '("TAGS" "tags" ".tern-port"))
  '(projectile-use-git-grep t)
  '(recentf-exclude
-   '("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS") t)
+   '("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS"))
  '(ring-bell-function 'ignore)
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
