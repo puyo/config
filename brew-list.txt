@@ -91,3 +91,4 @@ weechat             # IRC client
 wget                # CLI tool to fetch web sites
 wxwidgets@3.0       # for erlang observer
 youtube-dl          # download youtube videos
+zsh-completions     # completions for zsh, e.g. psql

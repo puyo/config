@@ -6,6 +6,9 @@ export PATH
 export CASE_SENSITIVE="true"
 
 if [[ ! -z "$PROMPT" ]] ; then # if running interactively
+  [ -d /usr/local/share/zsh-completions ] && FPATH=/usr/local/share/zsh-completions:$FPATH
+
+  # completions
   autoload -Uz compinit && compinit # zsh completion
   autoload -Uz bashcompinit && bashcompinit # bash completion command support
 
