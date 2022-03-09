@@ -583,9 +583,3 @@ function! HandleURL()
 endfunction
 nmap gx :call HandleURL()<cr>
 " }
-
-function! ProjectReplace(expr)
-  let s:parts = split(expr, '/')
-  " any parts that end in \ should be joined to the next part
-endfunction
-
