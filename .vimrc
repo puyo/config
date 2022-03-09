@@ -10,12 +10,6 @@ call plug#begin('~/.vim/plugged')
 " Plug {
 
 " colour schemes
-Plug 'chriskempson/base16-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'colepeters/spacemacs-theme.vim'
-Plug 'tomasr/molokai'
-Plug 'zefei/cake16'
-
 Plug 'puyo/vim-colors-pencil-warm'
 
 " .rdoc syntax highlighting
@@ -219,9 +213,12 @@ if has("gui_running")
   hi! link elixirStringDelimiter  String
   hi! link elixirAtom             Symbol
 else
+  let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
   let g:airline_theme = 'pencil'
-  set background=dark
-  colorscheme Tomorrow-Night-Eighties
+  set background=light
+  colorscheme pencil-warm
+  hi! link elixirStringDelimiter  String
+  hi! link elixirAtom             Symbol
 endif
 
 
@@ -253,9 +250,10 @@ set lazyredraw " do not redraw while running macros
 set linespace=0 " do not insert extra pixels between rows
 "set list " needed to display tabs
 "set listchars=tab:>- " only display tabs, not other whitespace
-set shortmess=aOstT " try to avoid 'press a key' prompts
+set shortmess=aOstTF " try to avoid 'press a key' prompts
 set report=0 " tell us when anything has changed
 set number " line numbers on the left
+set wildmenu " nicer when you press <tab> to complete commands
 set wildmode=list:longest " bash-like tab completion
 set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
 \*.jpg,*.gif,*.png,*~,*.swp
