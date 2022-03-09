@@ -134,7 +134,7 @@ Plug 'jparise/vim-graphql'              " .graphql
 call plug#end()
 " }
 
-                          " Basics {
+" Basics {
 filetype plugin indent on " auto indenting
 set noexrc                " don't use local .vimrc files
 set cpoptions+=a          " :read updates alternative file name
@@ -149,7 +149,7 @@ set mousemodel=popup      " right mouse button pops up a menu
 set t_Co=256              " use all 256 colours in 256 colour terminals
 set spelllang=en_au       " Australian English
 set conceallevel=0        " Don't show and hide things like markdown fencing - it's distracting
-                          " }
+" }
 
 " Folding {
 set foldenable        " turn on folding
