@@ -166,7 +166,7 @@ set directory=~/.vim/tmp     " put swap files here
 set hidden                   " let me open multiple unsaved buffers
 set autowrite                " autowrite, save the file when calling external commands
 set autoread                 " reload file from disk if it changed before I modified it
-set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage
+set wildignore+=*.o,*.obj,.git,.sass-cache,tmp,coverage,node_modules
 
 " Strip trailing whitespace when I save source files.
 function! StripTrailingWhitespaces() range
@@ -174,8 +174,6 @@ function! StripTrailingWhitespaces() range
   normal! g`"
 endfunction
 command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
-
-set wildignore+=node_modules
 
 " CtrlP {
 
@@ -204,23 +202,12 @@ if has("termguicolors")
   set termguicolors
 endif
 
-if has("gui_running")
-  " colorscheme spacemacs-theme
-  let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
-  let g:airline_theme = 'pencil'
-  set background=light
-  colorscheme pencil-warm
-  hi! link elixirStringDelimiter  String
-  hi! link elixirAtom             Symbol
-else
-  let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
-  let g:airline_theme = 'pencil'
-  set background=light
-  colorscheme pencil-warm
-  hi! link elixirStringDelimiter  String
-  hi! link elixirAtom             Symbol
-endif
-
+let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
+let g:airline_theme = 'pencil'
+set background=light
+colorscheme pencil-warm
+hi! link elixirStringDelimiter  String
+hi! link elixirAtom             Symbol
 
 set synmaxcol=200 " faster syntax highlighting
 set clipboard+=unnamed " share windows clipboard
@@ -255,8 +242,7 @@ set report=0 " tell us when anything has changed
 set number " line numbers on the left
 set wildmenu " nicer when you press <tab> to complete commands
 set wildmode=list:longest " bash-like tab completion
-set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc, " ignore these
-\*.jpg,*.gif,*.png,*~,*.swp
+set wildignore+=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png,*~,*.swp
 set statusline="%f %m%r%h%w[ff=%{&ff}][ft=%Y][%l/%L,%v]"
 " }
 
@@ -311,16 +297,6 @@ augroup END
 
 "autocmd BufWritePre *.{h,c,hpp,cpp,cc,hh,rb,sh,erb,feature,html,css,scss,sass,haml} :call StripTrailingWhitespaces()
 
-" }
-
-" rails.vim {
-" " app to spec and back
-" autocmd User Rails/app/assets/javascripts/**/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'app/assets', 'spec', ''), '\.js\.coffee', '_spec.js.coffee', '')
-" autocmd User Rails/spec/javascripts/*/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'spec/javascripts', 'app/assets/javascripts', ''), '_spec\.js\.coffee', '.js.coffee', '')
-
-" " lib to spec and back
-" autocmd User Rails/lib/assets/javascripts/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'lib/assets/javascripts', 'spec/javascripts/lib', ''), '\.js\.coffee', '_spec.js.coffee', '')
-" autocmd User Rails/spec/javascripts/lib/*.js.coffee let b:rails_alternate = substitute(substitute(rails#buffer().path(), 'spec/javascripts/lib', 'lib/assets/javascripts', ''), '_spec\.js\.coffee', '.js.coffee', '')
 " }
 
 " Ex commands {
