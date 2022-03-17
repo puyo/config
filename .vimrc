@@ -484,12 +484,14 @@ let g:ale_linters.elixir = ['credo']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.javascript = ['eslint']
+let g:ale_linters.typescript = ['eslint']
 
 let g:ale_fixers = {}
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.javascript = ['prettier', 'eslint']
+let g:ale_fixers.typescript = ['eslint']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.scss = ['stylelint']
 
