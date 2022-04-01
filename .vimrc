@@ -12,8 +12,6 @@ call plug#begin('~/.vim/plugged')
 " colour schemes
 Plug 'puyo/vim-colors-pencil-warm'
 
-" .rdoc syntax highlighting
-Plug 'depuracao/vim-rdoc'
 
 " press <Tab> to complete the current word
 Plug 'ervandew/supertab'
@@ -85,8 +83,6 @@ Plug 'airblade/vim-rooter'
 Plug 'osyo-manga/vim-over'
 
 " Async lint engine
-" fork of dense-analysis/ale to fix dialyxir and credo
-" Plug 'puyo/ale'
 Plug 'dense-analysis/ale'
 
 " Align stuff
@@ -98,38 +94,34 @@ Plug 'vim-scripts/CycleColor'
 " Project mode
 Plug 'tpope/vim-projectionist'
 
-" AsyncRun ...
-Plug 'skywind3000/asyncrun.vim'
 
-" chruby support
-" Plug 'mikepjb/vim-chruby'
-
-Plug 'tpope/vim-scriptease'
 
 " Writing mode
 Plug 'junegunn/goyo.vim'
 
 " File types
+" Plug 'dermusikman/sonicpi.vim'          " .sonicpi
+Plug 'tpope/vim-scriptease'             " .vim improvements
+Plug 'dag/vim2hs'                       " .hs
+Plug 'depuracao/vim-rdoc'               " .rdoc
 Plug 'digitaltoad/vim-jade'             " .jade
 Plug 'elixir-lang/vim-elixir'           " .ex, exs
 Plug 'elmcast/elm-vim'                  " .elm
+Plug 'evanleck/vim-svelte'              " svelte
 Plug 'idris-hackers/idris-vim'          " .idr
+Plug 'jparise/vim-graphql'              " .graphql
 Plug 'kchmck/vim-coffee-script'         " .coffee
 Plug 'leafgarland/typescript-vim'       " .ts
 Plug 'mustache/vim-mustache-handlebars' " .hbr
 Plug 'pangloss/vim-javascript'          " .js
 Plug 'puyo/vim-cucumber'                " .feature
 Plug 'puyo/vim-haml'                    " .haml
+Plug 'rust-lang/rust.vim'               " .rs
 Plug 'slashmili/alchemist.vim'          " .ex, .exs
 Plug 'tpope/vim-rails'                  " .rb, .erb
 Plug 'wavded/vim-stylus'                " .stylus
-Plug 'rust-lang/rust.vim'               " .rs
 Plug 'wlangstroth/vim-racket'           " .rkt
-Plug 'evanleck/vim-svelte'              " svelte
-Plug 'dag/vim2hs'                       " .hs
-" Plug 'dermusikman/sonicpi.vim'          " .sonicpi
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
-Plug 'jparise/vim-graphql'              " .graphql
 
 call plug#end()
 " }
