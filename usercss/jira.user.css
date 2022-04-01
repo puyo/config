@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -171,6 +171,10 @@
     }
 
     /* smart cards */
+    /*
+     * no longer needed, feature disabled via userscripts
+     */
+    /*
     .inlineCardView-content-wrap .card {
         padding: inherit !important;
     }
@@ -187,4 +191,5 @@
     .inlineCardView-content-wrap a::after {
         content: attr(href);
     }
+    */
 }
