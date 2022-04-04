@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+repo = ARGV.first
+
+if repo.nil?
+  warn 'Must pass a fully qualified docker image such as:'
+  warn
+  warn '  docker-repo-image-size xyz.ecr.server/myapp:latest'
+  warn
+  exit 1
+end
+
+json = `docker manifest inspect #{repo}`
+
+require 'json'
+manifest = JSON.parse(json)
+size = manifest['layers'].reduce(0) { |sum, layer| sum + layer['size'] }
+system("echo #{size} | numfmt --to=si")
