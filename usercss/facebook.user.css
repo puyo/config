@@ -1,30 +1,22 @@
 /* ==UserStyle==
 @name           Facebook with less junk
 @namespace      github.com/openstyles/stylus
-@version        1.1.0
+@version        1.2.0
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/facebook.user.css
-@description    Facebook changes - more compact, no main feed as it's too full of ads
+@description    Facebook changes
 @author         Gregory McIntyre
 ==/UserStyle== */
 
 @-moz-document domain("facebook.com") {
-    [data-pagelet="Stories"] {
+    /* stories */
+    [aria-label="Stories"] {
         display: none;
     }
 
-    [data-pagelet^="VideoChatHomeUnit"] {
-        display: none;
-    }
-
-    [aria-label^="Marketplace"] {
-        display: none;
-    }
-
-    [aria-label^="Watch"] {
-        display: none;
-    }
-
+    /* top nav icons */
+    [aria-label^="Marketplace"],
+    [aria-label^="Watch"],
     [aria-label^="Gaming"] {
         display: none;
     }
@@ -37,81 +29,14 @@
         display: block;
     }
 
+    /* video / photo / feeling tabs under "what's on your mind" input */
     [aria-label="Create a post"] > div:nth-child(2) {
         display: none;
     }
 
-    [role="main"] {
-        padding: 0;
-    }
-
-    /* squash the feed slightly to fit when using half-a-screen */
-    @media (max-width: 1080px) {
-        [role="main"] > div {
-            width: 100% !important;
-        }
-    }
-
-    /* left rail text */
-    [data-pagelet="LeftRail"] span {
-        font-size: 13px;
-    }
-
-    [data-pagelet="LeftRail"] > div > div > div > ul a > div {
-        min-height: 0;
-    }
-
-    /* left rail icon */
-    [data-pagelet="LeftRail"] > div > div > div > ul a > div > div:nth-child(1) {
-        margin: 0 0 5px 0;
-    }
-
-    /* your shortcuts label */
-    [data-pagelet="LeftRail"] > div > div > div > ul a > div > div:nth-child(2) > div {
-        padding-top: 0;
-        padding-bottom: 0;
-        padding-left: 0.5em;
-    }
-
-    [data-pagelet="LeftRail"] [role=link] {
-        margin-bottom: 5px;
-    }
-
-    [data-pagelet="LeftRail"] [role=link] div {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-    }
-
-    [data-pagelet="LeftRail"] [role=link] span::before,
-    [data-pagelet="LeftRail"] [role=link] span::after {
-        margin: 0 !important;
-        content: initial;
-    }
-
-    /* see more container */
-    [data-pagelet="LeftRail"] [role="button"] > div {
-        min-height: 0;
-    }
-
-    /* see more icon */
-    [data-pagelet="LeftRail"] [role="button"] > div > div:nth-child(1) {
-        margin: 0;
-    }
-
-    /* see more icon */
-    [data-pagelet="LeftRail"] [role="button"] > div > div:nth-child(1) > div {
-        width: 2em !important;
-        height: 2em !important;
-    }
-
-    /* see more label */
-    [data-pagelet="LeftRail"] [role="button"] > div > div:nth-child(2) {
-        margin: 0 0 5px 0;
-    }
-
-    /* see more label */
-    [data-pagelet="LeftRail"] [role="button"] > div > div:nth-child(2) > div {
-        padding: 0;
-        padding-left: 0.5em;
+    /* create room */
+    #ssrb_stories_end + div > div > div:nth-child(4) {
+        display: none;
     }
 }
+
