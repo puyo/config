@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Facebook with less junk
 @namespace      github.com/openstyles/stylus
-@version        1.2.0
+@version        1.2.1
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/facebook.user.css
 @description    Facebook changes
@@ -36,6 +36,11 @@
 
     /* create room */
     #ssrb_stories_end + div > div > div:nth-child(4) {
+        display: none;
+    }
+
+    /* suggestions in the complementary sidebar on the right */
+    #ssrb_rhc_start + div > div:first-child {
         display: none;
     }
 }
