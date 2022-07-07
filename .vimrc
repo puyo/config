@@ -477,6 +477,7 @@ let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.javascript = ['eslint']
 let g:ale_linters.typescript = ['eslint']
+let g:ale_linters.sh = ['shellcheck']
 
 let g:ale_fixers = {}
 let g:ale_fixers.css = ['stylelint']
