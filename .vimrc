@@ -122,6 +122,8 @@ Plug 'tpope/vim-rails'                  " .rb, .erb
 Plug 'wavded/vim-stylus'                " .stylus
 Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
+Plug 'ziglang/zig.vim'                  " .zig
+Plug 'cespare/vim-toml'                 " .toml
 
 call plug#end()
 " }
