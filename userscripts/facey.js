@@ -2,7 +2,7 @@
 // @name         Facey
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
-// @version      1.13
+// @version      1.14
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -33,6 +33,9 @@
       return false;
     }
     const parent = describedBy.querySelector("[style*=flex]");
+    if (parent == null) {
+      return false;
+    }
     const map = new Map();
 
     Array.from(parent.childNodes).forEach((c) => {
