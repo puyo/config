@@ -2,7 +2,7 @@
 // @name         Facey
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
-// @version      1.14
+// @version      1.15
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -32,6 +32,9 @@
     if (describedBy == null) {
       return false;
     }
+    if (describedBy.textContent.includes("Sponsored")) {
+      return true;
+    }
     const parent = describedBy.querySelector("[style*=flex]");
     if (parent == null) {
       return false;
@@ -53,7 +56,7 @@
   };
 
   window.fbIsAd = (a) => {
-    isAd(a, true);
+    return isAd(a, true);
   };
 
   removeAd = (article, debug = false) => {
@@ -78,7 +81,7 @@
   };
 
   window.fbRemoveAd = (a) => {
-    removeAd(a, true);
+    return removeAd(a, true);
   };
 
   removeAds = (debug = false) => {
@@ -99,7 +102,7 @@
   };
 
   window.fbRemoveAds = () => {
-    removeAds(true);
+    return removeAds(true);
   };
 
   window.count = 0;
