@@ -198,6 +198,14 @@ endif
 
 let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
 let g:airline_theme = 'pencil'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.colnr = ' Col '
+let g:airline_symbols.linenr = ' Line '
+let g:airline_symbols.maxlinenr = ''
+
 set background=light
 colorscheme pencil-warm
 hi! link elixirStringDelimiter  String
