@@ -64,7 +64,7 @@
     Array.from(flexParent.childNodes).forEach((c) => {
       const s = getComputedStyle(c);
       if (s.width !== "0px" && s.height !== "0px") {
-        const t = `${s.top}`;
+        const t = s.top;
         if (!map.has(t)) {
           map.set(t, []);
         }
