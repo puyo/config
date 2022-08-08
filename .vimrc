@@ -105,7 +105,7 @@ Plug 'tpope/vim-scriptease'             " .vim improvements
 Plug 'dag/vim2hs'                       " .hs
 Plug 'depuracao/vim-rdoc'               " .rdoc
 Plug 'digitaltoad/vim-jade'             " .jade
-Plug 'elixir-lang/vim-elixir'           " .ex, exs
+Plug 'elixir-editors/vim-elixir'        " .ex, exs
 Plug 'elmcast/elm-vim'                  " .elm
 Plug 'evanleck/vim-svelte'              " svelte
 Plug 'idris-hackers/idris-vim'          " .idr
@@ -279,6 +279,9 @@ au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
 au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
 au BufNewFile,BufRead *.as setlocal filetype=javascript
 au BufNewFile,BufRead Dockerfile.* setlocal filetype=dockerfile
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+au BufRead,BufNewFile mix.lock set filetype=elixir
 augroup END
 
 augroup filetypes
