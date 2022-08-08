@@ -2,7 +2,7 @@
 // @name         Facey
 // @namespace    puyo/facey
 // @license      Creative Commons BY-NC-SA
-// @version      1.15
+// @version      1.16
 // @description  Make Facey better
 // @author       puyo
 // @match        https://www.facebook.com/
@@ -20,8 +20,19 @@
   const adStyle = "background-color: darkred; color: white;";
 
   isAd = (article, debug) => {
-    let found = article.querySelector("[aria-label=Sponsored]") != null;
-    if (found) {
+    const suggested = article.textContent.includes("Suggested for you");
+    if (suggested) {
+      if (debug) {
+        console.log("Suggested for you, ad");
+      }
+      return true;
+    }
+    const sponsoredLabel =
+      article.querySelector("[aria-label=Sponsored]") != null;
+    if (sponsoredLabel) {
+      if (debug) {
+        console.log("Aria label Sponsored, ad");
+      }
       return true;
     }
     const id = (article.getAttribute("aria-describedby") || "").split(" ")[0];
@@ -30,29 +41,47 @@
     }
     const describedBy = article.querySelector(`#${id}`);
     if (describedBy == null) {
+      if (debug) {
+        console.log("Aria describedby missing, not an ad");
+      }
       return false;
     }
     if (describedBy.textContent.includes("Sponsored")) {
+      if (debug) {
+        console.log("Aria describedby includes Sponsored, ad");
+      }
       return true;
     }
-    const parent = describedBy.querySelector("[style*=flex]");
-    if (parent == null) {
+    const flexParent = describedBy.querySelector("[style*=flex]");
+    if (flexParent == null) {
+      if (debug) {
+        console.log("No flex parent, not an ad");
+      }
       return false;
     }
-    const map = new Map();
 
-    Array.from(parent.childNodes).forEach((c) => {
-      const t = getComputedStyle(c).top;
-      if (!map.has(t)) {
-        map.set(t, []);
+    const map = new Map();
+    Array.from(flexParent.childNodes).forEach((c) => {
+      const s = getComputedStyle(c);
+      if (s.width !== "0px" && s.height !== "0px") {
+        const t = `${s.top}`;
+        if (!map.has(t)) {
+          map.set(t, []);
+        }
+        const a = map.get(t);
+        const text = c.textContent;
+        a.push(text);
       }
-      const a = map.get(t);
-      const text = c.textContent;
-      a.push(text);
     });
 
     const values = Array.from(map.values());
-    return values.map((x) => x.sort().join("")).indexOf("Sdenooprs") !== -1;
+    const hiddenSponsored =
+      values.map((x) => x.sort().join("")).indexOf("Sdenooprs") !== -1;
+    if (hiddenSponsored && debug) {
+      console.log("Aria describedby has hidden word Sponsored, ad");
+    }
+
+    return hiddenSponsored;
   };
 
   window.fbIsAd = (a) => {
