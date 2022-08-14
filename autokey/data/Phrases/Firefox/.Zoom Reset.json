@@ -24,7 +24,7 @@
         "hotKey": "0"
     },
     "filter": {
-        "regex": "^Navigator.Firefox$",
+        "regex": "^Navigator.firefox$",
         "isRecursive": false
     },
     "sendMode": "kb"
