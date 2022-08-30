@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Slack with less noise
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
+@version        1.0.2
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/slack.user.css
 @description    Remove hover effects and other noisy junk
@@ -24,42 +24,6 @@
      * -------------------------------------------------------
      * layout
      */
-
-    /* no having to resize thead and main views to take up 50% of the space after resizing the browser */
-    .p-workspace-layout {
-        display: flex !important;
-        grid-template-columns: none !important;
-        grid-template-rows: none !important;
-        grid-template-areas: none !important;
-        position: initial !important;
-    }
-    .p-workspace__sidebar {
-        display: grid !important;
-        width: 180px !important;
-        min-width: 180px !important;
-        top: initial !important;
-        bottom: initial !important;
-        z-index: initial !important;
-        transition: initial !important;
-    }
-    .p-workspace__primary_view,
-    .p-workspace__secondary_view {
-        width: calc(100vw - 180px) !important;
-    }
-
-    /* stop the sidebar auto hiding on small sizes, it's always important */
-    .p-workspace-layout .p-workspace__sidebar--floating {
-        position: initial !important;
-        transform: initial !important;
-    }
-    .p-ia__view_header__sidebar_toggle_button {
-        display: none !important;
-    }
-
-    /* no more resizer handles needed now */
-    .p-workspace-layout .p-resizer {
-        display: none !important;
-    }
 
     /* no more hiding/displaying these */
     .p-avatar_stack__avatar {
@@ -228,3 +192,4 @@
         display: none;
     }
 }
+
