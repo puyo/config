@@ -14,7 +14,11 @@ if has("gui_macvim")
   set guifont=Comic\ Shanns:h13,Menlo\ Regular:h13
   set fuoptions+=maxhorz " full screen options on mac
   set macmeta " option key works as M- key modifier
-elseif has("gui")
+end
+
+if has("gui_gtk3")
+  set guifont=Comic\ Mono\ 10,Hack\ 10
+
   " autokey super bindings
 
   imap <C-M-s> <ESC><C-M-s>
