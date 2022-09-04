@@ -17,7 +17,7 @@ Plug 'puyo/vim-colors-pencil-warm'
 Plug 'ervandew/supertab'
 
 " :W! to sudo write
-Plug 'gmarik/sudo-gui.vim'
+" Plug 'gmarik/sudo-gui.vim'
 
 " allows custom text objects
 Plug 'kana/vim-textobj-user'
