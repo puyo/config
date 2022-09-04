@@ -41,7 +41,10 @@ if has("gui_gtk3")
   vmap <M-b> <ESC><M-b>
 
   imap <M-o> <ESC><M-o>
-  nnoremap <M-o> :e <R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g') .'/'<CR><BS>/
+  nnoremap <M-o> :e
+        \ <C-R>=
+        \ substitute(expand("%:p:h"), ' ', '\\ ', 'g')
+        \ .'/'<CR><BS>/
   vmap <M-o> <ESC><M-o>
 
   imap <M-p> <ESC><M-p>
