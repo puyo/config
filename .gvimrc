@@ -17,7 +17,8 @@ if has("gui_macvim")
 end
 
 if has("gui_gtk3")
-  set guifont=Comic\ Mono\ 10,Hack\ 10
+  set guifont=Comic\ Mono\ 10
+  set linespace=1
 
   " autokey super bindings
 
