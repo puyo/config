@@ -17,54 +17,52 @@ if has("gui_macvim")
 end
 
 if has("gui_gtk3")
-  set guifont=Comic\ Mono\ 10
+  set guifont=Comic\ Mono\ 11
   set linespace=1
 
-  " autokey super bindings
+  imap <M-s> <ESC><M-s>
+  nnoremap <M-s> :w<CR>
+  vmap <M-s> <ESC><M-s>gv
 
-  imap <C-M-s> <ESC><C-M-s>
-  nnoremap <C-M-s> :w<CR>
-  vmap <C-M-s> <ESC><C-M-s>gv
+  inoremap <M-m> <ESC>lma:Commentary<CR>`ai
+  nnoremap <M-m> :Commentary<CR>
+  vnoremap <M-m> :Commentary<CR>gv
 
-  inoremap <C-M-m> <ESC>lma:Commentary<CR>`ai
-  nnoremap <C-M-m> :Commentary<CR>
-  vnoremap <C-M-m> :Commentary<CR>gv
+  inoremap <M-v> <ESC>"+pa
+  nnoremap <M-v> "+p
+  vnoremap <M-v> "+p
 
-  inoremap <C-M-v> <ESC>"+pa
-  nnoremap <C-M-v> "+p
-  vnoremap <C-M-v> "+p
+  imap <M-a> <ESC><M-a>
+  nnoremap <M-a> ggVG
+  vmap <M-a> <ESC><M-a>
 
-  imap <C-M-a> <ESC><C-M-a>
-  nnoremap <C-M-a> ggVG
-  vmap <C-M-a> <ESC><C-M-a>
+  imap <M-b> <ESC><M-b>
+  nnoremap <M-b> :CtrlPBuffer<CR>
+  vmap <M-b> <ESC><M-b>
 
-  imap <C-M-b> <ESC><C-M-b>
-  nnoremap <C-M-b> :CtrlPBuffer<CR>
-  vmap <C-M-b> <ESC><C-M-b>
+  imap <M-o> <ESC><M-o>
+  nnoremap <M-o> :e <R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g') .'/'<CR><BS>/
+  vmap <M-o> <ESC><M-o>
 
-  imap <C-M-o> <ESC><C-M-o>
-  nnoremap <C-M-o> :e <C-R>=substitute(expand("%:p:h"), ' ', '\\ ', 'g') .'/'<CR><BS>/
-  vmap <C-M-o> <ESC><C-M-o>
+  imap <M-p> <ESC><M-p>
+  nnoremap <M-p> :CtrlP<CR>
+  vmap <M-p> <ESC><M-p>
 
-  imap <C-M-p> <ESC><C-M-p>
-  nnoremap <C-M-p> :CtrlP<CR>
-  vmap <C-M-p> <ESC><C-M-p>
+  imap <M-r> <ESC><M-r>
+  nnoremap <M-r> :CtrlPMRUFiles<CR>
+  vmap <M-r> <ESC><M-r>
 
-  imap <C-M-r> <ESC><C-M-r>
-  nnoremap <C-M-r> :CtrlPMRUFiles<CR>
-  vmap <C-M-r> <ESC><C-M-r>
+  imap <M-w> <ESC><M-w>
+  nnoremap <M-w> :silent Kwbd<CR>
+  vmap <M-w> <ESC><M-w>
 
-  imap <C-M-w> <ESC><C-M-w>
-  nnoremap <C-M-w> :silent Kwbd<CR>
-  vmap <C-M-w> <ESC><C-M-w>
+  imap <M-z> <ESC><M-z>
+  nnoremap <M-z> u
+  vmap <M-z> <ESC><M-z>
 
-  imap <C-M-z> <ESC><C-M-z>
-  nnoremap <C-M-z> u
-  vmap <C-M-z> <ESC><C-M-z>
+  vnoremap <M-c> "+ygv
 
-  vnoremap <C-M-c> "+ygv
-
-  vnoremap <C-M-x> "+c
+  vnoremap <M-x> "+c
 
   " y yanks to OS clipboard, p pastes from OS clipboard
   set clipboard=unnamedplus
