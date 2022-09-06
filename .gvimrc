@@ -24,12 +24,12 @@ if has("gui_gtk3")
   nnoremap <M-s> :w<CR>
   vmap <M-s> <ESC><M-s>gv
 
-  inoremap <M-m> <ESC>lma:Commentary<CR>`ai
-  nnoremap <M-m> :Commentary<CR>
-  vnoremap <M-m> :Commentary<CR>gv
+  inoremap <M-/> <ESC>lma:Commentary<CR>`ai
+  nnoremap <M-/> :Commentary<CR>
+  vnoremap <M-/> :Commentary<CR>gv
 
   inoremap <M-v> <ESC>"+pa
-  nnoremap <M-v> "+p
+  nnoremap <M-v> "+P
   vnoremap <M-v> "+p
 
   imap <M-a> <ESC><M-a>
