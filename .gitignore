@@ -10,3 +10,6 @@ TAGS
 .respec
 vendor.*
 *.tags
+/bin/obsidian
+/bin/privoxy
+/bin/geckodriver
