@@ -65,7 +65,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi tabbar flycheck-popup-tip)
+   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi tabbar flycheck-popup-tip cmake-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -690,7 +690,7 @@ With argument, do this that many times."
  '(projectile-globally-ignored-files '("TAGS" "tags" ".tern-port"))
  '(projectile-use-git-grep t)
  '(recentf-exclude
-   '("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS"))
+   '("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS") t)
  '(ring-bell-function 'ignore)
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
