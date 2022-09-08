@@ -2,7 +2,7 @@
     "type": "folder",
     "title": "Gvim",
     "modes": [],
-    "usageCount": 0,
+    "usageCount": 1,
     "showInTrayMenu": false,
     "abbreviation": {
         "abbreviations": [],
@@ -17,7 +17,7 @@
         "hotKey": null
     },
     "filter": {
-        "regex": null,
-        "isRecursive": false
+        "regex": "gvim.Gvim",
+        "isRecursive": true
     }
 }
