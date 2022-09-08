@@ -1,9 +1,7 @@
 {
     "type": "phrase",
     "description": "Close Buffer",
-    "modes": [
-        3
-    ],
+    "modes": [],
     "usageCount": 0,
     "prompt": false,
     "omitTrigger": false,
@@ -18,13 +16,11 @@
         "wordChars": "[\\w]"
     },
     "hotkey": {
-        "modifiers": [
-            "<super>"
-        ],
-        "hotKey": "w"
+        "modifiers": [],
+        "hotKey": null
     },
     "filter": {
-        "regex": "gvim.Gvim",
+        "regex": null,
         "isRecursive": false
     },
     "sendMode": "kb"

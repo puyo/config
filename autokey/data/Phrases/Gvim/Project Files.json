@@ -24,7 +24,7 @@
         "hotKey": "p"
     },
     "filter": {
-        "regex": "gvim.Gvim",
+        "regex": null,
         "isRecursive": false
     },
     "sendMode": "kb"
