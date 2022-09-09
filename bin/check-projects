@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+require 'set'
+
+projects_path = File.join(ENV['HOME'], 'projects')
+
+Pathname.new(projects_path).find do |path|
+  if path.directory?
+    dir = path
+    if dir.join('.git').directory?
+      if dirty = !system("cd #{dir} && git diff --quiet HEAD --")
+        warn "WARNING: #{dir} dirty"
+      end
+
+      untracked_branches = `cd #{dir} && git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}'`
+      if !untracked_branches.empty?
+        warn "WARNING: #{dir} has untracked branches: #{untracked_branches}"
+      end
+
+      Find.prune
+      return
+    end
+
+    git_dirs = dir.glob('**/.git/')
+
+    if git_dirs.empty?
+      warn "WARNING: #{dir} is not stored in git"
+      Find.prune
+    end
+  else
+    warn "WARNING: #{path} is not checked into git"
+  end
+end
