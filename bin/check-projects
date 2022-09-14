@@ -3,7 +3,7 @@
 require 'pathname'
 require 'set'
 
-projects_path = File.join(ENV['HOME'], 'projects')
+projects_path = ARGV.first || File.join(ENV['HOME'], 'projects')
 
 Pathname.new(projects_path).find do |path|
   if path.directory?
@@ -14,9 +14,7 @@ Pathname.new(projects_path).find do |path|
       end
 
       untracked_branches = `cd #{dir} && git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}'`
-      if !untracked_branches.empty?
-        warn "WARNING: #{dir} has untracked branches: #{untracked_branches}"
-      end
+      warn "WARNING: #{dir} has untracked branches: #{untracked_branches}" unless untracked_branches.empty?
 
       Find.prune
       return
