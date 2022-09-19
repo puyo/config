@@ -66,7 +66,7 @@ sudo apt install -y jq
 # aws cli
 sudo apt install -y awscli
 
-# shellcheck
+# shell check
 sudo apt install -y shellcheck
 
 # spotify
@@ -80,3 +80,17 @@ echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbunt
 curl -fsSL https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_manuelschneid3r.gpg > /dev/null
 sudo apt update
 sudo apt install albert
+
+# pulseaudio - headphones have higher priority than laptop speakers
+sudo sed -i 's/priority = 100/priority = 98/g' /usr/share/pulseaudio/alsa-mixer/paths/analog-output-speaker.conf
+
+# pulseaudio - add a profile with all devices enabled so we can switch between them more easily
+if ! grep -q "All Output" /usr/share/pulseaudio/alsa-mixer/profile-sets/default.conf; then
+  echo "Adding 'All Output' profile to /usr/share/pulseaudio/alsa-mixer/profile-sets/default.conf"
+  sudo "${SHELL}" -c "echo '
+[Profile output:all+input:all]
+description = All Output
+output-mappings = hdmi-stereo analog-stereo
+input-mappings = analog-stereo
+' >> /usr/share/pulseaudio/alsa-mixer/profile-sets/default.conf"
+fi
