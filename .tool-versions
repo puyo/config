@@ -2,6 +2,7 @@ awscli 2.7.33
 elixir 1.13.4
 erlang 25.0.4
 golang 1.12.5
+kubectl 1.25.1
 nodejs lts-gallium
 python 3.9.0
 ruby 3.1.2
