@@ -64,7 +64,11 @@ sudo apt install -y wmctrl
 sudo apt install -y jq
 
 # aws cli
-sudo apt install -y awscli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
+unzip /tmp/awscliv2.zip -d /tmp/awscli2
+rm -rf ~/.awscli
+/tmp/awscli2/aws/install -i ~/.awscli -b ~/bin
+rm -rf /tmp/awscli2*
 
 # shell check
 sudo apt install -y shellcheck
