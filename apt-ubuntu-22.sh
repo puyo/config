@@ -62,6 +62,7 @@ packages=(
   kde-config-gtk-style         # gtk style config
   kde-config-gtk-style-preview # gtk style config
   kde-config-screenlocker      # screen lock config
+  kde-config-sddm              # login screen config
   kde-config-tablet            # wacom tablet support
   kde-config-whoopsie          # configure error reporting to canonical
   kde-spectacle                # screen capture app
@@ -96,6 +97,7 @@ packages=(
   pulseaudio-module-bluetooth  # play audio on bluetooth
   ruby                         # interpreter for many of my scripts
   samba                        # share files with windows machines on the network
+  sddm                         # login screen
   secureboot-db                # manage secureboot database
   shellcheck                   # shell check
   smbclient                    # windows file sharing
