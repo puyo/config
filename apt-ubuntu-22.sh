@@ -25,9 +25,30 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
   sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 # various
-sudo apt install -y aptitude blender curl dict dosfstools emacs exuberant-ctags git \
-  htop imagemagick inkscape irssi manpages-dev ruby samba unrar unzip vim-gtk vlc \
-  wbritish wine zip
+sudo apt install -y \
+  aptitude \
+  blender \
+  curl \
+  dict \
+  dosfstools \
+  emacs \
+  exuberant-ctags
+  git \
+  htop \
+  imagemagick \
+  inkscape \
+  irssi \
+  manpages-dev \
+  net-tools \
+  ruby \
+  samba \
+  unrar \
+  unzip \
+  vim-gtk \
+  vlc \
+  wbritish \
+  wine \
+  zip
 
 # asdf elixir
 sudo apt install -y autoconf fop libgl1-mesa-dev libglu1-mesa-dev libmysqlclient-dev libncurses5-dev libpng-dev libpq-dev libreadline-dev libssh-dev m4 unixodbc-dev xsltproc
