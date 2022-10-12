@@ -1,0 +1,23 @@
+[Desktop Entry]
+DefaultProfile=Greg.profile
+
+[KonsoleWindow]
+RememberWindowSize=false
+
+[MainWindow]
+ToolBarsMovable=Disabled
+
+[SearchSettings]
+SearchCaseSensitive=true
+SearchRegExpression=true
+
+[SplitView]
+SplitDragHandleSize=SplitDragHandleLarge
+SplitViewVisibility=AlwaysHideSplitHeader
+
+[TabBar]
+TabBarVisibility=AlwaysHideTabBar
+
+[UiSettings]
+ColorScheme=Breeze Dark
+WindowColorScheme=Breeze Dark
