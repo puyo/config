@@ -27,6 +27,7 @@ packages=(
   apport-kde                   # crash reports
   apport-symptoms              # crash reports extra info
   aptitude                     # apt UI
+  ark                          # app for opening compressed files
   avahi-daemon                 # dns discovery, mDNS
   bash-completion              # shell tab completion
   blender                      # 3D graphics
@@ -100,6 +101,7 @@ packages=(
   smbclient                    # windows file sharing
   telnet                       # test networks
   thermald                     # monitor computer temperature
+  unar                         # decompress files
   unattended-upgrades          # unattended upgrades
   unrar                        # decompress files
   unzip                        # decompress files
@@ -109,10 +111,12 @@ packages=(
   wbritish                     # british dictionary
   wine                         # windows emulator
   wmctrl                       # wmctrl (gvim wrapper)
+  xfonts-scalable              # some basic fonts
   xserver-xorg-video-all       # video card drivers (does not include intel)
   xserver-xorg-video-intel     # video card drivers for intel
   xsettingsd                   # gnome app support in non-gnome environment
   zip                          # decompress files
+  zstd                         # decompress files
 )
 
 sudo apt install -y "${packages[@]}"
