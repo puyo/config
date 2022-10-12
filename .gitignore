@@ -13,4 +13,5 @@ vendor.*
 /bin/obsidian
 /bin/privoxy
 /bin/geckodriver
+/bin/zola
 .vim/spell/en.utf-8.add.spl
