@@ -32,7 +32,7 @@ sudo apt install -y \
   dict \
   dosfstools \
   emacs \
-  exuberant-ctags
+  exuberant-ctags \
   git \
   htop \
   imagemagick \
