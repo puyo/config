@@ -112,3 +112,9 @@ output-mappings = hdmi-stereo analog-stereo
 input-mappings = analog-stereo
 ' >> /usr/share/pulseaudio/alsa-mixer/profile-sets/default.conf"
 fi
+
+sudo apt install -y \
+  okular \
+  command-not-found \
+  avahi-daemon \
+  bash-completion
