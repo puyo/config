@@ -1,2 +1,0 @@
-d12frosted/emacs-plus
-homebrew/portable-ruby
