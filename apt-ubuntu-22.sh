@@ -9,9 +9,6 @@ APT::AutoRemove::RecommendsImportant "false";
 APT::AutoRemove::SuggestsImportant "false";
 EOF
 
-# unattended upgrades
-sudo apt install -y unattended-upgrades
-
 # firefox (remove snap version, install apt version)
 sudo snap remove firefox
 sudo apt remove -y firefox
@@ -25,10 +22,15 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
   sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 packages=(
+  acpi-support                 # detect lid closure, AC power, etc.
+  apparmor                     # linux security system
+  apport-kde                   # crash reports
+  apport-symptoms              # crash reports extra info
   aptitude                     # apt UI
   avahi-daemon                 # dns discovery, mDNS
   bash-completion              # shell tab completion
   blender                      # 3D graphics
+  breeze-gtk-theme             # gtk app theme to match qt apps
   command-not-found            # suggest uninstalled programs
   cups                         # printer support
   curl                         # download over HTTP
@@ -37,12 +39,14 @@ packages=(
   dosfstools                   # fix line endings
   emacs                        # editor
   exuberant-ctags              # code indexer
+  ffmpegthumbs                 # video thumbnails in dolphin
   firefox                      # browser
   fonts-hack                   # font
   friendly-recovery            # recovery boot mode menu
   geoip-database               # IP geo lookup
   gh                           # github cli
   git                          # version control
+  gstreamer-qapt               # recommend/install video codecs
   gwenview                     # image viewer
   htop                         # task monitor
   imagemagick                  # image conversion on command line
@@ -62,6 +66,7 @@ packages=(
   kde-spectacle                # screen capture app
   kdeconnect                   # smartphone integration
   kerneloops                   # report kernal crashes
+  kubuntu-notification-helper  # notifications about crashes, upgrades, reboots
   kwalletmanager               # manage passwords
   manpages-dev                 # manual pages for devs
   mesa-utils                   # check 3D acceleration is working
@@ -95,6 +100,7 @@ packages=(
   smbclient                    # windows file sharing
   telnet                       # test networks
   thermald                     # monitor computer temperature
+  unattended-upgrades          # unattended upgrades
   unrar                        # decompress files
   unzip                        # decompress files
   vim-gtk                      # editor
