@@ -11,6 +11,7 @@ newgrp docker
 
 # mysql server
 sudo apt install -y mysql-server mysql-client-8.0 libmysqlclient-dev
+sudo mysql -u root mysql -e "update user set plugin = 'mysql_native_password' where User = 'root';"
 
 # redis server
 sudo apt install -y redis-server redis-tools
