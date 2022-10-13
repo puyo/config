@@ -5,6 +5,9 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   # Android
   export ANDROID_HOME="$HOME/Android/sdk"
 
+  # fly
+  export FLYCTL_INSTALL="${HOME}/.fly"
+
   # --------------------------------------------------
   # $PATH
   paths=(
@@ -17,6 +20,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     "$ANDROID_HOME/platform-tools"
     "/usr/local/bin"
     "/usr/local/sbin"
+    "$FLYCTL_INSTALL/bin"
   )
 
   for p in ${paths[@]}; do
@@ -29,25 +33,9 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   # --------------------------------------------------
   # asdf (Elixir, Ruby, Erlang, Node)
 
-  if [ -d "$HOME/.asdf" ]; then
-    source $HOME/.asdf/asdf.sh
+  if [ -f "$HOME/.asdf/asdf.sh" ]; then
+    . "$HOME/.asdf/asdf.sh"
   fi
-
-  # --------------------------------------------------
-  # Node (NVM)
-
-  if [ -d "$HOME/.nvm" ]; then
-    PATH="$PATH:./node_modules/.bin" # Add node modules bin path
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-    # export PATH="$PATH:`yarn global bin --offline`" # yarn
-  fi
-
-  # --------------------------------------------------
-  # irssi
-
-  [ -f "$HOME/.irssi/passwords" ] && source "$HOME/.irssi/passwords"
 
   # --------------------------------------------------
   # Other
@@ -61,9 +49,11 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   export KERL_CONFIGURE_OPTIONS="--without-javac --disable-debug --without-odbc"
 fi
 
-export GOPATH=$HOME/go
-export PATH=$PATH:${GOPATH//://bin:}/bin
+# go
+export GOPATH="$HOME/go"
+export PATH="$PATH:${GOPATH//://bin:}/bin"
 
+# qt
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 [ -f "$HOME/.blake" ] && . "$HOME/.blake"
