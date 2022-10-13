@@ -14,3 +14,6 @@ sudo apt install -y mysql-server mysql-client-8.0 libmysqlclient-dev
 
 # redis server
 sudo apt install -y redis-server redis-tools
+
+# other misc (ts = timestamp output)
+sudo apt install -y moreutils
