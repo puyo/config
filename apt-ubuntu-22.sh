@@ -32,6 +32,7 @@ packages=(
   bash-completion              # shell tab completion
   blender                      # 3D graphics
   breeze-gtk-theme             # gtk app theme to match qt apps
+  cmake                        # needed to build some gems
   command-not-found            # suggest uninstalled programs
   cups                         # printer support
   curl                         # download over HTTP
