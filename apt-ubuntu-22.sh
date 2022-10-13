@@ -43,6 +43,8 @@ packages=(
   ffmpegthumbs                 # video thumbnails in dolphin
   firefox                      # browser
   fonts-hack                   # font
+  fonts-noto-color-emoji       # emoji
+  fonts-noto-core              # emoji font
   friendly-recovery            # recovery boot mode menu
   geoip-database               # IP geo lookup
   gh                           # github cli
