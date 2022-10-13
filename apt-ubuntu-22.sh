@@ -55,6 +55,7 @@ packages=(
   htop                         # task monitor
   imagemagick                  # image conversion on command line
   inkscape                     # vector graphics
+  inotify-tools                # Elixir Phoenix uses this
   iptables                     # firewall
   iputils-tracepath            # souped up traceroute
   irssi                        # irc client
