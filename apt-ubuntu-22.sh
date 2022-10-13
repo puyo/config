@@ -140,6 +140,8 @@ sudo apt install -y g++ pkg-config libx11-dev libasound2-dev libudev-dev
 
 # postgresql server
 sudo apt install -y postgresql libpq-dev
+sudo -u postgres createuser -d -r -s "${USER}"
+createdb "${USER}"
 
 # diff-so-fancy
 sudo add-apt-repository -y ppa:aos1/diff-so-fancy
