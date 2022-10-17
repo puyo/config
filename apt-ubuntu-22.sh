@@ -55,6 +55,7 @@ packages=(
   git                           # version control
   gnupg-agent                   # digitally signed messages
   gstreamer-qapt                # recommend/install video codecs
+  gstreamer1.0-pulseaudio:i386  # firestorm voice
   gwenview                      # image viewer
   htop                          # task monitor
   imagemagick                   # image conversion on command line
@@ -85,6 +86,7 @@ packages=(
   kubuntu-notification-helper   # notifications about crashes, upgrades, reboots
   kwalletmanager                # manage passwords
   kwin-addons                   # KDE simple task switcher
+  libidn12:i386                 # firestorm voice
   manpages-dev                  # manual pages for devs
   memtest86+                    # memory testing on boot
   mesa-utils                    # check 3D acceleration is working
@@ -99,6 +101,7 @@ packages=(
   openssh-server                # ssh into this machine
   p7zip-full                    # decommpress files
   partitionmanager              # manage partitions
+  patchelf                      # firestorm voice
   pavucontrol-qt                # pulseaudio volume control
   pipewire                      # multimedia server
   plasma-browser-integration    # KDE media control, download notifications
