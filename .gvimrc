@@ -84,6 +84,6 @@ if has("gui_gtk3")
     let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
   endfunction
 
-  nmap <M--> :call FontSizeMinus()<CR>
-  nmap <M-=> :call FontSizePlus()<CR>
+  nmap <C-M-_> :call FontSizeMinus()<CR>
+  nmap <C-M-=> :call FontSizePlus()<CR>
 endif
