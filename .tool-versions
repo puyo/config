@@ -6,6 +6,6 @@ kubectl 1.25.1
 nodejs lts-gallium
 python 3.9.0
 ruby 3.1.2
-rust 1.63.0
+rust 1.64.0
 yarn 1.22.19
 zig master
