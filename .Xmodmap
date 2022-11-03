@@ -9,8 +9,13 @@ clear Lock
 keycode 66 = Escape NoSymbol Escape
 
 ! Swap Super/Win and Alt
-keycode 113 = Alt_L
+! https://superuser.com/questions/277990/how-do-i-swap-alt-and-windows-keys-with-xmodmap
+remove mod1 = Alt_L
+remove mod4 = Super_L
+keycode 133 = Alt_L
 keycode 64 = Super_L
+add mod1 = Alt_L
+add mod4 = Super_L
 
 ! This stupid HP laptop has keys down the right hand side that I keep pressing
 ! accidentally. Map them to the nearest key.
