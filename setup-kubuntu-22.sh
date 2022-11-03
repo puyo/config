@@ -156,15 +156,6 @@ packages=(
 
 sudo apt install -y "${packages[@]}"
 
-# asdf elixir
-sudo apt install -y autoconf fop libgl1-mesa-dev libglu1-mesa-dev libmysqlclient-dev libncurses5-dev libpng-dev libpq-dev libreadline-dev libssh-dev m4 unixodbc-dev xsltproc
-
-# asdf erlang
-sudo apt install -y autoconf build-essential fop libgl1-mesa-dev libglu1-mesa-dev libncurses-dev libncurses5-dev libpng-dev libssh-dev libwxgtk-webview3.0-gtk3-dev libwxgtk3.0-gtk3-dev libxml2-utils m4 unixodbc-dev xsltproc
-
-# asdf ruby
-sudo apt install -y autoconf bison build-essential libdb-dev libffi-dev libgdbm-dev libgdbm6 libncurses5-dev libreadline6-dev libssl-dev libyaml-dev uuid-dev zlib1g-dev
-
 # bevy
 sudo apt install -y g++ pkg-config libx11-dev libasound2-dev libudev-dev
 
