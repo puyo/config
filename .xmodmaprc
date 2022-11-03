@@ -1,4 +1,28 @@
-! capslock = Escape
-keycode 66 = Escape NoSymbol Escape
+! If you need to know what a keycode is for a given key:
+!
+!   xev | grep keycode
+
+! Turn off caps lock
 clear Lock
-add Control = Control_L
+
+! CapsLock => Escape
+keycode 66 = Escape NoSymbol Escape
+
+! Swap Super/Win and Alt
+keycode 113 = Alt_L
+keycode 64 = Super_L
+
+! This stupid HP laptop has keys down the right hand side that I keep pressing
+! accidentally. Map them to the nearest key.
+
+! Home => Backspace
+keycode 110 = BackSpace
+
+! Page Up (Prior) => backslash
+keycode 112 = backslash
+
+! Page Down (Next) => Return
+keycode 117 = Return
+
+! End => Return
+keycode 115 = Shift_R
