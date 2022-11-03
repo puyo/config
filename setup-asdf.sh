@@ -12,12 +12,11 @@ sudo apt install -y autoconf build-essential fop libgl1-mesa-dev libglu1-mesa-de
 sudo apt install -y autoconf bison build-essential libdb-dev libffi-dev libgdbm-dev libgdbm6 libncurses5-dev libreadline6-dev libssl-dev libyaml-dev uuid-dev zlib1g-dev
 
 # asdf python
-sudo apt install -y make build-essential libssl-dev zlib1g-dev \
-  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2 || true
 
+# shellcheck source=/dev/null
 source ~/.asdf/asdf.sh
 
 asdf plugin add awscli
@@ -33,6 +32,6 @@ asdf plugin add yarn
 asdf plugin add zig
 
 cd ~/
-ln -sf ~/projects/config/.asdfrc
-ln -sf ~/projects/config/.tool-versions
+ln -sf ~/projects/config/.asdfrc .asdfrc
+ln -sf ~/projects/config/.tool-versions .tool-versions
 asdf install
