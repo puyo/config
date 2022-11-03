@@ -62,6 +62,7 @@ packages=(
   inkscape                      # vector graphics
   inotify-tools                 # Elixir Phoenix uses this
   iptables                      # firewall
+  iputils-ping                  # ping
   iputils-tracepath             # souped up traceroute
   irqbalance                    # improve performance on multiple cores
   irssi                         # irc client
