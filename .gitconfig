@@ -81,3 +81,5 @@
 	required = true
 [url "git@github.com:blake-education/"]
 	insteadOf = https://github.com/blake-education/
+[submodule]
+	recurse = true
