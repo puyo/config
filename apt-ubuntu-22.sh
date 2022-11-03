@@ -86,6 +86,7 @@ packages=(
   kubuntu-notification-helper   # notifications about crashes, upgrades, reboots
   kwalletmanager                # manage passwords
   kwin-addons                   # KDE simple task switcher
+  less                          # terminal pager
   libidn12:i386                 # firestorm voice
   manpages-dev                  # manual pages for devs
   memtest86+                    # memory testing on boot
