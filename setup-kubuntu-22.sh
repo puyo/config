@@ -22,124 +22,37 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
   sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 packages=(
-  acpi-support                  # detect lid closure, AC power, etc.
-  apparmor                      # linux security system
-  apport-kde                    # crash reports
-  apport-symptoms               # crash reports extra info
   aptitude                      # apt UI
-  ark                           # app for opening compressed files
-  avahi-daemon                  # dns discovery, mDNS
   bash-completion               # shell tab completion
   blender                       # 3D graphics
-  breeze-gtk-theme              # gtk app theme to match qt apps
   cmake                         # needed to build some gems
-  command-not-found             # suggest uninstalled programs
-  cups                          # printer support
   curl                          # download over HTTP
   dict                          # dictionary
-  dolphin                       # file manager
   dosfstools                    # fix line endings
   emacs                         # editor
   exuberant-ctags               # code indexer
-  ffmpegthumbs                  # video thumbnails in dolphin
   firefox                       # browser
-  firmware-sof-signed           # intel audio driver
-  fonts-hack                    # font
-  fonts-noto-color-emoji        # emoji
-  fonts-noto-core               # emoji font
-  friendly-recovery             # recovery boot mode menu
-  fwupd                         # firmware management
-  fwupd-signed                  # firmware management
-  geoip-database                # IP geo lookup
   gh                            # github cli
   git                           # version control
-  gnupg-agent                   # digitally signed messages
-  gstreamer-qapt                # recommend/install video codecs
-  gstreamer1.0-pulseaudio:i386  # firestorm voice
-  gwenview                      # image viewer
   htop                          # task monitor
   imagemagick                   # image conversion on command line
   inkscape                      # vector graphics
   inotify-tools                 # Elixir Phoenix uses this
-  iptables                      # firewall
-  iputils-ping                  # ping
-  iputils-tracepath             # souped up traceroute
-  irqbalance                    # improve performance on multiple cores
-  irssi                         # irc client
   jq                            # jq (json pretty printer / query)
-  kamera                        # digital camera support
-  kate                          # text editor
-  kcalc                         # calculator
-  kde-config-gtk-style          # gtk style config
-  kde-config-gtk-style-preview  # gtk style config
-  kde-config-screenlocker       # screen lock config
-  kde-config-sddm               # login screen config
-  kde-config-tablet             # wacom tablet support
-  kde-config-whoopsie           # configure error reporting to canonical
-  kde-spectacle                 # screen capture app
-  kdeconnect                    # smartphone integration
-  kdegraphics-thumbnailers      # thumbnails
-  kdialog                       # used by autokey-qt
-  kerneloops                    # report kernal crashes
-  kimageformat-plugins          # support for various image formats
-  kio-fuse                      # KDE fuse support (for NTFS)
-  kscreen                       # KDE monitor hot plug support
-  kubuntu-notification-helper   # notifications about crashes, upgrades, reboots
-  kwalletmanager                # manage passwords
-  kwin-addons                   # KDE simple task switcher
   less                          # terminal pager
-  libidn12:i386                 # firestorm voice
   manpages-dev                  # manual pages for devs
-  memtest86+                    # memory testing on boot
   mesa-utils                    # check 3D acceleration is working
   mesa-vulkan-drivers           # faster 3D drivers
-  mscompress                    # decompress files
   mtr-tiny                      # ping/traceroute
   net-tools                     # ifconfig and similar command line tools
-  network-manager               # wifi connection manager
-  ntfs-3g                       # NTFS support
-  okular                        # pdf and document viewer
-  okular-extra-backends         # okular epub support
   openssh-server                # ssh into this machine
-  p7zip-full                    # decommpress files
   partitionmanager              # manage partitions
-  patchelf                      # firestorm voice
-  pavucontrol-qt                # pulseaudio volume control
-  pipewire                      # multimedia server
-  plasma-browser-integration    # KDE media control, download notifications
-  plasma-discover               # KDE app store
-  plasma-discover-backend-fwupd # KDE manage firmware
-  plasma-disks                  # KDE alert about failing S.M.A.R.T. hard disks
-  plasma-firewall               # KDE firewall config
-  plasma-nm                     # KDE network manager applet
-  plasma-pa                     # KDE audio manager applet
-  plasma-systemmonitor          # KDE show sensor info
-  plasma-thunderbolt            # KDE manage thunderbolt devices
-  plasma-vault                  # KDE manage encrypted folders
-  plasma-widgets-addons         # KDE various widgets including nightcolor control
-  plymouth                      # boot logo
   plymouth-theme-spinner        # basic boot logo theme
   pm-utils                      # suspend/hibernate from command line
-  print-manager                 # KDE printer manager
-  printer-driver-postscript-hp  # HP printer drivers
-  pulseaudio-module-bluetooth   # play audio on bluetooth
-  rsyslog                       # system logs
   ruby                          # interpreter for many of my scripts
-  samba                         # share files with windows machines on the network
-  sddm                          # login screen
-  secureboot-db                 # manage secureboot database
-  shellcheck                    # shell check
-  smbclient                     # windows file sharing
+  shellcheck                    # shell script linting
   telnet                        # test networks
-  thermald                      # monitor computer temperature
-  ufw                           # firewall CLI
-  unar                          # decompress files
-  unattended-upgrades           # unattended upgrades
-  unrar                         # decompress files
-  unzip                         # decompress files
-  upower                        # power supply info
-  va-driver-all                 # all video drivers
-  vdpau-driver-all              # video decoding via graphics cards
+  unattended-upgrades           # unattended security upgrades
   vim-gtk                       # editor
   vlc                           # media player
   vulkan-tools                  # vulkaninfo
@@ -147,12 +60,6 @@ packages=(
   whois                         # domain name info
   wine                          # windows emulator
   wmctrl                        # wmctrl (gvim wrapper)
-  xfonts-scalable               # some basic fonts
-  xserver-xorg-video-all        # video card drivers (does not include intel)
-  xserver-xorg-video-intel      # video card drivers for intel
-  xsettingsd                    # gnome app support in non-gnome environment
-  zip                           # decompress files
-  zstd                          # decompress files
 )
 
 sudo apt install -y "${packages[@]}"
