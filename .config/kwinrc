@@ -27,4 +27,8 @@ HighlightWindows=false
 LayoutName=big_icons
 
 [org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false
 ButtonsOnLeft=M
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Sweet-Dark-transparent
