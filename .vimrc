@@ -552,6 +552,7 @@ function! s:goyo_enter()
   " noremap <silent> j gj
   " noremap <silent> 0 g0
   " noremap <silent> $ g$
+  setlocal statusline="%!airline#statusline(1)"
 endfunction
 
 function! s:goyo_leave()
