@@ -40,6 +40,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   # --------------------------------------------------
   # Other
 
+  export BROWSER="/usr/bin/firefox"
   export DICTIONARY="british"
   export PAGER="/usr/bin/less -R"
   export HISTCONTROL="ignoreboth"
