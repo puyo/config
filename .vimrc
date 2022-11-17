@@ -124,6 +124,7 @@ Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
 Plug 'ziglang/zig.vim'                  " .zig
 Plug 'cespare/vim-toml'                 " .toml
+Plug 'suy/vim-qmake'                    " .pri, .pro
 
 call plug#end()
 " }
