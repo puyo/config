@@ -130,6 +130,7 @@ packages=(
   secureboot-db                 # manage secureboot database
   shellcheck                    # shell check
   smbclient                     # windows file sharing
+  strace                        # debug programs
   telnet                        # test networks
   thermald                      # monitor computer temperature
   ufw                           # firewall CLI
