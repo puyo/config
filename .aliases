@@ -42,7 +42,7 @@ function masterbranch {
 
 alias grep='grep --color'
 alias less='less -R' # deal with colours
-alias make='make -j17' # use more cores
+alias make='make -j17 --no-print-directory' # use more cores
 
 # ----------------------------------------------------------------------
 # Ruby
