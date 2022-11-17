@@ -41,6 +41,7 @@ packages=(
   dosfstools                    # fix line endings
   emacs                         # editor
   exuberant-ctags               # code indexer
+  ffmpeg                        # work with videos
   ffmpegthumbs                  # video thumbnails in dolphin
   firefox                       # browser
   firmware-sof-signed           # intel audio driver
