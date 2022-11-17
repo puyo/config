@@ -58,3 +58,4 @@ export PATH="$PATH:${GOPATH//://bin:}/bin"
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 [ -f "$HOME/.blake" ] && . "$HOME/.blake"
+[ -f "$HOME/.nearmap/profile.bash" ] && . "$HOME/.nearmap/profile.bash"
