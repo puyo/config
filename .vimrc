@@ -124,6 +124,7 @@ Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
 Plug 'ziglang/zig.vim'                  " .zig
 Plug 'cespare/vim-toml'                 " .toml
+Plug 'suy/vim-qmake'                    " .pri, .pro
 
 call plug#end()
 " }
@@ -296,7 +297,8 @@ au FileType plaintex setlocal spell
 au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
 au FileType slim setlocal comments+=b:'
 au FileType coffee setlocal ts=2 sw=2 sts=2
-au FileType javascript setlocal ts=2 sw=2 sts=2
+au FileType javascript setlocal ts=4 sw=4 sts=4
+au FileType typescript setlocal ts=4 sw=4 sts=4
 au FileType json setlocal nowrap smartindent
 augroup END
 
@@ -489,7 +491,7 @@ let g:ale_linters.elixir = ['credo']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.javascript = ['eslint']
-let g:ale_linters.typescript = ['eslint']
+let g:ale_linters.typescript = ['tsserver']
 let g:ale_linters.sh = ['shellcheck']
 
 let g:ale_fixers = {}

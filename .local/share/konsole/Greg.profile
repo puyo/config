@@ -3,6 +3,7 @@ AntiAliasFonts=true
 ColorScheme=Breeze
 DimmValue=32
 Font=Comic Mono,10,-1,5,50,0,0,0,0,0
+LineSpacing=1
 
 [Cursor Options]
 CustomCursorColor=255,0,255
