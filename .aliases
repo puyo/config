@@ -27,9 +27,6 @@ function gitbranch {
 function sprintbranch {
   gitbranch sprint "$@"
 }
-function developbranch {
-  gitbranch develop "$@"
-}
 function mainbranch {
   gitbranch main "$@"
 }
