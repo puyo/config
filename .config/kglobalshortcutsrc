@@ -1,6 +1,7 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
 switch-to-activity-1d69ab90-2b30-442c-8f4a-2cebd452ecf1=none,none,Switch to activity "Default"
+switch-to-activity-7ff72725-1c61-41de-a9b1-c920a117f41a=none,none,Switch to activity "Default"
 switch-to-activity-d4c978da-b73b-4489-8fb3-d426a2b33e17=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
@@ -21,11 +22,6 @@ _k_friendly_name=Touchpad
 Show System Activity=Ctrl+Esc,Ctrl+Esc,Show System Activity
 _k_friendly_name=KDE Daemon
 display=Display,Display\tMeta+P,Switch Display
-
-[khotkeys]
-_k_friendly_name=Custom Shortcuts Service
-{3fae4908-3924-449a-b11c-37e9252943ba}=Ctrl+Alt+T,none,Launch Konsole
-{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none,none,Search
 
 [kmix]
 _k_friendly_name=Audio Volume
@@ -176,9 +172,9 @@ Window to Desktop 7=none,,Window to Desktop 7
 Window to Desktop 8=none,,Window to Desktop 8
 Window to Desktop 9=none,,Window to Desktop 9
 Window to Next Desktop=none,,Window to Next Desktop
-Window to Next Screen=Meta+Alt+End,Meta+Shift+Right,Window to Next Screen
+Window to Next Screen=Meta+Alt+End\tMeta+Ctrl+Alt+Right,Meta+Shift+Right,Window to Next Screen
 Window to Previous Desktop=none,,Window to Previous Desktop
-Window to Previous Screen=Meta+Alt+Home,Meta+Shift+Left,Window to Previous Screen
+Window to Previous Screen=Meta+Alt+Home\tMeta+Ctrl+Alt+Left,Meta+Shift+Left,Window to Previous Screen
 Window to Screen 0=none,,Window to Screen 0
 Window to Screen 1=none,,Window to Screen 1
 Window to Screen 2=none,,Window to Screen 2

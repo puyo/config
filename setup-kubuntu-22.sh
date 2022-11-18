@@ -31,6 +31,7 @@ packages=(
   dosfstools                    # fix line endings
   emacs                         # editor
   exuberant-ctags               # code indexer
+  ffmpeg                        # work with videos
   firefox                       # browser
   gh                            # github cli
   git                           # version control
@@ -50,7 +51,8 @@ packages=(
   plymouth-theme-spinner        # basic boot logo theme
   pm-utils                      # suspend/hibernate from command line
   ruby                          # interpreter for many of my scripts
-  shellcheck                    # shell script linting
+  shellcheck                    # shell check
+  strace                        # debug programs
   telnet                        # test networks
   unattended-upgrades           # unattended security upgrades
   vim-gtk                       # editor

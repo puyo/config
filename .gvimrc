@@ -18,7 +18,7 @@ end
 
 if has("gui_gtk3")
   set guifont=Comic\ Mono\ 11
-  set linespace=3
+  set linespace=1
 
   imap <C-M-s> <ESC><C-M-s>
   nnoremap <C-M-s> :w<CR>
