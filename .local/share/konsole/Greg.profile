@@ -1,7 +1,7 @@
 [Appearance]
 AntiAliasFonts=true
 ColorScheme=Breeze
-DimmValue=32
+DimmValue=60
 Font=Comic Mono,10,-1,5,50,0,0,0,0,0
 LineSpacing=1
 
