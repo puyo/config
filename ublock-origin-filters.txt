@@ -1,0 +1,2 @@
+! block smart cards
+||atlassian.net/gateway/api/object-resolver/*$1p
