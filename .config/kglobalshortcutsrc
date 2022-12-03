@@ -5,7 +5,6 @@ switch-to-activity-7ff72725-1c61-41de-a9b1-c920a117f41a=none,none,Switch to acti
 switch-to-activity-d4c978da-b73b-4489-8fb3-d426a2b33e17=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
-Switch keyboard layout to Cameroon Multilingual (QWERTY, intl.)=none,none,Switch keyboard layout to Cameroon Multilingual (QWERTY\\, intl.)
 Switch to Next Keyboard Layout=Ctrl+Alt+K,Ctrl+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
@@ -23,6 +22,11 @@ _k_friendly_name=Touchpad
 Show System Activity=Ctrl+Esc,Ctrl+Esc,Show System Activity
 _k_friendly_name=KDE Daemon
 display=Display,Display\tMeta+P,Switch Display
+
+[khotkeys]
+_k_friendly_name=Custom Shortcuts Service
+{55d2e0a0-caa8-454f-b8d8-3689fe653e92}=Meta+T,none,New Tab
+{ca49c322-0a85-47b8-9aaa-41acf68864b0}=Meta+F,none,foo.com
 
 [kmix]
 _k_friendly_name=Audio Volume
@@ -207,7 +211,7 @@ _launch=Meta+E,Meta+E,Dolphin
 [org.kde.krunner.desktop]
 RunClipboard=none,Alt+Shift+F2,Run command on clipboard contents
 _k_friendly_name=KRunner
-_launch=Meta+K,Alt+Space\tAlt+F2\tSearch,KRunner
+_launch=Meta+Space,Alt+Space\tAlt+F2\tSearch,KRunner
 
 [org.kde.plasma.emojier.desktop]
 _k_friendly_name=Emoji Selector
@@ -249,11 +253,12 @@ activate task manager entry 7=Meta+7,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=Meta+8,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
 activate widget 3=Alt+F1,none,Activate Application Launcher Widget
+activate widget 30=none,none,Activate Application Launcher Widget
 activate widget 31=none,none,Activate Application Launcher Widget
 activate widget 34=none,none,Activate Netspeed Widget Widget
 activate widget 36=none,none,Activate Application Launcher Widget
 activate widget 56=none,none,Activate Application Launcher Widget
-activate widget 64=none,none,Activate Application Launcher Widget
+activate widget 59=none,none,Activate Application Launcher Widget
 activate widget 8=none,none,Activate System Tray Widget
 activate widget 87=none,none,Activate Application Launcher Widget
 clear-history=none,none,Clear Clipboard History
@@ -262,8 +267,8 @@ cycleNextAction=none,none,Next History Item
 cyclePrevAction=none,none,Previous History Item
 edit_clipboard=none,none,Edit Contents…
 manage activities=none,Meta+Q,Show Activity Switcher
-next activity=none,none,Walk through activities
-previous activity=none,none,Walk through activities (Reverse)
+next activity=none,Meta+Tab,Walk through activities
+previous activity=none,Meta+Shift+Tab,Walk through activities (Reverse)
 repeat_action=Ctrl+Alt+R,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard
 show dashboard=Ctrl+F12,Ctrl+F12,Show Desktop
 show-barcode=none,none,Show Barcode…

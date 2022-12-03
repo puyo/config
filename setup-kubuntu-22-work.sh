@@ -31,3 +31,22 @@ sudo apt-get install helm
 curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
 sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 sudo apt install pgadmin4-desktop
+
+# OpenSSL config for GlobalProtect VPN
+#
+# /etc/ssl/openssl.cnf
+#
+# ...
+#
+# [openssl_init]
+# # Comment this out:
+# #providers = provider_sect
+# ssl_conf = ssl_sect
+#
+# ...
+#
+# [system_default_sect]
+# CipherString = DEFAULT:@SECLEVEL=2
+#
+# Add this:
+# Options = UnsafeLegacyRenegotiation
