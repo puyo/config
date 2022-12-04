@@ -1,10 +1,3 @@
---langdef=CoffeeScript
---langmap=CoffeeScript:.coffee
---regex-CoffeeScript=/(^|=[ \t])*class ([A-Za-z.]+)( extends [A-Za-z.]+)?$/\2/c,class/
---regex-CoffeeScript=/^[ \t]*@?([A-Za-z.]+):.*[-=]>.*$/\1/f,function/ 
---regex-CoffeeScript=/^[ \t]*([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\1/f,function/
---regex-CoffeeScript=/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/
-
 --langdef=Elixir
 --langmap=Elixir:.ex.exs
 --regex-Elixir=/^[ \t]*def(p?)[ \t]+([a-z_][a-zA-Z0-9_?!]*)/\2/f,functions,functions (def ...)/
@@ -24,8 +17,8 @@
 
 --langmap=JavaScript:+.jsx
 --regex-JavaScript=/^[ \t]*([A-Z][A-Z0-9._$]+)[ \t]*[=:][ \t]*([0-9"'\[\{]|null)/\1/n,constants/
---regex-JavaScript=/^[ \t]*([A-Za-z_$][A-Za-z0-9._$]*):.*function[ \t*](.*)[ \t*]{/\1/f,functions/
---regex-JavaScript=/^[ \t]*([A-Za-z_$][A-Za-z0-9._$]*)[ \t]*(.*)[ \t*]{$/\1/f,functions/
+--regex-JavaScript=/^[ \t]*([A-Za-z_$][A-Za-z0-9._$]*):.*function[ \t*](.*)[ \t*]\{/\1/f,functions/
+--regex-JavaScript=/^[ \t]*([A-Za-z_$][A-Za-z0-9._$]*)[ \t]*(.*)[ \t*]\{$/\1/f,functions/
 
 --exclude=node_modules
 --exclude=bower_components
