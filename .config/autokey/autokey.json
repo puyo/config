@@ -5,7 +5,7 @@
         "isFirstRun": false,
         "serviceRunning": true,
         "menuTakesFocus": false,
-        "showTrayIcon": false,
+        "showTrayIcon": true,
         "sortByUsageCount": true,
         "promptToSave": false,
         "enableQT4Workaround": false,
@@ -17,8 +17,8 @@
         ],
         "hPanePosition": 260,
         "columnWidths": [
-            102,
-            51,
+            103,
+            49,
             492
         ],
         "showToolbar": true,
