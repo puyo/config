@@ -5,7 +5,8 @@ switch-to-activity-7ff72725-1c61-41de-a9b1-c920a117f41a=none,none,Switch to acti
 switch-to-activity-d4c978da-b73b-4489-8fb3-d426a2b33e17=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
-Switch to Next Keyboard Layout=Ctrl+Alt+K,none,Switch to Next Keyboard Layout
+Switch keyboard layout to Cameroon Multilingual (QWERTY, intl.)=none,none,Switch keyboard layout to Cameroon Multilingual (QWERTY\\, intl.)
+Switch to Next Keyboard Layout=Ctrl+Alt+K,Ctrl+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]
@@ -204,9 +205,9 @@ _k_friendly_name=Dolphin
 _launch=Meta+E,Meta+E,Dolphin
 
 [org.kde.krunner.desktop]
-RunClipboard=Alt+Shift+F2,Alt+Shift+F2,Run command on clipboard contents
+RunClipboard=none,Alt+Shift+F2,Run command on clipboard contents
 _k_friendly_name=KRunner
-_launch=none,Alt+Space\tAlt+F2\tSearch,KRunner
+_launch=Meta+K,Alt+Space\tAlt+F2\tSearch,KRunner
 
 [org.kde.plasma.emojier.desktop]
 _k_friendly_name=Emoji Selector
@@ -250,19 +251,22 @@ activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
 activate widget 3=Alt+F1,none,Activate Application Launcher Widget
 activate widget 31=none,none,Activate Application Launcher Widget
 activate widget 34=none,none,Activate Netspeed Widget Widget
+activate widget 36=none,none,Activate Application Launcher Widget
 activate widget 56=none,none,Activate Application Launcher Widget
+activate widget 64=none,none,Activate Application Launcher Widget
 activate widget 8=none,none,Activate System Tray Widget
-clear-history=none,,Clear Clipboard History
+activate widget 87=none,none,Activate Application Launcher Widget
+clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
-cycleNextAction=none,,Next History Item
-cyclePrevAction=none,,Previous History Item
-edit_clipboard=none,,Edit Contents…
+cycleNextAction=none,none,Next History Item
+cyclePrevAction=none,none,Previous History Item
+edit_clipboard=none,none,Edit Contents…
 manage activities=none,Meta+Q,Show Activity Switcher
 next activity=none,none,Walk through activities
 previous activity=none,none,Walk through activities (Reverse)
 repeat_action=Ctrl+Alt+R,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard
 show dashboard=Ctrl+F12,Ctrl+F12,Show Desktop
-show-barcode=none,,Show Barcode…
+show-barcode=none,none,Show Barcode…
 show-on-mouse-pos=none,Meta+V,Open Klipper at Mouse Position
 stop current activity=none,Meta+S,Stop Current Activity
 switch to next activity=none,,Switch to Next Activity
