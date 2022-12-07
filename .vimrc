@@ -47,7 +47,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " .md syntax highlighting
-Plug 'tpope/vim-markdown'
+Plug 'preservim/vim-markdown'
 
 " press . to repeat more sophisticated things
 Plug 'tpope/vim-repeat'
@@ -237,7 +237,7 @@ set nowrap " do not wrap long lines
 set cursorline " highlight current line
 set laststatus=2 " always show the status line
 set lazyredraw " do not redraw while running macros
-set linespace=0 " do not insert extra pixels between rows
+set linespace=1 " do not insert extra pixels between rows
 "set list " needed to display tabs
 "set listchars=tab:>- " only display tabs, not other whitespace
 set shortmess=aOstTF " try to avoid 'press a key' prompts
@@ -517,7 +517,7 @@ augroup END
 " }
 
 " Markdown {
-let g:vim_markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript', 'sql']
+let g:vim_markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript', 'sql', 'xml']
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 let g:markdown_syntax_conceal = 0
