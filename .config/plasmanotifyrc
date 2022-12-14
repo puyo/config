@@ -1,2 +1,5 @@
+[Applications][firefox]
+Seen=true
+
 [Notifications]
 PopupTimeout=20000
