@@ -33,6 +33,7 @@ packages=(
   exuberant-ctags               # code indexer
   ffmpeg                        # work with videos
   firefox                       # browser
+  firmware-sof-signed           # intel audio drivers
   gh                            # github cli
   git                           # version control
   htop                          # task monitor
