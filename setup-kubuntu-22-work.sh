@@ -1,5 +1,10 @@
 #!/bin/bash
 
+packages=(
+  libkrb5-dev # aws-adfs
+)
+sudo apt install -y "${packages[@]}"
+
 # docker server and cli tools
 sudo apt install -y ca-certificates curl gnupg lsb-release docker-compose
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
