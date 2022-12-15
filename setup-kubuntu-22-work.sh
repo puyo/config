@@ -2,6 +2,7 @@
 
 packages=(
   libkrb5-dev # aws-adfs
+  qgis        # maps!
 )
 sudo apt install -y "${packages[@]}"
 
