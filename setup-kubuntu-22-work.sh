@@ -2,6 +2,8 @@
 
 packages=(
   libkrb5-dev # aws-adfs
+  postgis     # CLI tools for pgsql format
+  postgresql-14-postgis-3     # GIS in the db
   qgis        # maps!
 )
 sudo apt install -y "${packages[@]}"

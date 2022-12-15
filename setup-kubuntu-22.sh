@@ -22,6 +22,7 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
   sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 packages=(
+  alsa-ucm-conf                 # needed for output to audio device plugged into screen
   aptitude                      # apt UI
   bash-completion               # shell tab completion
   blender                       # 3D graphics
