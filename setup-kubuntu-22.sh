@@ -35,6 +35,7 @@ packages=(
   ffmpeg                        # work with videos
   firefox                       # browser
   firmware-sof-signed           # intel audio drivers
+  fonts-noto                    # unicode characters
   gh                            # github cli
   git                           # version control
   htop                          # task monitor
