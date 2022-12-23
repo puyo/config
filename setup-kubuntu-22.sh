@@ -105,4 +105,6 @@ description = All Output
 output-mappings = hdmi-stereo analog-stereo
 input-mappings = analog-stereo
 ' >> /usr/share/pulseaudio/alsa-mixer/profile-sets/default.conf"
+
+  pulseaudio -k
 fi
