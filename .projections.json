@@ -1,13 +1,5 @@
 {
-  "app/*.rb": {
-    "alternate": [
-      "spec/{}_spec.rb"
-    ]
-  },
-  "apps/**/lib/**/*.ex": {
-    "alternate": "apps/{dirname}/test/{dirname}/{basename}_test.exs"
-  },
-  "lib/*.ex": {
-    "alternate": "test/{}_test.exs"
-  }
+  "app/*.rb": { "alternate": "spec/{}_spec.rb" },
+  "apps/**/lib/**/*.ex": { "alternate": "apps/{dirname}/test/{dirname}/{basename}_test.exs" },
+  "lib/*.ex": { "alternate": "test/{}_test.exs" }
 }
