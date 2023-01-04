@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.1.0
+@version        1.1.1
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -10,15 +10,15 @@
 
 @-moz-document regexp("https://.+?.atlassian.net.*") {
     #ak-main-content > div {
-        margin-left: 16px !important;
-        margin-right: 16px !important;
+        margin-left: 16px;
+        margin-right: 16px;
     }
 
     .issue-table thead {
-        border: none !important;
+        border: none;
     }
     .issue-table tbody {
-        border: none !important;
+        border: none;
     }
     .issue-table > tbody > tr > td {
         padding: 4px 4px !important;
@@ -27,5 +27,12 @@
     .empty-results.search-results-dashboard-item {
         padding: 0 !important;
         margin-bottom: 1rem;
+    }
+
+    .dashboard .activity-stream-header {
+        display: none;
+    }
+    .dashboard .activity-stream-container {
+        padding: 0;
     }
 }
