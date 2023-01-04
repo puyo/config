@@ -11,6 +11,7 @@
 /bin/privoxy
 /bin/update-report
 /bin/zola
+/bin/rubymine
 TAGS
 ansible/*.retry
 away.log
