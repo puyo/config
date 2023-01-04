@@ -1,10 +1,12 @@
 #!/bin/bash
 
 packages=(
-  libkrb5-dev # aws-adfs
-  postgis     # CLI tools for pgsql format
-  postgresql-14-postgis-3     # GIS in the db
-  qgis        # maps!
+  libkrb5-dev             # aws-adfs
+  libmagickwand-dev       # rmagick gem
+  libpq-dev               # pg gem
+  postgis                 # CLI tools for pgsql format
+  postgresql-14-postgis-3 # GIS in the db
+  qgis                    # maps in databases
 )
 sudo apt install -y "${packages[@]}"
 
