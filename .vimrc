@@ -449,9 +449,9 @@ let g:projectionist_heuristics = {
 \     'test/*_test.exs': { 'alternate': 'lib/{}.ex' },
 \   },
 \   'Gemfile&!app/': {
-\     '**lib/*.rb': { 'type': 'ruby', 'alternate': ['{dirname}spec/{basename}_spec.rb', '{dirname}test/test_{basename}.rb'] },
+\     '**lib/*.rb': { 'type': 'ruby', 'alternate': ['{dirname}spec/{basename}_spec.rb', '{dirname}test/{basename}_test.rb'] },
 \     '**spec/*_spec.rb': { 'type': 'spec', 'alternate': '{dirname}lib/{basename}.rb' },
-\     '**test/test_*.rb': { 'type': 'test', 'alternate': '{dirname}lib/{basename}.rb' },
+\     '**test/*_test.rb': { 'type': 'test', 'alternate': '{dirname}lib/{basename}.rb' },
 \   },
 \   'Gemfile&app/': {
 \     'app/*.rb': { 'type': 'ruby', 'alternate': 'spec/{}_spec.rb' },
