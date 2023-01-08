@@ -1,2 +1,5 @@
+AllCops:
+  NewCops: enable
+
 Metrics/ClassLength: { Enabled: no }
 Metrics/MethodLength: { Enabled: no }
