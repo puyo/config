@@ -448,8 +448,12 @@ let g:projectionist_heuristics = {
 \     'lib/*.ex': { 'alternate': 'test/{}_test.exs' },
 \     'test/*_test.exs': { 'alternate': 'lib/{}.ex' },
 \   },
+\   '.rspec': {
+\     'lib/*.rb': { 'type': 'ruby', 'alternate': 'spec/{}_spec.rb' },
+\     'spec/*_spec.rb': { 'type': 'spec', 'alternate': 'lib/{}.rb' },
+\   },
 \   'Gemfile&!app/': {
-\     '**lib/*.rb': { 'type': 'ruby', 'alternate': ['{dirname}spec/{basename}_spec.rb', '{dirname}test/{basename}_test.rb'] },
+\     '**lib/*.rb': { 'type': 'ruby', 'alternate': '{dirname}spec/{basename}_spec.rb' },
 \     '**spec/*_spec.rb': { 'type': 'spec', 'alternate': '{dirname}lib/{basename}.rb' },
 \     '**test/*_test.rb': { 'type': 'test', 'alternate': '{dirname}lib/{basename}.rb' },
 \   },
@@ -489,20 +493,22 @@ let g:ale_linters = {}
 let g:ale_linters.css = ['stylelint']
 "let g:ale_linters.elixir = ['credo', 'dialyxir']
 let g:ale_linters.elixir = ['credo']
+let g:ale_linters.javascript = ['eslint']
+let g:ale_linters.python = ['pylint']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
-let g:ale_linters.javascript = ['eslint']
-let g:ale_linters.typescript = ['tsserver']
 let g:ale_linters.sh = ['shellcheck']
+let g:ale_linters.typescript = ['tsserver']
 
 let g:ale_fixers = {}
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.javascript = ['prettier', 'eslint']
-let g:ale_fixers.typescript = ['eslint']
+let g:ale_fixers.python = ['black']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.scss = ['stylelint']
+let g:ale_fixers.typescript = ['eslint']
 
 let g:ale_elixir_credo_strict = 1
 let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
