@@ -2,25 +2,14 @@
 
 if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   # --------------------------------------------------
-  # Android
-  export ANDROID_HOME="$HOME/Android/sdk"
-
-  # fly
-  export FLYCTL_INSTALL="${HOME}/.fly"
-
-  # --------------------------------------------------
   # $PATH
   paths=(
-    "/usr/local/opt/postgresql@12/bin"
+    "$HOME/bin"
+    "$HOME/.local/bin"
     "$HOME/.cargo/bin"
     "/usr/local/share/npm/bin"
-    "/usr/X11/bin"
-    "$HOME/bin"
-    "$ANDROID_HOME/tools"
-    "$ANDROID_HOME/platform-tools"
     "/usr/local/bin"
     "/usr/local/sbin"
-    "$FLYCTL_INSTALL/bin"
   )
 
   for p in ${paths[@]}; do
