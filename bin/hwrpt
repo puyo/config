@@ -1,0 +1,20 @@
+#!/usr/bin/ruby
+
+def make_time
+  t = Time.now - rand(1_000)
+  t.strftime('%m/%d/%Y %H:%M:%S')
+end
+
+contents =
+  File.read(File.join('/home/greg/.nearmap/pan_gp_hrpt.xml'))
+      .gsub(%r{<generate-time>(.*?)</generate-time>}) do
+        "<generate-time>#{make_time}</generate-time>"
+      end
+      .gsub(%r{<last-full-scan-time>(.*?)</last-full-scan-time>}) do
+        "<last-full-scan-time>#{make_time}</last-full-scan-time>"
+      end
+
+path = File.read('/home/greg/.nearmap/pan_gp_hrpt.path').strip
+File.open(path, 'w') do |f|
+  f.print contents
+end
