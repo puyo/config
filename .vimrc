@@ -448,6 +448,10 @@ let g:projectionist_heuristics = {
 \     'lib/*.ex': { 'alternate': 'test/{}_test.exs' },
 \     'test/*_test.exs': { 'alternate': 'lib/{}.ex' },
 \   },
+\   'pytest.ini': {
+\     '**/*.py': { 'type': 'mod', 'alternate': 'tests/{dirname}/test_{basename}.py' },
+\     'tests/**/test_*.py': { 'type': 'test', 'alternate': '{dirname}/{basename}.py' },
+\   },
 \   '.rspec': {
 \     'lib/*.rb': { 'type': 'ruby', 'alternate': 'spec/{}_spec.rb' },
 \     'spec/*_spec.rb': { 'type': 'spec', 'alternate': 'lib/{}.rb' },
