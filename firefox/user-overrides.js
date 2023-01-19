@@ -22,3 +22,4 @@ user_pref("privacy.clearOnShutdown.offlineApps", false); // 2811
 user_pref("privacy.clearOnShutdown.sessions", false);  // 2811
 user_pref("privacy.sanitize.sanitizeOnShutdown", false);
 user_pref("signon.autofillForms", true);
+user_pref("privacy.resistFingerprinting.letterboxing", false); // [HIDDEN PREF]
