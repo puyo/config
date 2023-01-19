@@ -448,20 +448,15 @@ let g:projectionist_heuristics = {
 \     'lib/*.ex': { 'alternate': 'test/{}_test.exs' },
 \     'test/*_test.exs': { 'alternate': 'lib/{}.ex' },
 \   },
-\   'pytest.ini': {
-\     '**/*.py': { 'type': 'mod', 'alternate': 'tests/{dirname}/test_{basename}.py' },
-\     'tests/**/test_*.py': { 'type': 'test', 'alternate': '{dirname}/{basename}.py' },
-\   },
 \   '.rspec': {
 \     'lib/*.rb': { 'type': 'ruby', 'alternate': 'spec/{}_spec.rb' },
 \     'spec/*_spec.rb': { 'type': 'spec', 'alternate': 'lib/{}.rb' },
 \   },
-\   'Gemfile&!app/': {
-\     '**lib/*.rb': { 'type': 'ruby', 'alternate': '{dirname}spec/{basename}_spec.rb' },
-\     '**spec/*_spec.rb': { 'type': 'spec', 'alternate': '{dirname}lib/{basename}.rb' },
-\     '**test/*_test.rb': { 'type': 'test', 'alternate': '{dirname}lib/{basename}.rb' },
+\   'pytest.ini': {
+\     '*.py': { 'type': 'python', 'alternate': 'tests/{dirname}/test_{basename}.py' },
+\     'tests/**/test_*.py': { 'type': 'test', 'alternate': '{dirname}/{basename}.py' },
 \   },
-\   'Gemfile&app/': {
+\   '.rspec&app/': {
 \     'app/*.rb': { 'type': 'ruby', 'alternate': 'spec/{}_spec.rb' },
 \     'lib/*.rb': { 'type': 'ruby', 'alternate': 'spec/lib/{}_spec.rb' },
 \     'lib/tasks/*.rake': { 'type': 'rake', 'alternate': 'spec/lib/tasks/{}_spec.rb' },
