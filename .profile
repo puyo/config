@@ -24,6 +24,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
 
   if [ -f "$HOME/.asdf/asdf.sh" ]; then
     . "$HOME/.asdf/asdf.sh"
+    [ -n "$BASH_VERSION" ] && . "$HOME/.asdf/completions/asdf.bash"
   fi
 
   # --------------------------------------------------
