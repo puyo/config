@@ -318,6 +318,7 @@ activate widget 56=none,none,Activate Application Launcher Widget
 activate widget 59=none,none,Activate Application Launcher Widget
 activate widget 79=none,none,Activate Application Launcher Widget
 activate widget 8=none,none,Activate System Tray Widget
+activate widget 84=none,none,Activate Application Launcher Widget
 activate widget 87=none,none,Activate Application Launcher Widget
 clear-history=none,,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
@@ -335,6 +336,13 @@ stop current activity=none,Meta+S,Stop Current Activity
 switch to next activity=none,,Switch to Next Activity
 switch to previous activity=none,,Switch to Previous Activity
 toggle do not disturb=none,,Toggle do not disturb
+
+[strawberry]
+_k_friendly_name=strawberry
+next_track=none,none,Next track
+play_pause=none,none,Play/Pause
+prev_track=none,none,Previous track
+stop=none,none,Stop
 
 [systemsettings.desktop]
 _k_friendly_name=System Settings
