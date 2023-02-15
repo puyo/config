@@ -21,14 +21,26 @@ LatitudeAuto=-33.8715
 LongitudeAuto=151.2006
 NightTemperature=3900
 
+[Plugins]
+highlightwindowEnabled=false
+quicktile-enhancementsEnabled=false
+
 [TabBox]
 ApplicationsMode=1
 HighlightWindows=false
 LayoutName=big_icons
 
+[TabBoxAlternative]
+HighlightWindows=false
+LayoutName=big_icons
+
+[Windows]
+Placement=Smart
+
 [org.kde.kdecoration2]
 BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=M
+CloseOnDoubleClickOnMenu=true
 library=org.kde.kwin.aurorae
 theme=__aurorae__svg__Sweet-Dark-transparent
