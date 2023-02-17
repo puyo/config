@@ -70,6 +70,9 @@ if has("gui_gtk3")
   " y yanks to OS clipboard, p pastes from OS clipboard
   set clipboard=unnamedplus
 
+  " recompute window size after font size changes
+  set guioptions+=k
+
   function! FontSizePlus ()
     let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
     let l:gf_size_whole = l:gf_size_whole + 1
