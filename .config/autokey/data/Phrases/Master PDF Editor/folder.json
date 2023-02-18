@@ -1,0 +1,23 @@
+{
+    "type": "folder",
+    "title": "Master PDF Editor",
+    "modes": [],
+    "usageCount": 0,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": null
+    },
+    "filter": {
+        "regex": "masterpdfeditor5.Master PDF Editor 5",
+        "isRecursive": true
+    }
+}
