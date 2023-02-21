@@ -100,14 +100,14 @@ Plug 'tpope/vim-projectionist'
 Plug 'junegunn/goyo.vim'
 
 " File types
-" Plug 'dermusikman/sonicpi.vim'          " .sonicpi
-Plug 'tpope/vim-scriptease'             " .vim improvements
+Plug 'cespare/vim-toml'                 " .toml
 Plug 'dag/vim2hs'                       " .hs
 Plug 'depuracao/vim-rdoc'               " .rdoc
 Plug 'digitaltoad/vim-jade'             " .jade
 Plug 'elixir-editors/vim-elixir'        " .ex, exs
 Plug 'elmcast/elm-vim'                  " .elm
 Plug 'evanleck/vim-svelte'              " svelte
+Plug 'hashivim/vim-terraform'           " .tf
 Plug 'idris-hackers/idris-vim'          " .idr
 Plug 'jparise/vim-graphql'              " .graphql
 Plug 'kchmck/vim-coffee-script'         " .coffee
@@ -118,13 +118,15 @@ Plug 'puyo/vim-cucumber'                " .feature
 Plug 'puyo/vim-haml'                    " .haml
 Plug 'rust-lang/rust.vim'               " .rs
 Plug 'slashmili/alchemist.vim'          " .ex, .exs
+Plug 'suy/vim-qmake'                    " .pri, .pro
 Plug 'tpope/vim-rails'                  " .rb, .erb
+Plug 'tpope/vim-scriptease'             " .vim improvements
 Plug 'wavded/vim-stylus'                " .stylus
 Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
 Plug 'ziglang/zig.vim'                  " .zig
-Plug 'cespare/vim-toml'                 " .toml
-Plug 'suy/vim-qmake'                    " .pri, .pro
+
+" Plug 'dermusikman/sonicpi.vim'          " .sonicpi
 
 call plug#end()
 " }
