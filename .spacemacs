@@ -40,7 +40,6 @@ values."
      erlang
      evil-commentary
      git
-     github
      go
      haskell
      html
@@ -143,8 +142,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Menlo"
-                               :size 13
+   dotspacemacs-default-font '("Comic Mono"
+                               :size 20
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -270,7 +269,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
