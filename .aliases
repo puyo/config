@@ -2,7 +2,7 @@
 
 # colors
 if [ -x /usr/bin/dircolors ]; then
-  eval "`dircolors -b`"
+  eval "$(dircolors -b)"
   alias ls='ls -lhN --color=auto'
   alias dir='ls -lhN --color=auto'
 else
@@ -11,26 +11,26 @@ else
   alias dir='ls -ohG'
 fi
 
-function gitbranch {
+gitbranch() {
   base=$1
   shift
-  if [[ "$@" != "" ]]; then
+  if [ "$*" != "" ]; then
     git fetch
-    git branch "$@" origin/$base
-    git checkout "$@"
-    git config branch."$@".remote origin
-    git config branch."$@".merge refs/heads/"$@"
-    git config branch."$@".rebase true
+    git branch "$*" "origin/$base"
+    git checkout "$*"
+    git config branch."$*".remote origin
+    git config branch."$*".merge refs/heads/"$*"
+    git config branch."$*".rebase true
   fi
 }
 
-function sprintbranch {
+sprintbranch() {
   gitbranch sprint "$@"
 }
-function mainbranch {
+mainbranch() {
   gitbranch main "$@"
 }
-function masterbranch {
+masterbranch() {
   gitbranch master "$@"
 }
 
@@ -40,27 +40,28 @@ function masterbranch {
 alias grep='grep --color'
 alias less='less -R' # deal with colours
 alias make='make -j17 --no-print-directory' # use more cores
+alias sqlite3='sqlite3 -line' # better output format by default
 
 # ----------------------------------------------------------------------
 # Ruby
 
-function rake { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else `which rake` "$@"; fi }
-function rails { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else `which rails` "$@"; fi }
-function rspec { if [ -f './bin/rspec' ]; then ./bin/rspec "$@" 2> /dev/null; else `which rspec` "$@"; fi }
+rake() { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else $(which rake) "$@"; fi }
+rails() { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else $(which rails) "$@"; fi }
+rspec() { if [ -f './bin/rspec' ]; then ./bin/rspec "$@" 2> /dev/null; else $(which rspec) "$@"; fi }
 
 alias be='bundle exec'
 
 # ----------------------------------------------------------------------
 # Allegro 4
 
-function extract_dat {
+extract_dat() {
     datexe="${HOME}/bin/allegro4dat.exe"
-    files=`wine ${datexe} "$1" -l | cut -d '-' -f 3 | awk 'NR > 1 { print }'`
-    out=`basename -s .dat "${1}"`
-    echo $out
+    files=$(wine "${datexe}" "$1" -l | cut -d '-' -f 3 | awk 'NR > 1 { print }')
+    out=$(basename -s .dat "${1}")
+    echo "$out"
     mkdir -p "$out"
     for f in $files; do
-        wine "${datexe}" $1 -e "$f" -o "$out/"
+        wine "${datexe}" "$1" -e "$f" -o "$out/"
     done
 }
 
@@ -70,9 +71,9 @@ function extract_dat {
 catasrc="$HOME/Library/Application Support/Cataclysm/save/"
 #catasrc=/usr/local/Cellar/cataclysm/*/libexec/save/
 catabkp=~/.catabackup/
-function catabackup  {
+catabackup() {
     rsync -rvah "${catasrc}" "${catabkp}"
 }
-function catarestore {
+catarestore() {
     rsync -rvah "${catabkp}" "${catasrc}"
 }
