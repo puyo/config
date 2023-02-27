@@ -34,13 +34,9 @@ LayoutName=big_icons
 HighlightWindows=false
 LayoutName=big_icons
 
-[Windows]
-Placement=Smart
-
 [org.kde.kdecoration2]
 BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=M
-CloseOnDoubleClickOnMenu=true
 library=org.kde.kwin.aurorae
 theme=__aurorae__svg__Sweet-Dark-transparent
