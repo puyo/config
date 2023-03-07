@@ -23,6 +23,7 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
 
 packages=(
   alsa-ucm-conf                 # needed for output to audio device plugged into screen
+  apparmor                      # security policies
   aptitude                      # apt UI
   bash-completion               # shell tab completion
   blender                       # 3D graphics
