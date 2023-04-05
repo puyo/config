@@ -47,7 +47,6 @@ values."
      ivy
      javascript
      markdown
-     osx
      python
      react
      ruby
@@ -56,6 +55,7 @@ values."
      spell-checking
      sql
      syntax-checking
+     tabs
      typescript
      vimscript
      yaml
@@ -64,7 +64,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi tabbar flycheck-popup-tip cmake-mode writegood-mode)
+   dotspacemacs-additional-packages '(editorconfig stylus-mode haml-mode sonic-pi flycheck-popup-tip cmake-mode writegood-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -332,7 +332,6 @@ you should place your code here."
 
   (dotspacemacs/user-init-flycheck-popups)
   (dotspacemacs/user-init-disable-semantic-completion)
-  (dotspacemacs/user-init-tabbar)
   (dotspacemacs/user-init-fix-m-backspace)
   (dotspacemacs/user-init-evil-move-region)
   (dotspacemacs/user-init-window-size)
@@ -368,33 +367,6 @@ you should place your code here."
                 (dolist (x (default-value 'completion-at-point-functions))
                   (when (string-prefix-p "semantic-" (symbol-name x))
                     (remove-hook 'completion-at-point-functions x))))))
-  )
-
-(defun dotspacemacs/user-init-tabbar ()
-  (use-package tabbar
-    :config
-
-    (tabbar-mode)
-
-    (defun tabbar-buffer-groups ()
-      (list
-       (cond
-        ((string-equal "*" (substring (buffer-name) 0 1))
-         "Emacs"
-         )
-        ((string-equal " *" (substring (buffer-name) 0 2))
-         "Emacs"
-         )
-        ((member (file-name-nondirectory (buffer-file-name)) '("tags" "TAGS"))
-         "Emacs"
-         )
-        (t
-         "User"
-         )
-        )))
-
-    (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
-    )
   )
 
 (defun dotspacemacs/user-init-add-buffer-switches-to-recentf ()
@@ -499,11 +471,13 @@ With argument, do this that many times."
   (global-set-key (kbd "s-b") 'ivy-switch-buffer)
   (global-set-key (kbd "s-t") 'counsel-projectile)
   (global-set-key (kbd "s-p") 'counsel-git)
-  (global-set-key (kbd "s-{") 'tabbar-backward)
-  (global-set-key (kbd "s-}") 'tabbar-forward)
+  (global-set-key (kbd "s-{") 'spacemacs/tabs-backward)
+  (global-set-key (kbd "s-}") 'spacemacs/tabs-forward)
   (global-set-key (kbd "s-o") 'counsel-find-file)
   (global-set-key (kbd "s-V") 'counsel-show-kill-ring)
   (global-set-key (kbd "s-g") 'counsel-git-grep)
+  (global-set-key (kbd "s-+") 'spacemacs/zoom-frm-in)
+  (global-set-key (kbd "s--") 'spacemacs/zoom-frm-out)
 
   ;; Kill buffer without closing windows
   (defun custom-kill-buffer ()
@@ -750,3 +724,153 @@ With argument, do this that many times."
  '(tabbar-selected-modified ((t (:inherit tabbar-selected :foreground "green3"))))
  '(tabbar-unselected ((t (:inherit tabbar-default :background "#e1dfd7" :slant normal :weight light)))))
 
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
+ '(centaur-tabs-set-icons nil)
+ '(compilation-message-face 'default)
+ '(create-lockfiles nil)
+ '(css-indent-offset 2)
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+ '(delete-selection-mode t)
+ '(evil-ex-search-persistent-highlight nil)
+ '(evil-surround-pairs-alist
+   '((40 "( " . " )")
+     (91 "[ " . " ]")
+     (123 "{ " . " }")
+     (41 "(" . ")")
+     (93 "[" . "]")
+     (125 "{" . "}")
+     (35 "#{" . "}")
+     (98 "(" . ")")
+     (66 "{" . "}")
+     (62 "<" . ">")
+     (116 . evil-surround-read-tag)
+     (60 . evil-surround-read-tag)
+     (102 . evil-surround-function)
+     (37 "%{" . "}")))
+ '(evil-want-C-i-jump t)
+ '(evil-want-Y-yank-to-eol nil)
+ '(exec-path-from-shell-check-startup-files nil)
+ '(flycheck-disabled-checkers '(rust rust-cargo))
+ '(flycheck-elixir-credo-strict t)
+ '(flyspell-persistent-highlight nil)
+ '(global-evil-matchit-mode t)
+ '(global-linum-mode t)
+ '(global-vi-tilde-fringe-mode nil)
+ '(helm-adaptive-sort-by-frequent-recent-usage nil)
+ '(highlight-changes-colors '("#FD5FF0" "#AE81FF"))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    '("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2")))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   '(("#49483E" . 0)
+     ("#67930F" . 20)
+     ("#349B8D" . 30)
+     ("#21889B" . 50)
+     ("#968B26" . 60)
+     ("#A45E0A" . 70)
+     ("#A41F99" . 85)
+     ("#49483E" . 100)))
+ '(hl-bg-colors
+   '("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00"))
+ '(hl-fg-colors
+   '("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36"))
+ '(js-indent-level 2)
+ '(js2-mode-show-parse-errors t)
+ '(js2-mode-show-strict-warnings nil)
+ '(js2-strict-missing-semi-warning nil)
+ '(large-file-warning-threshold 1000000000)
+ '(magit-diff-use-overlays nil)
+ '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
+ '(nrepl-message-colors
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
+ '(ns-pop-up-frames nil)
+ '(package-selected-packages
+   '(writegood-mode cmake-mode orgalist queue magit-section compat org-plus-contrib orgit nadvice tabbar lv transient reformatter flycheck-popup-tip toml-mode racer flycheck-rust cargo rust-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy osc sonic-pi counsel-dash xpm csv-mode ghub let-alist dockerfile-mode docker tablist docker-tramp protobuf-mode tide typescript-mode vimrc-mode dactyl-mode projectile-rails inflections feature-mode erlang magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht macrostep helm-company helm-c-yasnippet fuzzy elisp-slime-nav company-web web-completion-data company-tern dash-functional company-statistics company-go company-cabal company-anaconda auto-yasnippet auto-compile packed ac-ispell auto-complete sql-indent flycheck-credo evil-tutor idris-mode prop-menu winum powerline pcre2el spinner hydra parent-mode projectile request flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key s dash pkg-info epl helm avy helm-core popup async hide-comnt intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode cmm-mode flycheck-elm elm-mode ess go-guru go-eldoc go-mode utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic sws-mode ob-elixir org minitest markdown-mode json-snatcher json-reformat yasnippet multiple-cursors js2-mode haml-mode gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor inf-ruby company elixir-mode zenburn-theme monokai-theme livid-mode skewer-mode dumb-jump uuidgen toc-org rake pug-mode osx-dictionary org-bullets simple-httpd link-hint git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff f column-enforce-mode yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stylus-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode pbcopy paradox page-break-lines osx-trash open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-surround evil-numbers evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-commentary evil-args evil-anzu eval-sexp-fu emmet-mode editorconfig define-word coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))
+ '(paradox-github-token t)
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
+ '(projectile-globally-ignored-directories
+   '(".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "node_modules"))
+ '(projectile-globally-ignored-files '("TAGS" "tags" ".tern-port"))
+ '(projectile-use-git-grep t)
+ '(recentf-exclude
+   '("COMMIT_EDITMSG\\'" "/Users/greg/.emacs.d/elpa" "/Users/greg/.emacs.d/.cache/" "TAGS"))
+ '(ring-bell-function 'ignore)
+ '(ruby-insert-encoding-magic-comment nil)
+ '(rust-format-on-save t)
+ '(sh-basic-offset 2)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(sonic-pi-path "/Applications/Sonic Pi.app/Resources/app")
+ '(tabbar-background-color "#e1dfd7")
+ '(tabbar-separator '(" "))
+ '(tags-add-tables nil)
+ '(tags-case-fold-search nil)
+ '(tags-revert-without-query t)
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
+ '(tooltip-delay 0.1)
+ '(tooltip-short-delay 0)
+ '(typescript-indent-level 2)
+ '(vc-annotate-background "#2B2B2B")
+ '(vc-annotate-color-map
+   '((20 . "#BC8383")
+     (40 . "#CC9393")
+     (60 . "#DFAF8F")
+     (80 . "#D0BF8F")
+     (100 . "#E0CF9F")
+     (120 . "#F0DFAF")
+     (140 . "#5F7F5F")
+     (160 . "#7F9F7F")
+     (180 . "#8FB28F")
+     (200 . "#9FC59F")
+     (220 . "#AFD8AF")
+     (240 . "#BFEBBF")
+     (260 . "#93E0E3")
+     (280 . "#6CA0A3")
+     (300 . "#7CB8BB")
+     (320 . "#8CD0D3")
+     (340 . "#94BFF3")
+     (360 . "#DC8CC3")))
+ '(vc-annotate-very-old-color "#DC8CC3")
+ '(vc-follow-symlinks t)
+ '(volatile-highlights-mode nil)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
+ '(weechat-color-list
+   (unspecified "#272822" "#49483E" "#A20C41" "#F92672" "#67930F" "#A6E22E" "#968B26" "#E6DB74" "#21889B" "#66D9EF" "#A41F99" "#FD5FF0" "#349B8D" "#A1EFE4" "#F8F8F2" "#F8F8F0"))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(tabbar-button ((t (:inherit tabbar-default :box nil))))
+ '(tabbar-default ((t (:background "#e1dfd7" :foreground "#3a81c3"))))
+ '(tabbar-modified ((t (:inherit tabbar-default :foreground "green3"))))
+ '(tabbar-selected ((t (:inherit tabbar-default :background "#fbf8ef" :foreground "blue" :weight normal))))
+ '(tabbar-selected-modified ((t (:inherit tabbar-selected :foreground "green3"))))
+ '(tabbar-unselected ((t (:inherit tabbar-default :background "#e1dfd7" :slant normal :weight light)))))
+)
