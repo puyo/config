@@ -146,7 +146,7 @@ set mousemodel=popup      " right mouse button pops up a menu
                           " helptags ~/.vim/doc " add help searching for user installed packages
 set t_Co=256              " use all 256 colours in 256 colour terminals
 set spelllang=en_au       " Australian English
-set conceallevel=3        " Don't show and hide things like markdown fencing - it's distracting
+set conceallevel=0        " Don't show and hide things like markdown fencing - it's distracting
 " }
 
 " Folding {
@@ -279,8 +279,7 @@ au BufNewFile,BufRead {Gemfile,Guardfile} setlocal filetype=ruby
 au BufNewFile,BufRead *.txt setlocal filetype=text
 au BufNewFile,BufRead *.ejs setlocal filetype=html
 au BufNewFile,BufRead *.hamlc setlocal filetype=haml
-au BufNewFile,BufRead *.md.erb setlocal filetype=markdown
-au BufNewFile,BufRead *.markdown.liquid setlocal filetype=markdown
+au BufNewFile,BufRead *.{md,md.erb,markdown.liquid} setlocal filetype=markdown conceallevel=2 | hi mkdCode guibg=NONE
 au BufNewFile,BufRead *.as setlocal filetype=javascript
 au BufNewFile,BufRead Dockerfile.* setlocal filetype=dockerfile
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
@@ -558,7 +557,7 @@ function! s:goyo_enter()
   setlocal background=dark
   setlocal noshowmode
   setlocal noshowcmd
-  setlocal scrolloff=999
+  setlocal scrolloff=10
   setlocal nospell
   setlocal wrap
   setlocal linebreak
@@ -569,13 +568,15 @@ function! s:goyo_enter()
   setlocal statusline="%!airline#statusline(1)"
 endfunction
 
+let g:goyo_width = '100%'
+let g:goyo_height = '100%'
+let g:goyo_linenr = 1
+
 function! s:goyo_leave()
-  " set background=light
-  " set showmode
-  " set showcmd
-  " set scrolloff=5
-  " set spell
   setlocal background=light
+  set showmode
+  set showcmd
+  set scrolloff=10
   " noremap <silent> k k
   " noremap <silent> j j
   " noremap <silent> 0 0
