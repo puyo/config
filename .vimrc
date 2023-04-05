@@ -48,6 +48,7 @@ Plug 'tpope/vim-rhubarb'
 
 " .md syntax highlighting
 Plug 'preservim/vim-markdown'
+Plug 'godlygeek/tabular'
 
 " press . to repeat more sophisticated things
 Plug 'tpope/vim-repeat'
@@ -145,7 +146,7 @@ set mousemodel=popup      " right mouse button pops up a menu
                           " helptags ~/.vim/doc " add help searching for user installed packages
 set t_Co=256              " use all 256 colours in 256 colour terminals
 set spelllang=en_au       " Australian English
-set conceallevel=0        " Don't show and hide things like markdown fencing - it's distracting
+set conceallevel=3        " Don't show and hide things like markdown fencing - it's distracting
 " }
 
 " Folding {
@@ -526,9 +527,12 @@ augroup END
 
 " Markdown {
 let g:vim_markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript', 'sql', 'xml']
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_conceal_code_blocks = 0
-let g:markdown_syntax_conceal = 0
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:markdown_syntax_conceal = 1
 " }
 
 " Haskell {
