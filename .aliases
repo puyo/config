@@ -68,8 +68,7 @@ extract_dat() {
 # ----------------------------------------------------------------------
 # Cataclysm DDA
 
-catasrc="$HOME/Library/Application Support/Cataclysm/save/"
-#catasrc=/usr/local/Cellar/cataclysm/*/libexec/save/
+catasrc="$HOME/games/cdda/save/"
 catabkp=~/.catabackup/
 catabackup() {
     rsync -rvah "${catasrc}" "${catabkp}"
