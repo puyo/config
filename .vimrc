@@ -240,7 +240,7 @@ set nowrap " do not wrap long lines
 set cursorline " highlight current line
 set laststatus=2 " always show the status line
 set lazyredraw " do not redraw while running macros
-set linespace=1 " do not insert extra pixels between rows
+set linespace=2 " do not insert extra pixels between rows
 "set list " needed to display tabs
 "set listchars=tab:>- " only display tabs, not other whitespace
 set shortmess=aOstTF " try to avoid 'press a key' prompts
@@ -299,8 +299,9 @@ au FileType plaintex setlocal spell
 au FileType markdown setlocal iskeyword-=/ wrap linebreak nolist tw=0 wm=0 spell
 au FileType slim setlocal comments+=b:'
 au FileType coffee setlocal ts=2 sw=2 sts=2
-au FileType javascript setlocal ts=4 sw=4 sts=4
-au FileType typescript setlocal ts=4 sw=4 sts=4
+au FileType javascript setlocal ts=2 sw=2 sts=2
+au FileType typescript setlocal ts=2 sw=2 sts=2
+au FileType typescriptreact setlocal ts=2 sw=2 sts=2
 au FileType json setlocal nowrap smartindent
 augroup END
 
@@ -499,7 +500,8 @@ let g:ale_linters.python = ['pylint']
 let g:ale_linters.ruby = ['rubocop', 'ruby']
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.sh = ['shellcheck']
-let g:ale_linters.typescript = ['tsserver']
+let g:ale_linters.typescript = ['eslint']
+let g:ale_linters.typescriptreact = ['eslint']
 
 let g:ale_fixers = {}
 let g:ale_fixers.css = ['stylelint']
@@ -509,7 +511,8 @@ let g:ale_fixers.javascript = ['prettier', 'eslint']
 let g:ale_fixers.python = ['black']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.scss = ['stylelint']
-let g:ale_fixers.typescript = ['eslint']
+let g:ale_fixers.typescript = ['prettier', 'eslint']
+let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
 
 let g:ale_elixir_credo_strict = 1
 let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
