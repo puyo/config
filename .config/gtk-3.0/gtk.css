@@ -1,0 +1,9 @@
+@import 'colors.css';
+
+/* firefox, remove borders and drop shadows */
+decoration {
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
