@@ -75,21 +75,18 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
 ;; OS X Apple button based shortcuts: recent, buffers, project files, close,
 ;; previous buffer, next buffer
 (global-set-key (kbd "s-r") 'recentf-open-files)
-(global-set-key (kbd "s-b") 'switch-to-buffer)
+(global-set-key (kbd "s-b") 'ivy-switch-buffer)
 (global-set-key (kbd "s-t") 'projectile-find-file)
 (global-set-key (kbd "s-p") 'projectile-find-file)
 (global-set-key (kbd "s-{") 'centaur-tabs-backward)
 (global-set-key (kbd "s-}") 'centaur-tabs-forward)
 (global-set-key (kbd "s-o") 'find-file)
 (global-set-key (kbd "s-g") '+default/search-project)
-
-;; Keybindings
-(global-set-key (kbd "s-+") 'doom/increase-font-size)
-(global-set-key (kbd "s--") 'doom/decrease-font-sizent)
+(global-set-key (kbd "s-=") 'doom/increase-font-size)
+(global-set-key (kbd "s--") 'doom/decrease-font-size)
 (global-set-key (kbd "s-0") 'doom/reset-font-size)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
 (global-set-key (kbd "s-v") 'yank)
@@ -100,8 +97,18 @@
 (global-set-key (kbd "s-W") 'delete-frame)
 (global-set-key (kbd "s-n") 'make-frame)
 (global-set-key (kbd "s-`") 'other-frame)
-(global-set-key (kbd "s-z") 'undo-tree-undo)
+(global-set-key (kbd "s-z") 'undo)
 (global-set-key (kbd "s-s") 'save-buffer)
+(global-set-key (kbd "s-,") 'customize)
+
+;; Make movement keys work like they should
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
+; Make horizontal movement cross lines
+(setq-default evil-cross-lines t)
 
 ;; Kill buffer without closing windows
 (defun custom-kill-buffer ()
@@ -117,3 +124,7 @@
   (save-buffer nil))
 (evil-declare-not-repeat 'custom-save-buffer)
 (global-set-key (kbd "s-s") 'custom-save-buffer)
+
+(after! recentf
+  (add-hook 'buffer-list-update-hook 'recentf-track-opened-file)
+  )
