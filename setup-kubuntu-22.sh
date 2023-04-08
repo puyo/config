@@ -25,6 +25,7 @@ packages=(
   alsa-ucm-conf                 # needed for output to audio device plugged into screen
   apparmor                      # security policies
   aptitude                      # apt UI
+  at-spi2-core                  # prevents a warning in emacs start up
   bash-completion               # shell tab completion
   blender                       # 3D graphics
   cmake                         # needed to build some gems
