@@ -50,3 +50,5 @@ Open3.popen2e(emacsclient, '-nq', *args) do |_, _, wait_thr|
   exit_status = wait_thr.value
   exit_status.success? || Process.spawn(emacs, '--chdir', Dir.pwd, *args)
 end
+
+Open3.capture2(emacsclient, '-nqe', "(select-frame-set-input-focus (selected-frame))")
