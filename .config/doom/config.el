@@ -75,8 +75,8 @@
 ;; they are implemented.
 
 ;; ----------------------------------------------------------------------
+;; Global shortcuts
 
-;; Super-key shortcuts
 (global-set-key (kbd "s-r") 'recentf-open-files)
 (global-set-key (kbd "s-b") 'ivy-switch-buffer)
 (global-set-key (kbd "s-B") 'switch-to-buffer)
@@ -94,83 +94,12 @@
 (global-set-key (kbd "s-c") 'evil-yank)
 (global-set-key (kbd "s-a") 'mark-whole-buffer)
 (global-set-key (kbd "s-x") 'kill-region)
-(global-set-key (kbd "s-w") 'centaur-tabs--kill-this-buffer-dont-ask)
-(global-set-key (kbd "s-W") 'delete-frame)
 (global-set-key (kbd "s-n") 'make-frame)
 (global-set-key (kbd "s-`") 'other-frame)
 (global-set-key (kbd "s-z") 'undo)
 (global-set-key (kbd "s-s") 'save-buffer)
 (global-set-key (kbd "s-,") 'customize)
 (global-set-key (kbd "s-/") 'evilnc-comment-operator)
-
-(setq evil-kill-on-visual-paste nil)
-(setq select-enable-clipboard t)
-(setq select-enable-primary t)
-
-;; ----------------------------------------------------------------------
-
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (setq-local paragraph-start (default-value 'paragraph-start))
-            (setq-local paragraph-separate (default-value 'paragraph-separate))
-            (setq-local adaptive-fill-first-line-regexp (default-value 'adaptive-fill-first-line-regexp))
-            (setq-local adaptive-fill-regexp (default-value 'adaptive-fill-regexp))
-            (setq-local adaptive-fill-function (default-value 'adaptive-fill-function))
-
-            (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-paragraph)
-            (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-paragraph)
-            (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-paragraph)
-            (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-paragraph)
-
-            (modify-syntax-entry ?* ".")
-            (modify-syntax-entry ?_ "w")
-            (modify-syntax-entry ?/ ".")
-
-            (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
-            )
-          )
-
-(after! lisp
-  (add-hook 'lisp-mode-hook
-            (modify-syntax-entry ?- "w")
-            (modify-syntax-entry ?/ "w")
-            )
-  )
-
-;; ----------------------------------------------------------------------
-
-(after! evil
-  ;; Make movement keys work with wrapped text
-  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-                                        ; Make horizontal movement cross lines
-  (setq-default evil-cross-lines t)
-
-  )
-
-;; ----------------------------------------------------------------------
-
-(after! recentf
-  (add-hook 'buffer-list-update-hook 'recentf-track-opened-file)
-  )
-
-;; ----------------------------------------------------------------------
-
-(after! centaur-tabs
-  (setq centaur-tabs-height 40)
-  (setq centaur-tabs-bar-height 50)
-
-  (defun centaur-tabs-buffer-groups ()
-    (list
-     (cond
-      ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-      (t "Editing"))))
-
-  )
-
-;; ----------------------------------------------------------------------
 
 (defun custom-kill-buffer ()
   "Kill the current buffer without closing windows"
@@ -185,5 +114,85 @@
   (save-buffer nil))
 (evil-declare-not-repeat 'custom-save-buffer)
 (global-set-key (kbd "s-s") 'custom-save-buffer)
+
+;; ----------------------------------------------------------------------
+;; OS clipboard interop
+;;
+(setq evil-kill-on-visual-paste nil)
+(setq select-enable-clipboard t)
+(setq select-enable-primary t)
+
+;; ----------------------------------------------------------------------
+
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            ;; Don't use different markdowny paragraph text objects, they're buggy
+            (setq-local paragraph-start (default-value 'paragraph-start))
+            (setq-local paragraph-separate (default-value 'paragraph-separate))
+            (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-paragraph)
+            (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-paragraph)
+            (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-paragraph)
+            (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-paragraph)
+
+            ;; Modify what characters are considered punctuation (.) and words (w)
+            (modify-syntax-entry ?* ".")
+            (modify-syntax-entry ?_ "w")
+            (modify-syntax-entry ?/ ".")
+
+            (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
+            )
+          )
+
+;; ----------------------------------------------------------------------
+
+(after! emacs-lisp
+  (add-hook 'lisp-mode-hook
+            ;; Modify what characters are considered punctuation (.) and words (w)
+            (modify-syntax-entry ?- "w")
+            (modify-syntax-entry ?/ "w")
+            )
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! evil
+  ;; Make movement keys work with wrapped text
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
+  ;; Make horizontal movement cross lines
+  (setq-default evil-cross-lines t)
+
+  ;; Fix C-w o so it actually closes other windows
+  (define-key evil-window-map (kbd "o") 'doom/window-maximize-buffer)
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! recentf
+  ;; If I visit a buffer, it should update its recentf status
+  (add-hook 'buffer-list-update-hook 'recentf-track-opened-file)
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! centaur-tabs
+  ;; Consistent height so everything does not move around when the "close" and
+  ;; "unsaved" icons swap
+  (setq centaur-tabs-height 40)
+  (setq centaur-tabs-bar-height 50)
+
+  ;; Don't group tabs except for one to hide all the uncloseable Emacs windows
+  (defun centaur-tabs-buffer-groups ()
+    (list
+     (cond
+      ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+      (t "Editing"))))
+
+  )
+
+;; ----------------------------------------------------------------------
 
 ;; ----------------------------------------------------------------------
