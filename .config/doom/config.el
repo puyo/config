@@ -117,31 +117,34 @@
 
 ;; ----------------------------------------------------------------------
 ;; OS clipboard interop
-;;
+
 (setq evil-kill-on-visual-paste nil)
 (setq select-enable-clipboard t)
 (setq select-enable-primary t)
 
 ;; ----------------------------------------------------------------------
 
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            ;; Don't use different markdowny paragraph text objects, they're buggy
-            (setq-local paragraph-start (default-value 'paragraph-start))
-            (setq-local paragraph-separate (default-value 'paragraph-separate))
-            (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-paragraph)
-            (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-paragraph)
-            (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-paragraph)
-            (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-paragraph)
+(after! (:and markdown evil)
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              ;; Don't use different markdowny paragraph text objects, they're buggy
+              (setq-local paragraph-start (default-value 'paragraph-start))
+              (setq-local paragraph-separate (default-value 'paragraph-separate))
+              (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-paragraph)
+              (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-paragraph)
+              (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-paragraph)
+              (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-paragraph)
 
-            ;; Modify what characters are considered punctuation (.) and words (w)
-            (modify-syntax-entry ?* ".")
-            (modify-syntax-entry ?_ "w")
-            (modify-syntax-entry ?/ ".")
+              ;; Modify what characters are considered punctuation (.) and words (w)
+              (modify-syntax-entry ?* ".")
+              (modify-syntax-entry ?_ "w")
+              (modify-syntax-entry ?/ ".")
 
-            (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
+              ;; Ensure unicode inside code renders neatly
+              (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
+              )
             )
-          )
+  )
 
 ;; ----------------------------------------------------------------------
 
