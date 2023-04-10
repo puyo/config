@@ -7,6 +7,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
     "$HOME/bin"
     "$HOME/.local/bin"
     "$HOME/.cargo/bin"
+    "$HOME/.config/emacs/bin"
     "/usr/local/share/npm/bin"
     "/usr/local/bin"
     "/usr/local/sbin"
