@@ -23,7 +23,7 @@
 ;;
 (setq doom-font (font-spec :family "Comic Mono" :size 18)
       doom-variable-pitch-font (font-spec :family "Noto Sans" :size 15))
-;;
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -79,6 +79,7 @@
 ;; previous buffer, next buffer
 (global-set-key (kbd "s-r") 'recentf-open-files)
 (global-set-key (kbd "s-b") 'ivy-switch-buffer)
+(global-set-key (kbd "s-B") 'switch-to-buffer)
 (global-set-key (kbd "s-t") 'projectile-find-file)
 (global-set-key (kbd "s-p") 'projectile-find-file)
 (global-set-key (kbd "s-{") 'centaur-tabs-backward)
@@ -100,6 +101,31 @@
 (global-set-key (kbd "s-z") 'undo)
 (global-set-key (kbd "s-s") 'save-buffer)
 (global-set-key (kbd "s-,") 'customize)
+
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (evil-define-key 'normal markdown-mode-map
+              (kbd "{") 'markdown-backward-block
+              (kbd "}") 'markdown-forward-block
+              )
+
+            (define-key markdown-mode-map [remap backward-paragraph] 'markdown-backward-block)
+            (define-key markdown-mode-map [remap forward-paragraph] 'markdown-forward-block)
+
+            (modify-syntax-entry ?* ".")
+            (modify-syntax-entry ?_ "w")
+            (modify-syntax-entry ?/ ".")
+
+            (custom-set-faces
+             '(markdown-code-face ((t (:extend t :family "Source Code Pro"))))
+             )
+            )
+          )
+
+(setq centaur-tabs-height 40)
+(setq centaur-tabs-bar-height 43)
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-plain-icons t)
 
 ;; Make movement keys work like they should
 (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
