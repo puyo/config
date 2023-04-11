@@ -188,3 +188,9 @@
 (after! consult
   (consult-customize consult-buffer :preview-key nil)
   )
+
+;; ----------------------------------------------------------------------
+
+(after! (:and ruby evil)
+  (add-hook 'ruby-mode-hook 'evil-ruby-text-objects-mode)
+  )

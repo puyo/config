@@ -4,14 +4,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages '(counsel cmake-mode))
- )
+ '(rubocop-format-on-save t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-comment-face ((t (:foreground "LightSteelBlue3" :slant italic))))
- '(line-number ((t (:inherit default :foreground "#585a64" :slant italic :weight normal))))
+ '(font-lock-comment-face ((t (:foreground "#787a84" :slant italic))))
+ '(line-number ((t (:inherit default :foreground "#787a84" :slant italic :weight normal))))
  '(mode-line-inactive ((t (:background "#1a1c23" :foreground "#6e7079" :box nil))))
- '(region ((t (:extend t :background "#4e4f5a"))))
- )
+ '(region ((t (:extend t :background "#4e4f5a")))))
