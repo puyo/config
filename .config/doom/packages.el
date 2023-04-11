@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! counsel)
+(package! evil-ruby-text-objects)

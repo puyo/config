@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     (shell :variables shell-default-height 30 shell-default-position 'bottom)
+     ;; (shell :variables shell-default-height 30 shell-default-position 'bottom)
      auto-completion
      csv
      docker
@@ -433,7 +433,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -594,17 +594,16 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   (dotspacemacs/user-init-flycheck-popups)
-  ;(dotspacemacs/user-init-disable-semantic-completion)
-  (dotspacemacs/user-init-fix-m-backspace)
-  (dotspacemacs/user-init-evil-move-region)
+  (dotspacemacs/user-init-disable-semantic-completion)
+  (dotspacemacs/user-init-init-m-backspace)
   (dotspacemacs/user-init-window-size)
   (dotspacemacs/user-init-spelling)
   (dotspacemacs/user-init-editorconfig)
-  (dotspacemacs/user-fix-evil-visual)
-  (dotspacemacs/user-fix-large-file-handling)
-  (dotspacemacs/user-init-osx)
-  ;(dotspacemacs/user-init-elixir)
-  ;(dotspacemacs/user-init-js)
+  (dotspacemacs/user-init-evil)
+  (dotspacemacs/user-init-large-file-handling)
+  (dotspacemacs/user-init-keybindings)
+  (dotspacemacs/user-init-elixir)
+  (dotspacemacs/user-init-js)
   (dotspacemacs/user-init-add-buffer-switches-to-recentf)
   (dotspacemacs/user-init-magit-blame-fix)
 )
@@ -633,39 +632,26 @@ before packages are loaded."
 (defun dotspacemacs/user-init-add-buffer-switches-to-recentf ()
   (use-package recentf
     :config
-
-    (defun switched-buffer ()
-      (recentf-track-opened-file)
-      )
-
-    (add-hook 'buffer-list-update-hook 'switched-buffer)
+    (add-hook 'buffer-list-update-hook 'recentf-track-opened-file)
     )
   )
 
-(defun dotspacemacs/user-init-fix-m-backspace ()
+(defun dotspacemacs/user-init-init-m-backspace ()
   "From https://www.emacswiki.org/emacs/BackwardDeleteWord"
 
   (defun delete-word (arg)
-    "Delete characters forward until encountering the end of a word.
-With argument, do this that many times."
+    "Delete characters forward until encountering the end of a word. With argument, do this that many times."
     (interactive "p")
     (if (use-region-p)
         (delete-region (region-beginning) (region-end))
       (delete-region (point) (progn (forward-word arg) (point)))))
 
   (defun backward-delete-word (arg)
-    "Delete characters backward until encountering the end of a word.
-With argument, do this that many times."
+    "Delete characters backward until encountering the end of a word. With argument, do this that many times."
     (interactive "p")
     (delete-word (- arg)))
 
   (global-set-key (read-kbd-macro "<M-DEL>") 'backward-delete-word))
-
-(defun dotspacemacs/user-init-evil-move-region ()
-  ;; M-{hjkl} to move blocks of text around
-  (require 'evil-move-region)
-  (evil-move-region-default-bindings)
-  )
 
 (defun dotspacemacs/user-init-window-size ()
   (if (window-system)
@@ -685,12 +671,26 @@ With argument, do this that many times."
     )
   )
 
-(defun dotspacemacs/user-fix-evil-visual ()
-  ;; Fix problem copying and pasting with evil visual mode
-  (fset 'evil-visual-update-x-selection 'ignore)
+(defun dotspacemacs/user-init-evil ()
+  ;; Markdown mode improvements
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              ;; Make these keys behave more like they do in Vim
+              (evil-define-key '(normal visual) 'local (kbd "}") 'evil-forward-block)
+              (evil-define-key '(normal visual) 'local (kbd "{") 'evil-backward-block)
+
+              ;; Modify what characters are considered punctuation (.) and words (w)
+              (modify-syntax-entry ?* ".")
+              (modify-syntax-entry ?_ "w")
+              (modify-syntax-entry ?/ ".")
+
+              ;; Ensure unicode inside code renders neatly
+              (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
+              )
+            )
   )
 
-(defun dotspacemacs/user-fix-large-file-handling ()
+(defun dotspacemacs/user-init-large-file-handling ()
   ;; Stop asking me about fundamental mode when opening any file inside a
   ;; project that has a large TAGS file
   (defun spacemacs/check-large-file ()
@@ -706,78 +706,54 @@ With argument, do this that many times."
   ;; Elixir mode on atypical elixir files
   (add-to-list 'auto-mode-alist '("mix\\.lock\\'" . elixir-mode))
 
-  ;; ;; elixir-mode hook
-  ;; (add-hook 'elixir-mode-hook
-  ;;           (lambda () (add-hook 'before-save-hook 'mix-format-before-save)))
-  ;; https://github.com/syl20bnr/spacemacs/issues/9284
-  ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
-  (add-hook
-   'elixir-mode-hook
-   (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+  ;; ;; ;; elixir-mode hook
+  ;; ;; (add-hook 'elixir-mode-hook
+  ;; ;;           (lambda () (add-hook 'before-save-hook 'mix-format-before-save)))
+  ;; ;; https://github.com/syl20bnr/spacemacs/issues/9284
+  ;; ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
+  ;; (add-hook
+  ;;  'elixir-mode-hook
+  ;;  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
 
-  (add-hook
-   'elixir-format-hook
-   (lambda ()
-     (if (projectile-project-p)
-         (setq elixir-format-arguments
-               (list "--dot-formatter"
-                     (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
-       (setq elixir-format-arguments nil))))
+  ;; (add-hook
+  ;;  'elixir-format-hook
+  ;;  (lambda ()
+  ;;    (if (projectile-project-p)
+  ;;        (setq elixir-format-arguments
+  ;;              (list "--dot-formatter"
+  ;;                    (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
+  ;;      (setq elixir-format-arguments nil))))
   )
 
-(defun dotspacemacs/user-init-osx ()
-  ;; OS X Apple button based shortcuts: recent, buffers, project files, close,
-  ;; previous buffer, next buffer
-  (global-set-key (kbd "s-r") 'counsel-recentf)
-  (global-set-key (kbd "s-b") 'ivy-switch-buffer)
-  (global-set-key (kbd "s-t") 'counsel-projectile)
-  (global-set-key (kbd "s-p") 'counsel-git)
-  (global-set-key (kbd "s-{") 'spacemacs/tabs-backward)
-  (global-set-key (kbd "s-}") 'spacemacs/tabs-forward)
-  (global-set-key (kbd "s-o") 'counsel-find-file)
-  (global-set-key (kbd "s-g") 'counsel-git-grep)
+(defun dotspacemacs/user-init-keybindings ()
+  (require 'evil-move-region)
 
-  ;; Keybindings
-  (global-set-key (kbd "s-+") 'spacemacs/scale-up-font)
+  (global-set-key (kbd "s-h") 'evil-move-left)
+  (global-set-key (kbd "s-j") 'evil-move-down)
+  (global-set-key (kbd "s-k") 'evil-move-up)
+  (global-set-key (kbd "s-l") 'evil-move-right)
+  (global-set-key (kbd "s-,") 'customize)
   (global-set-key (kbd "s--") 'spacemacs/scale-down-font)
   (global-set-key (kbd "s-0") 'spacemacs/reset-font-size)
-  (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
-  (global-set-key (kbd "s-v") 'yank)
-  (global-set-key (kbd "s-c") 'evil-yank)
+  (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (global-set-key (kbd "s-a") 'mark-whole-buffer)
-  (global-set-key (kbd "s-x") 'kill-region)
-  (global-set-key (kbd "s-w") 'delete-window)
-  (global-set-key (kbd "s-W") 'delete-frame)
+  (global-set-key (kbd "s-b") 'counsel-buffer-or-recentf)
+  (global-set-key (kbd "s-c") 'evil-yank)
+  (global-set-key (kbd "s-g") 'spacemacs/search-project-auto)
   (global-set-key (kbd "s-n") 'make-frame)
-  (global-set-key (kbd "s-`") 'other-frame)
-  (global-set-key (kbd "s-z") 'undo-tree-undo)
+  (global-set-key (kbd "s-o") 'find-file)
+  (global-set-key (kbd "s-p") 'projectile-find-file)
+  (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+  (global-set-key (kbd "s-r") 'counsel-recentf)
   (global-set-key (kbd "s-s") 'save-buffer)
-
-  ;; window manipulation with command key
-  (global-set-key (kbd "s-1") 'spacemacs/winum-select-window-1)
-  (global-set-key (kbd "s-2") 'spacemacs/winum-select-window-2)
-  (global-set-key (kbd "s-3") 'spacemacs/winum-select-window-3)
-  (global-set-key (kbd "s-4") 'spacemacs/winum-select-window-4)
-  (global-set-key (kbd "s-5") 'spacemacs/winum-select-window-5)
-  (global-set-key (kbd "s-6") 'spacemacs/winum-select-window-6)
-  (global-set-key (kbd "s-7") 'spacemacs/winum-select-window-7)
-  (global-set-key (kbd "s-8") 'spacemacs/winum-select-window-8)
-  (global-set-key (kbd "s-9") 'spacemacs/winum-select-window-9)
-
-  ;; Kill buffer without closing windows
-  (defun custom-kill-buffer ()
-    "Kill the current buffer"
-    (interactive)
-    (kill-buffer nil))
-  (evil-declare-not-repeat 'custom-kill-buffer)
-  (global-set-key (kbd "s-w") 'custom-kill-buffer)
-
-  ;; Save buffer but don't muck up evil-repeat
-  (defun custom-save-buffer ()
-    (interactive)
-    (save-buffer nil))
-  (evil-declare-not-repeat 'custom-save-buffer)
-  (global-set-key (kbd "s-s") 'custom-save-buffer)
+  (global-set-key (kbd "s-t") 'projectile-find-file)
+  (global-set-key (kbd "s-v") 'evil-paste-before)
+  (global-set-key (kbd "s-w") 'kill-current-buffer)
+  (global-set-key (kbd "s-x") 'kill-region)
+  (global-set-key (kbd "s-y") 'redo)
+  (global-set-key (kbd "s-z") 'undo)
+  (global-set-key (kbd "s-{") 'centaur-tabs-backward)
+  (global-set-key (kbd "s-}") 'centaur-tabs-forward)
   )
 
 (defun dotspacemacs/user-init-js ()
@@ -812,11 +788,13 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(centaur-tabs-set-bar 'over)
+ '(centaur-tabs-bar-height 50)
+ '(centaur-tabs-height 40)
  '(compilation-message-face 'default)
  '(create-lockfiles nil)
  '(css-indent-offset 2)
  '(delete-selection-mode t)
+ '(evil-ex-interactive-search-highlight nil)
  '(evil-ex-search-persistent-highlight nil)
  '(evil-want-C-i-jump t)
  '(evil-want-Y-yank-to-eol nil)
@@ -825,7 +803,8 @@ This function is called at the very end of Spacemacs initialization."
  '(flycheck-elixir-credo-strict t)
  '(flyspell-persistent-highlight nil)
  '(global-evil-matchit-mode t)
- '(global-linum-mode t)
+ '(global-linum-mode nil)
+ '(global-superword-mode t)
  '(global-vi-tilde-fringe-mode nil)
  '(js-indent-level 2)
  '(js2-mode-show-parse-errors t)
@@ -841,6 +820,7 @@ This function is called at the very end of Spacemacs initialization."
  '(rust-format-on-save t)
  '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(tabs-group-by-project nil)
  '(tags-add-tables nil)
  '(tags-case-fold-search nil)
  '(tags-revert-without-query t)
