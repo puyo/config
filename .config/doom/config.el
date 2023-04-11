@@ -75,47 +75,6 @@
 ;; they are implemented.
 
 ;; ----------------------------------------------------------------------
-;; Global shortcuts
-
-(global-set-key (kbd "s-r") 'recentf-open-files)
-(global-set-key (kbd "s-b") 'ivy-switch-buffer)
-(global-set-key (kbd "s-B") 'switch-to-buffer)
-(global-set-key (kbd "s-t") 'projectile-find-file)
-(global-set-key (kbd "s-p") 'projectile-find-file)
-(global-set-key (kbd "s-{") 'centaur-tabs-backward)
-(global-set-key (kbd "s-}") 'centaur-tabs-forward)
-(global-set-key (kbd "s-o") 'find-file)
-(global-set-key (kbd "s-g") '+default/search-project)
-(global-set-key (kbd "s-=") 'doom/increase-font-size)
-(global-set-key (kbd "s--") 'doom/decrease-font-size)
-(global-set-key (kbd "s-0") 'doom/reset-font-size)
-(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
-(global-set-key (kbd "s-v") 'evil-paste-before)
-(global-set-key (kbd "s-c") 'evil-yank)
-(global-set-key (kbd "s-a") 'mark-whole-buffer)
-(global-set-key (kbd "s-x") 'kill-region)
-(global-set-key (kbd "s-n") 'make-frame)
-(global-set-key (kbd "s-`") 'other-frame)
-(global-set-key (kbd "s-z") 'undo)
-(global-set-key (kbd "s-s") 'save-buffer)
-(global-set-key (kbd "s-,") 'customize)
-(global-set-key (kbd "s-/") 'evilnc-comment-operator)
-
-(defun custom-kill-buffer ()
-  "Kill the current buffer without closing windows"
-  (interactive)
-  (kill-buffer nil))
-(evil-declare-not-repeat 'custom-kill-buffer)
-(global-set-key (kbd "s-w") 'custom-kill-buffer)
-
-(defun custom-save-buffer ()
-  "Save buffer but don't muck up evil-repeat"
-  (interactive)
-  (save-buffer nil))
-(evil-declare-not-repeat 'custom-save-buffer)
-(global-set-key (kbd "s-s") 'custom-save-buffer)
-
-;; ----------------------------------------------------------------------
 ;; OS clipboard interop
 
 (setq evil-kill-on-visual-paste nil)
@@ -126,14 +85,12 @@
 
 (after! (:and markdown evil)
   (add-hook 'markdown-mode-hook
-            (lambda ()
-              ;; Don't use different markdowny paragraph text objects, they're buggy
-              (setq-local paragraph-start (default-value 'paragraph-start))
-              (setq-local paragraph-separate (default-value 'paragraph-separate))
-              (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-paragraph)
-              (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-paragraph)
-              (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-paragraph)
-              (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-paragraph)
+            (lambda (Don't use different markdowny paragraph text objects, they're buggy)
+              ;; Make these keys behave more like they do in Vim
+              (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-block)
+              (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-block)
+              (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-block)
+              (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-block)
 
               ;; Modify what characters are considered punctuation (.) and words (w)
               (modify-syntax-entry ?* ".")
@@ -149,7 +106,7 @@
 ;; ----------------------------------------------------------------------
 
 (after! emacs-lisp
-  (add-hook 'lisp-mode-hook
+  (add-hook 'emacs-lisp-mode-hook
             ;; Modify what characters are considered punctuation (.) and words (w)
             (modify-syntax-entry ?- "w")
             (modify-syntax-entry ?/ "w")
@@ -159,17 +116,48 @@
 ;; ----------------------------------------------------------------------
 
 (after! evil
+  (global-set-key (kbd "s-r") 'recentf-open-files)
+  (global-set-key (kbd "s-b") 'ivy-switch-buffer)
+  (global-set-key (kbd "s-B") 'switch-to-buffer)
+  (global-set-key (kbd "s-t") 'projectile-find-file)
+  (global-set-key (kbd "s-p") 'projectile-find-file)
+  (global-set-key (kbd "s-{") 'centaur-tabs-backward)
+  (global-set-key (kbd "s-}") 'centaur-tabs-forward)
+  (global-set-key (kbd "s-o") 'find-file)
+  (global-set-key (kbd "s-g") '+default/search-project)
+  (global-set-key (kbd "s-=") 'doom/increase-font-size)
+  (global-set-key (kbd "s--") 'doom/decrease-font-size)
+  (global-set-key (kbd "s-0") 'doom/reset-font-size)
+  (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+  (global-set-key (kbd "s-v") 'evil-paste-before)
+  (global-set-key (kbd "s-c") 'evil-yank)
+  (global-set-key (kbd "s-a") 'mark-whole-buffer)
+  (global-set-key (kbd "s-x") 'kill-region)
+  (global-set-key (kbd "s-n") 'make-frame)
+  (global-set-key (kbd "s-`") 'other-frame)
+  (global-set-key (kbd "s-z") 'undo)
+  (global-set-key (kbd "s-s") 'save-buffer)
+  (global-set-key (kbd "s-,") 'customize)
+  (global-set-key (kbd "s-/") 'evilnc-comment-operator)
+  (global-set-key (kbd "s-s") 'save-buffer)
+  (global-set-key (kbd "s-w") 'kill-buffer)
+
   ;; Make movement keys work with wrapped text
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (setq-default evil-cross-lines t) ; horizontal movement crosses lines
 
-  ;; Make horizontal movement cross lines
-  (setq-default evil-cross-lines t)
-
-  ;; Fix C-w o so it actually closes other windows
+  ;; Fix "C-w o" so it actually closes other windows
   (define-key evil-window-map (kbd "o") 'doom/window-maximize-buffer)
+
+  ;; Make "s" in visual mode work like Vim, rather than having to use "S"
+  (define-key evil-visual-state-map (kbd "s") 'evil-surround-region)
+
+  ;; SPC TAB to switch back and forth between latest two buffers
+  (map! :leader "TAB" #'evil-switch-to-windows-last-buffer)
+
   )
 
 ;; ----------------------------------------------------------------------
@@ -177,6 +165,7 @@
 (after! recentf
   ;; If I visit a buffer, it should update its recentf status
   (add-hook 'buffer-list-update-hook 'recentf-track-opened-file)
+
   )
 
 ;; ----------------------------------------------------------------------
