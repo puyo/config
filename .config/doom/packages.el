@@ -49,7 +49,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! counsel)
+;; Ruby text objects like m for method
 (package! evil-ruby-text-objects)
-(package! format-all)
-(package! inheritenv)
+
+;; Emacs stats (R mode)
+(package! ess)
