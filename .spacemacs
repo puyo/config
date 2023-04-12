@@ -49,7 +49,7 @@ This function should only modify configuration layer settings."
      html
      idris
      javascript
-     lsp
+     ;;lsp
      markdown
      multiple-cursors
      org
@@ -83,7 +83,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist flycheck-pos-tip hl-todo auto-highlight-symbol)
+   dotspacemacs-excluded-packages '(evil-tutor evil-search-highlight-persist flycheck-pos-tip hl-todo auto-highlight-symbol drag-stuff lsp-ruby-lsp)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -676,8 +676,8 @@ before packages are loaded."
   (add-hook 'markdown-mode-hook
             (lambda ()
               ;; Make these keys behave more like they do in Vim
-              (evil-define-key '(normal visual) 'local (kbd "}") 'evil-forward-block)
-              (evil-define-key '(normal visual) 'local (kbd "{") 'evil-backward-block)
+              ;; (evil-define-key '(normal visual) 'local (kbd "}") 'evil-forward-block)
+              ;; (evil-define-key '(normal visual) 'local (kbd "{") 'evil-backward-block)
 
               ;; Modify what characters are considered punctuation (.) and words (w)
               (modify-syntax-entry ?* ".")
@@ -727,6 +727,7 @@ before packages are loaded."
 
 (defun dotspacemacs/user-init-keybindings ()
   (require 'evil-move-region)
+  (evil-move-region-default-bindings)
 
   (global-set-key (kbd "s-h") 'evil-move-left)
   (global-set-key (kbd "s-j") 'evil-move-down)
@@ -737,7 +738,7 @@ before packages are loaded."
   (global-set-key (kbd "s-0") 'spacemacs/reset-font-size)
   (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
   (global-set-key (kbd "s-a") 'mark-whole-buffer)
-  (global-set-key (kbd "s-b") 'counsel-buffer-or-recentf)
+  (global-set-key (kbd "s-b") 'ivy-switch-buffer)
   (global-set-key (kbd "s-c") 'evil-yank)
   (global-set-key (kbd "s-g") 'spacemacs/search-project-auto)
   (global-set-key (kbd "s-n") 'make-frame)
@@ -766,17 +767,23 @@ before packages are loaded."
 
 (defun dotspacemacs/user-init-bundler ()
   ;; Run Ruby commands through bundler
-
   (add-hook 'ruby-mode-hook
             (lambda ()
               (setq-local flycheck-command-wrapper-function
                           (lambda (command) (append '("bundle" "exec") command)))))
   )
 
-
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-
+(spacemacs|use-package-add-hook tabs
+  :post-config
+  ;; Don't group tabs except for one to hide all the uncloseable Emacs windows
+  (defun centaur-tabs-buffer-groups ()
+    (list
+     (cond
+      ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+      (t "Editing"))))
+  )
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
@@ -790,6 +797,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(centaur-tabs-bar-height 50)
  '(centaur-tabs-height 40)
+ '(company-global-modes nil)
  '(compilation-message-face 'default)
  '(create-lockfiles nil)
  '(css-indent-offset 2)
@@ -810,15 +818,20 @@ This function is called at the very end of Spacemacs initialization."
  '(js2-mode-show-parse-errors t)
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
+ '(lsp-disabled-clients '(ruby))
  '(magit-diff-use-overlays nil)
- '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
+ '(mouse-wheel-scroll-amount '(5 ((shift) . 10) ((control))))
  '(ns-pop-up-frames nil)
+ '(package-selected-packages
+   '(racer pos-tip cmake-mode yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode writegood-mode winum which-key wgrep web-mode web-beautify volatile-highlights vimrc-mode vim-powerline vi-tilde-fringe uuidgen use-package undo-tree typescript-mode treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toml-mode toc-org term-cursor tagedit symon symbol-overlay stylus-mode string-inflection string-edit-at-point sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smex smeargle slim-mode seeing-is-believing scss-mode sass-mode rvm rust-mode ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode ron-mode robe restart-emacs request rbenv rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode projectile-rails prettier-js popwin poetry pippel pipenv pip-requirements password-generator paradox overseer orgit-forge org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file ob-elixir npm-mode nose nodejs-repl nameless multi-line mmm-mode minitest markdown-toc macrostep lsp-ui lsp-treemacs lsp-python-ms lsp-pyright lsp-origami lsp-ivy lsp-haskell lorem-ipsum livid-mode live-py-mode link-hint json-reformat json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ivy-avy inspector info+ indent-guide importmagic impatient-mode idris-mode hybrid-mode hungry-delete holy-mode hlint-refactor hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-popup-tip flycheck-package flycheck-haskell flycheck-elsa flycheck-elm flycheck-credo flx-ido feature-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-textobj-line evil-surround evil-org evil-numbers evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-commentary evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu erlang emr emmet-mode elm-test-runner elm-mode elisp-slime-nav elisp-def editorconfig dumb-jump dotenv-mode dockerfile-mode docker-tramp docker dired-quick-sort diminish devdocs define-word dante dactyl-mode cython-mode csv-mode counsel-projectile counsel-css company-web company-go company-cabal company-anaconda column-enforce-mode code-cells cmm-mode clean-aindent-mode chruby centered-cursor-mode centaur-tabs cargo bundler browse-at-remote blacken auto-yasnippet auto-dictionary auto-compile attrap all-the-icons alchemist aggressive-indent ace-link ac-ispell))
  '(paradox-github-token t)
  '(projectile-use-git-grep t)
  '(ring-bell-function 'ignore)
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
+ '(server-mode t)
  '(sh-basic-offset 2)
+ '(show-smartparens-global-mode nil)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(tabs-group-by-project nil)
  '(tags-add-tables nil)
@@ -836,5 +849,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
 )
