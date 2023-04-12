@@ -51,3 +51,5 @@
 
 (package! counsel)
 (package! evil-ruby-text-objects)
+(package! format-all)
+(package! inheritenv)
