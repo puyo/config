@@ -83,6 +83,7 @@
 ;; ----------------------------------------------------------------------
 
 (after! evil
+  ;; Paste something you deleted multiple times
   (setq evil-kill-on-visual-paste nil)
 
   (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
@@ -236,3 +237,12 @@
 ;; ----------------------------------------------------------------------
 
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
+;; ----------------------------------------------------------------------
+
+(after! (:and company evil)
+  (unbind-key [return] company-active-map)
+  (unbind-key (kbd "RET") company-active-map )
+  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+  (define-key company-active-map [tab] 'company-complete-selection)
+  )
