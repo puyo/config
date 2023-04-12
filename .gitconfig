@@ -86,3 +86,5 @@
 
 [includeIf "gitdir:~/nm/"]
     path = ~/nm/.gitconfig
+[github]
+	user = puyo
