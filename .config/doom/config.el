@@ -85,6 +85,15 @@
 (after! evil
   (setq evil-kill-on-visual-paste nil)
 
+  (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
+  (require 'evil-move-region)
+  (evil-move-region-default-bindings)
+
+  (global-set-key (kbd "s-h") 'evil-move-left)
+  (global-set-key (kbd "s-j") 'evil-move-down)
+  (global-set-key (kbd "s-l") 'evil-move-right)
+  (global-set-key (kbd "s-k") 'evil-move-up)
+
   (global-set-key (kbd "s-,") 'customize)
   (global-set-key (kbd "s--") 'doom/decrease-font-size)
   (global-set-key (kbd "s-/") 'evilnc-comment-operator)
