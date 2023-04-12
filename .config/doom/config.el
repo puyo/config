@@ -75,12 +75,19 @@
 ;; they are implemented.
 
 ;; ----------------------------------------------------------------------
+;; asdf
+
+(push (expand-file-name "~/.asdf/bin") exec-path)
+(push (expand-file-name "~/.asdf/shims") exec-path)
+
+;; ----------------------------------------------------------------------
 ;; OS clipboard interop
 
 (setq select-enable-clipboard t)
 (setq select-enable-primary t)
 
 ;; ----------------------------------------------------------------------
+;; Key bindings
 
 (after! evil
   ;; Paste something you deleted multiple times
@@ -132,12 +139,13 @@
   ;; Make "s" in visual mode work like Vim, rather than having to use "S"
   (define-key evil-visual-state-map (kbd "s") 'evil-surround-region)
 
-  ;; SPC TAB to switch back and forth between latest two buffers
+  ;; SPC TAB to switch back and forth between latest two buffers, like spacemacs
   (map! :leader "TAB" #'evil-switch-to-windows-last-buffer)
 
   )
 
 ;; ----------------------------------------------------------------------
+;; Recent files
 
 (after! recentf
   ;; If I visit a buffer, it should update its recentf status
@@ -146,6 +154,7 @@
   )
 
 ;; ----------------------------------------------------------------------
+;; Tabs
 
 (after! centaur-tabs
   ;; Consistent height so everything does not move around when the "close" and
@@ -163,16 +172,41 @@
   )
 
 ;; ----------------------------------------------------------------------
+;; Make s-b buffer switching not preview files
 
 (after! consult
   (consult-customize consult-buffer :preview-key nil)
   )
 
 ;; ----------------------------------------------------------------------
+;; Set auto format tools for each language
+;;
+;; See ~/.config/emacs/.local/straight/repos/emacs-format-all-the-code/format-all.el:124
 
 (after! format
   (setq format-all-formatters
-        '(("Ruby" rubocop))
+        '(
+          ("Elixir" mix-format)
+          ("Go" gofmt)
+          ("GraphQL" prettier)
+          ("HTML+EEX" mix-format)
+          ("HTML+ERB" erb-format)
+          ("JSON" prettier)
+          ("JSON5" prettier)
+          ("JSX" prettier)
+          ("Markdown" prettier)
+          ("Python" black)
+          ("R" styler)
+          ("Ruby" rubocop)
+          ("Rust" rustfmt)
+          ("SCSS" prettier)
+          ("SQL" sqlformat)
+          ("Svelte" prettier)
+          ("TSX" prettier)
+          ("Terraform" terraform-fmt)
+          ("TypeScript" prettier)
+          ("YAML" prettier)
+          )
         )
   )
 
@@ -246,3 +280,4 @@
   (define-key company-active-map (kbd "TAB") 'company-complete-selection)
   (define-key company-active-map [tab] 'company-complete-selection)
   )
+
