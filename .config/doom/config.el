@@ -161,6 +161,7 @@
   ;; "unsaved" icons swap
   (setq centaur-tabs-height 40)
   (setq centaur-tabs-bar-height 50)
+  (setq centaur-tabs-set-bar 'over)
 
   ;; Don't group tabs except for one to hide all the uncloseable Emacs windows
   (defun centaur-tabs-buffer-groups ()
