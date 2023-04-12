@@ -77,45 +77,14 @@
 ;; ----------------------------------------------------------------------
 ;; OS clipboard interop
 
-(setq evil-kill-on-visual-paste nil)
 (setq select-enable-clipboard t)
 (setq select-enable-primary t)
 
 ;; ----------------------------------------------------------------------
 
-(after! (:and markdown evil)
-  (add-hook 'markdown-mode-hook
-            (lambda (Don't use different markdowny paragraph text objects, they're buggy)
-              ;; Make these keys behave more like they do in Vim
-              (define-key evil-normal-state-local-map (kbd "}") 'evil-forward-block)
-              (define-key evil-normal-state-local-map (kbd "{") 'evil-backward-block)
-              (define-key evil-visual-state-local-map (kbd "}") 'evil-forward-block)
-              (define-key evil-visual-state-local-map (kbd "{") 'evil-backward-block)
-
-              ;; Modify what characters are considered punctuation (.) and words (w)
-              (modify-syntax-entry ?* ".")
-              (modify-syntax-entry ?_ "w")
-              (modify-syntax-entry ?/ ".")
-
-              ;; Ensure unicode inside code renders neatly
-              (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
-              )
-            )
-  )
-
-;; ----------------------------------------------------------------------
-
-(after! emacs-lisp
-  (add-hook 'emacs-lisp-mode-hook
-            ;; Modify what characters are considered punctuation (.) and words (w)
-            (modify-syntax-entry ?- "w")
-            (modify-syntax-entry ?/ "w")
-            )
-  )
-
-;; ----------------------------------------------------------------------
-
 (after! evil
+  (setq evil-kill-on-visual-paste nil)
+
   (global-set-key (kbd "s-,") 'customize)
   (global-set-key (kbd "s--") 'doom/decrease-font-size)
   (global-set-key (kbd "s-/") 'evilnc-comment-operator)
@@ -191,6 +160,70 @@
 
 ;; ----------------------------------------------------------------------
 
+(after! format
+  (setq format-all-formatters
+        '(("Ruby" rubocop))
+        )
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! (:and markdown evil)
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              ;; Don't use different markdowny paragraph text objects, they're buggy)
+              (setq-local paragraph-start (default-value 'paragraph-start))
+              (setq-local paragraph-separate (default-value 'paragraph-separate))
+
+              ;; Modify what characters are considered punctuation (.) and words (w)
+              (modify-syntax-entry ?* ".")
+              (modify-syntax-entry ?/ ".")
+
+              ;; Ensure unicode inside code renders neatly
+              (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
+              )
+            )
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! elisp-mode
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (modify-syntax-entry ?- "w")
+              (modify-syntax-entry ?/ "w")
+              )
+            )
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! python
+  (add-hook! 'python-mode-hook (modify-syntax-entry ?_ "w"))
+  )
+
+;; ----------------------------------------------------------------------
+
+(after! javascript
+  (add-hook! 'js2-mode-hook (modify-syntax-entry ?_ "w"))
+  )
+
+;; ----------------------------------------------------------------------
+
 (after! (:and ruby evil)
   (add-hook 'ruby-mode-hook 'evil-ruby-text-objects-mode)
+
+  ;; Run Ruby commands through bundler
+  (add-hook 'ruby-mode-hook
+            (lambda ()
+              (modify-syntax-entry ?_ "w")
+              (setq-local flycheck-command-wrapper-function
+                          (lambda (command) (append '("bundle" "exec") command))))
+            )
+
+  (setq rubocop-format-on-save t)
   )
+
+;; ----------------------------------------------------------------------
+
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
