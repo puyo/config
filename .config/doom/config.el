@@ -211,6 +211,12 @@
   )
 
 ;; ----------------------------------------------------------------------
+;; Markdown
+
+;; Ensure unicode inside code renders neatly
+(custom-set-faces!
+  '(markdown-code-face :family "Source Code Pro")
+  )
 
 (after! (:and markdown evil)
   (add-hook 'markdown-mode-hook
@@ -222,9 +228,6 @@
               ;; Modify what characters are considered punctuation (.) and words (w)
               (modify-syntax-entry ?* ".")
               (modify-syntax-entry ?/ ".")
-
-              ;; Ensure unicode inside code renders neatly
-              (custom-set-faces '(markdown-code-face ((t (:extend t :family "Source Code Pro")))))
               )
             )
   )
