@@ -211,19 +211,23 @@
   )
 
 ;; ----------------------------------------------------------------------
-;; Markdown
 
-;; Ensure unicode inside code renders neatly
-(custom-set-faces!
-  '(markdown-code-face :family "Source Code Pro")
-  )
+(after! (:and markdown-mode evil)
+  ;; Ensure unicode inside code renders neatly
+  (custom-set-faces!
+    '(markdown-code-face :family "Source Code Pro")
+    )
 
-(after! (:and markdown evil)
   (add-hook 'markdown-mode-hook
             (lambda ()
               ;; Don't use different markdowny paragraph text objects, they're buggy)
               (setq-local paragraph-start (default-value 'paragraph-start))
               (setq-local paragraph-separate (default-value 'paragraph-separate))
+
+              (evil-define-key '(normal motion) evil-markdown-mode-map
+                "{" 'evil-backward-paragraph
+                "}" 'evil-forward-paragraph
+                )
 
               ;; Modify what characters are considered punctuation (.) and words (w)
               (modify-syntax-entry ?* ".")
