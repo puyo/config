@@ -119,12 +119,15 @@
   (global-set-key (kbd "s-r") 'consult-recent-file)
   (global-set-key (kbd "s-s") 'save-buffer)
   (global-set-key (kbd "s-t") 'projectile-find-file)
-  (global-set-key (kbd "s-v") 'evil-paste-before)
+  (global-set-key (kbd "s-v") 'evil-paste-before-cursor-after)
   (global-set-key (kbd "s-w") 'kill-current-buffer)
   (global-set-key (kbd "s-x") 'kill-region)
   (global-set-key (kbd "s-z") 'undo)
   (global-set-key (kbd "s-{") 'centaur-tabs-backward)
   (global-set-key (kbd "s-}") 'centaur-tabs-forward)
+
+  ;; Leave the cursor in the right spot after pasting in insert mode
+  (define-key evil-insert-state-map (kbd "s-v") 'clipboard-yank)
 
   ;; Make movement keys work with wrapped text
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
