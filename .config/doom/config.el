@@ -87,6 +87,11 @@
 (setq select-enable-primary t)
 
 ;; ----------------------------------------------------------------------
+;; Keep cursor away from margins
+
+(setq scroll-margin 5)
+
+;; ----------------------------------------------------------------------
 ;; Key bindings
 
 (after! evil
@@ -291,3 +296,7 @@
   (define-key company-active-map (kbd "TAB") 'company-complete-selection)
   (define-key company-active-map [tab] 'company-complete-selection)
   )
+
+;; ----------------------------------------------------------------------
+
+(setq ispell-personal-dictionary (expand-file-name "~/.aspell.en.pws"))
