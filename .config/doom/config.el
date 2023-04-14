@@ -182,8 +182,9 @@
     (list
      (cond
       ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-      (t "Editing"))))
-
+      ((string-equal "TAGS" (buffer-name)) "Emacs")
+      (t "Editing")))
+    )
   )
 
 ;; ----------------------------------------------------------------------
