@@ -149,7 +149,6 @@
 
   ;; SPC TAB to switch back and forth between latest two buffers, like spacemacs
   (map! :leader "TAB" #'evil-switch-to-windows-last-buffer)
-
   )
 
 ;; ----------------------------------------------------------------------
@@ -158,11 +157,18 @@
 (after! recentf
   ;; If I visit a buffer, it should update its recentf status
   (add-hook 'buffer-list-update-hook 'recentf-track-opened-file)
-
   )
 
 ;; ----------------------------------------------------------------------
-;; Tabs
+;; Open files AKA buffers
+
+(after! consult
+  ;; Don't preview, it's awful
+  (consult-customize consult-buffer :preview-key nil)
+  )
+
+;; ----------------------------------------------------------------------
+;; Tabs across the top
 
 (after! centaur-tabs
   ;; Consistent height so everything does not move around when the "close" and
@@ -181,14 +187,44 @@
   )
 
 ;; ----------------------------------------------------------------------
-;; Make s-b buffer switching not preview files
+;; Spelling
 
-(after! consult
-  (consult-customize consult-buffer :preview-key nil)
+(after! ispell
+  (setq ispell-personal-dictionary (expand-file-name "~/.aspell.en.pws"))
   )
 
 ;; ----------------------------------------------------------------------
-;; Set auto format tools for each language
+;; Typing brackets
+
+(after! smartparens
+  ;; Thanks I hate it
+  (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+  )
+
+;; ----------------------------------------------------------------------
+;; Autocomplete
+
+(after! (:and company evil)
+  (unbind-key [return] company-active-map)
+  (unbind-key (kbd "RET") company-active-map )
+  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+  (define-key company-active-map [tab] 'company-complete-selection)
+  )
+
+;; ----------------------------------------------------------------------
+;; TAGS
+
+(after! projectile
+  (defun create-tags ()
+    "Create tags file."
+    (interactive)
+    (shell-command (format "ctags -f TAGS -e -R %s" (projectile-project-root)))
+    (message "Tags rebuilt")
+    )
+  )
+
+;; ----------------------------------------------------------------------
+;; Auto format code
 ;;
 ;; See ~/.config/emacs/.local/straight/repos/emacs-format-all-the-code/format-all.el:124
 
@@ -220,6 +256,7 @@
   )
 
 ;; ----------------------------------------------------------------------
+;; Markdown
 
 (after! (:and markdown-mode evil)
   ;; Ensure unicode inside code renders neatly
@@ -246,6 +283,7 @@
   )
 
 ;; ----------------------------------------------------------------------
+;; Emacs lisp
 
 (after! elisp-mode
   (add-hook 'emacs-lisp-mode-hook
@@ -257,18 +295,21 @@
   )
 
 ;; ----------------------------------------------------------------------
+;; Python
 
 (after! python
   (add-hook! 'python-mode-hook (modify-syntax-entry ?_ "w"))
   )
 
 ;; ----------------------------------------------------------------------
+;; JavaScript
 
 (after! javascript
   (add-hook! 'js2-mode-hook (modify-syntax-entry ?_ "w"))
   )
 
 ;; ----------------------------------------------------------------------
+;; Ruby
 
 (after! (:and ruby evil)
   (add-hook 'ruby-mode-hook 'evil-ruby-text-objects-mode)
@@ -283,20 +324,3 @@
 
   (setq rubocop-format-on-save t)
   )
-
-;; ----------------------------------------------------------------------
-
-(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
-
-;; ----------------------------------------------------------------------
-
-(after! (:and company evil)
-  (unbind-key [return] company-active-map)
-  (unbind-key (kbd "RET") company-active-map )
-  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-  (define-key company-active-map [tab] 'company-complete-selection)
-  )
-
-;; ----------------------------------------------------------------------
-
-(setq ispell-personal-dictionary (expand-file-name "~/.aspell.en.pws"))

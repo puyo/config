@@ -54,3 +54,6 @@
 
 ;; Emacs stats (R mode)
 (package! ess)
+
+;; The latest has better formatters e.g. rubocop > rufo
+(unpin! format-all)
