@@ -7,6 +7,7 @@ Metrics/ClassLength: { Enabled: no }
 Metrics/CyclomaticComplexity: { Enabled: no }
 Metrics/MethodLength: { Enabled: no }
 Metrics/PerceivedComplexity: { Enabled: no }
+Style/Documentation: { Enabled: no }
 Style/FrozenStringLiteralComment: { Enabled: no }
 Style/TrailingCommaInArguments: { EnforcedStyleForMultiline: consistent_comma }
 Style/TrailingCommaInArrayLiteral: { EnforcedStyleForMultiline: consistent_comma }
