@@ -48,6 +48,7 @@ alias sqlite3='sqlite3 -line' # better output format by default
 rake() { if [ -f './bin/rake' ]; then ./bin/rake "$@"; else $(which rake) "$@"; fi }
 rails() { if [ -f './bin/rails' ]; then ./bin/rails "$@"; else $(which rails) "$@"; fi }
 rspec() { if [ -f './bin/rspec' ]; then ./bin/rspec "$@" 2> /dev/null; else $(which rspec) "$@"; fi }
+minitest() { if [ -f './bin/minitest' ]; then ./bin/minitest "$@" 2> /dev/null; else $(which minitest) "$@"; fi }
 
 alias be='bundle exec'
 
