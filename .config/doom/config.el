@@ -100,9 +100,11 @@
 ;; Key bindings
 
 (after! evil
-  ;; _ is part of a word, evil
-  (defalias 'forward-evil-word 'forward-evil-symbol)
-  (setq evil-symbol-word-search t)
+  ;; _ is considered part of a word
+  (defun myhook-evil-mode ()
+    (unless (eq (standard-syntax-table) (syntax-table))
+      (modify-syntax-entry ?_ "w")))
+  (add-hook 'evil-local-mode-hook 'myhook-evil-mode)
 
   ;; Paste something you deleted multiple times
   (setq evil-kill-on-visual-paste nil)
@@ -282,6 +284,23 @@
                 "{" 'evil-backward-paragraph
                 "}" 'evil-forward-paragraph
                 )
+
+              ;; Modify what characters are considered punctuation (.) and words (w)
+              (modify-syntax-entry ?* ".")
+              (modify-syntax-entry ?/ ".")
+              )
+            )
+  )
+
+;; ----------------------------------------------------------------------
+;; Emacs lisp
+
+(after! elisp-mode
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (modify-syntax-entry ?- "w")
+              (modify-syntax-entry ?/ "w")
+              )
             )
   )
 
