@@ -154,6 +154,14 @@
 
   ;; SPC TAB to switch back and forth between latest two buffers, like spacemacs
   (map! :leader "TAB" #'evil-switch-to-windows-last-buffer)
+
+  ;; Let emacs' fill-region config do its thing without interference. i.e.
+  ;; use the double-space sentence configuration.
+  (defadvice! +evil--no-squeeze-on-fill-a (fn &rest args)
+    :around '(evil-fill evil-fill-and-move)
+    (letf! (defun fill-region (from to &optional justify nosqueeze to-eop)
+             (funcall fill-region from to justify nosqueeze to-eop))
+      (apply fn args)))
   )
 
 ;; ----------------------------------------------------------------------
@@ -205,16 +213,6 @@
 (after! smartparens
   ;; Thanks I hate it
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
-  )
-
-;; ----------------------------------------------------------------------
-;; Autocomplete
-
-(after! (:and company evil)
-  (unbind-key [return] company-active-map)
-  (unbind-key (kbd "RET") company-active-map )
-  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-  (define-key company-active-map [tab] 'company-complete-selection)
   )
 
 ;; ----------------------------------------------------------------------
