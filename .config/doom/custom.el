@@ -12,6 +12,7 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-face ((t (:foreground "#787a84" :slant italic))))
  '(line-number ((t (:inherit default :foreground "#787a84" :slant italic :weight normal))))
+ '(markdown-code-face ((t (:family "Source Code Pro"))))
  '(mode-line-inactive ((t (:background "#1a1c23" :foreground "#6e7079" :box nil))))
  '(region ((t (:extend t :background "#4e4f5a")))))
 (put 'customize-group 'disabled nil)
