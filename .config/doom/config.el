@@ -42,6 +42,9 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+;; No!
+(setq doom-inhibit-indent-detection t)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -90,11 +93,6 @@
 ;; Keep cursor away from margins
 
 (setq scroll-margin 5)
-
-;; ----------------------------------------------------------------------
-;; Completion
-
-(setq global-company-mode nil)
 
 ;; ----------------------------------------------------------------------
 ;; Key bindings
@@ -308,14 +306,29 @@
 ;; Ruby
 
 (after! (:and ruby evil)
-  (add-hook 'ruby-mode-hook 'evil-ruby-text-objects-mode)
+  (add-hook 'ruby-mode-hook #'evil-ruby-text-objects-mode)
 
   ;; Run Ruby commands through bundler
   (add-hook 'ruby-mode-hook
             (lambda ()
               (setq-local flycheck-command-wrapper-function
-                          (lambda (command) (append '("bundle" "exec") command))))
+                          (lambda (command) (append '("bundle" "exec") command)))
+              )
             )
 
+  ;; Indentation seems to be 4 sometimes :( weird
+  (add-hook 'ruby-mode-hook (lambda () (setq ruby-indent-level 2)))
+
   (setq rubocop-format-on-save t)
+  )
+
+;; ----------------------------------------------------------------------
+;; Magit
+
+(after! browse-at-remote
+  (add-to-list 'browse-at-remote-remote-type-regexps
+               `(:host ,(rx bol "github.nearmap.com" eol)
+                 :type "github"
+                 :actual-host "github.nearmap.com"))
+
   )
