@@ -1,4 +1,6 @@
 #!/bin/bash
 
-kwin_x11 --replace &
-killall plasmashell; kstart plasmashell
+(
+    kwin_x11 --replace &
+    killall plasmashell; kstart plasmashell
+) 2> /dev/null > /dev/null
