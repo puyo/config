@@ -42,6 +42,7 @@ Plug 'tpope/vim-eunuch'
 
 " Git commands :Ggrep
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 " GitHub commands :Gbrowse
 Plug 'tpope/vim-rhubarb'
@@ -182,13 +183,16 @@ let g:ctrlp_prompt_mappings = {
 
 " }
 
-" Multiple VCS's:
+" VCSs {
+
 let g:ctrlp_user_command = {
   \ 'types': {
   \   1: ['.git', 'cd %s && git ls-files'],
   \   },
   \ 'fallback': 'find %s -type f'
   \ }
+
+let g:github_enterprise_urls = ['https://github.nearmap.com']
 
 " }
 
