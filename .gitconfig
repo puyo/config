@@ -83,7 +83,6 @@
 	insteadOf = https://github.com/blake-education/
 [submodule]
 	recurse = true
-
 [includeIf "gitdir:~/nm/"]
     path = ~/nm/.gitconfig
 [github]
