@@ -194,6 +194,8 @@
   (setq centaur-tabs-bar-height 50)
   (setq centaur-tabs-set-bar 'over)
 
+  (centaur-tabs-change-fonts "sans" 100)
+
   ;; Don't group tabs except for one to hide all the uncloseable Emacs windows
   (defun centaur-tabs-buffer-groups ()
     (list
