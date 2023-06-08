@@ -336,3 +336,13 @@
                  :actual-host "github.nearmap.com"))
 
   )
+
+(use-package lsp-mode
+  :commands lsp
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (add-to-list 'exec-path "~/.elixir-ls"))
+
+(setq flycheck-elixir-credo-strict t)
