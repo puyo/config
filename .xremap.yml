@@ -24,7 +24,7 @@ keymap:
       Alt_L-Backspace: Ctrl-Backspace # delete word back
       Alt_L-C: Ctrl-C # copy
       Alt_L-Equal: Ctrl-Equal # zoom in
-      Alt_L-F: Ctrl-F # zoom in
+      Alt_L-F: Ctrl-F # find
       Alt_L-L: Ctrl-L # select address bar
       Alt_L-Left: Ctrl-Left # word left
       Alt_L-Minus: Ctrl-Minus # zoom in
@@ -45,5 +45,56 @@ keymap:
     remap:
       Alt_L-C: Ctrl-Shift-C # copy
       Alt_L-D: Ctrl-Shift-0 # split pane horizontally
+      Alt_L-F: Ctrl-Shift-F # find
+      Alt_L-N: Ctrl-Shift-N # new window
       Alt_L-Shift-D: Ctrl-Shift-9 # split pane vertically
       Alt_L-V: Ctrl-Shift-V # paste
+
+  - application: { only: discord }
+    exact_match: true
+    remap:
+      Alt_L-A: Ctrl-A # select all
+      Alt_L-Backspace: Ctrl-Backspace # delete word back
+      Alt_L-C: Ctrl-C # copy
+      Alt_L-F: Ctrl-F # find
+      Alt_L-Left: Ctrl-Left # word left
+      Alt_L-Right: Ctrl-Right # word right
+      Alt_L-V: Ctrl-V # paste
+      Alt_L-X: Ctrl-X # cut
+
+  - application: { only: "master pdf editor 5" }
+    exact_match: true
+    remap:
+      Alt_L-A: Ctrl-A # select all
+      Alt_L-Backspace: Ctrl-Backspace # delete word back
+      Alt_L-C: Ctrl-C # copy
+      Alt_L-F: Ctrl-F # find
+      Alt_L-V: Ctrl-V # paste
+      Alt_L-X: Ctrl-X # cut
+      Alt_L-Y: Ctrl-Y # redo
+      Alt_L-Z: Ctrl-Z # undo
+
+  - application: { only: obsidian }
+    exact_match: true
+    remap:
+      Alt_L-A: Ctrl-A # select all
+      Alt_L-Backspace: Ctrl-Backspace # delete word back
+      Alt_L-C: Ctrl-C # copy
+      Alt_L-V: Ctrl-V # paste
+      Alt_L-W: Ctrl-W # close tab
+      Alt_L-X: Ctrl-X # cut
+      Alt_L-Y: Ctrl-Y # redo
+      Alt_L-Z: Ctrl-Z # undo
+      Alt_L-P: Ctrl-P # command palette
+
+  - application: { only: obsidian }
+    remap:
+      Alt_L-Left: Ctrl-Left # word left
+      Alt_L-Right: Ctrl-Right # word right
+      Alt_L-Up: Ctrl-Up # paragraph up
+      Alt_L-Down: Ctrl-Down # paragraph down
+
+  - application: { only: spotify }
+    remap:
+      Alt_L-F: Ctrl-F # find
+      Alt_L-A: Ctrl-A # select all
