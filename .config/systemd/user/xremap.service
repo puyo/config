@@ -4,4 +4,4 @@ Description=xremap
 
 [Service]
 Restart=always
-ExecStart=/bin/bash -l -c 'xremap ~/.xremap.yml --watch'
+ExecStart=/bin/bash -l -c 'xremap --watch=config ~/.xremap.yml'
