@@ -26,10 +26,10 @@ keymap:
       Alt_L-Equal: Ctrl-Equal # zoom in
       Alt_L-F: Ctrl-F # find
       Alt_L-L: Ctrl-L # select address bar
-      Alt_L-Left: Ctrl-Left # word left
+      Alt_L-Left: Super-Left # history back
       Alt_L-Minus: Ctrl-Minus # zoom in
       Alt_L-R: Ctrl-R # reload
-      Alt_L-Right: Ctrl-Right # word right
+      Alt_L-Right: Super-Right # history forward
       Alt_L-Shift-LeftBrace: Ctrl-PageUp # prev tab
       Alt_L-Shift-P: Ctrl-Shift-P # private window
       Alt_L-Shift-R: Ctrl-Shift-R # hard reload
