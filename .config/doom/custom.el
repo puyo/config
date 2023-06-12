@@ -6,6 +6,7 @@
  '(evil-shift-width 2)
  '(markdown-list-indent-width 2)
  '(rubocop-format-on-save t)
+ '(safe-local-variable-values '((evil-indent-width . 2) (indent-shift-width . 2)))
  '(smartparens-global-mode nil)
  '(web-mode-code-indent-offset 2))
 (custom-set-faces
