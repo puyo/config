@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.1.1
+@version        1.1.0
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -9,9 +9,13 @@
 ==/UserStyle== */
 
 @-moz-document regexp("https://.+?.atlassian.net.*") {
+    :root {
+        --margin-side: 16px;
+    }
+
     #ak-main-content > div {
-        margin-left: 16px;
-        margin-right: 16px;
+        margin-left: var(--margin-side);
+        margin-right: var(--margin-side);
     }
 
     .issue-table thead {
@@ -34,5 +38,31 @@
     }
     .dashboard .activity-stream-container {
         padding: 0;
+    }
+
+    [data-component-selector="jira-issue-field-heading-field-wrapper"] {
+        margin-bottom: 0 !important;
+    }
+
+    [data-component-selector="jira.issue-view.issue-details.full-size-mode-column"] {
+        padding-top: 5px;
+    }
+
+    [data-component-selector="jira-issue-view-issue-page-grid-padding-override"] {
+        margin-left: calc(-1 * var(--margin-side)) !important;
+        margin-right: calc(-1 * var(--margin-side)) !important;
+    }
+
+    [data-component-selector="jira-issue-view-common-component-resize-handle"] {
+        width: 15px !important;
+        background-color: #ffffff;
+        opacity: 0.8;
+        background-image: repeating-linear-gradient(45deg, #eaeaea 25%, transparent 25%, transparent 75%, #efefef 75%, #efefef), repeating-linear-gradient(45deg, #eaeaea 25%, #ffffff 25%, #ffffff 75%, #efefef 75%, #efefef);
+        background-position: 0 0, 4px 4px;
+        background-size: 4px 4px;
+    }
+
+    [data-component-selector="jira-issue-view-common-component-resize-handle"]:hover > div {
+        opacity: 0 !important;
     }
 }
