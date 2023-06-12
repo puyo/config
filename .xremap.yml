@@ -39,6 +39,7 @@ keymap:
       Alt_L-V: Ctrl-V # paste
       Alt_L-W: Ctrl-W # close tab
       Alt_L-X: Ctrl-X # cut
+      Alt_L-0: Ctrl-0 # zoom reset
 
   - application: { only: konsole }
     exact_match: true
@@ -62,7 +63,7 @@ keymap:
       Alt_L-V: Ctrl-V # paste
       Alt_L-X: Ctrl-X # cut
 
-  - application: { only: "master pdf editor 5" }
+  - application: { only: "net.code-industry.masterpdfeditor5" }
     exact_match: true
     remap:
       Alt_L-A: Ctrl-A # select all
@@ -73,6 +74,9 @@ keymap:
       Alt_L-X: Ctrl-X # cut
       Alt_L-Y: Ctrl-Y # redo
       Alt_L-Z: Ctrl-Z # undo
+      Alt_L-Equal: Ctrl-Shift-Equal # zoom in
+      Alt_L-Minus: Ctrl-Minus # zoom out
+      Alt_L-0: Ctrl-0 # zoom reset
 
   - application: { only: obsidian }
     exact_match: true
