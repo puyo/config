@@ -520,7 +520,6 @@ let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
 
 let g:ale_elixir_credo_strict = 1
 let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
-let g:ale_ruby_rubocop_executable = 'bundle'
 
 let g:airline#extensions#ale#enabled = 1
 
