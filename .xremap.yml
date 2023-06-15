@@ -1,18 +1,18 @@
 # Install xremap for KDE/Wayland:
-# 
+#
 #   cargo install xremap --features kde
 #
 # Give user non-root access to input devices if necessary (reboot required after this):
-# 
+#
 #   sudo gpasswd -a $USER input
 #   echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/input.rules
 #
 # Run it:
-# 
+#
 #   xremap --watch=config --device=/dev/input/event2 -- ~/.xremap.yml
 #
 # References:
-# 
+#
 # - https://github.com/k0kubun/xremap
 # - https://github.com/emberian/evdev/blob/1d020f11b283b0648427a2844b6b980f1a268221/src/scancodes.rs#L26-L572
 
