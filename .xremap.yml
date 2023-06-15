@@ -102,3 +102,20 @@ keymap:
     remap:
       Alt_L-F: Ctrl-F # find
       Alt_L-A: Ctrl-A # select all
+
+  - application: { only: gvim }
+    exact_match: true
+    remap:
+      Alt_L-A: Ctrl-Super-A
+      Alt_L-B: Ctrl-Super-B
+      Alt_L-C: Ctrl-Super-C
+      Alt_L-Equal: Ctrl-Super-Equal # zoom in
+      Alt_L-Minus: Ctrl-Super-Minus # zoom out
+      Alt_L-O: Ctrl-Super-O
+      Alt_L-P: Ctrl-Super-P
+      Alt_L-R: Ctrl-Super-R
+      Alt_L-S: Ctrl-Super-S
+      Alt_L-Slash: Ctrl-Super-Slash
+      Alt_L-V: Ctrl-Super-V
+      Alt_L-X: Ctrl-Super-X
+      Alt_L-Z: Ctrl-Super-Z
