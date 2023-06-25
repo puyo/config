@@ -20,6 +20,7 @@ keymap:
   - application: { only: firefox }
     exact_match: true
     remap:
+      Alt_L-0: Ctrl-0 # zoom reset
       Alt_L-A: Ctrl-A # select all
       Alt_L-Backspace: Ctrl-Backspace # delete word back
       Alt_L-C: Ctrl-C # copy
@@ -30,6 +31,7 @@ keymap:
       Alt_L-Minus: Ctrl-Minus # zoom in
       Alt_L-R: Ctrl-R # reload
       Alt_L-Right: Super-Right # history forward
+      Alt_L-Shift-C: Ctrl-Shift-C # inspect
       Alt_L-Shift-LeftBrace: Ctrl-PageUp # prev tab
       Alt_L-Shift-P: Ctrl-Shift-P # private window
       Alt_L-Shift-R: Ctrl-Shift-R # hard reload
@@ -39,7 +41,6 @@ keymap:
       Alt_L-V: Ctrl-V # paste
       Alt_L-W: Ctrl-W # close tab
       Alt_L-X: Ctrl-X # cut
-      Alt_L-0: Ctrl-0 # zoom reset
 
   - application: { only: konsole }
     exact_match: true
@@ -119,3 +120,4 @@ keymap:
       Alt_L-V: Ctrl-Super-V
       Alt_L-X: Ctrl-Super-X
       Alt_L-Z: Ctrl-Super-Z
+      Alt_L-W: Ctrl-Super-W
