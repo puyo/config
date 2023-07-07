@@ -47,7 +47,9 @@ keymap:
     remap:
       Alt_L-C: Ctrl-Shift-C # copy
       Alt_L-D: Ctrl-Shift-0 # split pane horizontally
+      Alt_L-Equal: Ctrl-Equal # zoom in
       Alt_L-F: Ctrl-Shift-F # find
+      Alt_L-Minus: Ctrl-Minus # zoom out
       Alt_L-N: Ctrl-Shift-N # new window
       Alt_L-Shift-D: Ctrl-Shift-9 # split pane vertically
       Alt_L-V: Ctrl-Shift-V # paste
