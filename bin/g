@@ -18,6 +18,21 @@ args =
     ['.']
   end
 
+def find(orig_path)
+  path = orig_path
+  loop do
+    return path if File.exist?(path)
+
+    parts = path.split(File::SEPARATOR)
+    return orig_path if parts.size <= 2
+
+    path = File.join(*parts[1, parts.size])
+  end
+  orig_path
+end
+
+args = args.map { |a| find(a) }
+
 if running
   args.each { |arg| system(vim, '--remote-silent', arg) }
 else
