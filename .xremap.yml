@@ -9,7 +9,7 @@
 #
 # Run it:
 #
-#   xremap --watch=config --device=/dev/input/event2 -- ~/.xremap.yml
+#   xremap --watch=config -- ~/.xremap.yml
 #
 # References:
 #
