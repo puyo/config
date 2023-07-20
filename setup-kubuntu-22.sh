@@ -53,6 +53,7 @@ packages=(
   mesa-vulkan-drivers    # faster 3D drivers
   mtr-tiny               # ping/traceroute
   net-tools              # ifconfig and similar command line tools
+  ntp                    # time sync
   openssh-server         # ssh into this machine
   partitionmanager       # manage partitions
   plymouth-theme-spinner # basic boot logo theme
