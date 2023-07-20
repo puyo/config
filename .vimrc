@@ -127,6 +127,7 @@ Plug 'wavded/vim-stylus'                " .stylus
 Plug 'wlangstroth/vim-racket'           " .rkt
 Plug 'zhaozg/vim-diagram'               " .seq (mermaid)
 Plug 'ziglang/zig.vim'                  " .zig
+Plug 'GutenYe/json5.vim'                " .json5
 
 " Plug 'dermusikman/sonicpi.vim'          " .sonicpi
 
@@ -511,12 +512,12 @@ let g:ale_fixers = {}
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fixers.elm = ['format']
-let g:ale_fixers.javascript = ['prettier', 'eslint']
+let g:ale_fixers.javascript = ['eslint']
 let g:ale_fixers.python = ['black']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.scss = ['stylelint']
-let g:ale_fixers.typescript = ['prettier', 'eslint']
-let g:ale_fixers.typescriptreact = ['prettier', 'eslint']
+let g:ale_fixers.typescript = ['eslint']
+let g:ale_fixers.typescriptreact = ['eslint']
 
 let g:ale_elixir_credo_strict = 1
 let g:ale_elixir_elixir_ls_release = $HOME . '/projects/vendor/elixir-ls/rel'
