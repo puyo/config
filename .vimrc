@@ -106,7 +106,7 @@ Plug 'cespare/vim-toml'                 " .toml
 Plug 'dag/vim2hs'                       " .hs
 Plug 'depuracao/vim-rdoc'               " .rdoc
 Plug 'digitaltoad/vim-jade'             " .jade
-Plug 'elixir-editors/vim-elixir'        " .ex, exs
+Plug 'elixir-editors/vim-elixir'        " .ex, exs, heex
 Plug 'elmcast/elm-vim'                  " .elm
 Plug 'evanleck/vim-svelte'              " svelte
 Plug 'hashivim/vim-terraform'           " .tf
