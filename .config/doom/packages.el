@@ -55,5 +55,9 @@
 ;; Emacs stats (R mode)
 (package! ess)
 
+;; Copilot
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+
 ;; The latest has better formatters e.g. rubocop > rufo
 (unpin! format-all)
