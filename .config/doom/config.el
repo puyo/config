@@ -337,6 +337,9 @@
 
   )
 
+;; ----------------------------------------------------------------------
+;; Elixir
+
 (use-package lsp-mode
   :commands lsp
   :diminish lsp-mode
@@ -345,7 +348,9 @@
   :init
   (add-to-list 'exec-path "~/.elixir-ls"))
 
-(setq flycheck-elixir-credo-strict t)
+(after! elixir-mode
+  (setq flycheck-elixir-credo-strict t)
+  )
 
 ;; ----------------------------------------------------------------------
 ;; Copilot
