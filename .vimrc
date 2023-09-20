@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
 " colour schemes
 Plug 'puyo/vim-colors-pencil-warm'
 
-
 " press <Tab> to complete the current word
 Plug 'ervandew/supertab'
 
@@ -96,7 +95,8 @@ Plug 'vim-scripts/CycleColor'
 " Project mode
 Plug 'tpope/vim-projectionist'
 
-
+" Copilot
+Plug 'github/copilot.vim'
 
 " Writing mode
 Plug 'junegunn/goyo.vim'
