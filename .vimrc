@@ -22,7 +22,7 @@ Plug 'ervandew/supertab'
 Plug 'kana/vim-textobj-user'
 
 " jump to files: in directory tree, most-recently-used, open buffers
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " 'i' is a text object that selects the current indentation level. e.g. vii
 Plug 'michaeljsmith/vim-indent-object'
@@ -176,12 +176,11 @@ endfunction
 command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
 
 " CtrlP {
-
+let g:ctrlp_root_markers = ['.git', 'Gemfile', 'Makefile', 'package.json']
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_prompt_mappings = {
 \ 'PrtInsert("c")':       ['<c-v>', '<insert>', '<MiddleMouse>'],
 \ }
-
 " }
 
 " VCSs {
@@ -557,6 +556,7 @@ let g:rustfmt_autosave = 1
 
 " rooter {
 let g:rooter_silent_chdir = 1
+let g:rooter_patterns = ['.git', 'Gemfile', 'Makefile', 'package.json']
 " }
 
 " Goyo {
