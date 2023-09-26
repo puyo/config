@@ -55,9 +55,6 @@
 ;; Emacs stats (R mode)
 (package! ess)
 
-;; Polymode
-(package! polymode)
-
 ;; Copilot
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
