@@ -12,6 +12,7 @@
 /bin/update-report
 /bin/zola
 /bin/rubymine
+/bin/yq
 TAGS
 ansible/*.retry
 away.log
