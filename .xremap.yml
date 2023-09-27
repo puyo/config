@@ -53,6 +53,8 @@ keymap:
       Alt_L-N: Ctrl-Shift-N # new window
       Alt_L-Shift-D: Ctrl-Shift-9 # split pane vertically
       Alt_L-V: Ctrl-Shift-V # paste
+      Alt_L-R: [Grave, V, Grave, Ctrl-Super-E] # insert current line from IDE
+      Alt_L-E: Ctrl-Super-E # expand current line
 
   - application: { only: discord }
     exact_match: true
