@@ -1,5 +1,5 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,kwin.upd:replace-cascaded-zerocornered
 
 [Compositing]
 OpenGLIsUnsafe=false
@@ -10,6 +10,9 @@ Number=1
 Rows=1
 
 [Effect-PresentWindows]
+BorderActivateAll=9
+
+[Effect-presentwindows]
 BorderActivateAll=9
 
 [ModifierOnlyShortcuts]
@@ -33,6 +36,24 @@ LayoutName=big_icons
 [TabBoxAlternative]
 HighlightWindows=false
 LayoutName=big_icons
+
+[Tiling]
+padding=0
+
+[Tiling][8939a3d9-2a8b-528b-a13d-6ca4773f18b0]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][97482133-af91-5b49-a10c-ac2f1a08cdeb]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.32421875},{"width":0.328125},{"width":0.34765625}]}
+
+[Tiling][ca2a1a5c-f2ca-54fd-a755-3ceabc80a828]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.33177083333333335},{"width":0.3921875},{"width":0.27604166666666663}]}
+
+[Tiling][ee0d2f37-10a9-5fd1-bc2a-ffb3453db286]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.3104166666666667},{"width":0.3565104166666666},{"width":0.3330729166666667}]}
+
+[Xwayland]
+Scale=1
 
 [org.kde.kdecoration2]
 BorderSize=None
