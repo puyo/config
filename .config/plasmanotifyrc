@@ -2,4 +2,5 @@
 Seen=true
 
 [Notifications]
+PopupPosition=TopCenter
 PopupTimeout=20000
