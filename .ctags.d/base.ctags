@@ -1,0 +1,19 @@
+# be sure to use universal-ctags not exuberant-ctags
+
+--exclude=.next
+--exclude=.swc
+--exclude=node_modules
+--exclude=gulp
+--exclude=.git
+--exclude=*.md
+--exclude=*.svg
+--exclude=coverage
+--exclude=vendor
+--exclude=public
+--exclude=dist
+--exclude=*.min.js
+--exclude=tmp
+
+--recurse=yes
+
+--map-TypeScript=+.tsx

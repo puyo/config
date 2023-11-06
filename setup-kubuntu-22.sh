@@ -34,7 +34,6 @@ packages=(
   dosfstools             # fix line endings
   editorconfig           # used by Doom Emacs
   emacs                  # editor
-  exuberant-ctags        # code indexer
   fd-find                # used by Doom Emacs
   ffmpeg                 # work with videos
   firefox                # browser
@@ -65,6 +64,7 @@ packages=(
   strace                 # debug programs
   telnet                 # test networks
   unattended-upgrades    # unattended security upgrades
+  universal-ctags        # code indexer
   vim-gtk                # editor
   vlc                    # media player
   vulkan-tools           # vulkaninfo
