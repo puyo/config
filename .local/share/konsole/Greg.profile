@@ -17,6 +17,7 @@ Parent=FALLBACK/
 
 [Interaction Options]
 TextEditorCmd=5
+WordCharacters=:@-./_~?&=%+#[]
 
 [Scrolling]
 HistoryMode=2
