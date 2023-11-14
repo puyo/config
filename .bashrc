@@ -84,8 +84,12 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     [ -f "$HOME/$file" ] && source "$HOME/$file"
   done
 
+  source $HOME/.asdf/completions/asdf.bash
+
   export GOPATH=$HOME/go
   PATH=$PATH:${GOPATH//://bin:}/bin
 
-  source $HOME/.asdf/completions/asdf.bash
+  export ADBPATH=$HOME/lineage/platform-tools
+  PATH=$PATH:${ADBPATH}
 fi
+
