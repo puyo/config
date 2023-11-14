@@ -8,6 +8,12 @@ rescue LoadError
   nil
 end
 
+begin
+  require 'pry-doc'
+rescue LoadError
+  nil
+end
+
 # vim FTW
 Pry.config.editor = 'gvim --nofork'
 
