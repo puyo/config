@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Slack with less noise
 @namespace      github.com/openstyles/stylus
-@version        1.0.2
+@version        1.0.3
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/slack.user.css
 @description    Remove hover effects and other noisy junk
@@ -16,8 +16,12 @@
      */
 
     /* no hover changes */
-    .c-link:hover {
+    .c-link:hover, .c-link--button:hover {
         text-decoration: none !important;
+    }
+
+    .p-message_pane_message__compact_timestamp {
+        opacity: 1 !important;
     }
 
     /*
