@@ -201,7 +201,7 @@
     (list
      (cond
       ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-      ((string-equal "TAGS" (buffer-name)) "Emacs")
+      ((string-prefix-p "TAGS" (buffer-name)) "Emacs")
       (t "Editing")))
     )
   )
