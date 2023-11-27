@@ -1,0 +1,15 @@
+/* ==UserStyle==
+@name           okta.com
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    Make Okta less upsettingly ugly
+@homepageURL    https://github.com/puyo/config/tree/master/usercss
+@updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/okta.user.css
+@author         Gregory McIntyre
+==/UserStyle== */
+
+@-moz-document domain("okta.com") {
+  html {
+    background-color: white;
+  }
+}
