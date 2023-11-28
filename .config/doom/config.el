@@ -241,7 +241,6 @@
 (after! format
   (setq format-all-formatters
         '(
-          ("Elixir" mix-format)
           ("Go" gofmt)
           ("GraphQL" prettier)
           ("HTML+EEX" mix-format)
@@ -254,7 +253,6 @@
           ("Markdown" prettier)
           ("Python" black)
           ("R" styler)
-          ("Ruby" rubocop)
           ("Rust" rustfmt)
           ("SCSS" prettier)
           ("SQL" sqlformat)
@@ -319,11 +317,12 @@
                           (lambda (command) (append '("bundle" "exec") command)))
               )
             )
+  )
 
-  ;; Indentation seems to be 4 sometimes :( weird
-  (add-hook 'ruby-mode-hook (lambda () (setq ruby-indent-level 2)))
-
-  (setq rubocop-format-on-save t)
+;; Use LSP to handle rubocop and formatting
+(add-hook! ruby-mode
+  (remove-hook 'ruby-mode-hook #'rubocop-mode)
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t)
   )
 
 ;; ----------------------------------------------------------------------
