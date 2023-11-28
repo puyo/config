@@ -61,3 +61,6 @@
 
 ;; The latest has better formatters e.g. rubocop > rufo
 (unpin! format-all)
+
+;; RuboCop is handled by Ruby LSP
+(package! rubocop :disable t)
