@@ -10,6 +10,7 @@
  '(rubocop-format-on-save t)
  '(safe-local-variable-values '((evil-indent-width . 2) (indent-shift-width . 2)))
  '(smartparens-global-mode nil)
+ '(typescript-indent-level 2)
  '(web-mode-code-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
