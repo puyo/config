@@ -22,56 +22,57 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
   sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 packages=(
-  alsa-ucm-conf          # needed for output to audio device plugged into screen
-  apparmor               # security policies
-  aptitude               # apt UI
-  at-spi2-core           # prevents a warning in emacs start up
-  bash-completion        # shell tab completion
-  blender                # 3D graphics
-  cmake                  # needed to build some gems
-  curl                   # download over HTTP
-  dict                   # dictionary
-  dosfstools             # fix line endings
-  editorconfig           # used by Doom Emacs
-  emacs                  # editor
-  fd-find                # used by Doom Emacs
-  ffmpeg                 # work with videos
-  firefox                # browser
-  firmware-sof-signed    # intel audio drivers
-  fonts-noto             # unicode characters
-  gh                     # github cli
-  git                    # version control
-  htop                   # task monitor
-  imagemagick            # image conversion on command line
-  inkscape               # vector graphics
-  inotify-tools          # Elixir Phoenix uses this
-  jq                     # jq (json pretty printer / query)
-  less                   # terminal pager
-  manpages-dev           # manual pages for devs
-  mesa-utils             # check 3D acceleration is working
-  mesa-vulkan-drivers    # faster 3D drivers
-  mtr-tiny               # ping/traceroute
-  net-tools              # ifconfig and similar command line tools
-  ntp                    # time sync
-  openssh-server         # ssh into this machine
-  partitionmanager       # manage partitions
-  plymouth-theme-spinner # basic boot logo theme
-  pm-utils               # suspend/hibernate from command line
-  ripgrep                # used by Doom Emacs
-  ruby                   # interpreter for many of my scripts
-  shellcheck             # shell check
-  shfmt                  # used by Doom Emacs
-  strace                 # debug programs
-  telnet                 # test networks
-  unattended-upgrades    # unattended security upgrades
-  universal-ctags        # code indexer
-  vim-gtk3               # editor
-  vlc                    # media player
-  vulkan-tools           # vulkaninfo
-  wbritish               # british dictionary
-  whois                  # domain name info
-  wine                   # windows emulator
-  wmctrl                 # wmctrl (gvim wrapper)
+  alsa-ucm-conf            # needed for output to audio device plugged into screen
+  apparmor                 # security policies
+  aptitude                 # apt UI
+  at-spi2-core             # prevents a warning in emacs start up
+  bash-completion          # shell tab completion
+  blender                  # 3D graphics
+  cmake                    # needed to build some gems
+  curl                     # download over HTTP
+  dict                     # dictionary
+  dosfstools               # fix line endings
+  editorconfig             # used by Doom Emacs
+  emacs                    # editor
+  fd-find                  # used by Doom Emacs
+  ffmpeg                   # work with videos
+  firefox                  # browser
+  firmware-sof-signed      # intel audio drivers
+  fonts-noto               # unicode characters
+  gh                       # github cli
+  git                      # version control
+  htop                     # task monitor
+  imagemagick              # image conversion on command line
+  inkscape                 # vector graphics
+  inotify-tools            # Elixir Phoenix uses this
+  jq                       # jq (json pretty printer / query)
+  kubuntu-wallpapers-focal # milky way wallpaper
+  less                     # terminal pager
+  manpages-dev             # manual pages for devs
+  mesa-utils               # check 3D acceleration is working
+  mesa-vulkan-drivers      # faster 3D drivers
+  mtr-tiny                 # ping/traceroute
+  net-tools                # ifconfig and similar command line tools
+  ntp                      # time sync
+  openssh-server           # ssh into this machine
+  partitionmanager         # manage partitions
+  plymouth-theme-spinner   # basic boot logo theme
+  pm-utils                 # suspend/hibernate from command line
+  ripgrep                  # used by Doom Emacs
+  ruby                     # interpreter for many of my scripts
+  shellcheck               # shell check
+  shfmt                    # used by Doom Emacs
+  strace                   # debug programs
+  telnet                   # test networks
+  unattended-upgrades      # unattended security upgrades
+  universal-ctags          # code indexer
+  vim-gtk3                 # editor
+  vlc                      # media player
+  vulkan-tools             # vulkaninfo
+  wbritish                 # british dictionary
+  whois                    # domain name info
+  wine                     # windows emulator
+  wmctrl                   # wmctrl (gvim wrapper)
 )
 
 sudo apt install -y "${packages[@]}"
