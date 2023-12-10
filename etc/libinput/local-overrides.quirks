@@ -1,0 +1,7 @@
+# This is needed so that libinput considers input from this device when
+# disabling the touchpad while typing.
+
+[Serial Keyboards]
+MatchUdevType=keyboard
+MatchName=xremap
+AttrKeyboardIntegration=internal
