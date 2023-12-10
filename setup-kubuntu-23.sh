@@ -26,6 +26,8 @@ packages=(
   apparmor                 # security policies
   aptitude                 # apt UI
   at-spi2-core             # prevents a warning in emacs start up
+  automake
+  autotools-dev
   bash-completion          # shell tab completion
   blender                  # 3D graphics
   cmake                    # needed to build some gems
@@ -38,7 +40,16 @@ packages=(
   ffmpeg                   # work with videos
   firefox                  # browser
   firmware-sof-signed      # intel audio drivers
+  fonts-droid-fallback
+  fonts-lato
+  fonts-liberation-sans-narrow
+  fonts-liberation2
   fonts-noto               # unicode characters
+  fonts-noto-cjk
+  fonts-noto-cjk-extra
+  fonts-noto-extra
+  fonts-noto-hinted
+  fonts-noto-ui-core
   gh                       # github cli
   git                      # version control
   htop                     # task monitor
@@ -48,6 +59,7 @@ packages=(
   jq                       # jq (json pretty printer / query)
   kubuntu-wallpapers-focal # milky way wallpaper
   less                     # terminal pager
+  lm-sensors
   manpages-dev             # manual pages for devs
   mesa-utils               # check 3D acceleration is working
   mesa-vulkan-drivers      # faster 3D drivers
@@ -56,6 +68,8 @@ packages=(
   ntp                      # time sync
   openssh-server           # ssh into this machine
   partitionmanager         # manage partitions
+  plocate
+  plymouth-theme-kubuntu-logo
   plymouth-theme-spinner   # basic boot logo theme
   pm-utils                 # suspend/hibernate from command line
   ripgrep                  # used by Doom Emacs
@@ -63,15 +77,18 @@ packages=(
   shellcheck               # shell check
   shfmt                    # used by Doom Emacs
   strace                   # debug programs
+  systemd-resolved
   telnet                   # test networks
   unattended-upgrades      # unattended security upgrades
   universal-ctags          # code indexer
   vim-gtk3                 # editor
   vlc                      # media player
   vulkan-tools             # vulkaninfo
+  wayland-utils
   wbritish                 # british dictionary
   whois                    # domain name info
   wine                     # windows emulator
+  winetricks
   wmctrl                   # wmctrl (gvim wrapper)
 )
 
