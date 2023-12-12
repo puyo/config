@@ -233,6 +233,9 @@
     )
   )
 
+;; Stop asking if you should keep the tags when navigating to other projects
+(setq tags-add-tables nil)
+
 ;; ----------------------------------------------------------------------
 ;; Auto format code
 ;;
@@ -260,7 +263,6 @@
           ("TSX" prettier)
           ("Terraform" terraform-fmt)
           ("TypeScript" prettier)
-          ("YAML" prettier)
           )
         )
   )
@@ -317,6 +319,8 @@
                           (lambda (command) (append '("bundle" "exec") command)))
               )
             )
+
+  (add-to-list 'auto-mode-alist '("\\.simplecov\\'" . ruby-mode))
   )
 
 ;; Use LSP to handle rubocop and formatting
