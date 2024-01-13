@@ -3,17 +3,23 @@
 require 'irb/color'
 require 'shellwords'
 
+app_name = ARGV[0] || 'spotify'
+
 names = `pw-link -o`.strip.lines.map(&:chomp)
 mic_name = names.grep(/\.pci-.*:capture_FL/).first.match(/(.*):capture_FL/).captures.first
 
-sink_name = 'combined-app-sink'
-virtual_mic_name = 'my-virtualmic'
-
-app_name = ARGV[0] || 'spotify'
+sink_name = "Mic and #{app_name}"
+virtual_mic_name = "Mic and #{app_name}"
 
 def cmd(*cmd)
   puts IRB::Color.colorize(cmd.shelljoin, [:BLUE])
-  system(*cmd) || exit(1)
+  system(*cmd)
+end
+
+def tidy
+  puts IRB::Color.colorize('Tidying up after error', [:RED])
+  system('pactl', 'unload-module', 'module-null-sink')
+  exit 1
 end
 
 # Removing the module removes all sinks created using it
@@ -25,30 +31,32 @@ cmd(
   'load-module',
   'module-null-sink',
   'media.class=Audio/Sink',
-  "sink_name=#{sink_name}",
+  "sink_name='#{sink_name}'",
   'channel_map=stereo',
-)
+  'sink_properties=port.name=hdmi',
+) || tidy
 
 cmd(
   'pactl',
   'load-module',
   'module-null-sink',
   'media.class=Audio/Source/Virtual',
-  "sink_name=#{virtual_mic_name}",
+  "sink_name='#{virtual_mic_name}'",
   'channel_map=front-left,front-right',
-)
+  'sink_properties=port.name=mic',
+) || tidy
 
 puts
 puts "Linking app #{app_name} to #{sink_name}"
-cmd('pw-link', "#{app_name}:output_FL", "#{sink_name}:playback_FL")
-cmd('pw-link', "#{app_name}:output_FR", "#{sink_name}:playback_FR")
+cmd('pw-link', "#{app_name}:output_FL", "#{sink_name}:playback_FL") || tidy
+cmd('pw-link', "#{app_name}:output_FR", "#{sink_name}:playback_FR") || tidy
 
 puts
 puts "Linking #{mic_name} to #{sink_name}"
-cmd('pw-link', "#{mic_name}:capture_FL", "#{sink_name}:playback_FL")
-cmd('pw-link', "#{mic_name}:capture_FR", "#{sink_name}:playback_FR")
+cmd('pw-link', "#{mic_name}:capture_FL", "#{sink_name}:playback_FL") || tidy
+cmd('pw-link', "#{mic_name}:capture_FR", "#{sink_name}:playback_FR") || tidy
 
 puts
 puts "Creating virtual mic: #{virtual_mic_name}"
-cmd('pw-link', "#{sink_name}:monitor_FL", "#{virtual_mic_name}:input_FL")
-cmd('pw-link', "#{sink_name}:monitor_FR", "#{virtual_mic_name}:input_FR")
+cmd('pw-link', "#{sink_name}:monitor_FL", "#{virtual_mic_name}:input_FL") || tidy
+cmd('pw-link', "#{sink_name}:monitor_FR", "#{virtual_mic_name}:input_FR") || tidy
