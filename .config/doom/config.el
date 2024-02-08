@@ -366,3 +366,10 @@
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+;; ----------------------------------------------------------------------
+;; Web mode
+
+(after! web-mode
+  (add-to-list 'web-mode-comment-formats '("jsx" . "//"))
+  )
