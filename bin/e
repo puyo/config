@@ -30,16 +30,16 @@ emacsclient = 'emacsclient'
 args =
   if ARGV.any?
     ARGV.map do |arg|
-      file, line, col = arg.split(':')
+      file, line, col = arg.split(':', 3)
       file.gsub!(%r{^[ab]/}, '') # git diff
-      if line && col
+      line = line.to_i
+      col = col.to_i
+      if line.positive? && col.positive?
         ["+#{line}:#{col}", file]
-      elsif line
+      elsif line.positive?
         ["+#{line}", file]
-      elsif file != line
-        file
       else
-        arg
+        file
       end
     end.flatten
   else
