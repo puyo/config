@@ -1,14 +1,14 @@
-AllCops:
-  NewCops: enable
+AllCops: { NewCops: enable }
 
-Lint/AssignmentInCondition: { Enabled: no }
-Metrics/AbcSize: { Enabled: no }
-Metrics/ClassLength: { Enabled: no }
-Metrics/CyclomaticComplexity: { Enabled: no }
-Metrics/MethodLength: { Enabled: no }
-Metrics/PerceivedComplexity: { Enabled: no }
-Style/Documentation: { Enabled: no }
-Style/FrozenStringLiteralComment: { Enabled: no }
+Lint/AssignmentInCondition: { Enabled: false }
+Lint/RedundantCopDisableDirective: { Enabled: false }
+Metrics/AbcSize: { Enabled: false }
+Metrics/ClassLength: { Enabled: false }
+Metrics/CyclomaticComplexity: { Enabled: false }
+Metrics/MethodLength: { Enabled: false }
+Metrics/PerceivedComplexity: { Enabled: false }
+Style/Documentation: { Enabled: false }
+Style/FrozenStringLiteralComment: { Enabled: false }
 Style/TrailingCommaInArguments: { EnforcedStyleForMultiline: consistent_comma }
 Style/TrailingCommaInArrayLiteral: { EnforcedStyleForMultiline: consistent_comma }
 Style/TrailingCommaInHashLiteral: { EnforcedStyleForMultiline: consistent_comma }
