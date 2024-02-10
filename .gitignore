@@ -13,6 +13,7 @@
 /bin/zola
 /bin/rubymine
 /bin/yq
+/bin/godot
 TAGS
 ansible/*.retry
 away.log
