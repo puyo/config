@@ -257,6 +257,7 @@
           ("Python" black)
           ("R" styler)
           ("Rust" rustfmt)
+          ("Ruby" rubocop)
           ("SCSS" prettier)
           ("SQL" sqlformat)
           ("Svelte" prettier)
@@ -265,6 +266,7 @@
           ("TypeScript" prettier)
           )
         )
+  ;; (setq apheleia-mode-alist (assoc-delete-all "ruby-mode" apheleia-mode-alist))
   )
 
 ;; ----------------------------------------------------------------------
@@ -325,9 +327,9 @@
 
 ;; Use LSP to handle rubocop and formatting
 (add-hook! ruby-mode
-  (remove-hook 'ruby-mode-hook #'rubocop-mode)
-  (add-hook 'before-save-hook 'lsp-format-buffer nil t)
-  )
+           ;; (remove-hook 'ruby-mode-hook #'rubocop-mode)
+           ;; (add-hook 'before-save-hook 'lsp-format-buffer nil t)
+           )
 
 ;; ----------------------------------------------------------------------
 ;; Magit
