@@ -12,26 +12,27 @@ else
 fi
 
 gitbranch() {
-  base=$1
-  shift
-  if [ "$*" != "" ]; then
+  name=$1
+  base=$2
+  if [ "$base" = "" ]; then
+    base=$(git rev-parse --abbrev-ref origin/HEAD)
+  fi
+  if [ "$name" != "" ]; then
     git fetch
-    git branch "$*" "origin/$base"
-    git checkout "$*"
-    git config branch."$*".remote origin
-    git config branch."$*".merge refs/heads/"$*"
-    git config branch."$*".rebase true
+    git branch "$name" "$base"
+    git checkout "$name"
+    git config branch."$name".remote origin
+    git config branch."$name".merge refs/heads/"$name"
+    git config branch."$name".rebase true
   fi
 }
 
-sprintbranch() {
-  gitbranch sprint "$@"
-}
 mainbranch() {
-  gitbranch main "$@"
+  gitbranch "$@"
 }
+
 masterbranch() {
-  gitbranch master "$@"
+  gitbranch "$@"
 }
 
 # ----------------------------------------------------------------------
