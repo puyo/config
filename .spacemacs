@@ -270,7 +270,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Comic Mono"
-                               :size 12.0
+                               :size 15
                                :weight normal
                                :width normal)
 
@@ -315,7 +315,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil then the last auto saved layouts are resumed automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-resume-layouts t
 
    ;; If non-nil, auto-generate layout name when creating new layouts. Only has
    ;; effect when using the "jump to layout by number" commands. (default nil)
@@ -575,6 +575,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   ;; Path to my elisp additions
   (add-to-list 'load-path (expand-file-name "~/projects/config/elisp/"))
+
+  (setq vc-follow-symlinks t)
 )
 
 
@@ -762,8 +764,9 @@ before packages are loaded."
   )
 
 (defun dotspacemacs/user-init-tabs ()
-  ;; Centaur
-  (centaur-tabs-change-fonts "sans" 100)
+  (add-hook 'centaur-tabs-mode-hook
+            (centaur-tabs-change-fonts "sans" 100)
+            )
 
   (setq centaur-tabs-bar-height 50)
   (setq centaur-tabs-height 40)
@@ -845,7 +848,6 @@ This function is called at the very end of Spacemacs initialization."
  '(tooltip-delay 0.1)
  '(tooltip-short-delay 0)
  '(typescript-indent-level 2)
- '(vc-follow-symlinks t)
  '(volatile-highlights-mode nil)
  '(web-mode-code-indent-offset 2)
  '(web-mode-markup-indent-offset 2))
