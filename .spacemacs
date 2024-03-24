@@ -49,7 +49,7 @@ This function should only modify configuration layer settings."
      html
      idris
      javascript
-     ;;lsp
+     lsp
      markdown
      multiple-cursors
      org
@@ -373,7 +373,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default t) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
@@ -606,6 +606,7 @@ before packages are loaded."
   (dotspacemacs/user-init-js)
   (dotspacemacs/user-init-add-buffer-switches-to-recentf)
   (dotspacemacs/user-init-magit-blame-fix)
+  (dotspacemacs/user-init-tabs)
 )
 
 (defun dotspacemacs/user-init-magit-blame-fix ()
@@ -704,25 +705,12 @@ before packages are loaded."
 
 (defun dotspacemacs/user-init-elixir ()
   ;; Elixir mode on atypical elixir files
-  (add-to-list 'auto-mode-alist '("mix\\.lock\\'" . elixir-mode))
+  ;; (add-to-list 'auto-mode-alist '("mix\\.lock\\'" . text-mode))
 
-  ;; ;; ;; elixir-mode hook
-  ;; ;; (add-hook 'elixir-mode-hook
-  ;; ;;           (lambda () (add-hook 'before-save-hook 'mix-format-before-save)))
-  ;; ;; https://github.com/syl20bnr/spacemacs/issues/9284
-  ;; ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
-  ;; (add-hook
-  ;;  'elixir-mode-hook
-  ;;  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-
-  ;; (add-hook
-  ;;  'elixir-format-hook
-  ;;  (lambda ()
-  ;;    (if (projectile-project-p)
-  ;;        (setq elixir-format-arguments
-  ;;              (list "--dot-formatter"
-  ;;                    (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
-  ;;      (setq elixir-format-arguments nil))))
+  ;; LSP format on save
+  (add-hook
+   'elixir-mode-hook
+   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
   )
 
 (defun dotspacemacs/user-init-keybindings ()
@@ -773,18 +761,29 @@ before packages are loaded."
                           (lambda (command) (append '("bundle" "exec") command)))))
   )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(spacemacs|use-package-add-hook tabs
-  :post-config
+(defun dotspacemacs/user-init-tabs ()
+  ;; Centaur
+  (centaur-tabs-change-fonts "sans" 100)
+
+  (setq centaur-tabs-bar-height 50)
+  (setq centaur-tabs-height 40)
+  (setq centaur-tabs-set-bar 'left)
+  (setq centaur-tabs-set-close-button nil)
+  (setq centaur-tabs-show-navigation-buttons nil)
+  (setq centaur-tabs-show-new-tab-button nil)
+
   ;; Don't group tabs except for one to hide all the uncloseable Emacs windows
   (defun centaur-tabs-buffer-groups ()
     (list
      (cond
       ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-      (t "Editing"))))
+      ((derived-mode-p 'special-mode) "Emacs")
+      (t "Editing")))
+    )
   )
 
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -795,8 +794,6 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(centaur-tabs-bar-height 50)
- '(centaur-tabs-height 40)
  '(company-global-modes nil)
  '(compilation-message-face 'default)
  '(create-lockfiles nil)
@@ -829,6 +826,14 @@ This function is called at the very end of Spacemacs initialization."
  '(ring-bell-function 'ignore)
  '(ruby-insert-encoding-magic-comment nil)
  '(rust-format-on-save t)
+ '(safe-local-variable-values
+   '((evil-indent-width . 2)
+     (indent-shift-width . 2)
+     (typescript-backend . tide)
+     (typescript-backend . lsp)
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp)))
  '(server-mode t)
  '(sh-basic-offset 2)
  '(show-smartparens-global-mode nil)
