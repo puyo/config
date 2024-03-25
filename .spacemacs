@@ -609,7 +609,8 @@ before packages are loaded."
   (dotspacemacs/user-init-add-buffer-switches-to-recentf)
   (dotspacemacs/user-init-magit-blame-fix)
   (dotspacemacs/user-init-tabs)
-)
+
+  )
 
 (defun dotspacemacs/user-init-magit-blame-fix ()
   (spacemacs/set-leader-keys "gb" 'magit-blame-addition)
@@ -738,7 +739,7 @@ before packages are loaded."
   (global-set-key (kbd "s-r") 'counsel-recentf)
   (global-set-key (kbd "s-s") 'save-buffer)
   (global-set-key (kbd "s-t") 'projectile-find-file)
-  (global-set-key (kbd "s-v") 'evil-paste-before)
+  (global-set-key (kbd "s-v") 'clipboard-yank)
   (global-set-key (kbd "s-w") 'kill-current-buffer)
   (global-set-key (kbd "s-x") 'kill-region)
   (global-set-key (kbd "s-y") 'redo)
@@ -748,11 +749,19 @@ before packages are loaded."
   )
 
 (defun dotspacemacs/user-init-js ()
-  ;; Format JS code via :'<,'>prettier
+  ;; LSP format on save
 
-  (use-package prettier-js
-    :hook js2-mode
-    )
+  (add-hook
+   'typescript-tsx-mode-hook
+   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
+
+  (add-hook
+   'typescript-ts-mode-hook
+   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
+
+  (add-hook
+   'js2-mode-hook
+   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
   )
 
 (defun dotspacemacs/user-init-bundler ()
@@ -780,6 +789,7 @@ before packages are loaded."
     (list
      (cond
       ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+      ((string-equal "TAGS" (buffer-name)) "Emacs")
       ((derived-mode-p 'special-mode) "Emacs")
       (t "Editing")))
     )
@@ -819,11 +829,13 @@ This function is called at the very end of Spacemacs initialization."
  '(js2-mode-show-strict-warnings nil)
  '(js2-strict-missing-semi-warning nil)
  '(lsp-disabled-clients '(ruby))
+ '(lsp-headerline-breadcrumb-enable-diagnostics nil)
+ '(lsp-javascript-format-enable nil)
  '(magit-diff-use-overlays nil)
  '(mouse-wheel-scroll-amount '(5 ((shift) . 10) ((control))))
  '(ns-pop-up-frames nil)
  '(package-selected-packages
-   '(racer pos-tip cmake-mode yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode writegood-mode winum which-key wgrep web-mode web-beautify volatile-highlights vimrc-mode vim-powerline vi-tilde-fringe uuidgen use-package undo-tree typescript-mode treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toml-mode toc-org term-cursor tagedit symon symbol-overlay stylus-mode string-inflection string-edit-at-point sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smex smeargle slim-mode seeing-is-believing scss-mode sass-mode rvm rust-mode ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode ron-mode robe restart-emacs request rbenv rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode projectile-rails prettier-js popwin poetry pippel pipenv pip-requirements password-generator paradox overseer orgit-forge org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file ob-elixir npm-mode nose nodejs-repl nameless multi-line mmm-mode minitest markdown-toc macrostep lsp-ui lsp-treemacs lsp-python-ms lsp-pyright lsp-origami lsp-ivy lsp-haskell lorem-ipsum livid-mode live-py-mode link-hint json-reformat json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ivy-avy inspector info+ indent-guide importmagic impatient-mode idris-mode hybrid-mode hungry-delete holy-mode hlint-refactor hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-popup-tip flycheck-package flycheck-haskell flycheck-elsa flycheck-elm flycheck-credo flx-ido feature-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-textobj-line evil-surround evil-org evil-numbers evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-commentary evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu erlang emr emmet-mode elm-test-runner elm-mode elisp-slime-nav elisp-def editorconfig dumb-jump dotenv-mode dockerfile-mode docker-tramp docker dired-quick-sort diminish devdocs define-word dante dactyl-mode cython-mode csv-mode counsel-projectile counsel-css company-web company-go company-cabal company-anaconda column-enforce-mode code-cells cmm-mode clean-aindent-mode chruby centered-cursor-mode centaur-tabs cargo bundler browse-at-remote blacken auto-yasnippet auto-dictionary auto-compile attrap all-the-icons alchemist aggressive-indent ace-link ac-ispell))
+   '(dap-mode lsp-docker bui racer pos-tip cmake-mode yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode writegood-mode winum which-key wgrep web-mode web-beautify volatile-highlights vimrc-mode vim-powerline vi-tilde-fringe uuidgen use-package undo-tree typescript-mode treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toml-mode toc-org term-cursor tagedit symon symbol-overlay stylus-mode string-inflection string-edit-at-point sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smex smeargle slim-mode seeing-is-believing scss-mode sass-mode rvm rust-mode ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode ron-mode robe restart-emacs request rbenv rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode projectile-rails prettier-js popwin poetry pippel pipenv pip-requirements password-generator paradox overseer orgit-forge org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file ob-elixir npm-mode nose nodejs-repl nameless multi-line mmm-mode minitest markdown-toc macrostep lsp-ui lsp-treemacs lsp-python-ms lsp-pyright lsp-origami lsp-ivy lsp-haskell lorem-ipsum livid-mode live-py-mode link-hint json-reformat json-navigator json-mode js2-refactor js-doc ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ivy-avy inspector info+ indent-guide importmagic impatient-mode idris-mode hybrid-mode hungry-delete holy-mode hlint-refactor hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-popup-tip flycheck-package flycheck-haskell flycheck-elsa flycheck-elm flycheck-credo flx-ido feature-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-textobj-line evil-surround evil-org evil-numbers evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-commentary evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu erlang emr emmet-mode elm-test-runner elm-mode elisp-slime-nav elisp-def editorconfig dumb-jump dotenv-mode dockerfile-mode docker-tramp docker dired-quick-sort diminish devdocs define-word dante dactyl-mode cython-mode csv-mode counsel-projectile counsel-css company-web company-go company-cabal company-anaconda column-enforce-mode code-cells cmm-mode clean-aindent-mode chruby centered-cursor-mode centaur-tabs cargo bundler browse-at-remote blacken auto-yasnippet auto-dictionary auto-compile attrap all-the-icons alchemist aggressive-indent ace-link ac-ispell))
  '(paradox-github-token t)
  '(projectile-use-git-grep t)
  '(ring-bell-function 'ignore)
