@@ -751,17 +751,18 @@ before packages are loaded."
 (defun dotspacemacs/user-init-js ()
   ;; LSP format on save
 
-  (add-hook
-   'typescript-tsx-mode-hook
-   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
+  ;; (add-hook
+  ;;  'typescript-tsx-mode-hook
+  ;;  (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
 
-  (add-hook
-   'typescript-ts-mode-hook
-   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
+  ;; (add-hook
+  ;;  'typescript-ts-mode-hook
+  ;;  (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
 
-  (add-hook
-   'js2-mode-hook
-   (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
+  ;; (add-hook
+  ;;  'js2-mode-hook
+  ;;  (lambda () (add-hook 'before-save-hook 'lsp-format-buffer)))
+
   )
 
 (defun dotspacemacs/user-init-bundler ()
