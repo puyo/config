@@ -267,6 +267,8 @@
           )
         )
   ;; (setq apheleia-mode-alist (assoc-delete-all "ruby-mode" apheleia-mode-alist))
+
+  (setf (alist-get 'ruby-mode apheleia-mode-alist) 'rubocop)
   )
 
 ;; ----------------------------------------------------------------------
@@ -326,10 +328,12 @@
   )
 
 ;; Use LSP to handle rubocop and formatting
-(add-hook! ruby-mode
-           ;; (remove-hook 'ruby-mode-hook #'rubocop-mode)
-           ;; (add-hook 'before-save-hook 'lsp-format-buffer nil t)
-           )
+;;
+;; we can switch to LSP based formatting this when we have Ruby 3.0+ in future
+;; (add-hook! ruby-mode
+;;   (remove-hook 'ruby-mode-hook #'rubocop-mode)
+;;   (add-hook 'before-save-hook 'lsp-format-buffer nil t)
+;;   )
 
 ;; ----------------------------------------------------------------------
 ;; Magit
