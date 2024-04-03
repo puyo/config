@@ -21,6 +21,8 @@ Pin-Priority: 1001
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' |
   sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
+sudo add-apt-repository -y ppa:neovim-ppa/unstable
+
 packages=(
   alsa-ucm-conf            # needed for output to audio device plugged into screen
   apparmor                 # security policies
@@ -65,6 +67,7 @@ packages=(
   mesa-vulkan-drivers      # faster 3D drivers
   mtr-tiny                 # ping/traceroute
   net-tools                # ifconfig and similar command line tools
+  neovim-qt                # modernised vim with lua
   ntp                      # time sync
   openssh-server           # ssh into this machine
   partitionmanager         # manage partitions
