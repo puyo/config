@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 ColorScheme=Breeze
 DimmValue=60
-Font=Comic Mono,13,-1,5,50,0,0,0,0,0
+Font=ComicMono Nerd Font,13,-1,5,50,0,0,0,0,0
 LineSpacing=1
 
 [Cursor Options]

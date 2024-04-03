@@ -56,11 +56,8 @@
 (package! ess)
 
 ;; Copilot
-(package! copilot
-  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+;; (package! copilot
+;; :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 
 ;; The latest has better formatters e.g. rubocop > rufo
 (unpin! format-all)
-
-;; ;; RuboCop is handled by Ruby LSP
-;; (package! rubocop :disable t)

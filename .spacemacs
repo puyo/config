@@ -746,6 +746,11 @@ before packages are loaded."
   (global-set-key (kbd "s-z") 'undo)
   (global-set-key (kbd "s-{") 'centaur-tabs-backward)
   (global-set-key (kbd "s-}") 'centaur-tabs-forward)
+
+  ;; (define-key evil-normal-state-map (kbd "M-h") 'evil-move-left)
+
+  (global-set-key (kbd "<S-down-mouse-1>") 'ignore) ; turn off font dialog
+  (global-set-key (kbd "<S-mouse-1>") 'mouse-set-point)
   )
 
 (defun dotspacemacs/user-init-js ()
