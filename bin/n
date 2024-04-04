@@ -37,6 +37,18 @@ else
   system_v(*vim_server, *args)
 end
 
+# Jump to line if specified
 system_v(*vim_client, '--remote-send', ":#{line}<CR>") if line
 
-system_v('wmctrl', '-a', 'Neovim') # does nothing in KDE Wayland :(
+# Focus Neovim window
+#
+# X11
+#
+# system_v('wmctrl', '-a', 'Neovim')
+#
+# KDE Wayland kdotool (cargo install kdotool)
+#
+stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
+if status.success? && m = stdout.match(/^(\S+)$/)
+  Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
+end
