@@ -268,6 +268,9 @@
         )
   ;; (setq apheleia-mode-alist (assoc-delete-all "ruby-mode" apheleia-mode-alist))
 
+  )
+
+(after! apheleia
   (setf (alist-get 'ruby-mode apheleia-mode-alist) 'rubocop)
   )
 
@@ -374,8 +377,8 @@
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 ;; ----------------------------------------------------------------------
-;; Web mode
+;; JavaScript
 
-(after! web-mode
-  (add-to-list 'web-mode-comment-formats '("jsx" . "//"))
+(after! javascript
+  (add-hook 'json-mode-hook (lambda () (setq-local js-indent-level 2)))
   )
