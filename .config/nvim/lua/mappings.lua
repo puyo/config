@@ -67,18 +67,23 @@ vnoremap <D-x> "+c
 vnoremap < <gv
 vnoremap > >gv
 
+" Zoom font size
+
+" guifont = "ComicMono Nerd Font:h13"
+" \@<= means lookbehind, the whole regexp only matches if the prefix is present
+
 function! FontSizePlus ()
-  let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+  let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
   let l:gf_size_whole = l:gf_size_whole + 1
-  let l:new_font_size = ' '.l:gf_size_whole
-  let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+  let l:new_font_size = ':h'.l:gf_size_whole
+  let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
 endfunction
 
 function! FontSizeMinus ()
-  let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+  let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
   let l:gf_size_whole = l:gf_size_whole - 1
-  let l:new_font_size = ' '.l:gf_size_whole
-  let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+  let l:new_font_size = ':h'.l:gf_size_whole
+  let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
 endfunction
 
 nmap <D--> :call FontSizeMinus()<CR>

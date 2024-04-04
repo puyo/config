@@ -3,6 +3,8 @@
 # Greg's gvim wrapper. Parses arguments and opens all sorts of random junk I
 # paste into it. ;)
 
+require 'open3'
+
 vim = 'gvim'
 line = nil
 
@@ -40,4 +42,12 @@ else
 end
 
 system(vim, '--remote-send', ":#{line}<CR>") if line
-system('wmctrl', '-a', 'GVIM')
+
+# X11
+# system('wmctrl', '-a', 'GVIM')
+
+# KDE Wayland
+stdout, status = Open3.capture2('kdotool', 'search', 'GVIM')
+if status.success? && m = stdout.match(/^(\S+)$/)
+  Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
+end
