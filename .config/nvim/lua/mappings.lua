@@ -1,4 +1,4 @@
-require "nvchad.mappings"
+require("nvchad.mappings")
 
 local function current_buffer_dir()
   local buffer_name = vim.api.nvim_buf_get_name(0)
@@ -11,18 +11,23 @@ local function edit_current_buffer_dir_expr()
   return ":e " .. current_buffer_dir() .. "/"
 end
 
-vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
-vim.keymap.set("n", ";", ":", { desc = "CMD enter command mode" })
-vim.keymap.set({ "n", "i", "v" }, "<D-b>", require("telescope.builtin").buffers, { desc = "Buffers" })
-vim.keymap.set({ "n", "i", "v" }, "<D-o>", edit_current_buffer_dir_expr, { desc = "Open buffer", expr = true })
-vim.keymap.set({ "n", "i", "v" }, "<D-p>", require("telescope.builtin").git_files, { desc = "Project files" })
-vim.keymap.set({ "n", "i", "v" }, "<D-r>", require("telescope.builtin").oldfiles, { desc = "Recent files" })
-vim.keymap.set({ "n", "i", "v" }, "<D-s>", "<cmd>w<cr>", { desc = "Save buffer" })
-vim.keymap.set({ "n", "i", "v" }, "<D-w>", "<cmd>silent confirm bd<cr>", { desc = "Close buffer" })
-vim.keymap.set({ "n", "i", "v" }, "<D-z>", "<cmd>silent undo<cr>", { desc = "Undo" })
+local map = vim.keymap.set
+local telescope_builtin = require("telescope.builtin")
+
+map("c", "<M-BS>", "<C-W>", { desc = "Back word" })
+map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
+map("n", ";", ":", { desc = "CMD enter command mode" })
+map({ "n", "i", "v" }, "<D-b>", telescope_builtin.buffers, { desc = "Buffers" })
+map({ "n", "i", "v" }, "<D-o>", edit_current_buffer_dir_expr, { desc = "Open buffer", expr = true })
+map({ "n", "i", "v" }, "<D-p>", telescope_builtin.git_files, { desc = "Project files" })
+map({ "n", "i", "v" }, "<D-r>", telescope_builtin.oldfiles, { desc = "Recent files" })
+map({ "n", "i", "v" }, "<D-s>", "<cmd>w<cr>", { desc = "Save buffer" })
+map({ "n", "i", "v" }, "<D-w>", "<cmd>silent confirm bd<cr>", { desc = "Close buffer" })
+map({ "n", "i", "v" }, "<D-z>", "<cmd>silent undo<cr>", { desc = "Undo" })
+map({ "n", "i" }, "<D-/>", require("Comment.api").toggle.linewise.current, { desc = "Comment toggle" })
 
 -- close fuzzy file finder instantly on Esc
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     mappings = {
       i = {
@@ -30,18 +35,52 @@ require("telescope").setup {
       },
     },
   },
-}
+})
 
 -- haven't figured out how to convert these to lua yet
-vim.cmd [[
+vim.cmd([[
+
+" s in visual mode starts surround
+vmap s S
+
+" Or just type the quote you want
+vmap " S"
+vmap ' S'
+vmap ) S)
+vmap ( S)
+
 " paste
 inoremap <D-v> <ESC>"+pa
 nnoremap <D-v> "+P
 vnoremap <D-v> "+p
+
+" toggle comment, maintain selection
+vmap <D-/> gcgv
 
 " copy
 vnoremap <D-c> "+ygv
 
 " cut
 vnoremap <D-x> "+c
-]]
+
+" Don't lose highlight after indenting it
+vnoremap < <gv
+vnoremap > >gv
+
+function! FontSizePlus ()
+  let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+  let l:gf_size_whole = l:gf_size_whole + 1
+  let l:new_font_size = ' '.l:gf_size_whole
+  let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+endfunction
+
+function! FontSizeMinus ()
+  let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+  let l:gf_size_whole = l:gf_size_whole - 1
+  let l:new_font_size = ' '.l:gf_size_whole
+  let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+endfunction
+
+nmap <D--> :call FontSizeMinus()<CR>
+nmap <D-=> :call FontSizePlus()<CR>
+]])
