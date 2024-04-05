@@ -3,7 +3,7 @@ return {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
     config = function()
-      require "configs.conform"
+      require("configs.conform")
     end,
   },
 
@@ -11,7 +11,7 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
+      require("configs.lspconfig")
     end,
   },
 
@@ -50,21 +50,25 @@ return {
   {
     "ahmedkhalf/project.nvim",
     config = function()
-      require("project_nvim").setup {
+      require("project_nvim").setup({
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
-      }
+      })
     end,
   },
 
-  "michaeljsmith/vim-indent-object",
+  {
+    "chrisgrieser/nvim-various-textobjs",
+    lazy = false,
+    opts = { useDefaultKeymaps = true },
+  },
 
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup {}
+      require("nvim-surround").setup({})
     end,
   },
 }
