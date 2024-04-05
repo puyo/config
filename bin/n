@@ -22,8 +22,7 @@ running = status.success?
 args =
   if ARGV.size == 1
     file, line = ARGV.first.split(':')
-    file.gsub!(%r{^[ab]/}, '') # git diff
-    file = File.join(Dir.pwd, file)
+    file = File.expand_path(file)
     [file]
   elsif ARGV.size > 1
     ARGV
