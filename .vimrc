@@ -95,9 +95,6 @@ Plug 'vim-scripts/CycleColor'
 " Project mode
 Plug 'tpope/vim-projectionist'
 
-" Copilot
-Plug 'github/copilot.vim'
-
 " Writing mode
 Plug 'junegunn/goyo.vim'
 
