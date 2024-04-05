@@ -5,6 +5,7 @@ o.compatible = false
 o.showtabline = 0
 o.spelllang = "en_au"
 o.expandtab = true
+o.linespace = 2
 
 -- no really
 vim.cmd([[
