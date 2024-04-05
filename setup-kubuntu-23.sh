@@ -61,13 +61,14 @@ packages=(
   jq                       # jq (json pretty printer / query)
   kubuntu-wallpapers-focal # milky way wallpaper
   less                     # terminal pager
+  libdbus-1-dev            # for cargo install kdotool
   lm-sensors
   manpages-dev             # manual pages for devs
   mesa-utils               # check 3D acceleration is working
   mesa-vulkan-drivers      # faster 3D drivers
   mtr-tiny                 # ping/traceroute
-  net-tools                # ifconfig and similar command line tools
   neovim-qt                # modernised vim with lua
+  net-tools                # ifconfig and similar command line tools
   ntp                      # time sync
   openssh-server           # ssh into this machine
   partitionmanager         # manage partitions
@@ -92,6 +93,7 @@ packages=(
   whois                    # domain name info
   wine                     # windows emulator
   winetricks
+  wl-clipboard             # wl-copy, wl-paste for neovim
   wmctrl                   # wmctrl (gvim wrapper)
 )
 
