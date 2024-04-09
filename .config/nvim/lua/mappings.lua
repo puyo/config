@@ -39,6 +39,8 @@ require("telescope").setup({
 
 -- haven't figured out how to convert these to lua yet
 vim.cmd([[
+" don't overwrite the clipboard/register when pasting so I can paste repeatedly the same text
+xnoremap p P
 
 " s in visual mode starts surround
 vmap s S
