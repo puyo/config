@@ -26,6 +26,22 @@ map({ "n", "i", "v" }, "<D-w>", "<cmd>silent confirm bd<cr>", { desc = "Close bu
 map({ "n", "i", "v" }, "<D-z>", "<cmd>silent undo<cr>", { desc = "Undo" })
 map({ "n", "i" }, "<D-/>", require("Comment.api").toggle.linewise.current, { desc = "Comment toggle" })
 
+-- open current code in github, gitlab, etc., browser
+
+local git_open_in_browser = function(mode)
+  local gitlinker = require("gitlinker")
+  local gitlinker_actions = require("gitlinker.actions")
+  gitlinker.get_buf_range_url(mode, { action_callback = gitlinker_actions.open_in_browser })
+end
+
+map("n", "gB", function()
+  git_open_in_browser("n")
+end, { silent = false })
+
+map("v", "gB", function()
+  git_open_in_browser("v")
+end, { silent = false })
+
 -- close fuzzy file finder instantly on Esc
 require("telescope").setup({
   defaults = {

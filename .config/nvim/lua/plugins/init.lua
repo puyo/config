@@ -72,4 +72,16 @@ return {
       require("nvim-surround").setup({})
     end,
   },
+
+  {
+    "ruifm/gitlinker.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("gitlinker").setup({
+        callbacks = {
+          ["github.nearmap.com"] = require("gitlinker.hosts").get_github_type_url,
+        },
+      })
+    end,
+  },
 }
