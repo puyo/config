@@ -1,8 +1,18 @@
 #!/bin/sh
 # Fetch the current file and line number from vim.
 
-# vim:
-#exec gvim --remote-expr "expand('%').':'.line('.')"
+gvim_line() {
+  gvim --remote-expr "expand('%').':'.line('.')"
+}
 
-# emacs:
-exec emacsclient --eval '(with-current-buffer (window-buffer (selected-window)) (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))' | sed s'/^\"\(.*\)\"$/\1/'
+emacs_line() {
+  emacsclient --eval '(with-current-buffer (window-buffer (selected-window)) (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))' | sed s'/^\"\(.*\)\"$/\1/'
+}
+
+nvim_line() {
+  nvim --headless --clean \
+    --server ~/.cache/nvim/server.pipe \
+    --remote-expr "expand('%').':'.line('.')"
+}
+
+nvim_line || gvim_line || emacs_line
