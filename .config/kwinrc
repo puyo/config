@@ -38,7 +38,7 @@ HighlightWindows=false
 LayoutName=big_icons
 
 [Tiling]
-padding=4
+padding=0
 
 [Tiling][3c373409-48e0-57e9-a1a9-eb32e49f8772]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.6888297872340425},{"width":0.15000000000000002},{"width":0.16117021276595744}]}
@@ -87,4 +87,4 @@ BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=M
 library=org.kde.kwin.aurorae
-theme=__aurorae__svg__Nostrum
+theme=__aurorae__svg__Sweet-Dark-transparent
