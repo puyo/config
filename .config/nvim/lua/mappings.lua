@@ -142,4 +142,12 @@ endfunction
 
 nmap <D--> :call FontSizeMinus()<CR>
 nmap <D-=> :call FontSizePlus()<CR>
+
+" Strip trailing whitespace when I save source files.
+function! StripTrailingWhitespaces() range
+  silent! execute a:firstline . "," . a:lastline . 's/\s\+$/\1/e'
+  normal! g`"
+endfunction
+command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
+
 ]])

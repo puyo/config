@@ -9,7 +9,7 @@ local servers = {
   "cssls",
   "html",
   "rubocop",
-  "ruby_ls",
+  "ruby_lsp",
   "tsserver",
 }
 
