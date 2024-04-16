@@ -56,7 +56,7 @@ map({ "n", "i", "v" }, "<D-w>", tabufline.close_buffer, { desc = "Close buffer" 
 map({ "n", "i", "v" }, "<D-z>", "<cmd>undo<cr>", { desc = "Undo", silent = true })
 map({ "n", "i", "v" }, "<D-{>", tabufline.prev, { desc = "Go to prev buffer" })
 map({ "n", "i", "v" }, "<D-}>", tabufline.next, { desc = "Go to next buffer" })
-map({ "n", "i", "v" }, "<leader><tab>", edit_last_file_expr, { desc = "Go to last buffer", expr = true, silent = true })
+map({ "n", "v" }, "<leader><tab>", edit_last_file_expr, { desc = "Go to last buffer", expr = true, silent = true })
 
 -- stop nvchad messing with C-i
 vim.keymap.set("n", "<tab>", "")
