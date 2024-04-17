@@ -7,6 +7,7 @@ o.spelllang = "en_au"
 o.expandtab = true
 o.linespace = 2
 o.shiftwidth = 2
+o.wildmode = "list:longest"
 
 vim.cmd([[
 " no really, no tabline please
