@@ -8,6 +8,7 @@ o.expandtab = true
 o.linespace = 2
 o.shiftwidth = 2
 o.wildmode = "list:longest"
+o.foldenable = false
 
 vim.cmd([[
 " no really, no tabline please

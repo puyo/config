@@ -98,10 +98,15 @@ xnoremap p P
 vmap s S
 
 " Or just type the quote you want
-vmap " S"
-vmap ' S'
-vmap ) S)
-vmap ( S)
+" vmap " S"
+" vmap ' S'
+" vmap ) S)
+" vmap ( S)
+
+" select all
+imap <D-a> <ESC><D-a>
+nnoremap <D-a> ggVG
+vmap <D-a> <ESC><D-a>
 
 " paste
 inoremap <D-v> <ESC>"+pa
