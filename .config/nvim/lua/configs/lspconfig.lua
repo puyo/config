@@ -10,7 +10,6 @@ local servers = {
   "html",
   "rubocop",
   "ruby_lsp",
-  "tsserver",
 }
 
 -- lsps with default config
@@ -25,6 +24,24 @@ end
 lspconfig.elixirls.setup({
   cmd = { vim.env.HOME .. "/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
   on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+})
+
+lspconfig.eslint.setup({
+  on_attach = function(client, buffer)
+    on_attach(client, buffer)
+    client.server_capabilities.documentFormattingProvider = true
+  end,
+  on_init = on_init,
+  capabilities = capabilities,
+})
+
+lspconfig.tsserver.setup({
+  on_attach = function(client, buffer)
+    on_attach(client, buffer)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
   on_init = on_init,
   capabilities = capabilities,
 })
