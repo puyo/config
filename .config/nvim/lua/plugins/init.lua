@@ -21,6 +21,7 @@ return {
       ensure_installed = {
         "css-lsp",
         "elixir-ls",
+        "eslint-lsp",
         "html-lsp",
         "lua-language-server",
         "prettier",
