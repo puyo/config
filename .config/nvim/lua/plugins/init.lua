@@ -41,6 +41,7 @@ return {
         "elixir",
         "html",
         "lua",
+        "norg",
         "ruby",
         "typescript",
         "vim",
@@ -111,6 +112,7 @@ return {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
     version = "*",
+    ft = { "norg" },
     config = function()
       require("neorg").setup({
         load = {
