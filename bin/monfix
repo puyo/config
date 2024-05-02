@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# https://askubuntu.com/a/1447010/1337030
+#
+# xrandr -q --verbose
+# DP-1 connected 3840x1600+0+0 (0x4b1) normal (normal left inverted right x axis y axis) 880mm x 370mm
+# 3840x1600 (0x4b1) 521.750MHz -HSync +VSync *current +preferred
+#       h: width  3840 start 4128 end 4544 total 5248 skew    0 clock  99.42KHz
+#      v: height 1600 start 1603 end 1613 total 1658           clock  59.96Hz
+#
+# DP-1 connected 3840x1600+0+0 (0x4b1) normal (normal left inverted right x axis y axis) 880mm x 370mm
+
+size=3840x1600
+mode="$size"_60.00
+
+if xrandr -q | grep -q "$size"; then
+  echo "Setting monitor refresh to 60Hz"
+  xrandr --newmode "$mode" 521.750 3840 4128 4544 5248 1600 1603 1613 1658 +hsync +vsync 2> /dev/null || true
+  xrandr --addmode DP-1 "$mode"
+  xrandr --output DP-1 --mode "$mode"
+else
+  echo "No 3840x1600 monitor"
+fi
