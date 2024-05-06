@@ -1,5 +1,20 @@
 require("nvchad.mappings")
 
+local wk = require("which-key")
+wk.register({
+  c = { name = "+code/current/cheatsheet/commits" },
+  d = { name = "+debug" },
+  f = { name = "+find/format/files" },
+  g = { name = "+git" },
+  l = { name = "+lsp" },
+  m = { name = "+marks" },
+  p = { name = "+preview/pick" },
+  r = { name = "+rename/reset/relative" },
+  s = { name = "+signature" },
+  t = { name = "+test" },
+  w = { name = "+workspace/whichkey" },
+}, { prefix = "<leader>" })
+
 local function current_buffer_dir()
   local buffer_name = vim.api.nvim_buf_get_name(0)
   local buffer_dir = vim.fs.dirname(buffer_name)

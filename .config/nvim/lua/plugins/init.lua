@@ -46,6 +46,7 @@ return {
         "typescript",
         "vim",
         "vimdoc",
+        "markdown",
       },
     },
   },
@@ -141,6 +142,7 @@ return {
     dependencies = {
       "nvim-neotest/nvim-nio",
       "haydenmeade/neotest-jest",
+      "folke/which-key.nvim",
     },
     opts = {
       adapters = {},
@@ -207,16 +209,16 @@ return {
 
     -- stylua: ignore
     keys = {
-      { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
-      { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files" },
-      { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest" },
-      { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Run Last" },
-      { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
-      { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
-      { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
+      --{ "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run file" },
+      --{ "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Test files in directory" },
+      { "<leader>tL", function() require("neotest").run.run_last({ strategy = "dap" }) end, desc = "Last test (debug)" },
+      { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Output panel" },
       { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
-      { "<leader>tL", function() require("neotest").run.run_last({ strategy = "dap" }) end, desc = "Debug Last Test" },
-      { "<leader>tw", "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>", desc = "Run Watch" },
+      { "<leader>ta", function() require("neotest").run.run_last() end, desc = "Again (last test)" },
+      { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Output" },
+      { "<leader>tr", function() require("neotest").run.run() end, desc = "Run" },
+      { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Summary" },
+      { "<leader>tw", "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>", desc = "Watch (Jest)" },
     },
   },
   {
@@ -235,9 +237,9 @@ return {
         dependencies = { "nvim-neotest/nvim-nio" },
         -- stylua: ignore
         keys = {
-          { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+          { "<leader>du", function() require("dapui").toggle({ }) end, desc = "UI" },
           { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-          { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
+          { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug" },
         },
         opts = {},
         config = function(_, opts)
@@ -256,15 +258,6 @@ return {
             dapui.close({})
           end
         end,
-      },
-      {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-          defaults = {
-            ["<leader>d"] = { name = "+debug" },
-          },
-        },
       },
     },
     opts = function()
@@ -308,20 +301,20 @@ return {
     end,
     -- stylua: ignore
     keys = {
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint with condition" },
+      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Breakpoint" },
       { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-      { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
-      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-      { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
-      { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+      --{ "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Cursor, run to" },
+      { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+      { "<leader>di", function() require("dap").step_into() end, desc = "Into" },
+      { "<leader>dj", function() require("dap").down() end, desc = "Down (next line)" },
       { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-      { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-      { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
+      { "<leader>dl", function() require("dap").run_last() end, desc = "Last run again" },
+      { "<leader>do", function() require("dap").step_out() end, desc = "Out" },
+      { "<leader>dO", function() require("dap").step_over() end, desc = "Over" },
       { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "REPL" },
       { "<leader>ds", function() require("dap").session() end, desc = "Session" },
       { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
