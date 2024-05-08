@@ -1,5 +1,20 @@
 return {
   {
+    "rickhowe/wrapwidth",
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "markdown,mkd,norg",
+        callback = function(_)
+          require("lazy").load({ plugins = "wrapwidth" })
+          vim.cmd([[
+          setlocal wrap breakindent linebreak
+          Wrapwidth 120
+          ]])
+        end,
+      })
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
     config = function()
@@ -121,7 +136,6 @@ return {
       require("neorg").setup({
         load = {
           ["core.defaults"] = {},
-          ["core.concealer"] = {},
           ["core.dirman"] = {
             config = {
               workspaces = {
@@ -133,7 +147,6 @@ return {
         },
       })
       vim.wo.foldlevel = 99
-      vim.wo.conceallevel = 2
     end,
   },
 

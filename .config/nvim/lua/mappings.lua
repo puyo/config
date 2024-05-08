@@ -170,4 +170,15 @@ function! StripTrailingWhitespaces() range
 endfunction
 command! -range=% StripTrailingWhitespaces <line1>,<line2>call StripTrailingWhitespaces()
 
+" soft wrap compatible movement
+nnoremap j gj
+nnoremap k gk
+nnoremap 0 g0
+nnoremap ^ g^
+nnoremap $ g$
+vnoremap j gj
+vnoremap k gk
+vnoremap 0 g0
+vnoremap ^ g^
+vnoremap $ g$
 ]])
