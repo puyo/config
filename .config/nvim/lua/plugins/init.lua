@@ -1,9 +1,35 @@
 return {
+  -- {
+  --   "preservim/vim-pencil",
+  --   init = function()
+  --     vim.api.nvim_create_autocmd("FileType", {
+  --       pattern = "markdown,mkd,norg",
+  --       callback = function(_)
+  --         require("lazy").load({ plugins = "vim-pencil" })
+  --         vim.call("pencil#init", { wrap = "hard", autoformat = 1 })
+  --         vim.bo.textwidth = 120
+  --       end,
+  --     })
+  --   end,
+  -- },
+
+  {
+    "nvim-orgmode/orgmode",
+    event = "VeryLazy",
+    ft = { "org" },
+    config = function()
+      require("orgmode").setup({
+        org_agenda_files = "~/notes/**/*",
+        org_default_notes_file = "~/notes/refile.org",
+      })
+    end,
+  },
+
   {
     "rickhowe/wrapwidth",
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "markdown,mkd,norg",
+        pattern = "markdown,mkd,norg,org",
         callback = function(_)
           require("lazy").load({ plugins = "wrapwidth" })
           vim.cmd([[
@@ -14,6 +40,7 @@ return {
       })
     end,
   },
+
   {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
@@ -56,12 +83,13 @@ return {
         "elixir",
         "html",
         "lua",
+        "markdown",
         "norg",
+        "org",
         "ruby",
         "typescript",
         "vim",
         "vimdoc",
-        "markdown",
       },
     },
   },
