@@ -36,5 +36,6 @@
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "telescope.nvim": { "branch": "master", "commit": "fac83a556e7b710dc31433dec727361ca062dbe9" },
   "ui": { "branch": "v2.5", "commit": "9c16efc915346c7bde5288ad94f0ea40a7267d31" },
-  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
+  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
+  "wrapwidth": { "branch": "main", "commit": "c592b47c6665e004f508b8ca01ec1fcf07493cbe" }
 }
