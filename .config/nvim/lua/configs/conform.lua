@@ -7,7 +7,6 @@ require("conform").setup({
   },
 
   format_on_save = {
-    async = true,
     timeout_ms = 3000,
     lsp_fallback = true,
   },

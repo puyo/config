@@ -137,6 +137,7 @@ return {
         "html",
         "lua",
         "markdown",
+        "markdown_inline",
         "norg",
         "org",
         "ruby",
@@ -417,4 +418,6 @@ return {
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
     end,
   },
+  { "tadmccorkle/markdown.nvim", ft = "markdown" },
+  { "godlygeek/tabular", lazy = false },
 }
