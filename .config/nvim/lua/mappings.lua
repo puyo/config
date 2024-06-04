@@ -56,12 +56,13 @@ autocmd! BufEnter * call UpdateOldFiles()
 local map = vim.keymap.set
 local telescope_builtin = require("telescope.builtin")
 local tabufline = require("nvchad.tabufline")
-local comment = require("Comment.api")
 
 map("c", "<M-BS>", "<C-W>", { desc = "Back word" })
 map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map({ "n", "i" }, "<D-/>", comment.toggle.linewise.current, { desc = "Toggle comment" })
+map("n", "<D-/>", "gcc", { desc = "comment toggle", remap = true })
+map("v", "<D-/>", "gcgv", { desc = "comment toggle", remap = true })
+map("i", "<D-/>", "<ESC>gcc", { desc = "comment toggle", remap = true })
 map({ "n", "i", "v" }, "<D-b>", telescope_builtin.buffers, { desc = "Browse buffers" })
 map({ "n", "i", "v" }, "<D-o>", edit_current_buffer_dir_expr, { desc = "Open buffer", expr = true })
 map({ "n", "i", "v" }, "<D-p>", telescope_builtin.git_files, { desc = "Browse project files" })
@@ -69,8 +70,10 @@ map({ "n", "i", "v" }, "<D-r>", telescope_builtin.oldfiles, { desc = "Browse rec
 map({ "n", "i", "v" }, "<D-s>", "<cmd>w<cr>", { desc = "Save buffer" })
 map({ "n", "i", "v" }, "<D-w>", tabufline.close_buffer, { desc = "Close buffer" })
 map({ "n", "i", "v" }, "<D-z>", "<cmd>undo<cr>", { desc = "Undo", silent = true })
-map({ "n", "i", "v" }, "<D-{>", tabufline.prev, { desc = "Go to prev buffer" })
-map({ "n", "i", "v" }, "<D-}>", tabufline.next, { desc = "Go to next buffer" })
+map({ "n", "i", "v" }, "<S-D-[>", tabufline.prev, { desc = "Go to prev buffer" })
+map({ "n", "i", "v" }, "<S-D-]>", tabufline.next, { desc = "Go to next buffer" })
+map({ "n", "i", "v" }, "<D-[>", tabufline.prev, { desc = "Go to prev buffer" })
+map({ "n", "i", "v" }, "<D-]>", tabufline.next, { desc = "Go to next buffer" })
 map({ "n", "v" }, "<leader><tab>", edit_last_file_expr, { desc = "Go to last buffer", expr = true, silent = true })
 
 -- stop nvchad messing with C-i
@@ -127,9 +130,6 @@ vmap <D-a> <ESC><D-a>
 inoremap <D-v> <ESC>"+pa
 nnoremap <D-v> "+P
 vnoremap <D-v> "+p
-
-" toggle comment, maintain selection
-vmap <D-/> gcgv
 
 " copy
 vnoremap <D-c> "+ygv
