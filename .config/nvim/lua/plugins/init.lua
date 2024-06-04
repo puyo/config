@@ -418,6 +418,19 @@ return {
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
     end,
   },
+
   { "tadmccorkle/markdown.nvim", ft = "markdown" },
   { "godlygeek/tabular", lazy = false },
+
+  {
+    "jparise/vim-graphql",
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "graphql",
+        callback = function(_)
+          require("lazy").load({ plugins = "vim-graphql" })
+        end,
+      })
+    end,
+  },
 }
