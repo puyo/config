@@ -23,9 +23,6 @@ au BufNewFile,BufRead *.hamlc setlocal filetype=haml
 au BufNewFile,BufRead *.{md,md.erb,markdown.liquid} setlocal filetype=markdown conceallevel=2 | hi mkdCode guibg=NONE
 au BufNewFile,BufRead *.as setlocal filetype=javascript
 au BufNewFile,BufRead Dockerfile.* setlocal filetype=dockerfile
-au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
-au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
-au BufRead,BufNewFile mix.lock set filetype=elixir
 augroup END
 
 augroup filetypes
