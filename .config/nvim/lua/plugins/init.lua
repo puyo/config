@@ -71,6 +71,7 @@ return {
         "ruby-ls",
         "stylua",
         "typescript-language-server",
+        "tailwindcss-language-server",
       },
     },
   },
@@ -131,9 +132,15 @@ return {
       end,
     },
     opts = {
+      highlight = {
+        enable = true,
+      },
       ensure_installed = {
         "css",
+        "eex",
         "elixir",
+        "erlang",
+        "heex",
         "html",
         "lua",
         "markdown",

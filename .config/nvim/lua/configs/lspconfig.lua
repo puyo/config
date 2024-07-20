@@ -12,6 +12,7 @@ local servers = {
   "ruby_lsp",
   "tsserver",
   "eslint",
+  "tailwindcss",
 }
 
 -- lsps with default config
@@ -28,4 +29,24 @@ lspconfig.elixirls.setup({
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+})
+
+lspconfig.tailwindcss.setup({
+  filetypes = { "html", "elixir", "eelixir", "heex" },
+  init_options = {
+    userLanguages = {
+      elixir = "html-eex",
+      eelixir = "html-eex",
+      heex = "html-eex",
+    },
+  },
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          'class[:]\\s*"([^"]*)"',
+        },
+      },
+    },
+  },
 })
