@@ -36,6 +36,7 @@ jq                       # jq (json pretty printer / query)
 kubuntu-wallpapers-focal # milky way wallpaper
 less                     # terminal pager
 libdbus-1-dev            # for cargo install kdotool
+libspa-0.2-bluetooth     # for bluetooth connections via pipewire/wireplumber
 lm-sensors
 manpages-dev             # manual pages for devs
 mesa-utils               # check 3D acceleration is working
