@@ -43,3 +43,11 @@ au FileType typescriptreact setlocal ts=2 sw=2 sts=2
 au FileType json setlocal nowrap smartindent
 augroup END
 ]])
+
+-- Fixes using gq on comments in LSP enabled modes.
+-- https://vi.stackexchange.com/questions/39200/wrapping-comment-in-visual-mode-not-working-with-gq
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.bo[args.buf].formatexpr = nil
+  end,
+})
