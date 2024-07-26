@@ -74,7 +74,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     ;;
   esac
 
-  for file in /etc/bash_completion /usr/local/etc/bash_completion /usr/local/etc/bash_completion.d/git-prompt.sh ~/.helm_bash_completion; do
+  for file in /etc/bash_completion /usr/local/etc/bash_completion /usr/local/etc/bash_completion.d/git-prompt.sh ~/.helm_bash_completion ~/.npm_completion; do
     [ -f "$file" ] && source "$file"
   done
 
@@ -92,4 +92,3 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   export ADBPATH=$HOME/lineage/platform-tools
   PATH=$PATH:${ADBPATH}
 fi
-
