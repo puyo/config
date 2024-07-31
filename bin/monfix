@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/ruby
 #
 # https://askubuntu.com/a/1447010/1337030
 #
@@ -10,14 +10,44 @@
 #
 # DP-1 connected 3840x1600+0+0 (0x4b1) normal (normal left inverted right x axis y axis) 880mm x 370mm
 
-size=3840x1600
-mode="$size"_60.00
+require 'open3'
+require 'json'
 
-if xrandr -q | grep -q "$size"; then
-  echo "Setting monitor refresh to 60Hz"
-  xrandr --newmode "$mode" 521.750 3840 4128 4544 5248 1600 1603 1613 1658 +hsync +vsync 2> /dev/null || true
-  xrandr --addmode DP-1 "$mode"
-  xrandr --output DP-1 --mode "$mode"
+out = nil
+loop do
+  out, err, status = Open3.capture3('kscreen-doctor', '-j')
+  break if status.success?
+
+  if err.match?(/corrupted/)
+    puts 'Retrying kscreen-doctor -j'
+    next
+  end
+
+  raise 'Command failed'
+end
+
+data = JSON.parse(out)
+outputs = data['outputs']
+
+width = (ARGV[0] || 3840).to_i
+height = (ARGV[1] || 1600).to_i
+refresh = (ARGV[2] || 60).to_i
+
+output = outputs.find do |o|
+  o['modes'].find { |m| m['size'] == { 'width' => width, 'height' => height } }
+end
+
+if output.nil?
+  puts "Cannot find output with resolution #{width}x#{height}"
+  exit 1
+end
+
+current_mode = output['modes'].find { |mode| mode['id'] == output['currentModeId'] }
+
+if current_mode['name'] == "#{width}x#{height}@#{refresh}"
+  puts 'OK'
 else
-  echo "No 3840x1600 monitor"
-fi
+  # problems!
+  puts 'Refresh rate problem detected'
+  pp output
+end
