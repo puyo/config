@@ -47,7 +47,7 @@ current_mode = output['modes'].find { |mode| mode['id'] == output['currentModeId
 if current_mode['name'] == "#{width}x#{height}@#{refresh}"
   puts 'OK'
 else
-  # problems!
   puts 'Refresh rate problem detected'
-  pp output
+  system('xrandr', '--output', output['name'], '-r', '60')
+  system('kscreen-doctor', "output.#{output['name']}.mode.0")
 end
