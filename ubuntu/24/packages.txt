@@ -55,6 +55,7 @@ ripgrep                  # used by Doom Emacs
 ruby                     # interpreter for many of my scripts
 shellcheck               # shell check
 shfmt                    # used by Doom Emacs
+sonnet-plugins           # KDE spell checking
 strace                   # debug programs
 systemd-resolved
 telnet                   # test networks
