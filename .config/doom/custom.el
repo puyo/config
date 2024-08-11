@@ -23,6 +23,7 @@
  '(line-number ((t (:inherit default :foreground "#787a84" :slant italic :weight normal))))
  '(markdown-code-face ((t (:family "Source Code Pro"))))
  '(mode-line-inactive ((t (:background "#1a1c23" :foreground "#6e7079" :box nil))))
+ '(org-table ((t (:foreground "#b877db" :family "Source Code Pro"))))
  '(region ((t (:extend t :background "#4e4f5a"))))
  '(ts-fold-replacement-face ((t (:foreground unspecified :box nil :inherit font-lock-comment-face :weight light)))))
 (put 'customize-group 'disabled nil)
