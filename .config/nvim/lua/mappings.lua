@@ -13,6 +13,7 @@ wk.add({
   { "<leader>s", group = "signature" },
   { "<leader>t", group = "test" },
   { "<leader>w", group = "workspace/whichkey" },
+  { "<leader>o", group = "org" },
 })
 
 local function current_buffer_dir()
