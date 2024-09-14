@@ -382,3 +382,16 @@
 (after! javascript
   (add-hook 'json-mode-hook (lambda () (setq-local js-indent-level 2)))
   )
+
+
+;; ----------------------------------------------------------------------
+;; Org
+
+(after! org
+  (setq-default org-startup-indented t
+                org-pretty-entities t
+                org-use-sub-superscripts "{}"
+                org-startup-with-inline-images t
+                org-display-remote-inline-images t
+                org-image-actual-width '(400))
+  )

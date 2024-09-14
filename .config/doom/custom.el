@@ -9,6 +9,7 @@
  '(lsp-ui-sideline-diagnostic-max-lines 20)
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(markdown-list-indent-width 2)
+ '(package-selected-packages '(org-sidebar @))
  '(rubocop-format-on-save t)
  '(safe-local-variable-values '((evil-indent-width . 2) (indent-shift-width . 2)))
  '(smartparens-global-mode nil)
