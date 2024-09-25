@@ -58,25 +58,6 @@ return {
   },
 
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "css-lsp",
-        "elixir-ls",
-        "eslint-lsp",
-        "html-lsp",
-        "lua-language-server",
-        "prettier",
-        "rubocop",
-        "ruby-ls",
-        "stylua",
-        "typescript-language-server",
-        "tailwindcss-language-server",
-      },
-    },
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -327,13 +308,6 @@ return {
     "mfussenegger/nvim-dap",
     optional = false,
     dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = function(_, opts)
-          opts.ensure_installed = opts.ensure_installed or {}
-          table.insert(opts.ensure_installed, "js-debug-adapter")
-        end,
-      },
       {
         "rcarriga/nvim-dap-ui",
         dependencies = { "nvim-neotest/nvim-nio" },
