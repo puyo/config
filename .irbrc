@@ -6,6 +6,6 @@ begin
   require 'pry'
   Pry.start
   exit
-rescue StandardError => e
+rescue LoadError, StandardError => e
   warn e
 end
