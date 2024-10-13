@@ -1,4 +1,4 @@
-require("conform").setup({
+local options = {
   formatters_by_ft = {
     lua = { "stylua" },
     css = { "prettier" },
@@ -7,7 +7,10 @@ require("conform").setup({
   },
 
   format_on_save = {
-    timeout_ms = 3000,
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
     lsp_fallback = true,
   },
-})
+}
+
+return options

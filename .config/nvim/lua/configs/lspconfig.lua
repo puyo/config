@@ -1,6 +1,7 @@
-local on_attach = require("nvchad.configs.lspconfig").on_attach
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
+local nvlsp = require("nvchad.configs.lspconfig")
+local on_attach = nvlsp.on_attach
+local on_init = nvlsp.on_init
+local capabilities = nvlsp.capabilities
 local lspconfig = require("lspconfig")
 
 -- :help lspconfig-all for a list of servers
