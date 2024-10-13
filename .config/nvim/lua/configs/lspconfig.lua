@@ -8,12 +8,13 @@ local lspconfig = require("lspconfig")
 
 local servers = {
   "cssls",
+  "eslint",
   "html",
+  "marksman",
   "rubocop",
   "ruby_lsp",
+  "tailwindcss-langauge-server",
   "ts_ls",
-  "eslint",
-  "tailwindcss",
 }
 
 -- lsps with default config
