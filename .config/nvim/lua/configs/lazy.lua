@@ -2,13 +2,6 @@ return {
   defaults = { lazy = true },
   install = { colorscheme = { "nvchad" } },
 
-  spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    { import = "lazyvim.plugins.extras.test.core" },
-    { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "plugins" },
-  },
-
   ui = {
     icons = {
       ft = "",

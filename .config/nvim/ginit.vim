@@ -1,6 +1,6 @@
 set mouse=a
 set clipboard+=unnamedplus
-set guifont=ComicMono\ Nerd\ Font:h10
+set guifont=ComicMono\ Nerd\ Font:h14
 
 " Turn off tabline in nvim-qt
 call rpcnotify(0, 'Gui', 'Option', 'Tabline', 0)
