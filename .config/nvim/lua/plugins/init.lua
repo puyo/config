@@ -117,6 +117,7 @@ return {
         enable = true,
       },
       ensure_installed = {
+        "cpp",
         "css",
         "eex",
         "elixir",
@@ -129,6 +130,7 @@ return {
         "norg",
         "org",
         "ruby",
+        "rust",
         "typescript",
         "vim",
         "vimdoc",
