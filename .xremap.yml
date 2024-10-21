@@ -9,7 +9,7 @@
 #
 # Run it:
 #
-#   xremap --watch=config -- ~/.xremap.yml
+#   xremap --watch -- ~/.xremap.yml
 #
 # References:
 #
