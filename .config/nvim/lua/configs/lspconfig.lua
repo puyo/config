@@ -13,7 +13,7 @@ local servers = {
   "marksman",
   "rubocop",
   "ruby_lsp",
-  "tailwindcss-langauge-server",
+  "tailwindcss",
   "ts_ls",
 }
 
