@@ -57,7 +57,7 @@ def find(orig_path)
     path = File.join(*parts[1, parts.size])
   end
 
-  File.join(Dir.pwd, orig_path)
+  File.expand_path(orig_path)
 end
 
 args = args.map { |a| find(a) }
