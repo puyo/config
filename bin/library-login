@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'cgi'
+
+addr = `bash -c 'cat /sys/class/net/wlp*/address'`.strip.upcase
+addr_esc = CGI.escapeURIComponent(addr)
+
+system(
+  'curl -s https://login.hitechwms.com.au/login ' \
+  '-X POST -H "Content-Type: application/x-www-form-urlencoded" ' \
+  "-d 'dst=&popup=true&username=#{addr_esc}&password=login' > /dev/null",
+) || begin
+  warn 'Failed to login'
+  exit 1
+end
+
+puts 'Logged in'
