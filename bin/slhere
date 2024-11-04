@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+# crontab -e
+# 3,9,12,18,24,28,34,38,44,48,54,58 9-16 * * * SLACK_CLIENT_ID=xyz ...
+
 require 'open3'
 require 'sqlite3'
 require 'fileutils'
