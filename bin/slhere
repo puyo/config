@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'open3'
 require 'sqlite3'
 require 'fileutils'
 require 'cgi'
@@ -33,8 +34,10 @@ begin
     'updated_ids' => {},
   }.to_json
 
-  ok = system(
+  o, s = Open3.capture2(
     'curl',
+    '--silent',
+    '-o', '-',
     "https://edgeapi.slack.com/cache/#{slack_client_id}/users/info?_x_app_name=client&fp=ff&_x_num_retries=0",
     '--compressed',
     '-X', 'POST',
@@ -53,12 +56,14 @@ begin
     '-H', 'Sec-Fetch-Site: same-site',
     '--data-raw', payload,
   )
-  puts
 
-  unless ok
-    warn 'Failed'
-    exit 1
+  if s.success?
+    result = JSON.parse(o)
+    exit 0 if result['ok']
   end
+
+  warn "Failed: #{o}"
+  exit 1
 ensure
   FileUtils.rm_f(cookies_path)
 end
