@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+
+require 'sqlite3'
+require 'fileutils'
+require 'cgi'
+require 'json'
+
+moz_dir = File.join(Dir.home, '.mozilla/firefox/')
+profiles = File.read(File.join(moz_dir, 'profiles.ini'))
+profile_id = profiles.match(/Path=(.*)$/).captures.first
+src_cookies_path = File.join(moz_dir, profile_id, 'cookies.sqlite')
+cookies_path = File.join(Dir.home, '.cookies.sqlite')
+FileUtils.cp(src_cookies_path, cookies_path)
+
+slack_client_id = ENV.fetch('SLACK_CLIENT_ID')
+
+begin
+  db = SQLite3::Database.new(cookies_path)
+  cookies = []
+  token = nil
+
+  db.execute("select name, value from moz_cookies where host = '.slack.com'") do |row|
+    name = row[0]
+    value = row[1]
+    token = value if name == 'd'
+    cookies << "#{name}=#{value}"
+  end
+
+  payload = {
+    'token' => token,
+    'check_interaction' => true,
+    'include_profile_only_users' => true,
+    'updated_ids' => {},
+  }.to_json
+
+  ok = system(
+    'curl',
+    "https://edgeapi.slack.com/cache/#{slack_client_id}/users/info?_x_app_name=client&fp=ff&_x_num_retries=0",
+    '--compressed',
+    '-X', 'POST',
+    '-H', 'User-Agent: Mozilla/5.0 Gecko/20100101 Firefox',
+    '-H', 'Accept: */*',
+    '-H', 'Accept-Language: en-US,en;q=0.5',
+    '-H', 'Accept-Encoding: gzip, deflate, br, zstd',
+    '-H', 'Content-Type: text/plain;charset=UTF-8',
+    '-H', 'Origin: https://app.slack.com',
+    '-H', 'DNT: 1',
+    '-H', 'Sec-GPC: 1',
+    '-H', 'Connection: keep-alive',
+    '-H', "Cookie: #{cookies.join('; ')}",
+    '-H', 'Sec-Fetch-Dest: empty',
+    '-H', 'Sec-Fetch-Mode: cors',
+    '-H', 'Sec-Fetch-Site: same-site',
+    '--data-raw', payload,
+  )
+  puts
+
+  unless ok
+    warn 'Failed'
+    exit 1
+  end
+ensure
+  FileUtils.rm_f(cookies_path)
+end
