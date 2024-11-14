@@ -10,7 +10,6 @@ local servers = {
   "cssls",
   "eslint",
   "html",
-  "marksman",
   "rubocop",
   "ruby_lsp",
   "tailwindcss",
