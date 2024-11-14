@@ -402,7 +402,8 @@ return {
     end,
   },
 
-  { "tadmccorkle/markdown.nvim", ft = "markdown" },
+  -- { "tadmccorkle/markdown.nvim", ft = "markdown" },
+
   { "godlygeek/tabular", lazy = false },
 
   {
@@ -418,4 +419,21 @@ return {
   },
 
   { "echasnovski/mini.nvim", version = false },
+
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+    },
+    opts = {
+      workspaces = {
+        { name = "personal", path = "~/projects/rikrok" },
+      },
+      daily_notes = { folder = "Daily" },
+      disable_frontmatter = true,
+    },
+  },
 }
