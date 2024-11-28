@@ -1,0 +1,11 @@
+#!/bin/sh
+
+DIR="${HOME}/vendor/chromium-latest-linux/"
+
+if [ -d "${DIR}" ]; then
+  cd $DIR
+  ./update-and-run.sh
+else
+  echo "No Chromium installed in ${DIR}, see https://github.com/scheib/chromium-latest-linux"
+fi
+
