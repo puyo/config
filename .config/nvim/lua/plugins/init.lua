@@ -448,4 +448,14 @@ return {
       -- Your setup opts here
     },
   },
+
+  {
+    "hrsh7th/nvim-cmp",
+    opts = {
+      enabled = function()
+        -- ~= is not equal in lua
+        return (vim.bo.ft ~= "markdown")
+      end,
+    },
+  },
 }
