@@ -18,4 +18,4 @@ user_pref("privacy.resistFingerprinting.letterboxing", false);
 user_pref("privacy.sanitize.sanitizeOnShutdown", false);
 user_pref("security.ssl.require_safe_negotiation", false);
 user_pref("signon.autofillForms", true);
-user_pref("mousewheel.default.delta_multiplier_y", 100);
+user_pref("dom.serviceWorkers.enabled", false);
