@@ -89,6 +89,6 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   export GOPATH=$HOME/go
   PATH=$PATH:${GOPATH//://bin:}/bin
 
-  export ADBPATH=$HOME/lineage/platform-tools
+  export ADBPATH=$HOME/android/platform-tools/
   PATH=$PATH:${ADBPATH}
 fi
