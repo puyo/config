@@ -3,30 +3,27 @@
 -- Please read that file to know all available options :(
 
 ---@type ChadrcConfig
-local M = {}
 
-M.base46 = {
-  theme = "onedark",
-
-  -- hl_override = {
-  -- 	Comment = { italic = true },
-  -- 	["@comment"] = { italic = true },
-  -- },
-}
-
-M.mason.pkgs = {
-  "css-lsp",
-  "elixir-ls",
-  "eslint-lsp",
-  "html-lsp",
-  "js-debug-adapter",
-  "lua-language-server",
-  "prettier",
-  "rubocop",
-  "ruby-ls",
-  "stylua",
-  "tailwindcss-language-server",
-  "typescript-language-server",
+local M = {
+  base46 = {
+    theme = "onedark",
+  },
+  mason = {
+    pkgs = {
+      "css-lsp",
+      "elixir-ls",
+      "eslint-lsp",
+      "html-lsp",
+      "js-debug-adapter",
+      "lua-language-server",
+      "prettier",
+      "rubocop",
+      "ruby-ls",
+      "stylua",
+      "tailwindcss-language-server",
+      "typescript-language-server",
+    },
+  },
 }
 
 return M
