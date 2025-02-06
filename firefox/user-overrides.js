@@ -19,3 +19,4 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", false);
 user_pref("security.ssl.require_safe_negotiation", false);
 user_pref("signon.autofillForms", true);
 user_pref("dom.serviceWorkers.enabled", false);
+user_pref("webgl.disabled", false); 
