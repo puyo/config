@@ -55,7 +55,9 @@
 
 	stashpull = !git -c rebase.autoStash=true pull --rebase
 
-	cleanup = "!git branch --merged origin/master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  # Git, so easy eh
+  cleanup = ! ( main=$(git rev-parse --abbrev-ref origin/HEAD | sed s:origin/::) && git branch --merged "origin/${main}" | grep -v "\\\\b${main}\\\\b" | xargs --no-run-if-empty --max-args=1 git branch -d )
+
 	tags = !.git/hooks/ctags
 
 [diff]
