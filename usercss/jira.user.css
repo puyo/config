@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.4
+@version        1.2.5
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -93,6 +93,9 @@
     }
     [data-testid="canned-comments.common.ui.comment-text-area-placeholder.textarea"] {
       border-radius: 6px;
+    }
+    [data-testid="issue-internal-fields.text-area.text-content-area"] {
+      font-size: 14px;
     }
   }
 
