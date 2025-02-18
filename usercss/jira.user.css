@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.2
+@version        1.2.3
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -78,10 +78,9 @@
   /* issue view */
   [data-component-selector="jira.issue-view.issue-details.full-size-mode-column"] {
     padding-top: 5px;
-    padding-left: 20px;
     /* account for grabber width */
+    padding-left: 20px;
     padding-right: 10px;
-
     /* AI bullshit */
     [data-testid="issue-smart-request-summary-trigger.ui.jira-smart-summary-standard-button"] {
       display: none;
@@ -96,38 +95,38 @@
 
   /* left sidebar */
   [data-ds--page-layout--slot="left-sidebar"] {
+    > div,
+    [data-vc="side-navigation"] {
+      background-color: var(--sidebar-bg-color);
+    }
     [data-navheader="true"] {
       padding: 0px;
-    }
-
-    > div {
-      transition: none;
-    }
-    [data-vc="side-navigation"] {
-      background-color: hsl(0, 0%, 98%);
     }
     nav > div:last-child {
       display: none;
     }
 
     /* left sidebar resize handle */
-    [data-testid="ContextualNavigation-grab-area"] {
-      --ds-line: none;
-      width: 10px !important;
-      background-image: var(--grabber-bg-img);
-      background-size: var(--grabber-bg-size);
+    [data-resize-control="true"] {
+      [data-testid="ContextualNavigation-grab-area"] {
+        --ds-line: none;
+        width: 10px !important;
+        height: 100% !important;
+        background-image: var(--grabber-bg-img);
+        background-size: var(--grabber-bg-size);
+        > span {
+          display: none;
+        }
+        &:enabled:hover {
+          --ds-line: none;
+        }
+      }
       [data-testid="ContextualNavigation-resize-button"] {
         z-index: 1000;
       }
-      > span {
+      [data-testid="ContextualNavigation-shadow"] {
         display: none;
       }
-    }
-    [data-testid="ContextualNavigation-grab-area"]:enabled:hover {
-      --ds-line: none;
-    }
-    [data-testid="ContextualNavigation-shadow"] {
-      display: none;
     }
 
     /* accordian arrows, remove hover */
