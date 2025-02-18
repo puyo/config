@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.1
+@version        1.2.2
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -116,6 +116,9 @@
       width: 10px !important;
       background-image: var(--grabber-bg-img);
       background-size: var(--grabber-bg-size);
+      [data-testid="ContextualNavigation-resize-button"] {
+        z-index: 1000;
+      }
       > span {
         display: none;
       }
