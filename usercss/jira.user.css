@@ -1,68 +1,184 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.1.0
+@version        1.2.0
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
 @author         Gregory McIntyre
 ==/UserStyle== */
 
-@-moz-document regexp("https://.+?.atlassian.net.*") {
-    :root {
-        --margin-side: 16px;
-    }
+@-moz-document regexp("https://.+?.atlassian.net.*")
+{
+  :root {
+    --margin-side: 10px;
+    --grabber-bg-img:
+      repeating-linear-gradient(
+        45deg,
+        #eaeaea 25%,
+        transparent 25%,
+        transparent 75%,
+        #efefef 75%,
+        #efefef
+      ),
+      repeating-linear-gradient(
+        45deg,
+        #eaeaea 25%,
+        #ffffff 25%,
+        #ffffff 75%,
+        #efefef 75%,
+        #efefef
+      );
+    --grabber-bg-size: 4px 4px;
+    --sidebar-bg-color: hsl(0, 0%, 98%);
+  }
 
-    #ak-main-content > div {
-        margin-left: var(--margin-side);
-        margin-right: var(--margin-side);
-    }
+  /* use full width available */
+  #ak-main-content > div {
+    margin-left: var(--margin-side);
+    margin-right: var(--margin-side);
 
+    [data-component-selector="jira-issue-view-issue-page-grid-padding-override"] {
+      margin-left: calc(-1 * var(--margin-side)) !important;
+      margin-right: calc(-1 * var(--margin-side)) !important;
+    }
+  }
+
+  /* header */
+  [data-testid="atlassian-navigation--header"] {
+    #atlassian-navigation-notification-count {
+      display: none;
+    }
+  }
+
+  /* dashboard */
+  .dashboard {
     .issue-table thead {
-        border: none;
+      border: none;
     }
     .issue-table tbody {
-        border: none;
+      border: none;
     }
     .issue-table > tbody > tr > td {
-        padding: 4px 4px !important;
+      padding: 4px 4px !important;
     }
 
     .empty-results.search-results-dashboard-item {
-        padding: 0 !important;
-        margin-bottom: 1rem;
+      padding: 0 !important;
+      margin-bottom: 1rem;
+    }
+    .activity-stream-header {
+      display: none;
+    }
+    .activity-stream-container {
+      padding: 0;
+    }
+  }
+
+  /* issue view */
+  [data-component-selector="jira.issue-view.issue-details.full-size-mode-column"] {
+    padding-top: 5px;
+    padding-left: 20px;
+    /* account for grabber width */
+    padding-right: 10px;
+
+    /* AI bullshit */
+    [data-testid="issue-smart-request-summary-trigger.ui.jira-smart-summary-standard-button"] {
+      display: none;
+    }
+    [data-testid="canned-comments.ui.ai-comments.ai-container"] ~ small {
+      display: none;
+    }
+    [aria-label="Quick comments"] {
+      display: none;
+    }
+  }
+
+  /* left sidebar */
+  [data-ds--page-layout--slot="left-sidebar"] {
+    > div {
+      transition: none;
+    }
+    [data-vc="side-navigation"] {
+      background-color: hsl(0, 0%, 98%);
+    }
+    nav > div:last-child {
+      display: none;
     }
 
-    .dashboard .activity-stream-header {
+    /* left sidebar resize handle */
+    [data-testid="ContextualNavigation-grab-area"] {
+      --ds-line: none;
+      width: 10px !important;
+      background-image: var(--grabber-bg-img);
+      background-size: var(--grabber-bg-size);
+      > span {
         display: none;
+      }
     }
-    .dashboard .activity-stream-container {
-        padding: 0;
+    [data-testid="ContextualNavigation-grab-area"]:enabled:hover {
+      --ds-line: none;
     }
+    [data-testid="ContextualNavigation-shadow"] {
+      display: none;
+    }
+
+    /* accordian arrows, remove hover */
+    [role="button"][aria-expanded="true"] {
+      opacity: 1;
+    }
+  }
+
+  /* right sidebar resize handle */
+  [data-component-selector="jira-issue-view-common-component-resize-handle"] {
+    width: 10px !important;
+    background-color: #ffffff;
+    opacity: 0.8;
+    background-image: var(--grabber-bg-img);
+    background-size: var(--grabber-bg-size);
+    margin-left: 5px;
+    border-right: 5px solid var(--sidebar-bg-color);
+
+    /* remove hover line */
+    > div {
+      opacity: 0 !important;
+    }
+  }
+
+  /* right sidebar */
+  [data-testid="issue.views.issue-details.issue-layout.container-right"] {
+    background-color: var(--sidebar-bg-color);
 
     [data-component-selector="jira-issue-field-heading-field-wrapper"] {
-        margin-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    #jira-issue-header-actions {
+      float: right;
+      padding-top: 5px;
+      background-color: initial;
     }
 
+    /* buttons I don't use */
+    [data-testid="issue.feedback-button.button-unified.button"],
+    [data-testid="share-button.ui.pre-share-view.button"],
+    [data-testid="issue.views.issue-base.foundation.status.actions-wrapper"],
+    [data-testid="issue-view-layout-templates-views.ui.context.visible-hidden.ui.ecosystem-context-group.container.automation-issue-audit-log-panel"],
+    [data-testid="issue-view-foundation.quick-add.quick-add-items-compact.apps-button-dropdown--trigger"],
+    [data-testid="issue-improve-issue-dropdown.improve-issue-dropdown--trigger"] {
+      display: none;
+    }
+
+    [data-testid="issue.views.issue-base.context.status-and-approvals-wrapper.status-and-approval"]
+      > div {
+      padding-top: 5px;
+    }
+
+    [data-testid="issue-view-layout-templates-views.ui.context.visible-hidden.ui.context-group.container.details-group"] {
+      background: var(--ds-surface, #fff);
+    }
     [data-component-selector="jira.issue-view.issue-details.full-size-mode-column"] {
-        padding-top: 5px;
+      padding-left: 0px;
+      padding-right: var(--margin-side);
     }
-
-    [data-component-selector="jira-issue-view-issue-page-grid-padding-override"] {
-        margin-left: calc(-1 * var(--margin-side)) !important;
-        margin-right: calc(-1 * var(--margin-side)) !important;
-    }
-
-    [data-component-selector="jira-issue-view-common-component-resize-handle"] {
-        width: 15px !important;
-        background-color: #ffffff;
-        opacity: 0.8;
-        background-image: repeating-linear-gradient(45deg, #eaeaea 25%, transparent 25%, transparent 75%, #efefef 75%, #efefef), repeating-linear-gradient(45deg, #eaeaea 25%, #ffffff 25%, #ffffff 75%, #efefef 75%, #efefef);
-        background-position: 0 0, 4px 4px;
-        background-size: 4px 4px;
-    }
-
-    [data-component-selector="jira-issue-view-common-component-resize-handle"]:hover > div {
-        opacity: 0 !important;
-    }
+  }
 }
