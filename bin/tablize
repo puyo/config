@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 input = ARGF.read.lines.to_a.map { |l| l.split("\t").map(&:strip) }
-maxes = input.transpose.map(&:max).map(&:size)
+maxes = input.transpose.map { |coldata| coldata.map(&:size) }.map(&:max)
 input.map do |line|
   puts line.each_with_index.map { |c, i| c.ljust(maxes[i]) }.join('   ')
 end
