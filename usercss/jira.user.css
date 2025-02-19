@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.5
+@version        1.2.6
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -72,6 +72,46 @@
     }
     .activity-stream-container {
       padding: 0;
+    }
+    .sprint-health-dashboard-item {
+      background: transparent;
+      display: flex;
+      gap: 1em;
+      justify-content: space-between;
+      .ag-header-region {
+        border: none;
+        .ag-status-header {
+          margin: 0;
+        }
+        h1,
+        .ag-name-sprint {
+          font-size: 1rem;
+          line-height: 1;
+          font-weight: normal;
+        }
+        .strip-bottom {
+          padding: 0;
+        }
+      }
+      .ag-meta-group {
+        display: none;
+      }
+      .ag-inner-area {
+        padding: 0;
+      }
+      > .strip-bottom {
+        display: none;
+      }
+      .ag-progress-group {
+        h3:not(.ag-time-remaining) {
+          display: none;
+        }
+      }
+      .ag-time-remaining {
+        font-size: 1rem;
+        line-height: 1;
+        font-weight: normal;
+      }
     }
   }
 
