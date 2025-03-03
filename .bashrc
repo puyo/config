@@ -50,7 +50,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
           local ruby=$(__which_tool ruby | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')
           export ASDF_RUBY_VERSION=$ruby
           [ "$ruby" == "" ] && return
-          case $(which ruby) in
+          case $(command -v ruby) in
             *asdf/shims/ruby|*.rubies*)
               echo " ruby-${ruby}"
               ;;
