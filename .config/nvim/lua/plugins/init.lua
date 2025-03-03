@@ -429,6 +429,9 @@ return {
       "nvim-lua/plenary.nvim", -- required
     },
     opts = {
+      enabled = function()
+        return vim.uv.fs_stat("~/projects/rikrok")
+      end,
       workspaces = {
         { name = "personal", path = "~/projects/rikrok" },
       },
