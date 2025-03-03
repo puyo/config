@@ -1,10 +1,18 @@
 #!/bin/sh
 
+alias ga='git add'
+alias gap='git add -p'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gd='git diff'
+alias gdc='git dc'
+alias gs='git status'
+
 # colors
-if [ -x /usr/bin/dircolors ]; then
+if $(command -v dircolors > /dev/null); then
   eval "$(dircolors -b)"
-  alias ls='ls -lhN --color=auto'
-  alias dir='ls -lhN --color=auto'
+  alias ls='ls -lhN --color=always'
+  alias dir='ls -lhN --color=always'
 else
   # OSX
   alias ls='ls -ohG'
