@@ -429,7 +429,6 @@ return {
       "nvim-lua/plenary.nvim", -- required
     },
     opts = {
-      daily_notes = { folder = "Daily" },
       disable_frontmatter = true,
       workspaces = {
         {
@@ -441,7 +440,6 @@ return {
             notes_subdir = vim.NIL,
             new_notes_location = "current_dir",
             templates = { folder = vim.NIL },
-            disable_frontmatter = true,
           },
         },
       },
