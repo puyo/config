@@ -74,7 +74,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     ;;
   esac
 
-  for file in /etc/bash_completion /usr/local/etc/bash_completion /usr/local/etc/bash_completion.d/git-prompt.sh ~/.helm_bash_completion ~/.npm_completion; do
+  for file in /etc/bash_completion /usr/local/etc/bash_completion /usr/local/etc/bash_completion.d/git-prompt.sh ~/.helm_bash_completion ~/.npm_completion ~/.asdf/completions/asdf.bash; do
     [ -f "$file" ] && source "$file"
   done
 
@@ -83,8 +83,6 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   for file in "${user_sources[@]}"; do
     [ -f "$HOME/$file" ] && source "$HOME/$file"
   done
-
-  source $HOME/.asdf/completions/asdf.bash
 
   export GOPATH=$HOME/go
   PATH=$PATH:${GOPATH//://bin:}/bin
