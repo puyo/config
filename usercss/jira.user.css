@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.11
+@version        1.2.12
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -224,19 +224,19 @@
 
     [data-testid="issue.views.issue-base.context.status-and-approvals-wrapper.status-and-approval"]
       > div {
-      padding-top: 5px;
+      padding-top: 4px;
     }
 
-    [data-testid="issue-view-layout-templates-views.ui.context.visible-hidden.ui.context-group.container.details-group"] {
-      [aria-label="Details"] {
-        background: initial;
-      }
-      details > div {
-        background: var(--ds-surface, #fff);
-      }
+    details > div {
+      background: var(--ds-surface, #fff);
     }
+
+    summary > div {
+      background: initial;
+    }
+
     [data-component-selector="jira.issue-view.issue-details.full-size-mode-column"] {
-      padding-left: 0px;
+      padding-left: 4px;
       padding-right: var(--margin-side);
     }
   }
