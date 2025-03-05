@@ -30,7 +30,6 @@ fonts-noto-ui-core
 gh                       # github cli
 git                      # version control
 htop                     # task monitor
-ibus                     # dep for work vpn
 imagemagick              # image conversion on command line
 inkscape                 # vector graphics
 inotify-tools            # Elixir Phoenix uses this
