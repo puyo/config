@@ -58,7 +58,9 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
               ;;
           esac
         }
+
         PROMPT_COMMAND="__exit_status=\$?" # save for use anywhere in PS1
+
         PS1="" # reset
         PS1="${PS1}${bgreen}${user_and_host}"    # user/host
         PS1="${PS1}${gray} \$(date +%T)"         # timestamp
