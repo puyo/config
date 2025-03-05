@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.10
+@version        1.2.11
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -128,6 +128,18 @@
 
   /* left sidebar */
   [data-ds--page-layout--slot="left-sidebar"] {
+    /* wtf jira, vars in style attributes */
+    [style^="--_suoboi"] {
+      --_suoboi: 4px !important;
+      border: 1px solid var(--ds-border);
+      background-color: var(--ds-background-neutral) !important;
+    }
+
+    [id="navigation-apps.scope-switcher-trigger-button"]
+      [data-item-elem-after="true"] {
+      display: none;
+    }
+
     > div,
     [data-vc="side-navigation"] {
       background-color: var(--sidebar-bg-color);
@@ -216,7 +228,12 @@
     }
 
     [data-testid="issue-view-layout-templates-views.ui.context.visible-hidden.ui.context-group.container.details-group"] {
-      background: var(--ds-surface, #fff);
+      [aria-label="Details"] {
+        background: initial;
+      }
+      details > div {
+        background: var(--ds-surface, #fff);
+      }
     }
     [data-component-selector="jira.issue-view.issue-details.full-size-mode-column"] {
       padding-left: 0px;
