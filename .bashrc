@@ -47,6 +47,7 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
         }
 
         __ruby_prompt() {
+          [ "$(git ls-files Gemfile 2> /dev/null)" == "Gemfile" ] || return
           local ruby=$(__which_tool ruby | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')
           export ASDF_RUBY_VERSION=$ruby
           [ "$ruby" == "" ] && return
