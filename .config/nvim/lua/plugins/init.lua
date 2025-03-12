@@ -128,7 +128,6 @@ return {
         "markdown",
         "markdown_inline",
         "norg",
-        "org",
         "ruby",
         "rust",
         "typescript",
@@ -163,7 +162,7 @@ return {
   {
     "chrisgrieser/nvim-various-textobjs",
     lazy = false,
-    opts = { useDefaultKeymaps = true },
+    opts = { keymaps = { useDefault = true } },
   },
 
   {
