@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.2.13
+@version        1.3.0
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -10,6 +10,8 @@
 
 @-moz-document regexp("https://.+?.atlassian.net.*")
 {
+  /* I recommend hiding the sidebar by pressing the [ key - it can still be accessed as a menu from the top left */
+
   :root {
     --margin-side: 10px;
     --grabber-bg-img:
@@ -30,7 +32,7 @@
         #efefef
       );
     --grabber-bg-size: 4px 4px;
-    --sidebar-bg-color: hsl(0, 0%, 97%);
+    --sidebar-bg-color: hsl(0, 0%, 95%);
     --ds-background-neutral: white !important; /* was ugly grey */
   }
 
@@ -43,6 +45,11 @@
       margin-left: calc(-1 * var(--margin-side)) !important;
       margin-right: calc(-1 * var(--margin-side)) !important;
     }
+  }
+
+  /* no no no no FFS */
+  [aria-label="AI"] {
+    display: none;
   }
 
   /* header */
@@ -126,63 +133,6 @@
     }
   }
 
-  /* left sidebar */
-  [data-ds--page-layout--slot="left-sidebar"] {
-    /* wtf jira, vars in style attributes */
-    [style^="--_suoboi"] {
-      --_suoboi: 4px !important;
-      border: 1px solid var(--ds-border);
-      background-color: var(--ds-background-neutral) !important;
-    }
-
-    [id="navigation-apps.scope-switcher-trigger-button"]
-      [data-item-elem-after="true"] {
-      display: none;
-    }
-
-    > div,
-    [data-vc="side-navigation"] {
-      background-color: var(--sidebar-bg-color);
-    }
-    [data-navheader="true"] {
-      padding: 0px;
-    }
-    nav > div:last-child {
-      display: none;
-    }
-    nav > div:nth-child(2) > div > div > div::before {
-      background-color: var(--sidebar-bg-color);
-    }
-
-    /* left sidebar resize handle */
-    [data-resize-control="true"] {
-      [data-testid="ContextualNavigation-grab-area"] {
-        --ds-line: none;
-        width: 10px !important;
-        height: 100% !important;
-        background-image: var(--grabber-bg-img);
-        background-size: var(--grabber-bg-size);
-        > span {
-          display: none;
-        }
-        &:enabled:hover {
-          --ds-line: none;
-        }
-      }
-      [data-testid="ContextualNavigation-resize-button"] {
-        z-index: 1000;
-      }
-      [data-testid="ContextualNavigation-shadow"] {
-        display: none;
-      }
-    }
-
-    /* accordian arrows, remove hover */
-    [role="button"][aria-expanded="true"] {
-      opacity: 1;
-    }
-  }
-
   /* right sidebar resize handle */
   [data-component-selector="jira-issue-view-common-component-resize-handle"] {
     width: 10px !important;
@@ -242,6 +192,10 @@
 
     [data-component-selector="jira-issue-field-heading-field-heading-title"] {
       white-space: nowrap;
+    }
+
+    [data-testid^="issue-view-layout-templates-views.ui.context.visible-hidden.ui.ecosystem-context-group.container.context-group-ecosystemContext"] {
+      display: none;
     }
   }
 }
