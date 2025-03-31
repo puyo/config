@@ -20,7 +20,7 @@ au BufNewFile,BufRead {Gemfile,Guardfile} setlocal filetype=ruby
 au BufNewFile,BufRead *.txt setlocal filetype=text
 au BufNewFile,BufRead *.ejs setlocal filetype=html
 au BufNewFile,BufRead *.hamlc setlocal filetype=haml
-au BufNewFile,BufRead *.{md,md.erb,markdown.liquid} setlocal filetype=markdown conceallevel=2 | hi mkdCode guibg=NONE
+au BufNewFile,BufRead *.{md,md.erb,markdown.liquid} setlocal filetype=markdown conceallevel=0 | hi mkdCode guibg=NONE
 au BufNewFile,BufRead *.as setlocal filetype=javascript
 au BufNewFile,BufRead Dockerfile.* setlocal filetype=dockerfile
 augroup END

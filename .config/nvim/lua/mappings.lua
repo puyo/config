@@ -81,22 +81,6 @@ map({ "n", "v" }, "<leader><tab>", edit_last_file_expr, { desc = "Go to last buf
 vim.keymap.set("n", "<tab>", "")
 vim.keymap.del("n", "<tab>")
 
--- open current code in github, gitlab, etc., browser
-
-local git_open_in_browser = function(mode)
-  local gitlinker = require("gitlinker")
-  local gitlinker_actions = require("gitlinker.actions")
-  gitlinker.get_buf_range_url(mode, { action_callback = gitlinker_actions.open_in_browser })
-end
-
-map("n", "gB", function()
-  git_open_in_browser("n")
-end, { silent = false })
-
-map("v", "gB", function()
-  git_open_in_browser("v")
-end, { silent = false })
-
 -- close fuzzy file finder instantly on Esc
 require("telescope").setup({
   defaults = {
