@@ -15,7 +15,6 @@ editorconfig             # used by Doom Emacs
 emacs                    # editor
 fd-find                  # used by Doom Emacs
 ffmpeg                   # work with videos
-firefox                  # browser
 firmware-sof-signed      # intel audio drivers
 fonts-droid-fallback
 fonts-lato
