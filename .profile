@@ -31,7 +31,7 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   # --------------------------------------------------
   # Other
 
-  export BROWSER="/usr/bin/firefox"
+  export BROWSER="/usr/bin/librewolf"
   export DICTIONARY="british"
   export PAGER="/usr/bin/less -R"
   export HISTCONTROL="ignoreboth"
