@@ -3,7 +3,7 @@ require("conform").setup({
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
-    -- ruby = { "rubocop" },
+    ruby = { "rubocop" },
   },
 
   format_on_save = {

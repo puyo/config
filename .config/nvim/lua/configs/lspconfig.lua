@@ -10,8 +10,8 @@ local servers = {
   "cssls",
   "eslint",
   "html",
-  -- "rubocop",
-  "ruby_lsp", -- currently causing some problems
+  "rubocop",
+  "ruby_lsp",
   "tailwindcss",
   "ts_ls",
 }
