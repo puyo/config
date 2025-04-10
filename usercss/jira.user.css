@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.3.1
+@version        1.3.2
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -10,30 +10,19 @@
 
 @-moz-document regexp("https://.+?.atlassian.net.*")
 {
-  /* I recommend hiding the sidebar by pressing the [ key - it can still be accessed as a menu from the top left */
-
   :root {
     --margin-side: 10px;
-    --grabber-bg-img:
-      repeating-linear-gradient(
-        45deg,
-        #eaeaea 25%,
-        transparent 25%,
-        transparent 75%,
-        #efefef 75%,
-        #efefef
-      ),
-      repeating-linear-gradient(
-        45deg,
-        #eaeaea 25%,
-        #ffffff 25%,
-        #ffffff 75%,
-        #efefef 75%,
-        #efefef
-      );
+    --grabber-bg-img: repeating-linear-gradient(
+      45deg,
+      var(--ds-background-neutral) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--ds-background-neutral) 75%,
+      var(--ds-background-neutral)
+    );
     --grabber-bg-size: 4px 4px;
-    --sidebar-bg-color: hsl(0, 0%, 95%);
-    --ds-background-neutral: white !important; /* was ugly grey */
+    --sidebar-bg-color: var(--ds-background-neutral);
+    --ds--resize-button--opacity: 1;
   }
 
   /* use full width available */
@@ -136,10 +125,23 @@
     }
   }
 
+  /* left sidebar, recommend leaving it hidden 99% of the time */
+  #ak-side-navigation {
+    /* reduce hover distractions */
+    [aria-label="Sidebar navigation"] {
+      &:hover {
+        background: var(--ds-surface-overlay);
+        color: var(--ds-text-subtle);
+      }
+    }
+    [data-testid="navigation-apps-sidebar-common.ui.project-footer.test-footer"] {
+      display: none;
+    }
+  }
+
   /* right sidebar resize handle */
   [data-component-selector="jira-issue-view-common-component-resize-handle"] {
     width: 10px !important;
-    background-color: #ffffff;
     opacity: 0.8;
     background-image: var(--grabber-bg-img);
     background-size: var(--grabber-bg-size);
