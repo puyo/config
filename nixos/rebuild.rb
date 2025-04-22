@@ -13,7 +13,11 @@ if Process.uid != 0
 end
 
 begin
+  puts "\e[33mFormatting...\e[0m"
+  system("alejandra .") or next
+  puts "\e[33mCopying config files into place...\e[0m"
   system("rsync -rvap ./ /etc/nixos/ --exclude '*.rb'") or next
+  puts "\e[33mRebuilding #{host}...\e[0m"
   system("nixos-rebuild switch --flake /etc/nixos/##{host}") or next
   puts "\e[32mSuccess\e[0m"
   puts
