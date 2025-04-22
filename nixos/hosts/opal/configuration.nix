@@ -17,6 +17,7 @@
     ../../lib/vim.nix
     ../../lib/asdf.nix
     ../../lib/intel-graphics.nix
+    ../../lib/discord.nix
   ];
 
   networking.hostName = "opal";
