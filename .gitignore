@@ -16,6 +16,7 @@
 /bin/update-report
 /bin/yq
 /bin/zola
+/bin/xremap
 TAGS
 ansible/*.retry
 away.log
