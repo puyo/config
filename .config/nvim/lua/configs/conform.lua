@@ -4,6 +4,7 @@ require("conform").setup({
     css = { "prettier" },
     html = { "prettier" },
     ruby = { "rubocop" },
+    nix = { "alejandra" },
   },
 
   format_on_save = {
