@@ -13,20 +13,19 @@
     nixpkgs-unstable,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
     overlay-unstable = final: prev: {
       unstable = nixpkgs-unstable.legacyPackages.${prev.system};
     };
   in {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      inherit system;
+    nixosConfigurations.opal = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
       modules = [
         ({
           config,
           pkgs,
           ...
         }: {nixpkgs.overlays = [overlay-unstable];})
-        ./configuration.nix
+        ./hosts/opal/configuration.nix
       ];
     };
   };
