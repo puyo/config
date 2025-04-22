@@ -16,6 +16,7 @@
     ../../lib/git.nix
     ../../lib/vim.nix
     ../../lib/asdf.nix
+    ../../lib/intel-graphics.nix
   ];
 
   networking.hostName = "opal";
