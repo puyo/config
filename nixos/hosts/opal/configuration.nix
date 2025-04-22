@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../../hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../lib/common.nix
     ../../lib/efi.nix
     ../../lib/sydney.nix
@@ -14,39 +14,14 @@
     ../../lib/greg.nix
     ../../lib/fam.nix
     ../../lib/git.nix
+    ../../lib/vim.nix
   ];
 
   networking.hostName = "opal";
 
-  # Enable automatic login for the user.
-  #services.displayManager.autoLogin.enable = true;
-  #services.displayManager.autoLogin.user = "greg";
-
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
-    (
-      vim_configurable.customize {
-        # Specifies the vim binary name.
-        name = "vim";
-
-        # Here you can specify what usually goes into `~/.vimrc`
-        vimrcConfig.customRC = ''
-          syntax enable
-          set sw=2
-          set sts=2
-          set clipboard+=unnamed " share windows clipboar
-          set visualbell
-        '';
-
-        # Install plugins for example for syntax highlighting of nix files
-        vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
-          start = [vim-nix];
-          opt = [];
-        };
-      }
-    )
-
     alejandra
     asdf-vm
     autoconf # ruby-build
