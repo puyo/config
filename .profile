@@ -31,9 +31,9 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   # --------------------------------------------------
   # Other
 
-  export BROWSER="/usr/bin/librewolf"
+  export BROWSER="librewolf"
   export DICTIONARY="british"
-  export PAGER="/usr/bin/less -R"
+  export PAGER="less -R"
   export HISTCONTROL="ignoreboth"
   export HISTSIZE="100000"
   export ANSIBLE_NOCOWS=1
@@ -49,5 +49,4 @@ export PATH="$PATH:${GOPATH//://bin:}/bin"
 # qt
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-[ -f "$HOME/.blake" ] && . "$HOME/.blake"
 [ -f "$HOME/nm/profile.bash" ] && . "$HOME/nm/profile.bash"
