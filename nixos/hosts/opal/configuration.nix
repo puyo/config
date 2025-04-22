@@ -15,6 +15,7 @@
     ../../lib/fam.nix
     ../../lib/git.nix
     ../../lib/vim.nix
+    ../../lib/asdf.nix
   ];
 
   networking.hostName = "opal";
@@ -23,18 +24,11 @@
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     alejandra
-    asdf-vm
-    autoconf # ruby-build
-    automake # ruby-build
     diff-so-fancy
-    gcc # ruby-build
-    gnumake # ruby-build
-    gnupatch # ruby-build
     htop
     jq
     kdotool # bin/n
     librewolf
-    libyaml # ruby-build
     neofetch
     neovim
     neovim-qt
@@ -46,7 +40,6 @@
     wget
     wireguard-tools
     wl-clipboard # neovim
-    zlib # ruby-build
   ];
 
   # This value determines the NixOS release from which the default
