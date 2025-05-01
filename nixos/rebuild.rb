@@ -2,9 +2,11 @@
 
 require 'shellwords'
 
+hosts = Dir.glob(File.join(__dir__, 'hosts/*')).map{|dir| File.basename(dir) }
+
 host = ARGV[0]
-if host.nil?
-  warn 'Must pass host name as first argument'
+if host.nil? || !hosts.include?(host)
+  warn "Must pass host name as first argument (#{hosts.join(', ')})"
   exit 1
 end
 
