@@ -21,6 +21,11 @@
 
   networking.hostName = "merlin";
 
+  services.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "fam";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
