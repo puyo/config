@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.3.3
+@version        1.3.4
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -37,7 +37,8 @@
   }
 
   /* no no no no FFS */
-  [aria-label="AI"] {
+  [aria-label="AI"],
+  [data-testid$=".ai-container"] {
     display: none;
   }
 
