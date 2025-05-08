@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Oh Jira
 @namespace      github.com/openstyles/stylus
-@version        1.3.2
+@version        1.3.3
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/jira.user.css
 @description    Jira changes - more compact, less busy, utilitarian
@@ -127,13 +127,29 @@
 
   /* left sidebar, recommend leaving it hidden 99% of the time */
   #ak-side-navigation {
-    /* reduce hover distractions */
+    transition: none;
+
+    > div {
+      /* stop the INFURIATING mouse over expand sidebar behaviour which leads to so many misclicks */
+      pointer-events: none;
+      transition: none;
+    }
+
+    [aria-label="Sidebar navigation"],
+    nav {
+      /* enable mouse events for the things that I actually want to click on */
+      pointer-events: all;
+    }
+
+    /* reduce hover distractions on little sidebar expand/collapse button */
     [aria-label="Sidebar navigation"] {
       &:hover {
         background: var(--ds-surface-overlay);
         color: var(--ds-text-subtle);
       }
     }
+
+    /* remove useless distracting disclaimer text */
     [data-testid="navigation-apps-sidebar-common.ui.project-footer.test-footer"] {
       display: none;
     }
