@@ -17,6 +17,7 @@
     ../../lib/git.nix
     ../../lib/vim.nix
     ../../lib/discord.nix
+    ../../lib/spotify.nix
   ];
 
   networking.hostName = "merlin";
