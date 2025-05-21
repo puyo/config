@@ -3,8 +3,15 @@
 require 'shellwords'
 
 hosts = Dir.glob(File.join(__dir__, 'hosts/*')).map{|dir| File.basename(dir) }
+current_host = `hostname`.strip
 
-host = ARGV[0]
+host =
+ if hosts.include?(current_host)
+   current_host
+ else
+   ARGV[0]
+ end
+
 if host.nil? || !hosts.include?(host)
   warn "Must pass host name as first argument (#{hosts.join(', ')})"
   exit 1
@@ -20,7 +27,7 @@ begin
   puts "\e[33mCopying config files into place...\e[0m"
   system("rsync -rvap ./ /etc/nixos/ --exclude '*.rb'") or next
   puts "\e[33mRebuilding #{host}...\e[0m"
-  system("nixos-rebuild switch --flake /etc/nixos/##{host}") or next
+  system("nixos-rebuild switch --upgrade --flake /etc/nixos/##{host}") or next
   puts "\e[32mSuccess\e[0m"
   puts
   puts "Press Enter to rebuild host #{host}"
