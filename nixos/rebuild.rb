@@ -26,6 +26,8 @@ begin
   system("alejandra .")
   puts "\e[33mCopying config files into place...\e[0m"
   system("rsync -rvap ./ /etc/nixos/ --exclude '*.rb'") or next
+  puts "\e[33mUpdating packages...\e[0m"
+  system("nix-channel --update") or next
   puts "\e[33mRebuilding #{host}...\e[0m"
   system("nixos-rebuild switch --upgrade --flake /etc/nixos/##{host}") or next
   puts "\e[32mSuccess\e[0m"
