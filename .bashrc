@@ -24,49 +24,26 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
         local reset="\[\033[00m\]"
         local user_and_host='\u@\h'
 
-        __which_tool() {
-          p=$PWD
-          tool=$1
-
-          while [ ! -z "${p}" ]; do
-            path="${p}/.tool-versions"
-            if [ -f "${path}" ]; then
-              result=`grep $tool "${path}"`
-              if [ ! -z "${result}" ]; then
-                echo $result
-                return 0
-              fi
-            fi
-            path="${p}/.ruby-version"
-            if [ -f "${path}" ]; then
-              cat "${path}"
-              return 0
-            fi
-            p=${p%/*}
-          done
+        __mise_prompt() {
+          local tool=$1
+          local only_if_file=$2
+          if [ ! -z "${only_if_file}" ]; then
+            [ "$(git ls-files ${only_if_file} 2> /dev/null)" == "${only_if_file}" ] || return
+          fi
+          local v=$(mise tool "${tool}" --active)
+          if [ "${v}" != "[none]" ]; then
+            echo " ${tool}-${v}"
+          fi
         }
-
-        __ruby_prompt() {
-          [ "$(git ls-files Gemfile 2> /dev/null)" == "Gemfile" ] || return
-          local ruby=$(__which_tool ruby | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')
-          export ASDF_RUBY_VERSION=$ruby
-          [ "$ruby" == "" ] && return
-          case $(command -v ruby) in
-            *asdf/shims/ruby|*.rubies*)
-              echo " ruby-${ruby}"
-              ;;
-            *)
-              ;;
-          esac
-        }
-
+        
         PROMPT_COMMAND="__exit_status=\$?" # save for use anywhere in PS1
 
         PS1="" # reset
         PS1="${PS1}${bgreen}${user_and_host}"    # user/host
         PS1="${PS1}${gray} \$(date +%T)"         # timestamp
         PS1="${PS1} \`[ \$__exit_status == 0 ] && echo '${green}■' || echo '${red}■'\`" # exit status
-        PS1="${PS1}${cyan}\$(__ruby_prompt)"     # ruby version
+        PS1="${PS1}${cyan}\$(__mise_prompt ruby Gemfile)"
+        PS1="${PS1}${cyan}\$(__mise_prompt node package.json)"
         PS1="${PS1}${yellow}\$(__git_ps1 ' %s')" # git info
         PS1="${PS1}${blue} \w"                   # directory
         PS1="${PS1}${reset}\n \$ "               # prompt
@@ -84,12 +61,13 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     ~/.helm_bash_completion
     ~/.npm_completion
     ~/.kube_completion
-    ~/.asdf/completions/asdf.bash
   )
 
   for file in "${completion_files[@]}"; do
     [ -f "$file" ] && source "$file"
   done
+
+  source <("$HOME/.local/bin/mise" completion bash --include-bash-completion-lib)
 
   user_sources=(.bash_aliases .bash_sticky)
 

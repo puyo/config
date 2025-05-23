@@ -21,12 +21,15 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   export PATH
 
   # --------------------------------------------------
-  # asdf (Elixir, Ruby, Erlang, Node)
-
-  if [ -f "$HOME/.asdf/asdf.sh" ]; then
-    . "$HOME/.asdf/asdf.sh"
-    [ -n "$BASH_VERSION" ] && . "$HOME/.asdf/completions/asdf.bash"
-  fi
+  # mise (Elixir, Ruby, Erlang, Node)
+  #
+  # Setup:
+  #
+  #   curl https://mise.run | sh
+  #   bash -l # or restart
+  #   mise use -g usage
+  
+  eval "$($HOME/.local/bin/mise activate bash)"
 
   # --------------------------------------------------
   # Other
