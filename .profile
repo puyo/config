@@ -21,17 +21,6 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   export PATH
 
   # --------------------------------------------------
-  # mise (Elixir, Ruby, Erlang, Node)
-  #
-  # Setup:
-  #
-  #   curl https://mise.run | sh
-  #   bash -l # or restart
-  #   mise use -g usage
-  
-  eval "$($HOME/.local/bin/mise activate bash)"
-
-  # --------------------------------------------------
   # Other
 
   export BROWSER="librewolf"
