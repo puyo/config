@@ -9,6 +9,17 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   shopt -s globstar 2> /dev/null # allow ** file patterns on Bash 4+
   stty -ixon                     # disable C-s and C-q pause and resume buttons
 
+  # --------------------------------------------------
+  # mise (Elixir, Ruby, Erlang, Node)
+  #
+  # Setup:
+  #
+  #   curl https://mise.run | sh
+  #   bash -l # or restart
+  #   mise use -g usage
+
+  eval "$($HOME/.local/bin/mise activate bash)"
+
   case "$TERM" in
     xterm*|rxvt*|screen*)
       _set_prompt() {
