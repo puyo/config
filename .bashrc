@@ -86,7 +86,6 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     [ -f "$file" ] && source "$file"
   done
 
-  source <("$HOME/.local/bin/mise" completion bash --include-bash-completion-lib)
 
   user_sources=(.bash_aliases .bash_sticky)
 
