@@ -18,7 +18,13 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
   #   bash -l # or restart
   #   mise use -g usage
 
-  eval "$($HOME/.local/bin/mise activate bash)"
+  if [ -x "$HOME/.local/bin/mise" ]; then
+    PATH="${PATH}:${HOME}/.local/bin"
+  fi
+
+  if command -v mise > /dev/null; then
+    eval "$(mise activate bash)"
+  fi
 
   case "$TERM" in
     xterm*|rxvt*|screen*)
@@ -72,6 +78,8 @@ if [[ ! -z "$PS1" ]] ; then # if running interactively
     ~/.helm_bash_completion
     ~/.npm_completion
     ~/.kube_completion
+    ~/.mix_completion.bash
+    ~/.mise_completion.bash
   )
 
   for file in "${completion_files[@]}"; do
