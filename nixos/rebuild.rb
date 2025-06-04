@@ -23,7 +23,7 @@ end
 
 begin
   puts "\e[33mFormatting...\e[0m"
-  system("alejandra .")
+  system("alejandra --quiet .")
   puts "\e[33mCopying config files into place...\e[0m"
   system("rsync -rvap ./ /etc/nixos/ --exclude '*.rb'") or next
   puts "\e[33mUpdating packages...\e[0m"
