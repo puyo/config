@@ -205,9 +205,4 @@ return {
 
   -- Disable indent indicators
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
-
-  -- Disable snippets
-  { "friendly-snippets", enabled = false },
-  { "LuaSnip", enabled = false },
-  { "cmp_luasnip", enabled = false },
 }
