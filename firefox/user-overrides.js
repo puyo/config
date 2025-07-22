@@ -19,4 +19,9 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", false);
 user_pref("security.ssl.require_safe_negotiation", false);
 user_pref("signon.autofillForms", true);
 user_pref("dom.serviceWorkers.enabled", false);
-user_pref("webgl.disabled", false); 
+user_pref("webgl.disabled", false);
+
+// screen sharing
+user_pref("media.gmp-provider.enabled", true);
+user_pref("media.gmp-gmpopenh264.enabled", true);
+user_pref("media.webrtc.hw.h264.enabled", true);
