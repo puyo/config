@@ -15,3 +15,7 @@ Style/FrozenStringLiteralComment: { Enabled: false }
 Style/TrailingCommaInArguments: { EnforcedStyleForMultiline: consistent_comma }
 Style/TrailingCommaInArrayLiteral: { EnforcedStyleForMultiline: consistent_comma }
 Style/TrailingCommaInHashLiteral: { EnforcedStyleForMultiline: consistent_comma }
+
+# don't change these when I'm still editing
+Lint/UselessAssignment: { AutoCorrect: false }
+Lint/UnusedMethodArgument: { AutoCorrect: false }
