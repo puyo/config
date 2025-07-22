@@ -19,6 +19,9 @@ Parent=FALLBACK/
 TextEditorCmd=5
 WordCharacters=:@-./_~?&=%+#[]
 
+[Keyboard]
+KeyBindings=default
+
 [Scrolling]
 HistoryMode=2
 
