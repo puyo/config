@@ -205,4 +205,7 @@ return {
 
   -- Disable indent indicators
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
+
+  -- Stop inserting closing brackets and quotes in the wrong places
+  { "nvim-autopairs", enabled = false },
 }
