@@ -13,10 +13,11 @@
 /bin/obsidian
 /bin/privoxy
 /bin/rubymine
+/bin/tenacity
 /bin/update-report
+/bin/xremap
 /bin/yq
 /bin/zola
-/bin/xremap
 TAGS
 ansible/*.retry
 away.log
