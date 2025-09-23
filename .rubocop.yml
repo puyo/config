@@ -1,4 +1,6 @@
-AllCops: { NewCops: enable }
+AllCops: { NewCops: enable, SuggestExtensions: true }
+
+plugins: []
 
 Lint/AssignmentInCondition: { Enabled: false }
 Lint/RedundantCopDisableDirective: { Enabled: false }
@@ -19,3 +21,8 @@ Style/TrailingCommaInHashLiteral: { EnforcedStyleForMultiline: consistent_comma 
 # don't change these when I'm still editing
 Lint/UselessAssignment: { AutoCorrect: false }
 Lint/UnusedMethodArgument: { AutoCorrect: false }
+
+Layout/FirstArrayElementLineBreak: { Enabled: true }
+Layout/FirstHashElementLineBreak: { Enabled: true }
+Layout/FirstMethodParameterLineBreak: { Enabled: true }
+Layout/ArgumentAlignment: { Enabled: true, EnforcedStyle: with_fixed_indentation }
