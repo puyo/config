@@ -1,24 +1,3 @@
-#!/usr/bin/env ruby
+#!/bin/sh
 
-require 'webrick'
-
-class CorsFileHandler < WEBrick::HTTPServlet::FileHandler
-  def do_GET(req, res)
-    res['Access-Control-Allow-Origin'] = '*'
-    res['Access-Control-Request-Method'] = '*'
-    super(req, res)
-  end
-end
-
-port = ARGV.first || 3333
-server = WEBrick::HTTPServer.new(Address: '0.0.0.0', Port: port)
-server.mount '/', CorsFileHandler, './', FancyIndexing: true
-trap('INT') { server.stop }
-
-puts '-'*50
-interfaces = `ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d ' ' -f 10`.lines
-interfaces.each do |iface|
-  puts "http://#{iface.strip}:#{port}"
-end
-puts '-'*50
-server.start
+exec npx serve
