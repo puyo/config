@@ -1,13 +1,10 @@
-local nvlsp = require("nvchad.configs.lspconfig")
-local on_attach = nvlsp.on_attach
-local on_init = nvlsp.on_init
-local capabilities = nvlsp.capabilities
-local lspconfig = require("lspconfig")
+require("nvchad.configs.lspconfig").defaults()
 
 -- :help lspconfig-all for a list of servers
 
 local servers = {
   "cssls",
+  "elixirls",
   "eslint",
   "html",
   "rubocop",
@@ -16,23 +13,13 @@ local servers = {
   "ts_ls",
 }
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup({
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  })
-end
+vim.lsp.enable(servers)
 
-lspconfig.elixirls.setup({
+vim.lsp.config("elixirls", {
   cmd = { vim.env.HOME .. "/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
 })
 
-lspconfig.tailwindcss.setup({
+vim.lsp.config("tailwindcss", {
   filetypes = { "html", "elixir", "eelixir", "heex" },
   init_options = {
     userLanguages = {
