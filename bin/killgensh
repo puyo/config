@@ -1,0 +1,15 @@
+#!/bin/bash
+
+gensh() {
+  ps ax | grep -i -E 'gensh|wine|proton|steam.exe|HYPHelper|\.exe'
+}
+
+echo "BEFORE"
+gensh
+
+ps ax | gensh | cut -d ' ' -f 2 | xargs kill
+# sleep 5
+# ps ax | gensh | cut -d ' ' -f 2 | xargs kill -9
+
+echo "AFTER"
+gensh
