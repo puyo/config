@@ -7,13 +7,16 @@
   imports = [
     ./hardware-configuration.nix
     ../../lib/common.nix
-    ../../lib/efi.nix
     ../../lib/sydney.nix
     ../../lib/plasma.nix
     ../../lib/fam.nix
     ../../lib/git.nix
     ../../lib/intel-graphics.nix
   ];
+
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
 
   networking.hostName = "virginia";
 
