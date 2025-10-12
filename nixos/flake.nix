@@ -39,5 +39,16 @@
         ./hosts/merlin/configuration.nix
       ];
     };
+    nixosConfigurations.virginia = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ({
+          config,
+          pkgs,
+          ...
+        }: {nixpkgs.overlays = [overlay-unstable];})
+        ./hosts/virginia/configuration.nix
+      ];
+    };
   };
 }
