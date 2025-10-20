@@ -1,15 +1,23 @@
 #!/bin/bash
 
 gensh() {
-  ps ax | grep -i -E 'gensh|wine|proton|steam.exe|HYPHelper|\.exe'
+  ps ax -o pid,comm | grep -i -E 'gensh|wine|proton|HYPHelper|\.exe' | grep -v -E 'killgensh|grep'
 }
 
+before=$(gensh)
+
+if test "$before" = ""; then
+  echo "No gensh found"
+  exit 0
+fi
+
 echo "BEFORE"
-gensh
+echo "${before}"
 
-ps ax | gensh | cut -d ' ' -f 2 | xargs kill
-# sleep 5
-# ps ax | gensh | cut -d ' ' -f 2 | xargs kill -9
+gensh | cut -d ' ' -f 1 | xargs kill
+sleep 2
+killall -9 winedevice.exe
 
+echo
 echo "AFTER"
 gensh
