@@ -14,9 +14,9 @@ fi
 echo "BEFORE"
 echo "${before}"
 
-gensh | cut -d ' ' -f 1 | xargs kill
+gensh | ruby -n -e 'puts $_.split.first' | xargs --verbose kill
 sleep 2
-killall -9 winedevice.exe
+killall --verbose -9 winedevice.exe
 
 echo
 echo "AFTER"
