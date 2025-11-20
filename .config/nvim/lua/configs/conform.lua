@@ -3,13 +3,13 @@ require("conform").setup({
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
-    ruby = { "rubocop" },
+    -- ruby = { "rubocop" },
     nix = { "alejandra" },
   },
 
   format_on_save = {
     -- These options will be passed to conform.format()
-    timeout_ms = 1000,
+    timeout_ms = 2000,
     lsp_format = "fallback",
   },
 })
