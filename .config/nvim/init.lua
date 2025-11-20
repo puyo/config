@@ -37,3 +37,5 @@ require("configs.autoread")
 vim.schedule(function()
   require("mappings")
 end)
+
+vim.g.editorconfig = true
