@@ -1,6 +1,6 @@
 awscli 2.28.10
-elixir 1.18.4-otp-28
-erlang 28.0
+elixir 1.19.3-otp-28
+erlang 28.1
 golang 1.25.0
 kubectl 1.33.4
 nodejs 24.11.0
