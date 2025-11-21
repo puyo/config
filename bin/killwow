@@ -1,0 +1,24 @@
+#!/bin/bash
+
+procs() {
+  ps ax -o pid,comm | grep -i -E '\.exe' | grep -v -E 'killwow|grep'
+}
+
+before=$(procs)
+
+if test "$before" = ""; then
+  echo "Not found"
+  exit 0
+fi
+
+echo "BEFORE"
+echo "${before}"
+
+procs | ruby -n -e 'puts $_.split.first' | xargs --verbose kill
+sleep 2
+killall --verbose -9 winedevice.exe
+
+echo
+echo "AFTER"
+procs
+
