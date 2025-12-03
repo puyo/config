@@ -26,6 +26,10 @@ return {
         enable = true,
       },
 
+      indent = {
+        enable = true,
+      },
+
       ensure_installed = {
         "cpp",
         "css",
