@@ -1,36 +1,15 @@
 /* ==UserStyle==
 @name           Outlookbetter
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
+@version        1.0.2
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/outlook.user.css
 @description    Outlook changes, more compact, less annoying distracting junk
 @author         Gregory McIntyre
 ==/UserStyle== */
 
-@-moz-document domain("outlook.office.com") {
-  [data-app-section="NavigationPane"] [aria-level="1"] {
-    padding-left: 0 !important;
-  }
-
-  [data-app-section="NavigationPane"] [aria-level="2"] {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  [data-app-section="NavigationPane"] [aria-level="2"] [data-icon-name] {
-    padding-left: 8px !important;
-  }
-
-  [data-app-section="NavigationPane"]
-    [aria-level="1"]
-    [data-icon-name="FolderRegular"] {
-    padding-left: 0px !important;
-  }
-
-  [data-app-section="NavigationPane"]
-    [aria-level="1"]
-    [data-icon-name="ChevronDownRegular"] {
-    padding-left: 0px !important;
+@-moz-document domain("outlook.office365.com") {
+  #CopilotCommandCenterButton {
+    display: none;
   }
 }
