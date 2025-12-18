@@ -17,6 +17,19 @@ return {
     end,
   },
 
+  {
+    "telescope.nvim",
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          layout_config = { width = 0.99, height = 0.5, anchor = "S" },
+          layout_strategy = "vertical",
+          sorting_strategy = "ascending",
+        },
+      })
+    end,
+  },
+
   -- Syntax highlighting and indent
   {
     "nvim-treesitter/nvim-treesitter",
