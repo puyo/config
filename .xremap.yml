@@ -17,6 +17,31 @@
 # - https://github.com/emberian/evdev/blob/1d020f11b283b0648427a2844b6b980f1a268221/src/scancodes.rs#L26-L572
 
 keymap:
+  - application: { only: [vivaldi-stable, vivaldi-bin] }
+    exact_match: true
+    remap:
+      Alt_L-0: Ctrl-0 # zoom reset
+      Alt_L-A: Ctrl-A # select all
+      Alt_L-Backspace: Ctrl-Backspace # delete word back
+      Alt_L-C: Ctrl-C # copy
+      Alt_L-Equal: Ctrl-Equal # zoom in
+      Alt_L-F: Ctrl-F # find
+      Alt_L-L: Ctrl-L # select address bar
+      Alt_L-Left: Super-Left # history back
+      Alt_L-Minus: Ctrl-Minus # zoom in
+      Alt_L-R: Ctrl-R # reload
+      Alt_L-Right: Super-Right # history forward
+      Alt_L-Shift-C: Ctrl-Shift-I # inspect
+      Alt_L-Shift-LeftBrace: Ctrl-PageUp # prev tab
+      Alt_L-Shift-P: Ctrl-Shift-N # private window
+      Alt_L-Shift-R: Ctrl-Shift-R # hard reload
+      Alt_L-Shift-RightBrace: Ctrl-PageDown # next tab
+      Alt_L-Shift-T: Ctrl-Shift-T # reopen tab
+      Alt_L-T: Ctrl-T # new tab
+      Alt_L-V: Ctrl-V # paste
+      Alt_L-W: Ctrl-W # close tab
+      Alt_L-X: Ctrl-X # cut
+
   - application: { only: [firefox, LibreWolf, librewolf] }
     exact_match: true
     remap:
