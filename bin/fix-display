@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+
+# Poke DRM subsystem to re-detect
+Dir.glob('/sys/class/drm/card*-*/status').each do |f|
+  system("echo detect | sudo tee '#{f}' > /dev/null 2>&1")
+end
+
+sleep 1
+
+current_output = nil
+kscreen_args = []
+
+IO.popen(['kscreen-doctor', '-o'], err: :close) do |io|
+  io.each_line do |line|
+    line.chomp!
+
+    # Detect a connected output
+    if (m = line.match(/^Output:\s+\d+\s+(\S+).*connected/))
+      current_output = m[1]
+      kscreen_args << "output.#{current_output}.enable"
+    end
+
+    # Find the highest resolution 60Hz mode (sort by pixel count descending)
+    next unless line.include?('Modes:')
+    next unless current_output
+
+    best_mode =
+      line
+      .scan(/\d+x\d+@60/)
+      .max_by do |mode|
+        w, h = mode.split(/[@x]/)
+        w.to_i * h.to_i
+      end
+
+    if best_mode
+      kscreen_args << "output.#{current_output}.mode.#{best_mode}"
+    else
+      warn "Warning: no 60Hz mode found for #{current_output}"
+    end
+    current_output = nil
+  end
+end
+
+system('kscreen-doctor', *kscreen_args) unless kscreen_args.empty?
+
+# Tell KWin to re-evaluate display layout and scaling
+unless system('qdbus org.kde.KWin /KWin reconfigure 2>/dev/null') ||
+       system('qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null')
+  warn 'Warning: could not reach KWin via qdbus'
+end
