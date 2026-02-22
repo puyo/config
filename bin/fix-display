@@ -1,50 +1,77 @@
 #!/usr/bin/env ruby
 
-# Poke DRM subsystem to re-detect
-Dir.glob('/sys/class/drm/card*-*/status').each do |f|
-  system("echo detect | sudo tee '#{f}' > /dev/null 2>&1")
+# Re-detect and configure external displays on KDE Plasma (Wayland)
+
+require 'open3'
+require 'json'
+
+# Output::Type enum from https://github.com/KDE/libkscreen/blob/master/src/output.h
+PANEL_TYPE = 7
+
+def main
+  enable_external_displays
+  sleep 1
+  enable_connected_outputs_at_best_60hz_mode
+  sleep 1
+  nudge_scale_to_force_layout_refresh
 end
 
-sleep 1
-
-current_output = nil
-kscreen_args = []
-
-IO.popen(['kscreen-doctor', '-o'], err: :close) do |io|
-  io.each_line do |line|
-    line.chomp!
-
-    # Detect a connected output
-    if (m = line.match(/^Output:\s+\d+\s+(\S+).*connected/))
-      current_output = m[1]
-      kscreen_args << "output.#{current_output}.enable"
-    end
-
-    # Find the highest resolution 60Hz mode (sort by pixel count descending)
-    next unless line.include?('Modes:')
-    next unless current_output
-
-    best_mode =
-      line
-      .scan(/\d+x\d+@60/)
-      .max_by do |mode|
-        w, h = mode.split(/[@x]/)
-        w.to_i * h.to_i
-      end
-
-    if best_mode
-      kscreen_args << "output.#{current_output}.mode.#{best_mode}"
-    else
-      warn "Warning: no 60Hz mode found for #{current_output}"
-    end
-    current_output = nil
+def enable_external_displays
+  Dir.glob('/sys/class/drm/card*-*/status').each do |f|
+    system("echo detect | sudo tee #{f} > /dev/null 2>&1")
   end
 end
 
-system('kscreen-doctor', *kscreen_args) unless kscreen_args.empty?
+def enable_connected_outputs_at_best_60hz_mode
+  kscreen_args =
+    external_outputs
+    .select { |o| o['connected'] }
+    .flat_map do |output|
+      name = output['name']
+      best_mode = best_60hz_mode(output['modes'])
+      warn "Warning: no 60Hz mode found for #{name}" unless best_mode
+      ["output.#{name}.enable", best_mode && "output.#{name}.mode.#{best_mode['name']}"].compact
+    end
 
-# Tell KWin to re-evaluate display layout and scaling
-unless system('qdbus org.kde.KWin /KWin reconfigure 2>/dev/null') ||
-       system('qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null')
-  warn 'Warning: could not reach KWin via qdbus'
+  configure_screen(*kscreen_args) unless kscreen_args.empty?
 end
+
+def nudge_scale_to_force_layout_refresh
+  external_outputs.each do |output|
+    next unless output['enabled']
+
+    name = output['name']
+    scale = output['scale']
+    nudged = scale + 0.05
+
+    configure_screen("output.#{name}.scale.#{nudged}")
+    sleep 0.5
+    configure_screen("output.#{name}.scale.#{scale}")
+  end
+end
+
+def outputs
+  stdout, stderr, status = Open3.capture3('kscreen-doctor', '--json')
+  unless status.success?
+    warn "kscreen-doctor --json failed: #{stderr.strip}"
+    exit 1
+  end
+  JSON.parse(stdout)['outputs']
+end
+
+def external_outputs
+  outputs.reject { |o| o['type'] == PANEL_TYPE }
+end
+
+def best_60hz_mode(modes)
+  modes
+    .select { |m| m['refreshRate'].round == 60 }
+    .max_by { |m| m['size']['width'] * m['size']['height'] }
+end
+
+def configure_screen(*args)
+  success = system('kscreen-doctor', *args, out: File::NULL, err: File::NULL)
+  warn "kscreen-doctor #{args.join(' ')} failed" unless success
+end
+
+main
