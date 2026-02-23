@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-# Re-detect and configure external displays on KDE Plasma (Wayland)
+# Fix screen scale issues with external displays on KDE Plasma (Wayland)
+#
+# Pass -e switch if you need to re-enable an external display.
 
 require 'open3'
 require 'json'
@@ -9,7 +11,7 @@ require 'json'
 PANEL_TYPE = 7
 
 def main
-  enable_external_displays
+  enable_external_displays if ARGV[0] == '-e'
   sleep 1
   enable_connected_outputs_at_best_60hz_mode
   sleep 1
