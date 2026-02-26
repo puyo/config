@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 
-# Fix screen scale issues with external displays on KDE Plasma (Wayland)
-#
-# Pass -e switch if you need to re-enable an external display.
+# Re-detect and configure external displays on KDE Plasma (Wayland)
 
 require 'open3'
 require 'json'
@@ -11,33 +9,55 @@ require 'json'
 PANEL_TYPE = 7
 
 def main
-  enable_external_displays if ARGV[0] == '-e'
-  sleep 1
+  unless external_outputs.any? { |o| o['connected'] }
+    enable_external_displays
+    sleep 3
+  end
   enable_connected_outputs_at_best_60hz_mode
-  sleep 1
-  nudge_scale_to_force_layout_refresh
+  arrange_displays
 end
 
 def enable_external_displays
   Dir.glob('/sys/class/drm/card*-*/status').each do |f|
     system("echo detect | sudo tee #{f} > /dev/null 2>&1")
   end
+  system('sudo', 'udevadm', 'trigger', '--subsystem-match=drm', '--action=change')
 end
 
 def enable_connected_outputs_at_best_60hz_mode
-  kscreen_args =
-    external_outputs
-    .select { |o| o['connected'] }
-    .flat_map do |output|
-      name = output['name']
-      best_mode = best_60hz_mode(output['modes'])
-      warn "Warning: no 60Hz mode found for #{name}" unless best_mode
-      ["output.#{name}.enable", best_mode && "output.#{name}.mode.#{best_mode['name']}"].compact
-    end
+  names = external_outputs.select { |o| o['connected'] }.map { |o| o['name'] }
+  return if names.empty?
 
-  configure_screen(*kscreen_args) unless kscreen_args.empty?
+  # Retry disable/enable to work around intermittent LTTPR channel equalization
+  # failures that cause the DP link to train at reduced bandwidth after a replug
+  connected = nil
+  5.times do |attempt|
+    warn "DP link training attempt #{attempt + 1}..." if attempt.positive?
+    configure_screen(*names.map { |n| "output.#{n}.disable" })
+    sleep 2
+    configure_screen(*names.map { |n| "output.#{n}.enable" })
+    sleep 2
+    connected = external_outputs.select { |o| o['connected'] }
+    break if connected.all? { |o| native_res_has_60hz?(o['modes']) }
+
+    warn "Native 60Hz not available after attempt #{attempt + 1}" if attempt < 4
+  end
+
+  enable_args = connected.flat_map do |output|
+    name = output['name']
+    best_mode = best_60hz_mode(output['modes'])
+    warn "Warning: no 60Hz mode found for #{name}" unless best_mode
+    ["output.#{name}.enable", best_mode && "output.#{name}.mode.#{best_mode['name']}"].compact
+  end
+  configure_screen(*enable_args)
 end
 
+def native_res_has_60hz?(modes)
+  max_pixels = modes.map { |m| m['size']['width'] * m['size']['height'] }.max
+  modes.any? { |m| m['size']['width'] * m['size']['height'] == max_pixels && m['refreshRate'].round == 60 }
+end
+
+# NOTE: May not be useful but left here for easy reference in case it is
 def nudge_scale_to_force_layout_refresh
   external_outputs.each do |output|
     next unless output['enabled']
@@ -52,13 +72,51 @@ def nudge_scale_to_force_layout_refresh
   end
 end
 
+def arrange_displays
+  all = outputs
+  panel = all.find { |o| o['type'] == PANEL_TYPE && o['enabled'] }
+  return unless panel
+
+  ext_list = all.reject { |o| o['type'] == PANEL_TYPE }.select { |o| o['enabled'] }
+  return if ext_list.empty?
+
+  panel_w = (panel['size']['width'] / panel['scale']).round
+
+  args = ext_list.flat_map do |output|
+    ext_w = (output['size']['width'] / output['scale']).round
+    ext_h = (output['size']['height'] / output['scale']).round
+
+    if ext_w >= panel_w
+      ext_x = 0
+      panel_x = (ext_w - panel_w) / 2
+    else
+      ext_x = (panel_w - ext_w) / 2
+      panel_x = 0
+    end
+
+    [
+      "output.#{output['name']}.position.#{ext_x},0",
+      "output.#{panel['name']}.position.#{panel_x},#{ext_h}",
+    ]
+  end
+
+  configure_screen(*args)
+end
+
 def outputs
-  stdout, stderr, status = Open3.capture3('kscreen-doctor', '--json')
-  unless status.success?
+  loop do
+    stdout, stderr, status = Open3.capture3('kscreen-doctor', '--json')
+    return JSON.parse(stdout)['outputs'] if status.success?
+
+    if stderr.match?(/corrupted/)
+      warn 'kscreen-doctor --json crashed, retrying...'
+      sleep 1
+      next
+    end
+
     warn "kscreen-doctor --json failed: #{stderr.strip}"
     exit 1
   end
-  JSON.parse(stdout)['outputs']
 end
 
 def external_outputs
@@ -72,8 +130,8 @@ def best_60hz_mode(modes)
 end
 
 def configure_screen(*args)
-  success = system('kscreen-doctor', *args, out: File::NULL, err: File::NULL)
-  warn "kscreen-doctor #{args.join(' ')} failed" unless success
+  _out, err, status = Open3.capture3('kscreen-doctor', *args)
+  warn "kscreen-doctor #{args.join(' ')} failed: #{err.strip}" unless status.success?
 end
 
 main
