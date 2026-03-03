@@ -14,6 +14,7 @@ def main
     sleep 3
   end
   enable_connected_outputs_at_best_60hz_mode
+  nudge_scale_to_force_layout_refresh
   arrange_displays
 end
 
@@ -25,8 +26,11 @@ def enable_external_displays
 end
 
 def enable_connected_outputs_at_best_60hz_mode
-  names = external_outputs.select { |o| o['connected'] }.map { |o| o['name'] }
-  return if names.empty?
+  connected_outputs = external_outputs.select { |o| o['connected'] }
+  return if connected_outputs.empty?
+  return if connected_outputs.all? { |o| native_res_has_60hz?(o['modes']) }
+
+  names = connected_outputs.map { |o| o['name'] }
 
   # Retry disable/enable to work around intermittent LTTPR channel equalization
   # failures that cause the DP link to train at reduced bandwidth after a replug
@@ -49,6 +53,7 @@ def enable_connected_outputs_at_best_60hz_mode
     warn "Warning: no 60Hz mode found for #{name}" unless best_mode
     ["output.#{name}.enable", best_mode && "output.#{name}.mode.#{best_mode['name']}"].compact
   end
+
   configure_screen(*enable_args)
 end
 
@@ -57,14 +62,13 @@ def native_res_has_60hz?(modes)
   modes.any? { |m| m['size']['width'] * m['size']['height'] == max_pixels && m['refreshRate'].round == 60 }
 end
 
-# NOTE: May not be useful but left here for easy reference in case it is
 def nudge_scale_to_force_layout_refresh
   external_outputs.each do |output|
     next unless output['enabled']
 
     name = output['name']
     scale = output['scale']
-    nudged = scale + 0.05
+    nudged = scale - 0.05
 
     configure_screen("output.#{name}.scale.#{nudged}")
     sleep 0.5
@@ -101,6 +105,8 @@ def arrange_displays
   end
 
   configure_screen(*args)
+  sleep 0.5
+  configure_screen("output.#{ext_list.first['name']}.primary")
 end
 
 def outputs
