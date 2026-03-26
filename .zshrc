@@ -68,11 +68,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
       local date='%*'
       local newline=$'\n'
 
-      __ruby_prompt() {
-        echo " ruby-$(ruby --version | sed -E 's/^ruby ([[:digit:]\.]+)(.*)$/\1/')"
-      }
-
-      PROMPT="%B%F{green}${user_and_host}%F{cyan}\$(__ruby_prompt)%B%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{#999}${date}%f%b \$ "
+      PROMPT="%B%F{green}${user_and_host}%F{yellow}${git}%F{blue} ${dir}${reset_color}${newline}%F{#999}${date}%f%b \$ "
     ;;
   esac
 
