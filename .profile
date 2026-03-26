@@ -37,7 +37,6 @@ fi
 export GOPATH="$HOME/go"
 export PATH="$PATH:${GOPATH//://bin:}/bin"
 
-# qt
-export QT_QPA_PLATFORMTHEME=qt5ct
-
-[ -f "$HOME/nm/profile.bash" ] && . "$HOME/nm/profile.bash"
+if [ -f "${HOME}/f/profile.sh" ]; then
+  source "${HOME}/f/profile.sh"
+fi
