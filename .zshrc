@@ -16,8 +16,8 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   # ignore commands on the CLI that start with #, rather than complaining about them
   set -k
 
-  # asdf
-  source $HOME/.asdf/completions/asdf.bash
+  # mise
+  command -v mise &>/dev/null && eval "$(mise activate zsh)"
 
   # history config
   export HISTFILE="$HOME/.zhistory"
