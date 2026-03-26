@@ -12,3 +12,12 @@ set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver25-iCursor
 set guicursor+=n-v-c:blinkon0
 set guicursor+=i:blinkwait10
+
+if exists("g:neovide")
+  let g:neovide_cursor_animation_length = 0
+  let g:neovide_cursor_short_animation_length = 0
+  let g:neovide_cursor_trail_size = 0
+  let g:neovide_cursor_vfx_mode = ""
+  let g:neovide_position_animation_length = 0
+  let g:neovide_scroll_animation_length = 0
+end

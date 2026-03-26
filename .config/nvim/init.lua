@@ -1,19 +1,23 @@
+-- Bootstrap lazy.nvim and load plugins + theme.
+-- Everything else auto-loads from plugin/ or is required by a plugin spec.
+
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46/"
 vim.g.mapleader = " "
 
--- bootstrap lazy and all plugins
+-- Auto-install lazy.nvim if missing
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not vim.uv.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
-
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_config = require("configs.lazy")
-
--- load plugins
 require("lazy").setup({
   {
     "NvChad/NvChad",
@@ -21,21 +25,54 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
+  { import = "lazy_plugins" },
+}, {
+  defaults = { lazy = true },
+  install = { colorscheme = { "nvchad" } },
 
-  { import = "plugins" },
-}, lazy_config)
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
 
--- load theme
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "tohtml",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "matchit",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
+        "tutor",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
+      },
+    },
+  },
+})
+
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
-
-require("options")
-require("nvchad.autocmds")
-require("configs.auto_make_dir")
-require("configs.autoread")
-
-vim.schedule(function()
-  require("mappings")
-end)
-
-vim.g.editorconfig = true
