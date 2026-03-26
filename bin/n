@@ -62,7 +62,12 @@ system_v(*vim_client, '--remote-send', ":#{line}<CR>") if line
 #
 # KDE Wayland kdotool (cargo install kdotool)
 #
-stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
-if status.success? && m = stdout.match(/^(\S+)$/)
-  Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
+if system('which kdotool >/dev/null 2>&1')
+  stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
+  if status.success? && m = stdout.match(/^(\S+)$/)
+    Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
+  end
+elsif RUBY_PLATFORM =~ /darwin/
+  sleep 0.5
+  system_v(%(osascript -e 'tell application "nvim-qt" to activate' 2> /dev/null))
 end
