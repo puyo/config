@@ -31,7 +31,6 @@ if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
   export ANSIBLE_NOCOWS=1
   export ERL_AFLAGS="-kernel shell_history enabled"
   export KERL_CONFIGURE_OPTIONS="--without-javac --disable-debug --without-odbc"
-  export PGPORT=5434
 fi
 
 # go
