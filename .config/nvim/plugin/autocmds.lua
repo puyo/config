@@ -68,6 +68,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
       end
     end
     table.insert(oldfiles, 1, file)
+    vim.v.oldfiles = oldfiles
   end,
 })
 
