@@ -6,8 +6,10 @@ export PATH
 export CASE_SENSITIVE="true"
 
 if [[ ! -z "$PROMPT" ]] ; then # if running interactively
+  # fpath must be set before compinit
   [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
   [ -d ~/.zsh/completions ] && fpath=(~/.zsh/completions $fpath)
+  [ -f "$HOME/f/zshrc.sh" ] && source "$HOME/f/zshrc.sh"
 
   # completions
   autoload -Uz compinit && compinit # zsh completion
@@ -16,8 +18,11 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   # ignore commands on the CLI that start with #, rather than complaining about them
   set -k
 
-  # mise
+  # mise — must be before direnv since direnv is installed via mise
   command -v mise &>/dev/null && eval "$(mise activate zsh)"
+
+  # direnv hook must run in .zshrc (not .zprofile) as it hooks into precmd
+  command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
   # history config
   export HISTFILE="$HOME/.zhistory"
@@ -60,7 +65,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
 
   case "$TERM" in
     xterm*|rxvt*|screen*)
-      [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
+      [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ] && source "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh"
 
       local user_and_host='%n@%m'
       local git='$(__git_ps1 " %s")'
