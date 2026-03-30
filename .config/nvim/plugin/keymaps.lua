@@ -35,6 +35,22 @@ local function current_buffer_dir()
   return vim.fn.fnameescape(vim.fs.dirname(name))
 end
 
+-- Keep oldfiles up to date during the session so "Jump to last file" works
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    local file = vim.fn.expand("%:p")
+    if file == "" then return end
+    local oldfiles = vim.v.oldfiles
+    for i, f in ipairs(oldfiles) do
+      if f == file then
+        table.remove(oldfiles, i)
+        break
+      end
+    end
+    table.insert(oldfiles, 1, file)
+  end,
+})
+
 -- Jump to the most recent file that isn't the current one
 local function edit_last_file_expr()
   local current_file = vim.api.nvim_buf_get_name(0)
@@ -94,6 +110,8 @@ map({ "n", "i", "v" }, "<D-w>", tabufline.close_buffer, { desc = "Close buffer" 
 map({ "n", "i", "v" }, "<D-z>", "<cmd>undo<cr>", { desc = "Undo", silent = true })
 map({ "n", "i", "v" }, "<S-D-{>", tabufline.prev, { desc = "Previous buffer" })
 map({ "n", "i", "v" }, "<S-D-}>", tabufline.next, { desc = "Next buffer" })
+map({ "n", "i", "v" }, "<S-D-[>", tabufline.prev, { desc = "Previous buffer" })
+map({ "n", "i", "v" }, "<S-D-]>", tabufline.next, { desc = "Next buffer" })
 map({ "n", "i", "v" }, "<D-[>", tabufline.prev, { desc = "Previous buffer" })
 map({ "n", "i", "v" }, "<D-]>", tabufline.next, { desc = "Next buffer" })
 map({ "n", "v" }, "<leader><tab>", edit_last_file_expr, { desc = "Jump to last file", expr = true, silent = true })
