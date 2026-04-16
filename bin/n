@@ -12,8 +12,6 @@ def system_v(*cmd)
 end
 
 pipe = File.join(Dir.home, '.cache/nvim/server.pipe')
-vim_server = ['nvim-qt', '--', '--listen', pipe]
-vim_client = ['nvim-qt', '--', '--server', pipe]
 line = nil
 
 _stdout, status = Open3.capture2e('nvim', '-es', '--clean', '--server', pipe, '--remote-expr', '1+1')
@@ -45,29 +43,41 @@ end
 
 args = args.map { |a| find(a) }
 
-if running
-  system_v(*vim_client, '--remote-silent', *args)
-else
-  system_v(*vim_server, *args)
-end
+if RUBY_PLATFORM =~ /darwin/
+  neovide = '/Applications/Neovide.app/Contents/MacOS/neovide'
 
-# Jump to line if specified
-system_v(*vim_client, '--remote-send', ":#{line}<CR>") if line
-
-# Focus Neovim window
-#
-# X11
-#
-# system_v('wmctrl', '-a', 'Neovim')
-#
-# KDE Wayland kdotool (cargo install kdotool)
-#
-if system('which kdotool >/dev/null 2>&1')
-  stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
-  if status.success? && m = stdout.match(/^(\S+)$/)
-    Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
+  if running
+    system_v('nvim', '--server', pipe, '--remote-silent', *args)
+    system_v('nvim', '--server', pipe, '--remote-send', ":#{line}<CR>") if line
+  else
+    cmd = [neovide, *args, '--', '--listen', pipe]
+    puts cmd.shelljoin if ENV['DEBUG']
+    pid = spawn(*cmd)
+    Process.detach(pid)
   end
-elsif RUBY_PLATFORM =~ /darwin/
-  sleep 0.5
-  system_v(%(osascript -e 'tell application "nvim-qt" to activate' 2> /dev/null))
+
+  #sleep 0.5
+  system_v(%(osascript -e 'tell application "Neovide" to activate' 2> /dev/null))
+else
+  if running
+    system_v('nvim-qt', '--', '--server', pipe, '--remote-silent', *args)
+    system_v('nvim-qt', '--', '--server', pipe, '--remote-send', ":#{line}<CR>") if line
+  else
+    system_v('nvim-qt', '--', '--listen', pipe, *args)
+  end
+
+  # Focus Neovim window
+  #
+  # X11
+  #
+  # system_v('wmctrl', '-a', 'Neovim')
+  #
+  # KDE Wayland kdotool (cargo install kdotool)
+  #
+  if system('which kdotool >/dev/null 2>&1')
+    stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
+    if status.success? && m = stdout.match(/^(\S+)$/)
+      Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
+    end
+  end
 end
