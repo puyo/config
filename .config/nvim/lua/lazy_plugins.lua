@@ -109,76 +109,78 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
     config = function()
-      -- The new nvim-treesitter no longer supports ensure_installed/auto_install
-      -- in opts. Install parsers explicitly here.
-      local installed = require("nvim-treesitter").get_installed()
-      local wanted = {
-        "cpp",
-        "css",
-        "eex",
-        "elixir",
-        "erlang",
-        "heex",
-        "html",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "norg",
-        "ruby",
-        "rust",
-        "typescript",
-        "vim",
-        "vimdoc",
-      }
-      local to_install = vim.tbl_filter(function(lang)
-        return not vim.tbl_contains(installed, lang)
-      end, wanted)
-      if #to_install > 0 then
-        require("nvim-treesitter").install(to_install)
-      end
+      pcall(function()
+        -- The new nvim-treesitter no longer supports ensure_installed/auto_install
+        -- in opts. Install parsers explicitly here.
+        local installed = require("nvim-treesitter").get_installed()
+        local wanted = {
+          "cpp",
+          "css",
+          "eex",
+          "elixir",
+          "erlang",
+          "heex",
+          "html",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "norg",
+          "ruby",
+          "rust",
+          "typescript",
+          "vim",
+          "vimdoc",
+        }
+        local to_install = vim.tbl_filter(function(lang)
+          return not vim.tbl_contains(installed, lang)
+        end, wanted)
+        if #to_install > 0 then
+          require("nvim-treesitter").install(to_install)
+        end
 
-      -- https://www.josean.com/posts/nvim-treesitter-and-textobjects
-      local ts_select = require("nvim-treesitter-textobjects.select")
-      local ts_swap = require("nvim-treesitter-textobjects.swap")
+        -- https://www.josean.com/posts/nvim-treesitter-and-textobjects
+        local ts_select = require("nvim-treesitter-textobjects.select")
+        local ts_swap = require("nvim-treesitter-textobjects.swap")
 
-      require("nvim-treesitter-textobjects").setup({
-        select = { lookahead = true },
-      })
+        require("nvim-treesitter-textobjects").setup({
+          select = { lookahead = true },
+        })
 
-      local select_maps = {
-        ["a="] = { "@assignment.outer", "outer assignment" },
-        ["i="] = { "@assignment.inner", "inner assignment" },
-        ["l="] = { "@assignment.lhs", "assignment LHS" },
-        ["r="] = { "@assignment.rhs", "assignment RHS" },
-        ["aa"] = { "@parameter.outer", "outer parameter" },
-        ["ia"] = { "@parameter.inner", "inner parameter" },
-        ["ac"] = { "@conditional.outer", "outer conditional" },
-        ["ic"] = { "@conditional.inner", "inner conditional" },
-        ["al"] = { "@loop.outer", "outer loop" },
-        ["il"] = { "@loop.inner", "inner loop" },
-        ["af"] = { "@call.outer", "outer function call" },
-        ["if"] = { "@call.inner", "inner function call" },
-        ["am"] = { "@function.outer", "outer function def" },
-        ["im"] = { "@function.inner", "inner function def" },
-      }
-      for key, val in pairs(select_maps) do
-        vim.keymap.set({ "x", "o" }, key, function()
-          ts_select.select_textobject(val[1])
-        end, { desc = val[2] })
-      end
+        local select_maps = {
+          ["a="] = { "@assignment.outer", "outer assignment" },
+          ["i="] = { "@assignment.inner", "inner assignment" },
+          ["l="] = { "@assignment.lhs", "assignment LHS" },
+          ["r="] = { "@assignment.rhs", "assignment RHS" },
+          ["aa"] = { "@parameter.outer", "outer parameter" },
+          ["ia"] = { "@parameter.inner", "inner parameter" },
+          ["ac"] = { "@conditional.outer", "outer conditional" },
+          ["ic"] = { "@conditional.inner", "inner conditional" },
+          ["al"] = { "@loop.outer", "outer loop" },
+          ["il"] = { "@loop.inner", "inner loop" },
+          ["af"] = { "@call.outer", "outer function call" },
+          ["if"] = { "@call.inner", "inner function call" },
+          ["am"] = { "@function.outer", "outer function def" },
+          ["im"] = { "@function.inner", "inner function def" },
+        }
+        for key, val in pairs(select_maps) do
+          vim.keymap.set({ "x", "o" }, key, function()
+            ts_select.select_textobject(val[1])
+          end, { desc = val[2] })
+        end
 
-      vim.keymap.set("n", "<leader>na", function()
-        ts_swap.swap_next("@parameter.inner")
-      end, { desc = "swap next parameter" })
-      vim.keymap.set("n", "<leader>nm", function()
-        ts_swap.swap_next("@function.outer")
-      end, { desc = "swap next function" })
-      vim.keymap.set("n", "<leader>pa", function()
-        ts_swap.swap_previous("@parameter.inner")
-      end, { desc = "swap prev parameter" })
-      vim.keymap.set("n", "<leader>pm", function()
-        ts_swap.swap_previous("@function.outer")
-      end, { desc = "swap prev function" })
+        vim.keymap.set("n", "<leader>na", function()
+          ts_swap.swap_next("@parameter.inner")
+        end, { desc = "swap next parameter" })
+        vim.keymap.set("n", "<leader>nm", function()
+          ts_swap.swap_next("@function.outer")
+        end, { desc = "swap next function" })
+        vim.keymap.set("n", "<leader>pa", function()
+          ts_swap.swap_previous("@parameter.inner")
+        end, { desc = "swap prev parameter" })
+        vim.keymap.set("n", "<leader>pm", function()
+          ts_swap.swap_previous("@function.outer")
+        end, { desc = "swap prev function" })
+      end)
     end,
   },
 
