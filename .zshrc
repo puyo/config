@@ -14,6 +14,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   # completions
   autoload -Uz compinit && compinit # zsh completion
   autoload -Uz bashcompinit && bashcompinit # bash completion command support
+  [ -f "$HOME/.mix_completions.zsh" ] && source "$HOME/.mix_completions.zsh"
 
   # ignore commands on the CLI that start with #, rather than complaining about them
   set -k
