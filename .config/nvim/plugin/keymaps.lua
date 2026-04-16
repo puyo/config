@@ -57,6 +57,25 @@ local function adjust_font_size(delta)
 end
 
 ---------------------------------------------------------------------------
+-- Keep oldfiles up to date so we can switch between them
+---------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    local file = vim.fn.expand("%:p")
+    if file == "" then return end
+    local oldfiles = vim.v.oldfiles
+    for i, f in ipairs(oldfiles) do
+      if f == file then
+        table.remove(oldfiles, i)
+        break
+      end
+    end
+    table.insert(oldfiles, 1, file)
+  end,
+})
+
+---------------------------------------------------------------------------
 -- General
 ---------------------------------------------------------------------------
 
@@ -94,6 +113,8 @@ map({ "n", "i", "v" }, "<D-w>", tabufline.close_buffer, { desc = "Close buffer" 
 map({ "n", "i", "v" }, "<D-z>", "<cmd>undo<cr>", { desc = "Undo", silent = true })
 map({ "n", "i", "v" }, "<S-D-{>", tabufline.prev, { desc = "Previous buffer" })
 map({ "n", "i", "v" }, "<S-D-}>", tabufline.next, { desc = "Next buffer" })
+map({ "n", "i", "v" }, "<D-{>", tabufline.prev, { desc = "Previous buffer" })
+map({ "n", "i", "v" }, "<D-}>", tabufline.next, { desc = "Next buffer" })
 map({ "n", "i", "v" }, "<S-D-[>", tabufline.prev, { desc = "Previous buffer" })
 map({ "n", "i", "v" }, "<S-D-]>", tabufline.next, { desc = "Next buffer" })
 map({ "n", "i", "v" }, "<D-[>", tabufline.prev, { desc = "Previous buffer" })
@@ -105,12 +126,8 @@ map("n", "<D-a>", "ggVG", { desc = "Select all" })
 map({ "i", "v" }, "<D-a>", "<ESC>ggVG", { desc = "Select all" })
 
 -- Font zoom
-map("n", "<D-=>", function()
-  adjust_font_size(1)
-end, { desc = "Increase font size" })
-map("n", "<D-->", function()
-  adjust_font_size(-1)
-end, { desc = "Decrease font size" })
+map("n", "<D-=>", function() adjust_font_size(1) end, { desc = "Increase font size" })
+map("n", "<D-->", function() adjust_font_size(-1) end, { desc = "Decrease font size" })
 
 ---------------------------------------------------------------------------
 -- Clipboard (system clipboard via Cmd shortcuts)
@@ -146,6 +163,20 @@ vim.api.nvim_create_user_command("StripTrailingWhitespaces", function(opts)
   vim.cmd(opts.line1 .. "," .. opts.line2 .. [[s/\s\+$//e]])
   vim.cmd([[normal! g`"]])
 end, { range = "%" })
+
+---------------------------------------------------------------------------
+-- Telescope
+---------------------------------------------------------------------------
+
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = require("telescope.actions").close,
+      },
+    },
+  },
+})
 
 ---------------------------------------------------------------------------
 -- Fix NvChad defaults
