@@ -1,175 +1,183 @@
 /* ==UserStyle==
 @name           Slack with less noise
 @namespace      github.com/openstyles/stylus
-@version        1.0.3
+@version        1.0.4
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/slack.user.css
 @description    Remove hover effects and other noisy junk
 @author         Gregory McIntyre
 ==/UserStyle== */
 
-@-moz-document url-prefix("https://app.slack.com/client/") {
+@-moz-document url-prefix("https://app.slack.com/client/")
+{
+  /* ------------------------------------------------------- */
+  /* typography */
 
-    /*
-     * -------------------------------------------------------
-     * typography
-     */
+  /* no hover changes */
+  .c-link:hover,
+  .c-link--button:hover {
+    text-decoration: none !important;
+  }
 
-    /* no hover changes */
-    .c-link:hover, .c-link--button:hover {
-        text-decoration: none !important;
-    }
+  .p-message_pane_message__compact_timestamp {
+    opacity: 1 !important;
+  }
 
-    .p-message_pane_message__compact_timestamp {
-        opacity: 1 !important;
-    }
+  /* ------------------------------------------------------- */
+  /* layout */
 
-    /*
-     * -------------------------------------------------------
-     * layout
-     */
+  /* no more hiding/displaying these */
+  .p-avatar_stack__avatar {
+    display: inline-block !important;
+  }
+  .p-avatar_stack__count {
+    padding-left: 14px !important;
+    border-radius: 4px !important;
+  }
 
-    /* no more hiding/displaying these */
-    .p-avatar_stack__avatar {
-        display: inline-block !important;
-    }
-    .p-avatar_stack__count {
-        padding-left: 14px !important;
-        border-radius: 4px !important;
-    }
+  /* ------------------------------------------------------- */
+  /* sidebar */
 
-    /*
-     * -------------------------------------------------------
-     * message
-     */
+  .p-channel_sidebar__channel:not(.p-channel_sidebar__channel--selected):hover,
+  .p-channel_sidebar__link:hover,
+  .p-channel_sidebar__section_heading {
+    background-color: inherit !important;
+  }
 
-    /* no hover effects */
-    .c-message_kit__background,
-    .c-message_kit__background--hovered {
-        background: none !important;
-    }
+  /* ------------------------------------------------------- */
+  /* message */
 
-    /*
-     * -------------------------------------------------------
-     * message input field
-     */
+  /* no hover effects */
+  .c-message_kit__background,
+  .c-message_kit__background--hovered {
+    background: none !important;
+  }
 
-    /* no focus effects */
-    .p-message_input_field {
-        border-color: rgba(var(--sk_foreground_high, 29, 28, 29), .5) !important;
-    }
+  /* ------------------------------------------------------- */
+  /* message input field */
 
-    /* no superfluous buttons */
-    .c-texty_input__button[data-qa="texty_mention_button"],
-    .p-shortcuts_menu_trigger_button_left_column,
-    .c-texty_input__button--emoji,
-    .c-texty_input__button--send {
-        display: none !important;
-    }
+  /* no focus effects */
+  .p-message_input_field {
+    border-color: rgba(var(--sk_foreground_high, 29, 28, 29), 0.5) !important;
+  }
 
-    /* reposition the only useful button */
-    .c-icon_button[aria-label="File menu"] {
-        right: 0 !important;
-    }
+  /* no superfluous buttons */
+  .c-texty_input__button[data-qa="texty_mention_button"],
+  .p-shortcuts_menu_trigger_button_left_column,
+  .c-texty_input__button--emoji,
+  .c-texty_input__button--send {
+    display: none !important;
+  }
 
-    /* widen input on right with no extra buttons */
-    .c-texty_input__container[data-buttons="1"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
-        width: 100% !important;
-        padding-right: initial !important;
-    }
-    .c-texty_input__container[data-buttons="2"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
-        width: 100% !important;
-        padding-right: initial !important;
-    }
-    .c-texty_input__container[data-buttons="3"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
-        width: calc(100% - 34px);
-        padding-right: 34px;
-    }
-    .c-texty_input__container[data-buttons="4"] .c-texty_input:not(.c-texty_input--double_decker) .ql-editor {
-        width: calc(100% - 68px);
-        padding-right: 68px;
-    }
+  /* reposition the only useful button */
+  .c-icon_button[aria-label="File menu"] {
+    right: 0 !important;
+  }
 
-    /* widen input on left with no extra buttons */
-    .p-workspace__input.p-message_input .p-message_input_field,
-    .p-threads_footer__input.p-message_input .p-message_input_field {
-        padding-left: 10px !important;
-    }
+  /* widen input on right with no extra buttons */
+  .c-texty_input__container[data-buttons="1"]
+    .c-texty_input:not(.c-texty_input--double_decker)
+    .ql-editor {
+    width: 100% !important;
+    padding-right: initial !important;
+  }
+  .c-texty_input__container[data-buttons="2"]
+    .c-texty_input:not(.c-texty_input--double_decker)
+    .ql-editor {
+    width: 100% !important;
+    padding-right: initial !important;
+  }
+  .c-texty_input__container[data-buttons="3"]
+    .c-texty_input:not(.c-texty_input--double_decker)
+    .ql-editor {
+    width: calc(100% - 34px);
+    padding-right: 34px;
+  }
+  .c-texty_input__container[data-buttons="4"]
+    .c-texty_input:not(.c-texty_input--double_decker)
+    .ql-editor {
+    width: calc(100% - 68px);
+    padding-right: 68px;
+  }
 
-    /* widen placeholder field on left with no extra buttons */
-    .c-texty_input .ql-placeholder {
-        left: 10px !important;
-    }
+  /* widen input on left with no extra buttons */
+  .p-workspace__input.p-message_input .p-message_input_field,
+  .p-threads_footer__input.p-message_input .p-message_input_field {
+    padding-left: 10px !important;
+  }
 
-    /*
-     * -------------------------------------------------------
-     * message reply bar
-     */
+  /* widen placeholder field on left with no extra buttons */
+  .c-texty_input .ql-placeholder {
+    left: 10px !important;
+  }
 
-    /* make it so I can see this important field - the one thing they didn't draw my attention to */
-    .c-message__reply_bar {
-        max-width: initial;
-        background: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
-        border-color: transparent !important;
-    }
+  /* ------------------------------------------------------- */
+  /* message reply bar */
 
-    /* no hover changing the content, arrgh */
-    .c-message__reply_bar_view_thread {
-        display: none !important;
-    }
-    .c-message__reply_bar_last_reply {
-        opacity: 1 !important;
-    }
+  /* make it so I can see this important field - the one thing they didn't draw my attention to */
+  .c-message__reply_bar {
+    max-width: initial;
+    background: rgba(var(--sk_foreground_min, 29, 28, 29), 0.04) !important;
+    border-color: transparent !important;
+  }
 
-    /* no hover effect on the little arrow on the right */
-    .c-message__reply_bar_arrow {
-        color: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1) !important;
-    }
+  /* no hover changing the content, arrgh */
+  .c-message__reply_bar_view_thread {
+    display: none !important;
+  }
+  .c-message__reply_bar_last_reply {
+    opacity: 1 !important;
+  }
 
-    /*
-     * -------------------------------------------------------
-     * message attachments
-     */
+  /* no hover effect on the little arrow on the right */
+  .c-message__reply_bar_arrow {
+    color: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1) !important;
+  }
 
-    /* specific to my worplace, make this channel useable to me by removing the clutter */
-    .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__attachments {
-        display: none;
-    }
-    .p-workspace__primary_view[aria-label="Channel pr"] .c-message_kit__background--labels--ephemeral .c-message_kit__attachments {
-        display: block;
-    }
+  /* ------------------------------------------------------- */
+  /* message attachments */
 
-    /*
-     * -------------------------------------------------------
-     * message reactions
-     */
+  /* specific to my worplace, make this channel useable to me by removing the clutter */
+  .p-workspace__primary_view[aria-label="Channel pr"]
+    .c-message_kit__attachments {
+    display: none;
+  }
+  .p-workspace__primary_view[aria-label="Channel pr"]
+    .c-message_kit__background--labels--ephemeral
+    .c-message_kit__attachments {
+    display: block;
+  }
 
-    /* no hover changes */
-    .c-reaction:hover,
-    .c-reaction--reacted:hover,
-    .c-reaction_add:hover {
-        background-color: rgba(var(--sk_foreground_min, 29, 28, 29), .04) !important;
-    }
+  /* ------------------------------------------------------- */
+  /* message reactions */
 
-    /* no hover changes */
-    .c-reaction,
-    .c-reaction--reacted,
-    .c-reaction_add {
-        box-shadow: none !important;
-    }
+  /* no hover changes */
+  .c-reaction:hover,
+  .c-reaction--reacted:hover,
+  .c-reaction_add:hover {
+    background-color: rgba(
+      var(--sk_foreground_min, 29, 28, 29),
+      0.04
+    ) !important;
+  }
 
-    /* make icons easier to see by reducing border radius a bit */
-    .c-reaction,
-    .c-reaction_add {
-        border-radius: 5px !important;
-    }
+  /* no hover changes */
+  .c-reaction,
+  .c-reaction--reacted,
+  .c-reaction_add {
+    box-shadow: none !important;
+  }
 
-    /*
-     * -------------------------------------------------------
-     * message actions
-     */
+  /* make icons easier to see by reducing border radius a bit */
+  .c-reaction,
+  .c-reaction_add {
+    border-radius: 5px !important;
+  }
 
-    /* experiment
+  /* ------------------------------------------------------- */
+  /* message actions */
+
+  /* experiment
     .c-message_actions__group {
         opacity: 0 !important;
     }
@@ -179,21 +187,26 @@
     }
     */
 
-    /*
-     * -------------------------------------------------------
-     * threads view
-     */
+  /* ------------------------------------------------------- */
+  /* threads view */
 
-    /* no hover changes */
-    .p-threads_view_load_newer_message,
-    .p-threads_view_load_older_message {
-        background: none !important;
-        text-decoration: none !important;
-    }
+  /* no hover changes */
+  .p-threads_view_load_newer_message,
+  .p-threads_view_load_older_message {
+    background: none !important;
+    text-decoration: none !important;
+  }
 
-    /* no focus changes */
-    .p-threads_footer__broadcast_controls {
-        display: none;
-    }
+  /* no focus changes */
+  .p-threads_footer__broadcast_controls {
+    display: none;
+  }
+
+  /* ------------------------------------------------------- */
+  /* AI */
+
+  [data-qa="slackbot-ai-button"],
+  [aria-label="Add agent"] {
+    display: none;
+  }
 }
-
