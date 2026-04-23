@@ -11,11 +11,6 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   [ -d ~/.zsh/completions ] && fpath=(~/.zsh/completions $fpath)
   [ -f "$HOME/f/zshrc.sh" ] && source "$HOME/f/zshrc.sh"
 
-  # completions
-  autoload -Uz compinit && compinit # zsh completion
-  autoload -Uz bashcompinit && bashcompinit # bash completion command support
-  [ -f "$HOME/.mix_completions.zsh" ] && source "$HOME/.mix_completions.zsh"
-
   # ignore commands on the CLI that start with #, rather than complaining about them
   set -k
 
@@ -42,31 +37,36 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
   setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
   setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-  # tab completion settings
-  setopt AUTOLIST NO_MENUCOMPLETE
-
-  # alt-backspace deletes the whole path! gah! fix it!
-  export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  ;# without /
-
-  # tab completion directory names prints a slash and then deletes it sometimes! gah! fix it!
-  setopt no_auto_remove_slash
-
-  # alt-p and alt-n search history with what was typed so far
-  bindkey '^[p' history-beginning-search-backward
-  bindkey '^[n' history-beginning-search-forward
-
-  # ctrl-alt-e expands like it does in bash
-  bindkey '^[^E' expand-or-complete
-
-  # disable C-s and C-q pause and resume buttons
-  stty -ixon
-
-  # allow $(...) commands inside the prompt
-  setopt promptsubst
-
   case "$TERM" in
     xterm*|rxvt*|screen*)
-      [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ] && source "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh"
+      [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ] && 
+        source "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh"
+      # tab completion settings
+      setopt AUTOLIST NO_MENUCOMPLETE
+
+      # alt-backspace deletes the whole path! gah! fix it!
+      export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  ;# without /
+
+      # tab completion directory names prints a slash and then deletes it sometimes! gah! fix it!
+      setopt no_auto_remove_slash
+
+      # alt-p and alt-n search history with what was typed so far
+      bindkey '^[p' history-beginning-search-backward
+      bindkey '^[n' history-beginning-search-forward
+
+      # ctrl-alt-e expands like it does in bash
+      bindkey '^[^E' expand-or-complete
+
+      # disable C-s and C-q pause and resume buttons
+      stty -ixon
+
+      # allow $(...) commands inside the prompt
+      setopt promptsubst
+
+      # completions
+      autoload -Uz compinit && compinit # zsh completion
+      autoload -Uz bashcompinit && bashcompinit # bash completion command support
+      #[ -f "$HOME/.mix_completions.zsh" ] && source "$HOME/.mix_completions.zsh"
 
       local user_and_host='%n@%m'
       local git='$(__git_ps1 " %s")'
