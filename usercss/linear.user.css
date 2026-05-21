@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Linear you can click
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/linear.user.css
 @description    Minor improvements to UX
@@ -15,5 +15,19 @@
 
   button {
     cursor: pointer !important;
+  }
+
+  /* parent issue containers alternating bg colors */
+  [data-list-container="true"] > div > div > div {
+    &:nth-child(2n) {
+      background-color: #19191f;
+    }
+  }
+
+  /* sub-issues visually distinct from parent issues */
+  [data-list-container="true"] > div > div > div > div > div > a span[title] {
+    font-style: italic;
+    opacity: 0.8;
+    font-size: 0.8rem;
   }
 }
