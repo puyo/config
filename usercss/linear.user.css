@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Linear you can click
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
+@version        1.0.2
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/linear.user.css
 @description    Minor improvements to UX
@@ -20,7 +20,7 @@
   /* parent issue containers alternating bg colors */
   [data-list-container="true"] > div > div > div {
     &:nth-child(2n) {
-      background-color: #19191f;
+      background-color: #8080801a;
     }
   }
 
