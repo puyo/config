@@ -78,3 +78,27 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "mix.lock",
   callback = check_and_refresh_elixir_ls,
 })
+
+-- Use project tsconfig.json files
+vim.lsp.config("ts_ls", {
+  init_options = {
+    hostInfo = "neovim",
+    -- Use the project's tsserver if present (matches what `tsc` sees).
+    tsserver = {
+      path = vim.fs.joinpath(vim.fs.root(0, "tsconfig.json") or vim.uv.cwd(), "node_modules/typescript/lib"),
+    },
+  },
+})
+
+-- Stop LSP clients when their last attached buffer closes.
+vim.api.nvim_create_autocmd("LspDetach", {
+  desc = "Stop LSP clients with no remaining attached buffers",
+  callback = function(args)
+    vim.schedule(function()
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and vim.tbl_isempty(client.attached_buffers) then
+        client:stop()
+      end
+    end)
+  end,
+})
