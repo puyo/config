@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Linear you can click
 @namespace      github.com/openstyles/stylus
-@version        1.0.2
+@version        1.0.3
 @homepageURL    https://github.com/puyo/config/tree/master/usercss
 @updateURL      https://raw.githubusercontent.com/puyo/config/master/usercss/linear.user.css
 @description    Minor improvements to UX
@@ -29,5 +29,16 @@
     font-style: italic;
     opacity: 0.8;
     font-size: 0.8rem;
+  }
+
+  /* style uploads so I can actually see them (not black on black) */
+  [data-upload-state] > div > div > div {
+    background: #ff80ff1a;
+    background: linear-gradient(
+      90deg,
+      rgba(177, 90, 177, 0.2) 0%,
+      rgba(107, 46, 107, 0.2) 100%
+    );
+    padding: 1rem;
   }
 }
