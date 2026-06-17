@@ -56,6 +56,13 @@ local function adjust_font_size(delta)
   end
 end
 
+-- Remember the startup font size so we can reset back to it
+local default_guifont = vim.o.guifont
+
+local function reset_font_size()
+  vim.o.guifont = default_guifont
+end
+
 ---------------------------------------------------------------------------
 -- Keep oldfiles up to date so we can switch between them
 ---------------------------------------------------------------------------
@@ -128,6 +135,7 @@ map({ "i", "v" }, "<D-a>", "<ESC>ggVG", { desc = "Select all" })
 -- Font zoom
 map("n", "<D-=>", function() adjust_font_size(1) end, { desc = "Increase font size" })
 map("n", "<D-->", function() adjust_font_size(-1) end, { desc = "Decrease font size" })
+map("n", "<D-0>", reset_font_size, { desc = "Reset font size" })
 
 ---------------------------------------------------------------------------
 -- Clipboard (system clipboard via Cmd shortcuts)
