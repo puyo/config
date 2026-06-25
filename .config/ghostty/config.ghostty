@@ -1,0 +1,17 @@
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-color = #FF00FF
+font-family = "Comic Mono"
+theme = "Catppuccin Mocha"
+background-image = "~/.ghostty-bg.png"
+background-image-fit = stretch
+keybind = cmd+r=text:`v`\x09
+macos-option-as-alt = true
+selection-word-chars = " \t'\"│`|:,{}<>$"
+
+# Dim diff backgrounds. Inside tmux/agent-deck, TERM=tmux-256color caps Claude
+# Code at 256 colours, so its dim-diff theme hex quantizes up to the standard
+# cube slots 52 (red) and 22 (green) — losing the dim look. Repaint those slots
+# as the intended dim colours so quantized diffs still read as subtle red/green.
+palette = 52=#3a1418
+palette = 22=#0e2a16
