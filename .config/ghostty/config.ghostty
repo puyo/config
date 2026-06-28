@@ -8,6 +8,7 @@ background-image-fit = stretch
 keybind = cmd+r=text:`v`\x09
 macos-option-as-alt = true
 selection-word-chars = " \t'\"│`|:,{}<>$"
+confirm-close-surface = false
 
 # Dim diff backgrounds. Inside tmux/agent-deck, TERM=tmux-256color caps Claude
 # Code at 256 colours, so its dim-diff theme hex quantizes up to the standard
