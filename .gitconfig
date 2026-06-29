@@ -1,3 +1,6 @@
+[core]
+	excludesfile = ~/.gitignore
+	pager = delta
 [color]
 	ui = true
 [push]
@@ -5,11 +8,6 @@
 [user]
 	name = Gregory McIntyre
 	email = greg@gregorymcintyre.com
-[core]
-	editor = gvim -f
-	excludesfile = ~/.gitignore
-[branch]
-	autosetuprebase = always
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
@@ -53,7 +51,7 @@
 	up = !git fetch --prune origin && git rebase --autostash --rebase-merges origin/$(git cb)
 	gup = !git fetch --prune origin && git rebase --autostash --rebase-merges origin/$(git cb)
 
-	stashpull = !git -c rebase.autoStash=true pull --rebase
+	stashpull = !git pull --rebase --autostash
 
   # Git, so easy eh
   cleanup = ! ( main=$(git rev-parse --abbrev-ref origin/HEAD | sed s:origin/::) && git branch --merged "origin/${main}" | grep -v "\\\\b${main}\\\\b" | xargs --no-run-if-empty --max-args=1 git branch -d )
@@ -83,15 +81,26 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[url "git@github.com:blake-education/"]
-	insteadOf = https://github.com/blake-education/
 [submodule]
 	recurse = true
-[includeIf "gitdir:~/nm/"]
-    path = ~/nm/.gitconfig
 [github]
 	user = puyo
 [grep]
 	patternType = perl
 [advice]
 	skippedCherryPicks = false
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+	minus-style       = syntax "#3a1418"
+	minus-emph-style  = syntax "#6e2230"
+	plus-style        = syntax "#0e2a16"
+	plus-emph-style   = syntax "#1c5a2e"
+[merge]
+	conflictStyle = zdiff3
+[rebase]
+	autoStash = true
+[includeIf "gitdir:~/f/"]
+    path = ~/f/.gitconfig
