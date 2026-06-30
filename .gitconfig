@@ -8,10 +8,6 @@
 [user]
 	name = Gregory McIntyre
 	email = greg@gregorymcintyre.com
-[pager]
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
-	log = diff-so-fancy | less --tabs=4 -RFX # too slow? locking up?
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
