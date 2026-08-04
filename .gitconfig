@@ -82,7 +82,7 @@
 [github]
 	user = puyo
 [grep]
-	patternType = perl
+	patternType = extended
 [advice]
 	skippedCherryPicks = false
 [interactive]
