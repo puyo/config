@@ -18,5 +18,6 @@
 --exclude=public
 --exclude=tmp
 --exclude=vendor
+--exclude=.conduct
 --map-TypeScript=+.tsx
 --recurse=yes
