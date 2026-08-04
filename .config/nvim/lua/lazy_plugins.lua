@@ -12,15 +12,17 @@ return {
     event = "BufWritePre",
     opts = {
       formatters_by_ft = {
-        lua = { "stylua" },
         css = { "prettier" },
         html = { "prettier" },
         javascript = { "prettier" },
         javascriptreact = { "prettier" },
+        lua = { "stylua" },
+        markdown = { "prettier" },
+        nix = { "alejandra" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
-        nix = { "alejandra" },
       },
+      formatters = { prettier = { prepend_args = { "--prose-wrap", "always", "--print-width", "120" } } },
       format_on_save = {
         timeout_ms = 2000,
         lsp_format = "fallback",
