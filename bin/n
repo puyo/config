@@ -11,21 +11,49 @@ def system_v(*cmd)
   system(*cmd)
 end
 
-pipe = File.join(Dir.home, '.cache/nvim/server.pipe')
-line = nil
+# Is a GUI nvim already listening on `pipe`? Connect and eval a trivial expr.
+def server_up?(pipe)
+  _out, status = Open3.capture2e('nvim', '-es', '--clean', '--server', pipe, '--remote-expr', '1+1')
+  status.success?
+end
 
-_stdout, status = Open3.capture2e('nvim', '-es', '--clean', '--server', pipe, '--remote-expr', '1+1')
-running = status.success?
+# Poll until a freshly-launched GUI's --listen server accepts connections (or
+# give up). The GUI takes a moment to boot; focusing/remoting before the server
+# exists is the race that occasionally spawned a second window.
+def wait_for_server(pipe, timeout: 15.0, interval: 0.1)
+  deadline = Time.now + timeout
+  loop do
+    return true if server_up?(pipe)
+    return false if Time.now > deadline
 
-args =
-  if ARGV.size == 1
-    file, line = ARGV.first.split(':')
-    [file]
-  elsif ARGV.size > 1
-    ARGV
-  else
-    ['.']
+    sleep interval
   end
+end
+
+# Bring the editor window to the front. Best-effort, platform-specific.
+def activate_window
+  if RUBY_PLATFORM =~ /darwin/
+    system_v(%(osascript -e 'tell application "Neovide" to activate' 2> /dev/null))
+  elsif system('which kdotool >/dev/null 2>&1')       # KDE / Wayland (cargo install kdotool)
+    stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
+    Open3.capture2e('kdotool', 'windowactivate', $1) if status.success? && stdout =~ /^(\S+)$/
+  elsif system('which wmctrl >/dev/null 2>&1')         # X11
+    system_v('wmctrl', '-a', 'Neovim')
+  end
+end
+
+# Launch a fresh GUI nvim listening on `pipe`, detached. Neovide on macOS,
+# nvim-qt elsewhere. Both take `-- <nvim args>` after their own args.
+def launch_gui(pipe, args)
+  cmd =
+    if RUBY_PLATFORM =~ /darwin/
+      ['/Applications/Neovide.app/Contents/MacOS/neovide', *args, '--', '--listen', pipe]
+    else
+      ['nvim-qt', '--', '--listen', pipe, *args]
+    end
+  puts cmd.shelljoin if ENV['DEBUG']
+  Process.detach(spawn(*cmd))
+end
 
 def find(orig_path)
   path = orig_path
@@ -41,53 +69,35 @@ def find(orig_path)
   File.expand_path(orig_path)
 end
 
+pipe = File.join(Dir.home, '.cache/nvim/server.pipe')
+line = nil
+
+args =
+  if ARGV.size == 1
+    file, line = ARGV.first.split(':')
+    [file]
+  elsif ARGV.size > 1
+    ARGV
+  else
+    ['.']
+  end
+
 args = args.map { |a| find(a) }
 
-if RUBY_PLATFORM =~ /darwin/
-  neovide = '/Applications/Neovide.app/Contents/MacOS/neovide'
-
-  if running
-    system_v('nvim', '--server', pipe, '--remote-silent', *args)
-    system_v('nvim', '--server', pipe, '--remote-send', ":#{line}<CR>") if line
-
-    # Bring the already-running Neovide window to the front. Do this ONLY in the
-    # `running` branch: activating "Neovide" by name races a freshly-spawned
-    # instance that hasn't yet registered with LaunchServices, so macOS launches
-    # a SECOND copy — the "opens 2 windows on cold start" bug.
-    system_v(%(osascript -e 'tell application "Neovide" to activate' 2> /dev/null))
-  else
-    # Cold start. Remove a stale server pipe first — a crashed session leaves the
-    # socket file behind and `--listen` would fail to bind, so no server comes up
-    # (and the next `n` cold-starts again instead of remoting in).
-    File.delete(pipe) if File.exist?(pipe)
-
-    cmd = [neovide, *args, '--', '--listen', pipe]
-    puts cmd.shelljoin if ENV['DEBUG']
-    pid = spawn(*cmd)
-    Process.detach(pid)
-    # No activate here: Neovide focuses itself on launch, and activating it by
-    # name now would spawn the duplicate window described above.
-  end
+if server_up?(pipe)
+  # Remote the files into the already-running instance.
+  system_v('nvim', '--server', pipe, '--remote-silent', *args)
 else
-  if running
-    system_v('nvim-qt', '--', '--server', pipe, '--remote-silent', *args)
-    system_v('nvim-qt', '--', '--server', pipe, '--remote-send', ":#{line}<CR>") if line
-  else
-    system_v('nvim-qt', '--', '--listen', pipe, *args)
-  end
-
-  # Focus Neovim window
-  #
-  # X11
-  #
-  # system_v('wmctrl', '-a', 'Neovim')
-  #
-  # KDE Wayland kdotool (cargo install kdotool)
-  #
-  if system('which kdotool >/dev/null 2>&1')
-    stdout, status = Open3.capture2('kdotool', 'search', 'neovim')
-    if status.success? && m = stdout.match(/^(\S+)$/)
-      Open3.capture2e('kdotool', 'windowactivate', m.captures.first)
-    end
-  end
+  # Cold start. Clear a stale server socket first — a crashed session leaves the
+  # file behind and --listen would then fail to bind (so every later `n`
+  # cold-starts again instead of remoting in). Launch, then wait for the server.
+  File.delete(pipe) if File.exist?(pipe)
+  launch_gui(pipe, args)
+  wait_for_server(pipe)
 end
+
+# Jump to a requested line, then focus the window. Both are safe now because the
+# server is confirmed up — freshly launched (we polled) or already running — so
+# there's no race, and it's identical on macOS and Linux.
+system_v('nvim', '--server', pipe, '--remote-send', ":#{line}<CR>") if line
+activate_window
