@@ -49,15 +49,25 @@ if RUBY_PLATFORM =~ /darwin/
   if running
     system_v('nvim', '--server', pipe, '--remote-silent', *args)
     system_v('nvim', '--server', pipe, '--remote-send', ":#{line}<CR>") if line
+
+    # Bring the already-running Neovide window to the front. Do this ONLY in the
+    # `running` branch: activating "Neovide" by name races a freshly-spawned
+    # instance that hasn't yet registered with LaunchServices, so macOS launches
+    # a SECOND copy — the "opens 2 windows on cold start" bug.
+    system_v(%(osascript -e 'tell application "Neovide" to activate' 2> /dev/null))
   else
+    # Cold start. Remove a stale server pipe first — a crashed session leaves the
+    # socket file behind and `--listen` would fail to bind, so no server comes up
+    # (and the next `n` cold-starts again instead of remoting in).
+    File.delete(pipe) if File.exist?(pipe)
+
     cmd = [neovide, *args, '--', '--listen', pipe]
     puts cmd.shelljoin if ENV['DEBUG']
     pid = spawn(*cmd)
     Process.detach(pid)
+    # No activate here: Neovide focuses itself on launch, and activating it by
+    # name now would spawn the duplicate window described above.
   end
-
-  #sleep 0.5
-  system_v(%(osascript -e 'tell application "Neovide" to activate' 2> /dev/null))
 else
   if running
     system_v('nvim-qt', '--', '--server', pipe, '--remote-silent', *args)
