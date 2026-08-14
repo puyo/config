@@ -58,7 +58,7 @@ if [[ ! -z "$PROMPT" ]] ; then # if running interactively
       bindkey '^[^E' expand-or-complete
 
       # disable C-s and C-q pause and resume buttons
-      stty -ixon
+      [[ -t 0 ]] && stty -ixon
 
       # allow $(...) commands inside the prompt
       setopt promptsubst
