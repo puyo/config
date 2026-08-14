@@ -107,3 +107,17 @@ if command -v __git_aliased_command > /dev/null; then
     (declare -f -F $complete_func > /dev/null) && __git_complete g$al $complete_func
   done
 fi
+
+# ----------------------------------------------------------------------
+# Audio
+
+transcribe() {
+  local out base
+  out=$(mktemp -d)
+  base=$(basename "$1"); base="${base%.*}"
+  HF_HUB_DISABLE_PROGRESS_BARS=1 uvx --from mlx-whisper mlx_whisper "$1" \
+    --model mlx-community/whisper-base-mlx --language en \
+    --verbose False --output-dir "$out" >/dev/null 2>&1
+  cat "$out/$base.txt"
+  rm -rf "$out"
+}
