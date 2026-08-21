@@ -122,3 +122,8 @@ transcribe() {
   cat "$out/$base.txt"
   rm -rf "$out"
 }
+
+# -----
+# Zola
+
+alias zola="flatpak run org.getzola.zola"
