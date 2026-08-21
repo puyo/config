@@ -83,7 +83,8 @@ alias k='kubectl'
 # ----------------------------------------------------------------------
 # Cataclysm DDA
 
-catasrc="$HOME/games/cdda/save/"
+catasrc="$HOME/.local/share/cataclysm-dda/save/"
+#catasrc="$HOME/games/cdda/save/"
 catabkp=~/.catabackup/
 catabackup() {
     rsync -rvah "${catasrc}" "${catabkp}"
