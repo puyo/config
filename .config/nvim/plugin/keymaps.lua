@@ -47,8 +47,19 @@ local function edit_last_file_expr()
   return ""
 end
 
+-- Remember the startup font size so we can reset back to it. Captured lazily:
+-- the GUI sources ginit.vim after this file loads, so guifont is still empty here.
+local default_guifont
+
+local function remember_default_font()
+  if not default_guifont or default_guifont == "" then
+    default_guifont = vim.o.guifont
+  end
+end
+
 -- Adjust GUI font size by delta (for Neovide, VimR, etc.)
 local function adjust_font_size(delta)
+  remember_default_font()
   local font = vim.o.guifont
   local name, size = font:match("^(.+:h)(%d+)$")
   if name and size then
@@ -56,11 +67,11 @@ local function adjust_font_size(delta)
   end
 end
 
--- Remember the startup font size so we can reset back to it
-local default_guifont = vim.o.guifont
-
 local function reset_font_size()
-  vim.o.guifont = default_guifont
+  remember_default_font()
+  if default_guifont ~= "" then
+    vim.o.guifont = default_guifont
+  end
 end
 
 ---------------------------------------------------------------------------
