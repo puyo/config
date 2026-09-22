@@ -17,7 +17,7 @@
 	helper = store
 [alias]
 	# one-line log
-	l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%aN]" --decorate --date=short
 
 	a = add
 	ap = add -p
