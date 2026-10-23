@@ -1,7 +1,7 @@
 awscli  2.34.51
 direnv  2.37.1
-elixir  1.20.2-otp-28
-erlang  28.5.0.5
+elixir  1.20.4-otp-29
+erlang  29.1.2
 go      1.27.3
 kubectl 1.36.1
 nodejs  26.12.1
